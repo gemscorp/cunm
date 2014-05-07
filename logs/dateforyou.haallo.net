@@ -1,0 +1,2 @@
+46.165.197.142 - - [11/Mar/2014:09:51:20 -0400] "GET /robots.txt HTTP/1.0" 404 - "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)"
+46.165.197.142 - - [11/Mar/2014:09:51:21 -0400] "GET / HTTP/1.0" 200 722 "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)"

@@ -1,0 +1,4 @@
+199.58.86.206 - - [11/Mar/2014:11:59:47 -0400] "GET /robots.txt HTTP/1.0" 404 - "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)"
+199.58.86.206 - - [11/Mar/2014:11:59:48 -0400] "GET / HTTP/1.0" 200 722 "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)"
+157.56.92.160 - - [11/Mar/2014:12:45:34 -0400] "GET /robots.txt HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"
+157.56.92.160 - - [11/Mar/2014:13:08:49 -0400] "GET / HTTP/1.1" 200 722 "-" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"

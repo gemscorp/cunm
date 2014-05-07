@@ -1,0 +1,2 @@
+157.55.32.142 - - [11/Mar/2014:20:30:12 -0400] "GET /robots.txt HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"
+157.55.32.142 - - [11/Mar/2014:20:54:26 -0400] "GET / HTTP/1.1" 200 728 "-" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"

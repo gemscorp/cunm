@@ -1,0 +1,2 @@
+100.43.83.137 - - [11/Mar/2014:16:52:59 -0400] "GET /robots.txt HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)"
+100.43.83.137 - - [11/Mar/2014:17:54:25 -0400] "GET / HTTP/1.1" 200 714 "-" "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)"

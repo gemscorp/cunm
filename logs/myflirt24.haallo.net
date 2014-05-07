@@ -1,0 +1,6 @@
+178.255.215.67 - - [11/Mar/2014:09:06:59 -0400] "GET /robots.txt HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; Exabot/3.0; +http://www.exabot.com/go/robot)"
+178.255.215.67 - - [11/Mar/2014:09:06:59 -0400] "GET / HTTP/1.1" 200 719 "-" "Mozilla/5.0 (compatible; Exabot/3.0; +http://www.exabot.com/go/robot)"
+199.192.207.146 - - [11/Mar/2014:15:03:04 -0400] "GET /robots.txt HTTP/1.0" 404 - "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)"
+199.192.207.146 - - [11/Mar/2014:15:03:06 -0400] "GET / HTTP/1.0" 200 719 "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)"
+157.55.35.113 - - [11/Mar/2014:16:34:20 -0400] "GET /robots.txt HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"
+157.55.35.113 - - [11/Mar/2014:16:49:56 -0400] "GET /de/www.webace.de HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"

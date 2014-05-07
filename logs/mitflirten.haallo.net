@@ -1,0 +1,5 @@
+196.217.52.228 - - [11/Mar/2014:09:09:06 -0400] "GET / HTTP/1.1" 200 714 "-" "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko/20100101 Firefox/11.0"
+196.217.52.228 - - [11/Mar/2014:09:09:28 -0400] "GET /favicon.ico HTTP/1.1" 404 - "-" "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko/20100101 Firefox/11.0"
+196.217.52.228 - - [11/Mar/2014:09:09:29 -0400] "GET /favicon.ico HTTP/1.1" 404 - "-" "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko/20100101 Firefox/11.0"
+66.249.81.51 - - [11/Mar/2014:12:28:28 -0400] "GET / HTTP/1.1" 200 714 "-" "Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110814 Firefox/6.0 Google favicon"
+66.249.81.51 - - [11/Mar/2014:12:28:28 -0400] "GET /favicon.ico HTTP/1.1" 404 - "-" "Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110814 Firefox/6.0 Google favicon"
