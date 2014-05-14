@@ -1,0 +1,58 @@
+INPUT.pearls { background-color:royalblue;
+		width:100px;
+		font:normal bolder 8pt Arial;
+	      }
+TABLE		{ background-color: #E8E8E8; border: none; cellpadding: 1; celspacing: 1; }
+TABLE.stripe	{ background-color: #FFFFFF; border: none; cellpadding: 1; cellspacing: 1; }
+TABLE.main  { border-style: solid; border-width: thin; border-color: C0C0C0; } TABLE.border  { border-style: solid; border-color: C0C0C0; }
+
+BODY        { background-color: #FFFFFF; border: none; }
+P           { color: #000000; font-size: 11pt; }
+
+TR			{ background-color: #E8E8E8; }
+TR.grayStripe { background-color: #E0E0E0; }
+TR.greyStripe { background-color: #E0E0E0; }
+TR.whiteStripe { background-color: #FFFFFF; }
+
+TD          { color: #000000; font-size: 8pt; font-family: arial;
+		border: none; }
+
+TD.label    { color: #324F5D; font-weight: bold; font-size: 8pt;
+              font-family: arial; background-color: #E8E8E8; border: none; }
+
+TH          { color: #F8F8F8; font-size: 9pt; font-family: arial;
+		background-color: #404040; border: none; }
+/*  classless TH is for reverse video.  class th.heading is for report column headings */ TH.heading  { color: #FFFFFF; font-family: techno; font-size: 10pt;
+				letter-spacing: 1.5; background-color: #324f5d;
+				border: none; font-weight: lighter; }
+
+SELECT      { color: #000000; font-size: 8pt; font-family: arial;
+		background-color: #FFFFFF; border: solid black 1px; }
+
+SELECT.mand	{ color: #000000; font-size: 8pt; font-family: arial;
+		background-color: #FFFFC6; border: solid black 1px; }
+
+TEXTAREA	{ color: #000000; font-size: 8pt; font-family: arial;
+		background-color: #FFFFFF; border: solid black 1px; }
+
+TEXTAREA.mand { color: #000000; font-size: 8pt; font-family: arial;
+		background-color: #FFFFC6; border: solid black 1px; }
+
+CHECKBOX	{ color: #000000; font-size: 8pt; font-family: arial;
+		background-color: #FFFFFF; border: solid black 1px; }
+
+INPUT		{ color: #000000; font-size: 8pt; font-family: 'franklin gothic'; }
+
+INPUT.small { color: #000000; font-size: 6pt; font-family: 'franklin gothic';
+		background-color: #FFFFFF; border: solid black 1px }
+
+INPUT.standard { color: #000000; font-size: 8pt; font-family: 'franklin gothic';
+		background-color: #FFFFFF; border: solid black 1px }
+
+INPUT.mand	{ color: #000000; font-size: 8pt; font-family: 'franklin gothic';
+		background-color: #FFFFC6; border: solid black 1px; }
+
+INPUT.button { color: #000000; font-size: 8pt; font-family: 'franklin gothic';
+		background-color: #E0E0E0; }
+
+INPUT.radio	{ color: #000000; font-size: 8pt; font-family: arial; }

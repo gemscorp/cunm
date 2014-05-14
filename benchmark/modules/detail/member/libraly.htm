@@ -1,0 +1,128 @@
+
+ <SCRIPT language=JavaScript> 
+<!-- 
+function Del(url,caption) { 
+ 
+ txt = " Are you sure you want to delete ?\n";
+ txt +=caption;
+ 
+  var rs=confirm(txt);
+     
+ if(rs==true)
+ {
+  location.href="{JAVA_URL}&"+url;
+ }    
+     
+} 
+//--> 
+ </SCRIPT>
+<div align="center">
+  <center>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="96%" id="AutoNumber1" height="209">
+  <tr>
+    <td width="98%" height="70">
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber3">
+      <tr>
+        <td width="100%"><b><font face="Arial" size="2"><span lang="en-us">&nbsp;</span>{MEMBER_NAME}<br>
+&nbsp;</font></b></td>
+      </tr>
+      <tr>
+        <td width="100%">
+                <p align="center"><font face="Arial" size="2">{TOPMENU}<br>
+&nbsp;</font><div align="center">
+                  <center>
+                  <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="38%" id="AutoNumber33" height="28">
+                    <tr>
+                      <td width="100%" bgcolor="#FFE9D2" height="28">
+                      <p align="center">
+              <span class="boldblack"><b>
+
+                      <font color="#0000FF" face="Arial" style="font-weight: 700; font-size: 10pt">
+                      <a style="text-decoration: none" href="{be}">
+                      <font color="#FF0000">Stat 
+              New<span lang="en-us"> </span>Benchmarking Services</font></a></font></b></span></td>
+                    </tr>
+                  </table>
+                  </center>
+                </div>
+                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber34">
+                  <tr>
+                    <td width="100%">&nbsp;</td>
+                  </tr>
+                </table>
+        </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="98%" bgcolor="#111111" height="22">
+    <font face="Arial" size="2" color="#FFFFFF"><b><span lang="en-us">&nbsp;Library</span></b></font></td>
+  </tr>
+  <tr>
+    <td width="98%" height="22"><b>
+    <a href="{U_ADD}" style="text-decoration: none">
+    <font face="Arial" size="5" color="#FF0000">+ </font><font face="Arial" size="2">
+    <font color="#000080">Add</font> </font></a>
+    </b>
+    <a href="{U_ADD}" style="text-decoration: none">
+    <font face="Arial" size="2">(Annaul Report, Policy, Business Plan, Other)</font></a><font face="Arial" size="2"> </font>
+    </td>
+  </tr>
+  <tr>
+    <td width="98%" height="95">
+<div align="center">
+  <center>
+  
+  <table border="0" cellpadding="2" cellspacing="1" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber6">
+    <tr>
+	   <td  bgcolor="#324F5D" width="165">
+      <p align="left"><b><font face="Arial" size="2" color="#FFFFFF">
+      <span lang="en-us">&nbsp; Date</span></font></b></td>
+	   <td  bgcolor="#324F5D" width="478">
+      <p align="left"><b><font face="Arial" size="2" color="#FFFFFF">
+      <span lang="en-us">Name</span></font></b></td>
+	   <td  bgcolor="#324F5D" width="165">
+      <p align="left"><b><font face="Arial" size="2" color="#FFFFFF">
+      <span lang="en-us">File Download</span></font></b></td>
+	  <td width="36" bgcolor="#324F5D" align="center"><b>
+      <font face="Arial" size="2" color="#FFFFFF">
+      <span lang="en-us">&nbsp;</span>Edit</font></b></td>
+      <td width="29" bgcolor="#324F5D" align="center"><b>
+      <font face="Arial" size="2" color="#FFFFFF">Del</font></b></td>
+    </tr>
+<!-- BEGIN listrow -->
+	<tr>
+	   <td  bgcolor="#CCFFCC" width="165">
+      <p align="left"><font face="Arial" size="2" color="#800000">
+      <span lang="en-us">&nbsp; {listrow.PDATE}</span></font></td>
+	   <td  bgcolor="#CCFFCC" width="478">
+      <p align="left"><font face="Arial" size="2" color="#000080">
+      <span lang="en-us">{listrow.NAME}</span></font></td>
+	   <td  bgcolor="#CCFFCC" width="165">
+      <p align="left"><font face="Arial" size="2">
+      <span lang="en-us"><a href="{listrow.DW}" style="text-decoration: none">{listrow.FILE}</a></span></font></td>
+	  <td width="36" bgcolor="#CCFFCC" align="center">
+      <p align="center">
+	 <font face="Arial" size="2">
+	 <a href="{listrow.U_EDIT}">
+      <img border="0" src="images/edit.gif" ></a></font></td>
+      <td width="29" bgcolor="#CCFFCC" align="center">
+      <p align="center">
+	 <font face="Arial" size="2">
+	 <a href="{listrow.U_DEL}">
+      <img border="0" src="images/del.gif" ></a></font></td>
+    </tr>
+<!-- END listrow -->
+  </table>
+  </center>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber7">
+  <tr>
+    <td width="100%">{PAGE_LIST}</td>
+  </tr>
+</table>&nbsp;</td>
+  </tr>
+</table></center>
+</div>

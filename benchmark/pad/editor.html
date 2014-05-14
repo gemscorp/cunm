@@ -1,0 +1,674 @@
+		<html>
+			<head>
+				<meta http-equiv="content-type" content="text/html;charset=".ISO-8859-1."">
+				<title>HTMLeditbox Pro 2.2 (language: English) - editing content of "test" field</title>
+
+				<style type="text/css">
+					<!--	
+						body { background-color: #FFFFFF; color: #000000; }
+						.h {  cursor: hand; }
+						.framed { border: 1px solid #000000; background-color: #FFF3BD;	}
+
+						.o {    
+						BORDER-BOTTOM: gray 1px solid;
+						BORDER-LEFT: white 1px solid;
+						BORDER-RIGHT: gray 1px solid;
+						BORDER-TOP: white 1px solid;
+						MARGIN-LEFT: 0px;
+						MARGIN-RIGHT: 0px;
+						MARGIN-TOP: 0px;
+						MARGIN-BOTTOM: 0px;
+						cursor: hand;
+						}
+		
+						.c {
+						BORDER-BOTTOM: white 1px solid;
+						BORDER-LEFT: gray 1px solid;
+						BORDER-RIGHT: white 1px solid;
+						BORDER-TOP: gray 1px solid;
+						MARGIN-LEFT: 0px;
+						MARGIN-RIGHT: 0px;
+						MARGIN-TOP: 0px;
+						MARGIN-BOTTOM: 0px;
+						cursor: hand;
+						}
+		
+						.n {
+						MARGIN-LEFT: 1px;
+						MARGIN-RIGHT: 1px;
+						MARGIN-TOP: 1px;
+						MARGIN-BOTTOM: 1px;
+						VISIBILITY: visible;
+						}
+
+						.select_update {
+						background-color: #E7EDF8;
+						color: #002D80;
+						}
+
+					-->
+				</style>
+			</head>
+
+			<body  leftmargin="2" marginwidth="2" topmargin="2" marginheight="2" onResize="blockDefault();">
+<script LANGUAGE="JavaScript">
+	var format="HTML"
+	var sStatusBarMes = "Current View WYSIWYG"; 
+	var tmpFontFamily
+	var tmpFontSize
+	var tmpBgColor1
+	var tmpText
+	var tmpBgColor3
+	var framingStatus = 0
+	var imageWin
+	var tableWin
+	var linkWin
+	var zoomValue = 100;
+	
+	var inputMethod = 2; 
+	var useRelPaths = 0; 
+	var useCSS = ""; 
+	var Ok = "false"
+	var name =  navigator.appName
+	var version =  parseFloat(navigator.appVersion)
+	var platform = navigator.platform
+
+	if (platform == "Win32" && name == "Microsoft Internet Explorer" && version >= 4){
+		Ok = "true";	
+	} else {
+		alert('Caution: This editor uses ActiveX and must be run on Windows95 and later and with Internet Explorer 5.5 and later.');
+	}
+
+		
+	document.write('<form name="fHtmlEditor" method="POST" action="_editor.php" style="margin:0px;">'); 
+
+
+function setFocus() {
+	textEdit.focus()
+}
+		
+	
+function Swap_it() {
+	if (format=="HTML") {
+		
+		if(inputMethod == 5) {
+			content = textEdit.document.documentElement.outerHTML;
+		} else {
+			content = textEdit.document.body.innerHTML;
+		}
+
+		tmpFontFamily = textEdit.document.body.style.fontFamily;
+		tmpFontSize = textEdit.document.body.style.fontSize;
+		tmpBgColor1 = textEdit.document.body.bgColor;
+		tmpText = textEdit.document.body.text;
+		tmpLineHeight = textEdit.document.body.style.lineHeight;
+		tmpBgColor3 = document.body.style.backgroundColor;
+
+		if(useRelPaths == 1) {
+			content = content.replace(new RegExp('http://www.labs4.com','g'),'.');
+		}
+		
+		content = content.replace(new RegExp('&amp;','g'),'&');
+		textEdit.document.body.innerText = content
+		
+		colorize();
+
+		textEdit.document.body.style.fontFamily = "Verdana";
+		textEdit.document.body.style.fontSize = "11px";
+		textEdit.document.body.style.bgColor = "#FFFFFF";
+		textEdit.document.body.style.text = "#000000";
+		textEdit.document.body.style.lineHeight = "18px";
+		textEdit.document.body.style.backgroundColor = "#FFFFFF";
+
+		format="Text";
+		sStatusBarMes = "Current View HTML";
+	} else {
+		if(tmpFontFamily == "") {
+			textEdit.document.body.style.removeAttribute("fontFamily");
+		} else {
+			textEdit.document.body.style.fontFamily = tmpFontFamily;
+		}
+		if(tmpFontSize == "") {
+			textEdit.document.body.style.removeAttribute("fontSize");
+		} else {
+			textEdit.document.body.style.fontSize = tmpFontSize;
+		}
+		if(tmpBgColor1 == "") {
+			textEdit.document.body.style.removeAttribute("bgColor");
+		} else {
+			textEdit.document.body.style.bgColor = tmpBgColor1;
+		}
+		if(tmpBgColor3 == "") {
+			textEdit.document.body.style.removeAttribute("backgroundColor");
+		} else {
+			textEdit.document.body.style.backgroundColor = tmpBgColor3;
+		}
+		if(tmpText == "") {
+			textEdit.document.body.style.removeAttribute("text");
+		} else {
+			textEdit.document.body.style.text = tmpText;
+		}
+		if(tmpLineHeight == "") {
+			textEdit.document.body.style.removeAttribute("lineHeight");
+		} else {
+			textEdit.document.body.style.lineHeight = tmpLineHeight;
+		}
+
+		if(inputMethod == 5) {
+			htmlString = textEdit.document.body.innerText;
+			textEdit.document.open();
+			textEdit.document.write(htmlString);
+			textEdit.document.close();
+
+		} else {
+			textEdit.document.body.innerHTML = textEdit.document.body.innerText;
+		}
+
+
+		// textEdit.document.body.innerHTML = textEdit.document.body.innerText;
+
+		format="HTML";
+		sStatusBarMes = "Current View WYSIWYG";
+		setFocus();
+	}
+	updateStatusBar();
+}
+
+	function doFormat(what) {
+		if(what == "FontName") {
+			if(arguments[1] != 1){
+				execCommand(what, arguments[1]);
+				document.all.font.selectedIndex = 0;
+			}
+		} else if(what == "FontSize") {
+			if(arguments[1] != 0 ){
+				execCommand(what, arguments[1]);
+				document.all.size.selectedIndex = 0;
+			}
+		} else if(what == "formatBlock") {
+			if(arguments[1] != 0 ){
+				execCommand(what, arguments[1]);
+				document.all.format.selectedIndex = 0;
+			}
+		} else {
+			execCommand(what, arguments[1]);
+		}
+	}
+
+	function execCommand(command) {
+		setFocus()
+			if (format=="HTML") {
+			var edit = textEdit.document.selection.createRange()
+				if (arguments[1]==null)
+				edit.execCommand(command)
+				else
+				edit.execCommand(command,false,arguments[1])
+				edit.select()
+				setFocus()
+			} else alert("Switch to WYSIWYG mode, image functions are disabled in HTML mode!")
+	}
+
+	function applyStyle(style) {
+		setFocus()
+			if (format=="HTML") {
+				var style=document.all.css_style.options[document.all.css_style.selectedIndex].value;
+				if(style == "update_list") {
+					updateCSS();
+				} else {
+					var seledit = textEdit.document.selection.createRange().text;
+					if(seledit != "") {
+						var editStyle = '<SPAN CLASS="'+ style +'">'+ seledit +'</SPAN>';
+						textEdit.document.selection.createRange().pasteHTML(editStyle);
+					}
+				}
+			} else alert("Switch to WYSIWYG mode, image functions are disabled in HTML mode!")
+		document.all.css_style.selectedIndex = 0;
+	}
+	
+	function setFontSize(howmuch) {
+		setFocus()
+			if (format=="HTML") {
+				var seledit = textEdit.document.selection.createRange().text
+				var editTag = '<SPAN STYLE="FONT-SIZE:' + howmuch + 'pt;">'+ seledit +'</SPAN>';
+				textEdit.document.selection.createRange().pasteHTML(editTag)
+			} else alert("Switch to WYSIWYG mode, image functions are disabled in HTML mode!")
+		document.all.size.selectedIndex = 0;
+	}
+
+	function defWindows(subH) {
+		var totalH = document.body.offsetHeight
+		var editH = totalH - 96
+		document.all['textEdit'].height = editH-subH;
+		document.all['subMenu'].height = subH-6;
+	}
+		
+	function blockDefault() {
+		defWindows(22);
+		var subHTML = ""
+		subHTML += "<body topmargin=0 leftmargin=0>"
+		subHTML += "<table cellspacing=3 cellpadding=0 border=0>"
+		subHTML += "<tr><td>"
+		subHTML += "<font style=\"font: 9.9px verdana; color: #000000;\">HTMLeditbox 2.2 (build 1) &nbsp&nbsp - &copy;&nbsp;2001-3 Labs4.com All Rights Reserved&nbsp; - English translation: <a href=\"mailto:support@labs4.com\" target=\"_blank\"><font color=\"#CE0000\">Josef Zirnsak</font></a>"
+		subHTML += "</font></td></tr></table>"
+		subHTML += "</body>"
+		subMenu.document.open();
+		subMenu.document.write(subHTML);
+		subMenu.document.close();
+		setFocus();
+	}
+
+
+	function blockLocIMG() {
+		var leftPos = (screen.availWidth - 520) / 2
+		var topPos = (screen.availHeight - 380) / 2
+		if (window.frames('textEdit').document.selection.type == "Control") {
+			var imageWin;
+			var myRange = window.frames('textEdit').document.selection.createRange();
+			if(myRange(0).tagName.toUpperCase() == "IMG") {
+				blockDefault();
+				launchWindow(1,'_editor.php?op=image_edit&w=edit',leftPos,topPos,520,380);
+			} else {
+				launchWindow(1,'_editor.php?op=image_edit',leftPos,topPos,520,380);
+			}
+		} else { 
+			launchWindow(1,'_editor.php?op=image_edit',leftPos,topPos,520,380);
+		}
+	}
+	
+	function launchWindow(win,path,leftPos,topPos,w,h) {
+		if(win==1) {
+			imageWin = window.open(path,'','width=' + w +',height=' + h +',help=no,center=yes,status=yes,scroll=no,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+		}
+		if(win==2) {
+			tableWin = window.open(path,'','width=' + w +',height=' + h +',help=no,center=yes,status=yes,scroll=no,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+		}
+		if(win==3) {
+			linkWin = window.open(path,'','width=' + w +',height=' + h +',help=no,center=yes,status=yes,scroll=no,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+		}
+	}
+
+
+	function blockTable() {
+		CssFramingOn();
+		var leftPos = (screen.availWidth - 580) / 2
+		var topPos = (screen.availHeight - 340) / 2
+		if (window.frames('textEdit').document.selection.type == "Control") {
+			var myRange = window.frames('textEdit').document.selection.createRange();
+			if(myRange(0).tagName.toUpperCase() == "TABLE") {
+				launchWindow(2,'_editor.php?op=table_edit&tab=preload',leftPos,topPos,580,340);
+			} else { 
+				launchWindow(2,'_editor.php?op=table_edit',leftPos,topPos,580,340);
+			}
+		} else {
+			launchWindow(2,'_editor.php?op=table_edit',leftPos,topPos,580,340);
+		}
+	
+	}
+
+
+	function blockCreateLink() {
+		var leftPos = (screen.availWidth - 500) / 2
+		var topPos = (screen.availHeight - 300) / 2
+		if (format=="HTML") {
+			if (window.frames('textEdit').document.selection.type != "Control") {
+				launchWindow(3,'_editor.php?op=link_select&method=0',leftPos,topPos,500,300);
+			} else {
+				oRange = window.frames('textEdit').document.selection.createRange();
+					if (oRange(0).tagName.toUpperCase() == "IMG") {
+						launchWindow(3,'_editor.php?op=link_select&method=0',leftPos,topPos,500,300);
+					} else {
+						alert("Make selection in text first!");
+					
+					}
+			}
+		} else alert("Switch to WYSIWYG mode, table functions are disabled in HTML mode!")	
+	}
+
+	function blockPicker(which) {
+		defWindows(102);
+		window.frames.subMenu.location.href = '_editor.php?op=color_picker&which=' + which
+	}
+
+	function editTable() {
+		if (format=="HTML") {
+			if (window.frames('textEdit').document.selection.type != "Control") {
+				var leftPos = (screen.availWidth - 580) / 2
+				var topPos = (screen.availHeight - 370) / 2
+				launchWindow(2,'_editor.php?op=table_cell',leftPos,topPos,580,370);
+			} else alert("There is no cell selected for editing!");
+		} else alert("Switch to WYSIWYG mode, table functions are disabled in HTML mode!")	
+	}
+
+	function newDoc() {
+		textEdit.document.open();
+		textEdit.document.write("");
+		textEdit.document.close();
+	
+		setFocus();
+	}
+
+
+	function initEditor() {
+	pool.document.body.innerHTML = window.opener.document.getElementById("test").value; 		
+		textEdit.document.designMode="On";
+		textEdit.document.open();
+
+		if(inputMethod == 5) {
+			var htmlString = pool.document.documentElement.outerHTML;
+		} else {
+			var htmlString = pool.document.body.innerHTML;
+		}
+
+		textEdit.document.write(htmlString);
+		textEdit.document.close()
+		setFocus();
+
+		setFocus();
+		updateStatusBar();
+	}
+
+	function copyValue() {
+		var theHtml = textEdit.document.documentElement.outerHTML;
+		pool.document.open();
+		pool.document.write(theHtml);
+		pool.document.close();
+		
+	}
+
+	
+	function filteredOutput(pool) {
+		if(useRelPaths == 1) {
+			pool = pool.replace(new RegExp('http://www.labs4.com','g'),'.');
+			pool = pool.replace(new RegExp('&amp;','g'),'&');
+		}
+		
+		return pool
+	}
+	
+	
+	function OnFormSubmit() {
+		if (format=="HTML") {
+			if(confirm("This Document is about to be submitted  Are you sure you have finished editing?")) {
+				if(framingStatus == 1) CssFramingOff();
+				copyValue();
+				closeChildWins()
+
+				window.opener.document.getElementById("test").value = filteredOutput(pool.document.body.innerHTML); self.close(); 			
+			}
+		} else alert("Switch to WYSIWYG mode, saving is disabled in HTML mode!  Saving now should screw your HTML code ...")
+	
+	}
+
+	function populateCSS() {
+		if (window.frames('textEdit').document.styleSheets && (window.frames('textEdit').document.readyState == 'complete')) {
+
+			var otitle, title="";
+			for(var i=0; i<textEdit.document.styleSheets(0).rules.length; i++) {
+				var title = textEdit.document.styleSheets(0).rules.item(i).selectorText;
+					if (title != "" && title != otitle) {
+
+						if(!approvedCSS(title)) {
+							var title2 = title.replace(".","");
+							document.fHtmlEditor.css_style.options[document.fHtmlEditor.css_style.options.length] = new Option(title, title2);
+						}
+						otitle=title;
+					}
+			}
+		}
+	var newOption = new Option('update CSS list','update_list');
+	document.fHtmlEditor.css_style.options[document.fHtmlEditor.css_style.options.length] = newOption;
+	newOption.className = "select_update";
+	}
+
+	function updateCSS() {
+		// clear current style selector
+		document.fHtmlEditor.css_style.options.length = 0;
+		document.fHtmlEditor.css_style.options[document.fHtmlEditor.css_style.options.length] = new Option('CSS Style','');
+		populateCSS();
+	}
+
+	function approvedCSS(title) {
+		var o;
+
+		o = title.indexOf(title.toLowerCase('a.'))
+		if(o > -1) return false;
+
+		var approvalArr = new Array("#","input","select","option","textarea","button","body","thead","tbody","tfoot","table","th","tr","td","font","span","form","fieldset","legend","hr","li","ol","ul","p","h1","h2","h3","h4","h5","h6");
+
+		for(var i=0; i<approvalArr.length; i++) {
+			o = title.indexOf(title.toLowerCase(approvalArr[i]))
+			if(o == 0) return false;
+		}
+		return true;	
+	}
+
+
+	function colorTag(htmlcode,tag,color) {
+			var tagColor = "<font color=" + color +">";
+
+			// opening upper case
+			var ouc = new RegExp("&lt;"+tag,"g");
+			htmlcode = htmlcode.replace(ouc,""+tagColor+"&lt;"+tag+"");
+
+			// opening lower case
+			var olc = new RegExp("&lt;"+tag.toLowerCase(),"g");
+			htmlcode = htmlcode.replace(olc,""+tagColor+"&lt;"+tag+"");
+
+			// closing upper case
+			var cuc = new RegExp("&lt;/"+tag,"g");
+			htmlcode = htmlcode.replace(cuc,""+tagColor+"&lt;/"+tag+"");
+
+			// closing lower case
+			var clc = new RegExp("&lt;/"+tag.toLowerCase(),"g");
+			htmlcode = htmlcode.replace(clc,""+tagColor+"&lt;/"+tag+"");
+
+			return htmlcode;
+	}
+
+	function colorize() {
+		var hc = textEdit.document.body.innerHTML;
+
+		// closing tags - add ending font tag
+		hc = hc.replace(/&gt;/g,"&gt;</font>");
+
+		var tagsStandard = new Array("HTML","HEAD","TITLE","BASE","META","BODY","DIV","H1","H2","H3","H4","H5","H6","SPAN","FONT","STRONG","EM","U","P","BR","HR","LI","UL","OL");
+		// note <B and <BR are mixing together ... generates duplicite tag
+		for(i=0; i<tagsStandard.length; i++) {
+			hc = colorTag(hc,tagsStandard[i],'mediumblue');
+		}
+
+		var tagsTable = new Array("TABLE","TBODY","TH","TR","TD");
+		// note <B and <BR are mixing together ... generates duplicite tag
+		for(i=0; i<tagsTable.length; i++) {
+			hc = colorTag(hc,tagsTable[i],'darkblue');
+		}
+
+		var tagsForm = new Array("FORM","INPUT","SELECT","OPTION","BUTTON","TEXTAREA","FIELDSET","LEGEND");
+		// note <B and <BR are mixing together ... generates duplicite tag
+		for(i=0; i<tagsForm.length; i++) {
+			hc = colorTag(hc,tagsForm[i],'teal');
+		}
+
+			// images
+			hc = colorTag(hc,'IMG','forestgreen');
+			
+			// links
+			hc = colorTag(hc,'A','purple');
+
+			//javascripts
+			hc = colorTag(hc,'SCRIPT','green');
+
+			// PHP scripts
+			var tc = "<font color=deepskyblue>"
+			hc = hc.replace(/&lt;\?/g,tc+"&lt;?");
+
+		textEdit.document.body.innerHTML = hc;
+	}
+
+
+	function switchFraming() {
+		if(framingStatus == 0) {
+			CssFramingOn();
+			framingStatus = 1;
+			textEdit.focus();
+			} else {
+			CssFramingOff();
+			framingStatus = 0;
+			location.reload;
+			textEdit.focus();
+		}
+	}
+
+	function CssFramingOn() {
+		var tEdit;
+		if (!textEdit.document.body.BehaviorStyleSheet){
+			textEdit.document.body.BehaviorStyleSheet = textEdit.document.createStyleSheet()
+		}
+		tEdit = textEdit.document.body.BehaviorStyleSheet;
+		tEdit.addRule('TD','border:1px dashed silver;');
+		tEdit.addRule('Table','border:1px dashed silver;');
+		tEdit.addRule('TD.claim','border:1px dashed #CE0000;');
+		tEdit.addRule('Table.claim','border:1px dashed #CE0000;');
+	}
+
+	function CssFramingOff() {
+		var tEdit;
+		tEdit = textEdit.document.body.BehaviorStyleSheet;
+		tEdit.removeRule('TD','border:1px dashed silver;');
+		tEdit.removeRule('Table','border:1px dashed silver;');
+		tEdit.removeRule('TD.claim','border:1px dashed #CE0000;');
+		tEdit.removeRule('Table.claim','border:1px dashed #CE0000;');
+	}
+
+	function closeChildWins() {
+		if (imageWin) imageWin.close()
+		if (linkWin) linkWin.close()
+		if (tableWin) tableWin.close()
+	}
+
+
+	function Help() {
+		window.open("http://support.labs4.com/editbox/help.php?host=","wHelp", "toolbar=0, scrollbars=yes, width=666, height=460");
+	}
+
+	function Update() {
+		window.open("http://www.labs4.com/update.php?version=&build=","wUpdate", "toolbar=yes, scrollbars=yes, statusbar=yes, width=640, height=480");
+	}
+
+	function watchKeys() {
+		if (event.keyCode == 107 && event.ctrlKey){
+			zoomin();
+		}
+		if (event.keyCode == 109 && event.ctrlKey){
+			zoomout();
+		}
+		if (event.keyCode == 96 && event.ctrlKey){
+			zoomrestore();
+		}
+		updateStatusBar();
+	}
+
+	function zoomin(){
+		if(textEdit.document.body.style.zoom!=0) {
+			textEdit.document.body.style.zoom*=1.2;
+			zoomValue*=1.2;
+		} else {
+			textEdit.document.body.style.zoom=1.2;
+			zoomValue=100*1.2;
+		}
+	}
+	
+	function zoomout(){
+		if(textEdit.document.body.style.zoom!=0) {
+			textEdit.document.body.style.zoom = textEdit.document.body.style.zoom / 1.2; 
+			zoomValue = zoomValue / 1.2;
+		} else {
+			textEdit.document.body.style.zoom = textEdit.document.body.style.zoom / 1.2;
+			zoomValue = 100 / 1.2;
+		}
+	}
+
+	function zoomrestore(){
+		if(textEdit.document.body.style.zoom!=0) {
+			textEdit.document.body.style.zoom*=0;
+			zoomValue=100;
+		} else {
+			textEdit.document.body.style.zoom=0;
+			zoomValue=100;
+		}
+	}
+	
+	function updateStatusBar() {
+		statusMessage = window.status = sStatusBarMes;
+		statusMessage += "   |   zoom: " + Math.round(zoomValue) + "%"; 
+		window.status = statusMessage;
+	}
+
+</script>				<script LANGUAGE="JavaScript">
+					window.onload = initEditor
+				</script>
+				<table border="0" cellpadding="5" cellspacing="0" width="100%" height="100%" class="framed">
+					<tr>
+						<td align="top" height=30>
+							<table border="0" cellpadding="0" cellspacing="0" width="100%">
+								<tr>
+									<td align="top"><img unselectable="on" class='n' src="_i3/img/new.gif" width="30" height="30" border="0" align="absmiddle" alt="Start Over / New File" onClick="newDoc();className='c';" onMouseOver="className='o'" onMouseOut="className='n'">										<img unselectable="on" class='n' src="_i3/img/save.gif" width="30" height="30" border="0" align="absmiddle" alt="Save Document" onClick="OnFormSubmit();className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/spacer.gif" width="8" height="30" border="0" align="absmiddle"><img unselectable="on" class='n' src="_i3/img/cut.gif" width="30" height="30" border="0" align="absmiddle" alt="Cut" onClick="doFormat('Cut');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/copy.gif" width="30" height="30" border="0" align="absmiddle" alt="Copy" onClick="doFormat('Copy');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/paste.gif" width="30" height="30" border="0" align="absmiddle" alt="Paste" onClick="doFormat('Paste');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/undo.gif" width="30" height="30" border="0" align="absmiddle" alt="Undo" onClick="execCommand('Undo');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/redo.gif" width="30" height="30" border="0" align="absmiddle" alt="Redo" onClick="execCommand('Redo');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/spacer.gif" width="8" height="30" border="0" align="absmiddle"><img unselectable="on" class='n' src="_i3/img/ul.gif" width="30" height="30" border="0" align="absmiddle" alt="List (Bullets)" onClick="doFormat('InsertUnorderedList');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/ol.gif" width="30" height="30" border="0" align="absmiddle" alt="List (Numbering)" onClick="doFormat('InsertOrderedList');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/tab_.gif" width="30" height="30" border="0" align="absmiddle" alt="Decrease Indent" onClick="doFormat('Outdent');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/tab+.gif" width="30" height="30" border="0" align="absmiddle" alt="Increase Indent" onClick="doFormat('Indent');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/hr.gif" width="30" height="30" border="0" align="absmiddle" alt="Horizontal Ruler" onClick="doFormat('InsertHorizontalRule');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/spacer.gif" width="8" height="30" border="0" align="absmiddle"><img unselectable="on" class='n' src="_i3/img/img_loc.gif" width="30" height="30" border="0" align="absmiddle" alt="Insert/edit image" onClick="blockLocIMG();className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img class='n' src="_i3/img/spacer.gif" width="8" height="30" border="0" align="absmiddle"><img unselectable="on" class='n' src="_i3/img/table.gif" width="30" height="30" border="0" align="absmiddle" alt="Insert/edit table" onClick="blockTable();className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/td.gif" width="30" height="30" border="0" align="absmiddle" alt="Edit Table Cell" onClick="editTable();className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img class='n' src="_i3/img/spacer.gif" width="8" height="30" border="0" align="absmiddle"><img unselectable="on" class='n' src="_i3/img/fg.gif" width="30" height="30" border="0" align="absmiddle" alt="Color picker (foreground color)" onClick="blockPicker('fg');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img class='n' src="_i3/img/bg.gif" width="30" height="30" border="0" align="absmiddle" alt="Color picker (background color)" onClick="blockPicker('bg');className='c';" onMouseOver="className='o'" onMouseOut="className='n'">&nbsp&nbsp;<input type="button" name="swapButton" value="HTML/WYSIWYG" onClick="Swap_it();" style="width:110px; font: 9.9px verdana; text-align: center; color: #ffffff; background-color: #CE0000;">								</td>
+								</tr>
+								<tr>
+									<td background="_i3/img/dashline.gif"><img unselectable="on" src="_i3/img/pix.gif" width="100" height="6" border="0"></td>
+								</tr>
+								<tr height=20>
+									<td valign="bottom" nowrap>									<select name="format" onChange="doFormat('formatBlock','&lt;'+document.all.format.value+'&gt;');" style="font: 11.9px verdana; width: 80px;">
+										<option value="1" selected>Format ...</option>
+										<option value="p">Normal</option>
+										<option value="H1">Heading 1</option>
+										<option value="H2">Heading 2</option>
+										<option value="H3">Heading 3</option>
+										<option value="H4">Heading 4</option>
+										<option value="H5">Heading 5</option>
+										<option value="H6">Heading 6</option>
+										<option value="PRE">Preformated</option>
+									</select>&nbsp;
+							
+									<select name="font" onChange="doFormat('FontName',document.all.font.value);" style="font: 11.9px verdana; width: 170px;">
+										<option value="1" selected>Select Font...</option>
+										<option value="Arial, Helvetica, sans-serif">Arial, Helvetica, sans-serif</option>
+										<option value="Comic Sans MS">Comic Sans MS</option>
+										<option value="Courier New, Courier, mono">Courier New, Courier, mono</option>
+										<option value="Georgia, Times New Roman">Georgia, Times New Roman</option>
+										<option value="System">System</option>
+										<option value="Times New Roman, Times, serif">Times New Roman, Times</option>
+										<option value="Verdana, Arial, Helvetica">Verdana, Arial, Helvetica</option>
+										<option value="Windings">Wingdings</option>
+
+									</select>&nbsp;<select name="size" onChange="doFormat('FontSize',document.all.size.value);" style="font: 11.9px verdana; width: 35px;"><option value="None" selected>Size</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>									<img unselectable="on" class='n' src="_i3/img/b.gif" width="30" height="20" border="0"  align="absmiddle" alt="Bold text" onClick="doFormat('Bold');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/i.gif" width="30" height="20" border="0" align="absmiddle" alt="Italic text" onClick="doFormat('Italic');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/u.gif" width="30" height="20" border="0" align="absmiddle" alt="Underline text" onClick="doFormat('Underline');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/left.gif" width="30" height="20" border="0" alt="Align Left" align="absmiddle" onClick="doFormat('JustifyLeft');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/center.gif" width="30" height="20" border="0" alt="Align Center" align="absmiddle" onClick="doFormat('JustifyCenter');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/right.gif" width="30" height="20" border="0" alt="Align Right" align="absmiddle" onClick="doFormat('JustifyRight');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/full.gif" width="30" height="20" border="0" alt="Justify Full" align="absmiddle" onClick="doFormat('JustifyFull');className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/link.gif" width="30" height="20" border="0" align="absmiddle" alt="Add Link" onClick="blockCreateLink();className='c';" onMouseOver="className='o'" onMouseOut="className='n'"><img unselectable="on" class='n' src="_i3/img/unlink.gif" width="30" height="20" border="0" align="absmiddle" alt="Remove Link" onClick="doFormat('Unlink');className='c';" onMouseOver="className='o'" onMouseOut="className='n'">
+									<img unselectable="on" class='n' src="_i3/img/frame.gif" width="30" height="20" border="0" align="absmiddle" alt="Table frames on/off" onClick="switchFraming();className='c';" onMouseOver="className='o'" onMouseOut="className='n'">
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+				
+							<!-- start of iframe section -->
+							<IFRAME ID="textEdit" width="100%" height="95%"></IFRAME>
+							<script LANGUAGE="JavaScript">
+							textEdit.focus()
+							</script>
+							<!-- end of iframe section -->
+				
+							<img src="_i3/img/pix.gif" width="100" height="5"><br>
+				
+							<!-- start of submenu section -->
+							<IFRAME ID="subMenu" width="100%" height="3%" style="border: solid 1px black;" frameborder="0" noresize scrolling="no"></IFRAME>
+							<!-- end of submenu section -->
+
+							<!-- start of pool section --><IFRAME ID="pool" width="0" height="0" style="display: none;" frameborder="0" noresize scrolling="no">							</IFRAME>
+							<!-- end of pool section -->
+
+						</td>
+					</tr>
+				</table>
+			</body>
+		</html>

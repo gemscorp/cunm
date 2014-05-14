@@ -1,0 +1,1825 @@
+<style>
+<!--
+.MsoNormal
+	{
+	font-size:8.0pt;
+	font-family:"MS Sans Serif";
+	
+	}
+
+	
+-->
+</style>
+</head>
+
+<body>
+      <form name="inputmember"  action="{ACTION}"  method=post onsubmit="return chkvalid()" >
+<input type="hidden" name=m value="{M}" >
+<input type="hidden" name=op value="{OP}" >
+<input type="hidden" name=gr value="{GR}" >
+          <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber5" cellpadding="0">
+            <tr>
+              <td width="100%" colspan="2">
+
+  <div align="center">
+    <center>
+
+  <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="96%" id="AutoNumber28" cellpadding="0">
+    <tr>
+              <td width="100%">
+
+                <b><font face="Arial" size="2">&nbsp;{MEMBER_NAME}<br>
+&nbsp;</font></b></td>
+            </tr>
+    <tr>
+              <td width="100%" valign="top">
+                <p align="center"><font face="Arial" size="2">{TOPMENU}<br>
+&nbsp;</font></td>
+            </tr>
+    <tr>
+      <td width="100%">
+      <div align="center">
+        <center>
+      <table border="0" cellspacing="0" width="98%" id="AutoNumber31" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0">
+        <tr>
+          <td width="100%"> <b>
+          <font face="Arial" color="#800000" style="font-size: 14pt">EDIT 
+          PROFILE</font><font face="Arial" size="2" color="#800000"> </font>
+          </b><font face="Arial"><b>
+          <span style="font-size: 10pt; color: #800000">&nbsp;</span></b></font></td>
+        </tr>
+      </table>
+        </center>
+      </div>
+      <div align="center">
+        <center>
+        <table border="0" cellspacing="0" width="98%" id="AutoNumber26" cellpadding="2" height="878" style="border-collapse: collapse" bordercolor="#111111">
+          <tr>
+          <td width="100%" colspan="2" bgcolor="#324F5D" height="16">
+          <p align="left"><font face="Arial"><b>
+          <span style="font-size: 10pt; color: white">&nbsp;Personal Information</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#D5FFD5" height="84" colspan="2">
+          <div align="center">
+            <center>
+            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="99%" id="AutoNumber32">
+              <tr>
+                <td width="100%">
+          <p style="line-height: 9.75pt"><i><font face="Arial">
+          <span style="font-size: 10pt">
+          Welcome to the ACCU</span></font><span style="font-size: 10pt; font-family: Arial">”</span><font face="Arial"><span style="font-size: 10pt">S 
+          Benchmark services! Please complete the following questionnaire to 
+          open <span class="GramE">a the</span> ACCU</span></font><span style="font-size: 10pt; font-family: Arial">”</span><font face="Arial"><span style="font-size: 10pt">S 
+          Benchmark services partner account. By opening this account, you will 
+          benefit from a wide range of <span class="GramE">Partner&nbsp; advantages</span>.
+          <font color="#000080">
+          <u>Upon receiving this questionnaire, we will email you a link to 
+          activate your <span class="GramE">partnership&nbsp; immediately</span></u>.</font></span></font></i></p>
+          <p style="line-height: 9.75pt"><i><font face="Arial">
+          <span style="font-size: 10pt">For 
+          more details on how <span class="GramE">the&nbsp; ACCU</span></span></font><span style="font-size: 10pt; font-family: Arial">”</span><font face="Arial"><span style="font-size: 10pt">S 
+          Benchmark services&nbsp; protects your personal information, please see the&nbsp; 
+          ACCU</span></font><span style="font-size: 10pt; font-family: Arial">”</span><span style="font-size: 10pt"><font face="Arial">S 
+          Benchmark services</font><span style="font-family: Arial"><a style="font-family: Verdana; color: #006699; text-decoration: underline; text-underline: single" href="index.php?m=privacy">&nbsp; 
+          Privacy Policy</a></span><font face="Arial">.<br>
+&nbsp;</font></span></i></td>
+              </tr>
+            </table>
+            </center>
+          </div>
+          </td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Title</font><font color="#FF0000"> *</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <span style="font-size: 7.5pt">
+          <font face="Arial">
+          <select name="title">{TITLE}</select></font></span></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">First name</font><font color="#FF0000"> *</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="firstname" size="31" value="{FIRSTNAME}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Last name </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="lastname" size="31" value="{LASTNAME}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">E-mail </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="email" size="20" value="{EMAIL}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Please retype
+          <span lang="en-us">E</span>-mail </font><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="email_confirmation" size="20" value="{EMAIL_CONFIRMATION}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Organization 
+          Name </font><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="organization" size="32" value="{ORGANIZATION}" ></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <b>
+          <font face="Arial" color="#000080">
+          <span style="font-size: 10pt">&nbsp;</span></font><span style="font-size: 10pt"><font face="Arial" color="#FFFFFF">Address</font></span></b></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Type </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <span style="font-size: 7.5pt">
+          <font face="Arial">
+          <select name="addresstype">{ADDRESSTYPE}</select></font></span></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Street</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="street" size="33" value="{STREET}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Street 2</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="street2" size="33" value="{STREET2}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">City </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="city" size="20" value="{CITY}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">State</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="state" size="20" value="{STATE}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">ZIP</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="zip" size="20" value="{ZIP}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Country </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <select size="1" name="country">{COUNTRY}</select></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+          <font face="Arial" size="2" color="#324F5D">Area Code</font></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="area_code" size="20" value="{AREA_CODE}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Direct Phone
+          </font><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="phone" size="20" value="{PHONE}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Fax</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="fax" size="20" value="{FAX}" ></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <font face="Arial" color="#FFFFFF"><b>
+          <span style="font-size: 10pt">&nbsp;Account &amp; Login information</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="23"><font face="Arial">
+          <span style="font-size: 10pt"><b>
+          <font color="#324F5D">Username<br>
+          </font></b><font color="#FFFFFF">(minimum 
+          6 characters)</font><font color="#324F5D"><span lang="en-us"><b> </b>
+          </span> </font><b>
+          <font color="#FF0000">*</font></b></span></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="23" valign="middle">
+            <input type="text" name="username" size="20" value="{USERNAME}" > <b>
+            <font color="#FF0000" face="Arial" size="2">{MSG}</font></b></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial">
+          <span style="font-size: 10pt"><b>
+          <font color="#324F5D">Password <br>
+          </font></b><font color="#FFFFFF">(minimum 
+          6 characters)</font><font color="#324F5D"><span lang="en-us"><b> </b>
+          </span> </font><b>
+          <font color="#FF0000">*</font></b></span></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="password" name="password1" size="20" value="{PASSWORD1}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Password 
+          Confirmation </font><font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="password" name="password2" size="20" value="{PASSWORD2}" ></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <font face="Arial" color="#FFFFFF"><b>
+          <span style="font-size: 10pt">&nbsp;Please, tell us about yourself</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="28">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Position in CU</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="28">
+            <select size="1" name="player">{PLAYER}</select></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="21">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">...if other, 
+          please specify</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="21">
+            <input type="text" name="player_other" size="20" value="{PLAYER_OTHER}" ></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="25">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Your interests</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="25">
+            <font face="Arial" size="2">{INTERESTS1}</font><font face="Arial"><font style="font-size: 10pt">&nbsp;Learn 
+          about Benchmark services<br>
+            {INTERESTS2}&nbsp;Net working with 
+          partners CUs<br>
+            {INTERESTS3}&nbsp;Academic 
+          seeking information<br>
+          </font><font size="2">{INTERESTS4}</font><span style="font-size: 7.5pt"><font style="font-size: 10pt">&nbsp;contributing 
+          to this site<br>
+            {INTERESTS5}&nbsp;Network 
+          seeking to provide technical assistance</font></span></font></td>
+          </tr>
+          <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="19">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Other interests</span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="19">
+            <font face="Arial"><span style="font-size: 7.5pt">
+          <textarea name="interests_other" rows="5" cols="47">{INTERESTS_OTHER}</textarea></span></font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <font face="Arial" color="#FFFFFF"><b>
+          <span style="font-size: 10pt">ACCU Newsletter</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#F3F3F3" height="58" colspan="2"><br>
+          {NEWSLETTER}<font face="Arial"><font size="2">&nbsp;</font><font style="font-size: 10pt">Click here if you 
+          DO NOT wish to receive the <span class="GramE">ACCU&nbsp; Newsletter</span>.</font></font><br>
+&nbsp;</td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td width="96%" align="center">
+      <table border="0" cellspacing="0" width="100%" id="AutoNumber27" cellpadding="0">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      <table border="0" cellspacing="1" bordercolor="#324F5D" width="96%" id="AutoNumber29" cellpadding="2" height="355">
+        <tr>
+          <td width="100%" colspan="2" bgcolor="#324F5D" height="25">
+          <p align="center"><font face="Arial">
+          <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">Member 
+            Profile : </span><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;</font></span></b></font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Name of Credit Union:&nbsp; </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="member_name" size="50" value="{MEMBER_NAME}" ></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Address: </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <span style="font-size: 8pt; color: black; font-family: Arial">
+            <textarea name="m_address" rows="3" cols="48">{M_ADDRESS}</textarea></span></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Country: </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <select size="1" name="m_country">{M_COUNTRY}</select></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+          <font face="Arial" size="2" color="#324F5D">Area Code</font></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="m_area" size="31" value="{M_AREA}" ></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Telephone: </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="m_tel" size="31" value="{M_TEL}" ></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Fax:
+            </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="m_fax" size="31" value="{M_FAX}" ></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Email: </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="m_email" size="31" value="{M_EMAIL}" ></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="17"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Homepage:</span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="17">
+            <input type="text" name="m_homepage" size="31" value="{M_HOMEPAGE}" ></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Established: (YYYY) </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <input type="text" name="m_establish" size="31" value="{M_ESTABLISH}" ></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="52"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Vision: </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="52">
+            <span style="font-size: 8pt; color: black; font-family: Arial">
+            <textarea name="m_vision" rows="3" cols="49">{M_VISION}</textarea></span></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="52"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Mission:</span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="52">
+            <span style="font-size: 8pt; color: black; font-family: Arial">
+            <textarea name="m_mission" rows="3" cols="49">{M_MISSION}</textarea></span></td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+    </center>
+  </div>
+  <table border="0" cellspacing="1" width="100%" id="AutoNumber16">
+    <tr>
+      <td width="100%">&nbsp;</td>
+    </tr>
+</table>
+<div align="center">
+  <center>
+        <table class="MsoNormalTable" style="background: white" border="0" width="96%" height="21" cellpadding="2" cellspacing="1">
+          <tr>
+            <td style="padding: 0.75pt; background: #324f5d" colSpan="3" height="25">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
+            Membership <span class="GramE">Profile&nbsp; as</span> of &nbsp;</span></font><input type="text" name="m_profile_as" size="12" value="{M_PROFILE_AS}" ><b><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
+            (YYYY) </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75pt; background: #324f5d" height="1">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Type of Credit Union </span></font></td>
+            <td style="padding: 0.75pt; background: #324f5d" height="1">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Number of members </span></font></td>
+            <td style="padding: 0.75pt; background: #324f5d" height="1">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">Low 
+            income less then $30 per month members </span></font></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Urban </span></b></td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          <input type="text" name="members_urban" size="17" value="{MEMBERS_URBAN}" ></td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          <input type="text" name="members_urban_low" size="18" value="{MEMBERS_URBAN_LOW}" ></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Rural </span></b></td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          <input type="text" name="members_rural" size="17" value="{MEMBERS_RURAL}" ></td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          <input type="text" name="members_rural_low" size="18" value="{MEMBERS_RURAL_LOW}" ></td>
+          </tr>
+        </table>
+      </center>
+</div>
+<table border="0" cellspacing="0" width="100%" id="AutoNumber18" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <td width="100%">&nbsp;</td>
+  </tr>
+</table>
+<div align="center">
+  <center>
+      <table class="MsoNormalTable" style="margin-left: -2.25pt; margin-right: -2.25pt; background: white" cellPadding="0" border="0" width="96%" height="132">
+        <tr>
+          <td style="width: 725; padding: 0.75pt; background: #324f5d" colSpan="7" height="12">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <b>
+          <font face="Arial">
+          <span style="font-size: 10pt; color: #FFFF00; font-family: techno">
+          Market <span class="GramE">segmentation&nbsp; as</span> of </span></font>
+          </b>
+            <span style="font-size: 8pt; color: black; font-family: Arial">
+            <b>&nbsp;</b></span><input type="text" name="market_segmentation" size="11" value="{MARKET_SEGMENTATION}" ><b><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
+          (YYYY) </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="width: 69; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Type 
+          of Credit Union </span></font></td>
+          <td style="width: 82; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Male
+          </span></font></td>
+          <td style="width: 94; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          Female</span></font></td>
+          <td style="width: 468; padding: 0.75pt; background: #324f5d" colSpan="4" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Age 
+          Segment of CU Membership</span></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="width: 120; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          &lt;18-19 </span></font></td>
+          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">30-45
+          </span></font></td>
+          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">45-60
+          </span></font></td>
+          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">60&gt;
+          </span></font></td>
+        </tr>
+        <tr>
+          <td style="width: 69; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Urban
+          </span></b></td>
+          <td style="width: 82; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="urban_male" size="9" value="{URBAN_MALE}" ></td>
+          <td style="width: 94; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="urban_female" size="9" value="{URBAN_FEMALE}" ></td>
+          <td style="width: 120; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_urban_18_19" size="10" value="{MEMBERS_URBAN_18_19}" ></td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_urban_30_45" size="10" value="{MEMBERS_URBAN_30_45}" ></td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_urban_45_60" size="10" value="{MEMBERS_URBAN_45_60}" ></td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_urban_60" size="10" value="{MEMBERS_URBAN_60}" ></td>
+        </tr>
+        <tr>
+          <td style="width: 69; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Rural
+          </span></b></td>
+          <td style="width: 82; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="rural_male" size="9" value="{RURAL_MALE}" ></td>
+          <td style="width: 94; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="rural_female" size="9" value="{RURAL_FEMALE}" ></td>
+          <td style="width: 120; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_rural_18_19" size="10" value="{MEMBERS_RURAL_18_19}" ></td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_rural_30_45" size="10" value="{MEMBERS_RURAL_30_45}" ></td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_rural_45_60" size="10" value="{MEMBERS_RURAL_45_60}" ></td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          <input type="text" name="members_rural_60" size="10" value="{MEMBERS_RURAL_60}" ></td>
+        </tr>
+      </table>
+        </center>
+</div>
+<div align="center">
+  <center>
+  <table border="0" cellspacing="0" width="96%" id="AutoNumber20" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+    <tr>
+      <td width="100%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="100%" bgcolor="#F3F3F3">&nbsp;<div align="center">
+        <center>
+        <table class="MsoNormalTable" style="background: white" cellPadding="0" border="0" width="304">
+          <tr>
+            <td style="width: 141; padding: 0.75pt; background: #324f5d">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Type of Credit Union </span></font></td>
+            <td style="width: 153; padding: 0.75pt; background: #324f5d">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Total Assets </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 141; padding: 0.75pt; background: #e8e8e8">
+            <p class="MsoNormal"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            &nbsp;Total Number</span></b></td>
+            <td style="width: 153; padding: 0.75pt; background: #e8e8e8">
+            <p class="MsoNormal">
+          <input type="text" name="assets_total" size="20" value="{ASSETS_TOTAL}" ></td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      <table border="0" cellspacing="0" width="100%" id="AutoNumber17" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      </td>
+    </tr>
+  </table>
+  </center>
+</div>
+<table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber23" cellpadding="0">
+  <tr>
+    <td width="100%">&nbsp;</td>
+  </tr>
+</table>
+<div align="center">
+  <center>
+      <table class="MsoNormalTable" style="background: white" cellPadding="2" border="0" width="96%" cellspacing="1" height="174">
+        <tr>
+          <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="629" colSpan="6" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">Core
+          <span class="GramE">Business&nbsp; as</span> of </span></font>
+          <input type="text" name="Core_Business" size="10" value="{CORE_BUSINESS}" ><b><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
+          (YYYY) </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="padding: 0.75pt; background: #324f5d" width="119" rowSpan="2">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          <span lang="en-us">&nbsp; </span>Type 
+          of Credit Union</span></font></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #324f5d" width="100" rowSpan="2" height="33">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          Amount in US$ </span></font></td>
+          <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="406" colSpan="4" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Usage 
+          of Service US$ </span></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Male
+          </span></font></td>
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          Female </span></font></td>
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Youth
+          </span></font></td>
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Non-Members
+          </span></font></td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+          Savings</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="savings_amount" size="11" value="{SAVINGS_AMOUNT}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="savings_male" size="10" value="{SAVINGS_MALE}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="savings_female" size="11" value="{SAVINGS_FEMALE}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="savings_youth" size="11" value="{SAVINGS_YOUTH}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="savings_nonmember" size="10" value="{SAVINGS_NONMEMBER}" ></td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Share</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="share_amount" size="11" value="{SHARE_AMOUNT}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="share_male" size="10" value="{SHARE_MALE}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="share_female" size="11" value="{SHARE_FEMALE}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="share_youth" size="11" value="{SHARE_YOUTH}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="share_nonmember" size="10" value="{SHARE_NONMEMBER}" ></td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Loan 
+          Outstanding</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="loan_total" size="11" value="{LOAN_TOTAL}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="loan_male" size="10" value="{LOAN_MALE}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="loan_female" size="11" value="{LOAN_FEMALE}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="loan_youth" size="11" value="{LOAN_YOUTH}" ></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="loan_nonmember" size="10" value="{LOAN_NONMEMBER}" ></td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Total 
+          Reserve</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          <input type="text" name="reserve_total" size="11" value="{RESERVE_TOTAL}" ></td>
+          <td style="width: 304.5pt; padding: 0.75pt; background: #F3F3F3; " width="406" colSpan="4" height="20">
+          <p class="MsoNormal">
+          <span style="font-size: 10pt; color: black; font-family: Arial">&nbsp;
+          </span></td>
+        </tr>
+      </table>
+        </center>
+</div>
+<div align="center">
+  <center>
+  <table border="0" cellspacing="0" width="96%" id="AutoNumber21" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+    <tr>
+      <td width="100%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="100%" bgcolor="#E8E8E8">
+      <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber24" cellpadding="0">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      <div align="center">
+        <center>
+        <table class="MsoNormalTable" style="background: white" border="0" height="307" cellspacing="1">
+          <tr>
+            <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="340" colSpan="2" height="25">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
+            Board Members and&nbsp; Other committee Members&nbsp; </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Name </span></font></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Position </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_1" size="26" value="{BOARD_NAME_1}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_1" size="26" value="{BOARD_POS_1}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_2" size="26" value="{BOARD_NAME_2}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_2" size="26" value="{BOARD_POS_2}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_3" size="26" value="{BOARD_NAME_3}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_3" size="26" value="{BOARD_POS_3}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_4" size="26" value="{BOARD_NAME_4}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_4" size="26" value="{BOARD_POS_4}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_5" size="26" value="{BOARD_NAME_5}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_5" size="26" value="{BOARD_POS_5}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_6" size="26" value="{BOARD_NAME_6}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_6" size="26" value="{BOARD_POS_6}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_7" size="26" value="{BOARD_NAME_7}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_7" size="26" value="{BOARD_POS_7}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_8" size="26" value="{BOARD_NAME_8}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_8" size="26" value="{BOARD_POS_8}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_9" size="26" value="{BOARD_NAME_9}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_9" size="26" value="{BOARD_POS_9}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_name_10" size="26" value="{BOARD_NAME_10}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="board_pos_10" size="26" value="{BOARD_POS_10}" ></td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      <table border="0" cellspacing="1" width="100%" id="AutoNumber14">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      <div align="center">
+        <center>
+        <table class="MsoNormalTable" style="background: white" border="0" height="179" cellspacing="1">
+          <tr>
+            <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="340" colSpan="2" height="27">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
+            Senior Management </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Name </span></font></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Position </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_name_1" size="26" value="{MANAGE_NAME_1}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_pos_1" size="26" value="{MANAGE_POS_1}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_name_2" size="26" value="{MANAGE_NAME_2}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_pos_2" size="26" value="{MANAGE_POS_2}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_name_3" size="26" value="{MANAGE_NAME_3}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_pos_3" size="26" value="{MANAGE_POS_3}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_name_4" size="26" value="{MANAGE_NAME_4}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_pos_4" size="26" value="{MANAGE_POS_4}" ></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_name_5" size="26" value="{MANAGE_NAME_5}" ></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          <input type="text" name="manage_pos_5" size="26" value="{MANAGE_POS_5}" ></td>
+          </tr>
+        </table>
+        <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber25" cellpadding="0">
+          <tr>
+            <td width="100%">&nbsp;</td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      </td>
+    </tr>
+  </table>
+  </center>
+</div>
+<table border="0" cellspacing="0" width="100%" id="AutoNumber22" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <td width="100%">&nbsp;</td>
+  </tr>
+</table>
+<div align="center">
+  <center>
+      <table border="0" cellspacing="1" width="96%" id="AutoNumber30" cellpadding="2" height="253">
+        <tr>
+          <td width="100%" height="17" bgcolor="#324F5D">
+          <p align="center"><font face="Arial" color="#FFFF00"><b>
+      <span style="font-size: 10pt">Terms of Service ACCU (TOS) and Privacy 
+          Policy</span></b></font></td>
+        </tr>
+        <tr>
+          <td width="100%" height="158" bgcolor="#F3F3F3">
+      <p align="center">
+      <span style="font-size: 7.5pt"><font face="Arial">
+          <textarea rows="9" cols="85" name="ppp" style="text-decoration: blink">PRIVACY POLICY - ACCU’S BENCHMARK SERVICES 
+We, at the ACCU’s Benchmark Services, are strongly committed to protecting your privacy online and have taken the necessary steps to protect the information you share with us. To help us protect your privacy, you should maintain the secrecy of the Log-on Username ID and password you may have set up in connection with your participation in any of ACCU’s Benchmark Services’   service.  
+
+Although ACCU’s BENCHMARK SERVICES will undertake all reasonable means to safeguard your personal information, transmissions made by means of the Internet cannot be made absolutely secure. Hence, ACCU’S BENCHMARK SERVICES will have no liability for disclosure of personal information brought about by errors in transmission or unauthorized acts of third parties.
+
+Information Collection and Use
+ACCU’s BENCHMARK SERVICES collects certain personally identifiable information in order to provide you with customized services, content, and advertisements. Some personal information is gathered whenever you register in order to avail of some of ACCU’S BENCHMARK SERVICES or products. We may also, at other times, obtain from you some personal information such as when you enter a sweepstakes contest or other similar promotions.  Examples of the types of personally identifiable information we collect range from your  name, home or e-mail address, phone or fax numbers, to your credit card information. 
+
+Disclosure of Information
+We shall not disclose your personally identifiable information to third parties without your permission, except to the extent necessary in order to:
+(a) comply with the law or respond to a subpoena, court order, government request or other legal processes; 
+(b) protect the interests, rights, safety, or property of ACCU’S BENCHMARK SERVICES  or others; 
+(c) enforce any terms of service on this Web site;
+(d) provide you with the services or products requested by you and to perform other activities related to such services and products, including billing and collection;
+(e) effectively carry out a merger, acquisition, or liquidation of ACCU’S BENCHMARK SERVICES ; or 
+(f) operate ACCU’S BENCHMARK SERVICES’ systems properly. 
+
+We may also share your personal information with a sponsor or other third party who is interested in serving you ("Third-Party Providers"). You may advise us at any time not to share your personal information with such Third-Party Providers by clicking here: accu@accu.coop or by contacting us at: 
+
+Chief Executive Officer
+Association of Asian Confederation of Credit Unions
+No 36/2 Soi 60 Ramkhamhaeng Road 
+Bangkapi Bangkok 10240 Thailand 
+Tel. 66 2 374, 3170 Fax 662 374 5321 
+Email  : accuran@ksc.th.com,  ceo@aaccu.coop
+ 
+ACCU’S BENCHMARK SERVICES reserves the right to change this Privacy Policy at any time by posting revisions on the ACCU’S BENCHMARK SERVICES Web site. This Privacy Policy is not intended to, nor does it create any contractual or other legal rights in favor of any party. This Privacy Policy applies only to ACCU’S BENCHMARK SERVICES Web site and does not apply to other ACCU’S BENCHMARK SERVICES products and services. 
+Read also our TERMS OF SERVICE.
+
+TERMS OF SERVICE (TOS) AND PRIVACY POLICY - ACCU’S BENCHMARK SERVICES 
+A - TERMS OF SERVICE (TOS) - ACCU’S BENCHMARK SERVICES 
+PLEASE READ THESE TERMS AND CONDITIONS OF SERVICE BEFORE USING THIS SITE. By continuing to access or use this site, or any service on this site, you signify YOUR ACCEPTANCE OF THESE TERMS AND CONDITIONS OF SERVICE. The ACCU’s Benchmark Services reserves the right to amend, remove, or add to these terms and conditions at any time by posting new terms and conditions on this page. Such modifications shall be effective within three (3) days from posting. Accordingly, you are advised to  review these terms and conditions of service whenever accessing or using this site. Your use of the site, or any service on this site, after the posting of modifications to these terms and conditions of service will constitute YOUR ACCEPTANCE OF THE TERMS AND CONDITIONS OF SERVICE, as modified. If, at any time, you do not wish to accept the terms and conditions of service, you may not use the site. Any terms and conditions proposed by you which are in addition to or which conflict with these terms and conditions of service are expressly rejected by ACCU’S BENCHMARK SERVICES and shall be of no legal force or effect. 
+
+1. User Consent to Terms and Conditions of Service: You represent that  (a) you have read and fully understood and agree to be bound by the terms and conditions of service ("TOS") for www.aaccu@accu.coop or any successor site; (b) you have the power and authority to enter into this agreement; and (c) you are at least eighteen (18) years old; You further agree: (a) to comply with U.S. laws regarding the transmission of any data obtained from the Service (as defined herein) in accordance with the TOS; (b) not to use the Service for illicit, immoral and prejudicial purposes; and (c) not to interfere in, or disrupt, networks connected to  the Service. 
+2. Copyright, Trademarks and other Intellectual Property Rights: This Web site, including but not limited to texts, contents, photographs, video, audio and graphics (the "Service"), is protected by copyrights, trademarks, service marks, international treaties and/or other proprietary rights and laws of the U.S. and other countries. The Service is also protected as a collective work or compilation under U.S. copyright and other laws and treaties. All individual articles, columns and other elements making up the Service are also copyrighted works. You agree to abide by all applicable copyright and other laws, as well as any additional copyright notices or restrictions contained in the Service. All present and future rights in and to trade secrets, patents, copyrights, trademarks, service marks, know-how and other proprietary rights of any type under the laws of any governmental authority, domestic or foreign, including rights in and to all applications and registrations relating to the Service (the "Intellectual Property Rights") shall, as between you and ACCU’s BENCHMARK SERVICES, at all times be and remain the sole and exclusive property of ACCU’S BENCHMARK SERVICES and/or its licensors or affiliates. All present and future rights in and title to the Service (including the right to exploit the Service and any portions of the Service over any present or future technology) are reserved to ACCU’S BENCHMARK SERVICES and/or its licensors and affiliates for its exclusive use. Except as specifically permitted herein, you shall not use ACCU’S BENCHMARK SERVICES’ Intellectual Property Rights or the Service, or the names of any individual participants in, or contributors to, the Service, or any variations or derivatives thereof, for any purpose, without ACCU’s BENCHMARK SERVICES’ prior written approval.  All rights in the ACCU trademarks and service marks are reserved except to the extent permitted under paragraph 8 hereof. Other trademarks, product names, company names and logos appearing on this Web site are the property of their respective owners.  You must obtain permission from these owners before copying or using their trademarks, product names, company names or logos.
+3. Restrictions on Use: You may not use the Service for any illicit purpose or in any manner inconsistent with the TOS. You agree to use the Service solely for your own non-commercial use and benefit, and not for resale or other transfer or disposition to, or use by or for the benefit of, any other person or entity. You agree not to use, transfer, distribute or dispose of any information contained in the Service in any manner that could compete with the business of ACCU’s BENCHMARK SERVICES. You acknowledge that the Service has been developed, compiled, prepared, revised, selected and arranged by ACCU’s BENCHMARK SERVICES and others (including certain other information sources) through the application of methods and standards of judgment developed and applied through the expenditure of substantial time, effort and money and constitutes valuable intellectual property and trade secrets of ACCU’S BENCHMARK SERVICES and such others. You agree to protect the proprietary rights of ACCU and all others having rights in the Service during and after the term of this agreement and to comply with all reasonable written requests made by ACCU’S BENCHMARK SERVICES or its suppliers of content, equipment or otherwise ("Suppliers") to protect their and others' contractual, statutory and common law rights in the Service. You agree to notify ACCU’S BENCHMARK SERVICES in writing promptly upon becoming aware of any unauthorized access or use of the Service by any party or of any claim that the Service infringes upon any copyright, trademark or other contractual, statutory or common law rights. 
+4. Further Restrictions on Use: YOU MAY NOT COPY, REPRODUCE, RECOMPILE, DECOMPILE, DISASSEMBLE, REVERSE ENGINEER, DISTRIBUTE, PUBLISH, DISPLAY, PERFORM, MODIFY, UPLOAD TO, CREATE DERIVATIVE WORKS FROM, TRANSMIT OR IN ANY WAY EXPLOIT ANY PART OF THE SERVICE, EXCEPT THAT YOU MAY DOWNLOAD MATERIAL FROM THE SERVICE AND/OR MAKE ONE PRINT COPY FOR YOUR OWN PERSONAL, NON-COMMERCIAL USE, PROVIDED THAT YOU RETAIN ALL COPYRIGHT AND OTHER PROPRIETARY NOTICES. THE ANALYSIS AND PRESENTATION INCLUDED IN THE SERVICE MAY NOT BE RECIRCULATED, REDISTRIBUTED OR PUBLISHED BY YOU WITHOUT ACCU’S BENCHMARK SERVICES’ PRIOR WRITTEN CONSENT. MODIFICATION OF THE SERVICES’ CONTENT WOULD BE A VIOLATION OF ACCU’S BENCHMARK SERVICES’ COPYRIGHT AND OTHER PROPRIETARY RIGHTS. ADDITIONALLY, YOU MAY NOT OFFER ANY PART OF THE SERVICE FOR SALE OR DISTRIBUTE IT OVER ANY OTHER MEDIUM INCLUDING BUT NOT LIMITED TO OVER-THE-AIR TELEVISION OR RADIO BROADCAST, A COMPUTER NETWORK OR HYPERLINK FRAMING ON THE INTERNET WITHOUT THE PRIOR WRITTEN CONSENT OF ACCU’S BENCHMARK SERVICES. THE SERVICE AND THE INFORMATION CONTAINED THEREIN MAY NOT BE USED TO CONSTRUCT A DATABASE OF ANY KIND. NOR MAY THE SERVICE BE STORED (IN ITS ENTIRETY OR IN ANY PART) IN DATABASES FOR ACCESS BY YOU OR ANY THIRD PARTY OR TO DISTRIBUTE ANY DATABASE SERVICES CONTAINING ALL OR PART OF THE SERVICE. YOU MAY NOT USE THE SERVICE IN ANY WAY TO IMPROVE THE QUALITY OF ANY DATA SOLD OR CONTRIBUTED BY YOU TO ANY THIRD PARTY. FURTHERMORE, YOU MAY NOT USE ANY OF ACCU’S BENCHMARK SERVICES’ TRADEMARKS, TRADE NAMES OR SERVICE MARKS IN ANY MANNER WHICH CREATES THE IMPRESSION THAT SUCH NAMES AND MARKS BELONG TO OR ARE ASSOCIATED WITH YOU OR ARE USED WITH ACCU’S BENCHMARK SERVICES’ CONSENT. YOU WILL NOT USE THE SERVICE OR THE INFORMATION CONTAINED THEREIN IN UNSOLICITED MAILINGS OR SPAM MATERIAL. YOU WILL NOT USE ANY OF ACCU’S BENCHMARK SERVICES' TRADEMARKS, TRADE NAMES OR SERVICE MARKS IN UNSOLICITED MAILINGS OR SPAM MATERIAL. YOU WILL NOT SPAM OR SEND UNSOLICITED MAILINGS TO ANY PERSON OR ENTITY USING THE SERVICE. 
+5. License: You acquire absolutely no rights or licenses in or to the Service and materials contained within the Service other than the limited right to utilize the Service in accordance with the TOS. Should you choose to download content from the Service, you must do so in accordance with the TOS. Such download is licensed to you by ACCU’S BENCHMARK SERVICES ONLY for your own personal, non-commercial use in accordance with the TOS and does not transfer any other rights to you. 
+6. Fees and Payments: ACCU’S BENCHMARK SERVICES reserves the right at any time to charge fees for access to portions of the Service or the Service as a whole. If at any time ACCU’S BENCHMARK SERVICES requires a fee for portions of the Service or the Service as a whole, ACCU’S BENCHMARK SERVICES will require you to register and create an account. In no event will you be charged for access to portions of the Service or to the Service unless ACCU’S BENCHMARK SERVICES obtains your prior agreement to pay such charges. You shall pay all fees and charges incurred through your account at the rates in effect for the billing period in which such fees and charges are incurred, including but not limited to charges for any products or services offered for sale through the Service by ACCU’S BENCHMARK SERVICES or by any other vendor or service provider. All fees and charges shall be billed to you, and you shall be solely responsible for their payment within thirty days from the date of the invoice.  Late payments will accrue interest at the legal maximum interest rate or one and one-half percent (1.5%) per month, whichever is lower. You shall pay all applicable taxes and interest charges relating to the use of the Service through your account, and the purchase of any other products or services. Certain portions of the Service or the Service as a whole may require a prepaid fee ("Prepaid Fee"), which may be modified from time to time in ACCU’S BENCHMARK SERVICES' sole discretion. The Prepaid Fee, and all taxes and other fees related thereto will be paid by you in advance. In no event will you receive any portions of the Service or the Service as a whole if a Prepaid Fee is required unless ACCU’S BENCHMARK SERVICES receives all fees and charges payable by you, including  the Prepaid Fee. 
+7. Partner Registration and Account Creation: As part of the registration and account creation process necessary to obtain access to certain portions of the Service, including those portions that require a fee or payment, you will select a username and a password. You will provide ACCU’S BENCHMARK SERVICES with certain registration information, all of which must be accurate, truthful, and updated. You shall not: (i) select a username already used by another person; (ii) use a username in which another person has rights without such person's authorization; or (iii) use a username or password that MIX MARKET, in its sole discretion, deems offensive or inappropriate. ACCU’S BENCHMARK SERVICES reserves the right to deny creation of your account based on ACCU’S BENCHMARK SERVICES’ inability to verify the authenticity of your registration information. You shall be solely responsible for maintaining the confidentiality of your password. You shall immediately notify ACCU’S BENCHMARK SERVICES by submitting feedback or contacting www.aaccu@accu.coop of any known or suspected unauthorized use(s) of your account, or any known or  suspected breach of security, including loss, theft, or unauthorized disclosure of your password or credit card  information. You are fully responsible for all usages and/or activities on your ACCU’S BENCHMARK SERVICES account, including but not limited to, the use of the account by any third party authorized by you to use your username and password. ACCU’S BENCHMARK SERVICES reserves the right to terminate your account, in its sole discretion, within one (1) day from notice. You may terminate your account  by promptly informing ACCU’s BENCHMARK SERVICES of such intent, or by submitting feedback. Upon termination, you will receive an automated confirmation via e-mail that the request was received and granted, and your account will be terminated within two (2) business days from said confirmation. You are responsible for all charges incurred up to the time the account is terminated including interests for any overdue payments. Moreover, ACCU’S BENCHMARK SERVICES reserves the right to pursue any and all claims against any user of your account. You agree to  maintain only one account with the Service at any time and you certify that you currently have no other account(s) with  the Service.
+8. Linking and Framing: You may include a link(s) on your Web site to the www.mixmarket.org home page, currently  located at www.aaccu@accu.coop ("Home Page"); provided that you first fill out the registration form below. You may not link to www.aaccu@accu.coop any site containing inappropriate, profane, defamatory, infringing, obscene, indecent or  unlawful topics, names, material or information, or material or information that violates any applicable intellectual property, proprietary, privacy or publicity rights. ACCU’S BENCHMARK SERVICES  is concerned about the integrity of this Web site when it  is accessed in a manner solely determined by third parties or viewed in a setting solely created by third parties.  Specifically, ACCU’S BENCHMARK SERVICES  is concerned with activities such as linking to an internal or subsidiary page of this Web site  that is located one or several levels down from the Home Page ("deep linking"), or bringing up or presenting content of  this Web site within another Web site ("framing"). In this regard you must make a specific request for, and secure  permission from, ACCU’S BENCHMARK SERVICES  prior to deep linking to, or framing, this Web site or any of its contents, or engaging in  similar activities. If you would like to deep link to or frame this Web site, or any of its content, you must seek permission from ACCU’S BENCHMARK SERVICES  by writing towww.aaccu@accu.coop:
+
+Chief Executive Officer
+Association of Asian Confederation of Credit Unions
+No 36/2  Soi  60  Ramkhamhaeng  Road 
+Bangkapi Bangkok 10240 Thailand 
+Tel. 66 2 374, 3170 Fax 662 374 5321
+
+Please include: 
+(a) your name, e-mail address, and telephone number; 
+
+(b) the name of the Credit Union concerned ; 
+
+(c) the Web site address/es where the proposed deep linking or framing will occur; and 
+
+(d) specific details about the contemplated deep linking or framing activities, including the content or Web page(s) of  this Web site to which you would like to deep link or frame. 
+Registration Form:
+
+By filling out the following required information you agree that you have read the above linking and framing terms and have fully understood the terms thereof, and further  agree to be bound by them. Note: All fields required. 
+Your Name:  
+Name of the Credit Union Concerned:  
+E-mail Address:  
+Telephone Numbers:  
+
+9. NO WARRANTIES: You agree that your use of the Service is at your sole risk and acknowledge that the Service and anything contained within the Service, including, but not limited to, contents, services, goods or advertisements (the  "Items") are provided "AS IS" and "AS AVAILABLE," and that ACCU’S BENCHMARK SERVICES  makes no warranty of any kind, express or implied,  as to the Items, including, but not limited to, merchantability, non-infringement, title or fitness for a particular  purpose or use. ACCU’S BENCHMARK SERVICES  does not warrant that the Service is compatible with your equipment or that the Service is absolutely  free of errors or viruses, worms or "Trojan horses," or any other harmful, invasive, or corrupted files, and is not  liable for any damage you may suffer as a result of such destructive features. You agree that ACCU’S BENCHMARK SERVICES , its officers  and employees, general partners, affiliates, subsidiaries, successors and assigns, Suppliers and its third-party agents  shall have no responsibility or liability for: (i) any injury or damages, whether caused by the  simple negligence of ACCU’S BENCHMARK SERVICES ,  its officers and employees, general partners, affiliates, subsidiaries, successors and assigns, Suppliers and/or its  third-party agents arising in connection with the Service including lost profits to ACCU’S BENCHMARK SERVICES ; or (ii) any excusable fault,  inaccuracy, omission, delay or any other failure in the Service caused by your computer equipment or arising from your  use of the Service on such equipment. The content of other Web sites, services, goods or advertisements that may be linked to the Service is not maintained or controlled by ACCU’S BENCHMARK SERVICES . ACCU’S BENCHMARK SERVICES , its officers and employees, general  partners, affiliates, subsidiaries, successors and assigns, Suppliers and/or its third-party agents are therefore not  responsible for the availability, content or accuracy of other Web sites, services or goods that may be linked to, or  advertised on, the Service. ACCU’S BENCHMARK SERVICES  does not: (a) make any warranty, express or implied, with respect to the use of  the links provided on, or to, the Service; (b) guarantee the accuracy, completeness, usefulness or adequacy of any other  Web sites, services, goods or advertisements that may be linked to the Service; or (c) make any endorsements, express or  implied, of any other Web sites, services, goods or advertisements that may be linked to the Service. ACCU’S BENCHMARK SERVICES  is also  not responsible for the reliability or continued availability of the telephone lines, wireless services, communications  media and equipment you use to access the Service. You understand that ACCU’S BENCHMARK SERVICES  and/or third-party contributors to the  Service may choose at any time to inhibit or prohibit their content from being accessed under the TOS. 
+10. Disclaimer and Limitation of Liability: You acknowledge that: (i) the Service is provided for information purposes only and is not intended for trading purposes; (ii) the Service includes information taken from stocks and other  exchanges from around the world, including the New York Stock Exchange, American Stock Exchange, NASDAQ and other  sources; (iii) ACCU’S BENCHMARK SERVICES  does not guarantee the sequence, accuracy, completeness or timeliness of the Service; and (iv)  the provision of certain parts of the Service is subject to the terms and conditions of other agreements to which  ACCU  is a party. Accordingly, anything to the contrary herein set forth notwithstanding, ACCU’S BENCHMARK SERVICES , its officers and  employees, general partners, affiliates, subsidiaries, successors and assigns, Suppliers and its third-party agents shall  not, directly or indirectly, be liable, in any way, to you or any other person for any: (i) inaccuracies or errors in or  omissions from the Service including, but not limited to, quotes and financial data; (ii) delays, errors or interruptions  in the transmission or delivery of the Service; or (iii) losses or damages arising there from or occasioned thereby, or by  any reason of non-performance. 
+11.Limitation of Liability: UNDER NO CIRCUMSTANCES, INCLUDING BUT NOT LIMITED TO SIMPLE NEGLIGENCE, SHALL ACCU’S BENCHMARK SERVICES ,  ITS OFFICERS, EMPLOYEES, GENERAL PARTNERS, AFFILIATES, SUBSIDIARIES, SUCCESSORS AND ASSIGNS, SUPPLIERS AND ITS  THIRD-PARTY AGENTS BE LIABLE TO YOU FOR INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, PUNITIVE OR EXEMPLARY DAMAGES EVEN  IF ACCU’S BENCHMARK SERVICES  HAS BEEN ADVISED SPECIFICALLY OF THE POSSIBILITY OF SUCH DAMAGES, ARISING FROM USE OF OR INABILITY TO USE  THE SERVICE OR ANY LINKS OR ITEMS ON THE SERVICE OR ANY PROVISION OF THE TOS, SUCH AS, BUT NOT LIMITED TO, LOSS OF  REVENUE OR ANTICIPATED PROFITS OR LOST BUSINESS. SOME JURISDICTIONS LIMIT THE EXCLUSION OF DAMAGES OR LIMITATION OF  LIABILITY, SO THE ABOVE EXCLUSIONS AND LIMITATIONS MAY NOT APPLY TO YOU.  IF ANY PARY OF THE EXCLUSIONS OR DAMAGES OR  LIMITATION OF LIABILITY SET FORTH ABOVE IS UNENFORCEABLE UNDER APPLICABLE LAW. ACCU’S BENCHMARK SERVICES’ AND ITS AFFILIATES’' AGGREGATE  LIABILITY SHALL BE LIMITED TO THE MAXIMUM EXTENT PERMITTED BY LAW. IN NO EVENT SHALL ACCU’S BENCHMARK SERVICES' AND ITS AFFILIATES'  TOTAL LIABILITY TO YOU FOR ALL DAMAGES, LOSSES AND CAUSES OF ACTION (WHETHER IN CONTRACT OR TORT, INCLUDING BUT NOT  LIMITED TO, NEGLIGENCE) EXCEED THE AMOUNT PAID BY YOU, IF ANY, FOR ACCESSING THIS SITE OR $50, WHICHEVER AMOUNT IS LOWER. 
+12. Indemnification: You agree, at your own expense, to indemnify, defend and hold harmless ACCU’S BENCHMARK SERVICES, its officers and employees, general partners, affiliates, subsidiaries, successors and assigns, Suppliers and its third-party agents, against any claim, suit, action or other proceeding brought against ACCU’S BENCHMARK SERVICES, its officers and employees,  general partners, affiliates, subsidiaries, successors and assigns, Suppliers and its third-party agents, to the extent  that such claim, suit, action or other proceeding brought against ACCU’S BENCHMARK SERVICES  , its officers and employees, general  partners, affiliates, subsidiaries, successors and assigns, Suppliers and its third-party agents is based on or arises in  connection with the Service, or any links on the Service, including, but not limited to: (i) your use of, or someone  using your computer, use of the Service; (ii) your use of, or someone using, your account, where applicable; (iii) a  violation of the TOS by you or anyone using your computer (or account, where applicable); (iv) a claim that any use of  the Service by you or someone using your computer (or account, where applicable) infringes any Intellectual Property  Right (as herein defined) of any third party, or any right of personality or publicity, is libelous or defamatory, or  otherwise results in injury or damage to any third party; (v) any deletions, additions, insertions or alterations to, or  any unauthorized use of, the Service by you or someone using your computer (or account, where applicable); (vi) any  misrepresentation or breach of representation or warranty made by you contained herein; or (vii) any breach of any  covenant or agreement to be performed by you hereunder. You agree to pay any and all costs, damages and expenses,  including, but not limited to, reasonable attorneys' fees and costs awarded against or otherwise incurred by or in  connection with or arising from any such claim, suit, action or proceeding attributable to any such claim. ACCU’S BENCHMARK SERVICES   reserves the right, at its own expense, to assume the exclusive defense and control of any matter otherwise subject to  indemnification by you, in which event you will fully cooperate with ACCU’S BENCHMARK SERVICES  in asserting any available defense. You  acknowledge and agree to pay ACCU’S BENCHMARK SERVICES' reasonable attorney’s fees incurred in connection with any and all lawsuits  brought against you by ACCU’S BENCHMARK SERVICES  under the TOS and any other terms and conditions of service on www.acccu.coop or any  successor site, in which ACCU’S BENCHMARK SERVICES  prevails, including without limitation, lawsuits arising from your failure to  indemnify ACCU’S BENCHMARK SERVICES  pursuant to the TOS. 
+13.Termination: Either you or ACCU’S BENCHMARK SERVICES  may terminate the TOS for cause, and after due notice . You may terminate the TOS by discontinuing use of the Service and destroying all materials obtained from the  Service. However, the TOS will terminate immediately without notice from ACCU’S BENCHMARK SERVICES  if you, in ACCU’S BENCHMARK SERVICES'  judgment, fail or refuse to comply with any of the provisions of the TOS. Upon termination by you or ACCU’S BENCHMARK SERVICES , you must destroy promptly all materials  obtained from the Service and any copies thereof. Sections two (2) through twelve (12) and fifteen (15) through nineteen (19)  shall survive any termination of the TOS. 
+14. Governing Law: The TOS shall be governed and construed in accordance with the laws of the District of  …………………………………….Bangkok Thailand ,without giving effect to conflicts-of-law principles thereof that might lead to the  application of the law of another jurisdiction. 
+15. ACCU’S BENCHMARK SERVICES  makes no representation that the products, services  and other materials available through this Web site are appropriate or available for use in any particular location.  Access to these products, services and materials from countries where their content or use is illegal is strictly prohibited. 
+16.Miscellaneous: The failure of ACCU’S BENCHMARK SERVICES  to exercise or enforce any right or provision of the TOS shall not  constitute a waiver of such right or provision.   
+17. Headings: The section titles in the TOS are used solely for the convenience of you and ACCU’S BENCHMARK SERVICES  and have  no legal or contractual significance. 
+18. Sever ability: If any provision of the TOS is found invalid or unenforceable, that provision will be enforced  to the maximum extent permissible, and the other provisions of the TOS will remain in force.
+19.Entire Agreement: The TOS and any other terms and conditions of service on www.aaccu@accu.coop  and any  successor site, constitute the entire agreement between you and ACCU’S BENCHMARK SERVICES  and govern your use of the Service. 
+
+INQUIRIES REGARDING  www.aaccu.coop CONTENT
+Click here for inquiries regarding on www.aaccu@accu.coop content:
+Click here for the ACCU’S BENCHMARK SERVICES  Home page
+INQUIRIES REGARDING INTELLECTUAL PROPERTY ISSUES
+1.General Inquiries: Please send general inquiries regarding intellectual property issues to accuran@ksc.th or to: 
+
+The ACCU’s Benchmark Services  (ACCU’S BENCHMARK SERVICES ) 
+Association of Asian Confederation of Credit Unions
+No 36/2  Soi  60  Ramkhamhaeng  Road 
+Bangkapi Bangkok 10240 Thailand 
+Tel. 66 2 374, 3170 Fax 662 374 5321
+
+2. Copyright Agent for Copyright Infringement Claims (Digital Millennium Copyright Act): The designated agent to  receive notification of claimed infringement under Title II of the Digital Millennium Copyright Act is: Isabelle Barres,  The ACCU’s Benchmark Services place (ACCU’S BENCHMARK SERVICES ), Association of Asian Confederation of Credit Unions
+No 36/2  Soi  60  Ramkhamhaeng  Road 
+Bangkapi Bangkok 10240 Thailand 
+Tel. 66 2 374, 3170 Fax 662 374 5321
+1919 Pennsylvania Avenue NW, Suite 760, Washington DC 20006, U.S.A., Tel: 01 (202)  659-9094, Fax: 01 (202) 659-9095, Email: legal@mixmarket.org. Read also our PRIVACY POLICY.
+
+B- PRIVACY POLICY  - ACCU’S BENCHMARK SERVICES 
+We, at the ACCU’s Benchmark Services , are strongly committed to protecting your privacy on-line and have taken the necessary steps to  protect the information you share with us. To help us protect your privacy, you should maintain the secrecy of the Log-on  Username ID and password you may have set up in connection with your participation in any ACCU’s Benchmark Services  ("ACCU’S BENCHMARK SERVICES ")  service. Although ACCU’S BENCHMARK SERVICES commits to undertake all reasonable efforts to safeguard your personal information, transmissions made by means of the Internet cannot be made absolutely secure. ACCU’S BENCHMARK SERVICES  will have no liability for disclosure of personal  information due to errors in transmission or unauthorized acts of third parties.
+
+Information Collection and Use
+ACCU’S BENCHMARK SERVICES  collects certain personally identifiable information in order to provide you with customized services,  content, and advertisements. Some personal information is gathered whenever you register in order to avail of some of ACCU’S BENCHMARK SERVICES’   services or products. We may also secure from you certain necessary personal information such as when you participate in a  sweepstakes contest, or other promotions.  Examples of the types of personally identifiable information we collect range  from your name, home and e-mail address, phone or fax numbers, to your credit card information. 
+
+Disclosure of Information
+
+We shall not disclose personally identifiable information we collect from you to third parties without your permission  except to the extent necessary in order: (a) to comply with the law or respond to a subpoena, court order, government  request, or other legal processes; (b) to protect the interests, rights, safety, or property of ACCU’S BENCHMARK SERVICES  or others; (c)  to enforce any terms of service on this Web site; (d) to provide you with the services or products requested by you and  to perform other activities related to such services and products, including billing and collection; (e) effectively carry out a merger, acquisition, or liquidation of ACCU’S BENCHMARK SERVICES , or (f) to operate ACCU’S BENCHMARK SERVICES 's systems properly. 
+We may also share your personal information with a sponsor or other third party who is interested in serving you  ("Third-Party Providers"). You may advise us at any time not to share your personal information with such Third-Party  Providers by clicking here: 
+Chief Executive Officer  Association of Asian Confederation of Credit Unions
+No 36/2  Soi  60  Ramkhamhaeng  Road   Bangkapi Bangkok 10240 Thailand 
+Tel. 66 2 374, 3170 Fax 662 374 5321
+ACCU’S BENCHMARK SERVICES  reserves the right to change this Privacy Policy at any time by posting revisions on the ACCU’S BENCHMARK SERVICES  Web site.  This Privacy Policy is not intended to, and does not create any contractual or other legal rights in or on behalf of any  party. This Privacy Policy applies only to the ACCU’S BENCHMARK SERVICES  Web site and does not apply to other ACCU’S BENCHMARK SERVICES  products and  services.
+</textarea></font></span></td>
+        </tr>
+        <tr>
+          <td width="100%" height="63" bgcolor="#F3F3F3">
+          <div align="center">
+            <center>
+            <table border="0" cellspacing="1" width="95%" id="AutoNumber11">
+              <tr>
+                <td width="100%"><b><font face="Arial"><span style="font-size: 8.5pt">
+      <input type="radio" value="yes" name="Iagree" checked><font size="2">&nbsp;</font></span><font color="#FF0000" style="font-size: 10pt">I agree&nbsp;with</font></font></b><font face="Arial"><span style="font-size: 10pt"><i>
+                <font color="#000080">ACCU”S Benchmark services</font></i><span lang="en-us"><b>
+                </b></span></span><b><span style="font-size: 10pt">
+                <font color="#000080">'s 
+      Terms of Service and Privacy Policy</font></span></b></font><b><font face="Arial"><span style="font-size: 8pt"><br>
+      <input type="radio" value="no" name="Iagree"></span><font style="font-size: 8pt">&nbsp;</font><font color="#FF0000" style="font-size: 10pt">I disagree with</font><font size="2">
+      </font></font></b><font face="Arial"><font color="#000080"><i><span style="font-size: 10pt">ACCU”S Benchmark service</span></i></font><span lang="en-us" style="font-size: 10pt"><b>
+                </b></span><b><span style="font-size: 10pt">
+                <font color="#000080">'s 
+      Terms of Service and Privacy Policy</font></span></b></font></td>
+              </tr>
+            </table>
+            </center>
+          </div>
+          </td>
+        </tr>
+      </table>
+      </center>
+</div>
+<p align="center">
+  <input type="submit" value="Edit Member " name="B1">
+  <input type="reset" value="Reset !" name="B2"></p>
+	  <input type="hidden" name="mem_id" value="{MEM_ID}" >
+              </td>
+            </tr>
+            <tr>
+              <td width="50%">&nbsp;</td>
+              <td width="50%">&nbsp;</td>
+            </tr>
+          </table>
+</form> <SCRIPT language="JavaScript"> 
+<!--  
+
+function EmailCheck(email)
+{
+	if (email.value ==0)
+  	{
+  		alert("Please enter a valid Email")
+ 		email.focus();
+  		return false;
+    } else if (email.value.indexOf("@") < 0)
+		{
+			alert("Please enter a valid Email '@' ")
+ 			email.focus();
+			return false;
+		}else if (email.value.indexOf(".") < 0)
+			{
+			alert("Please enter a valid Email  '.(dot)'")
+ 			email.focus();
+			return false;
+			}else{
+			return true;
+			}
+
+}
+
+
+function chkvalid() {  
+ 
+     if (document.inputmember.title.value ==0)
+	{
+alert("Please enter a valid title")
+document.inputmember.title.focus();
+return false;
+  } 
+    else if (document.inputmember.firstname.value ==0)
+	{
+alert("Please enter a valid firstname")
+document.inputmember.firstname.focus();
+return false;
+  } 
+    else if (document.inputmember.lastname.value ==0)
+	{
+alert("Please enter a valid lastname")
+document.inputmember.lastname.focus();
+return false;
+  } 
+    else if (EmailCheck(document.inputmember.email)==false)
+	{
+	document.inputmember.email.focus();
+	return false;
+  } 
+    else if (EmailCheck(document.inputmember.email_confirmation)==false)
+	{
+
+	document.inputmember.email_confirmation.focus();
+	return false;
+  } else if(document.inputmember.email_confirmation.value!=document.inputmember.email.value)
+    {
+    alert("E-mail not match");
+    	document.inputmember.email_confirmation.focus();
+	return false;
+    }
+    else if (document.inputmember.organization.value ==0)
+	{
+alert("Please enter a valid organization")
+document.inputmember.organization.focus();
+return false;
+  } 
+    else if (document.inputmember.addresstype.value ==0)
+	{
+alert("Please enter a valid addresstype")
+document.inputmember.addresstype.focus();
+return false;
+  } 
+   /*
+    else if (document.inputmember.street.value ==0)
+	{
+alert("Please enter a valid street")
+document.inputmember.street.focus();
+return false;
+  } 
+    else if (document.inputmember.street2.value ==0)
+	{
+alert("Please enter a valid street2")
+document.inputmember.street2.focus();
+return false;
+  }  */
+    else if (document.inputmember.city.value ==0)
+	{
+alert("Please enter a valid city")
+document.inputmember.city.focus();
+return false;
+  } /*
+    else if (document.inputmember.state.value ==0)
+	{
+alert("Please enter a valid state")
+document.inputmember.state.focus();
+return false;
+  } 
+    else if (document.inputmember.zip.value ==0)
+	{
+alert("Please enter a valid zip")
+document.inputmember.zip.focus();
+return false;
+  } */
+    else if (document.inputmember.country.value ==0)
+	{
+alert("Please enter a valid country")
+document.inputmember.country.focus();
+return false;
+  } 
+    else if (document.inputmember.phone.value ==0)
+	{
+alert("Please enter a valid phone")
+document.inputmember.phone.focus();
+return false;
+  } /*
+    else if (document.inputmember.fax.value ==0)
+	{
+alert("Please enter a valid fax")
+document.inputmember.fax.focus();
+return false;
+  } */
+    else if (document.inputmember.username.value ==0)
+	{
+alert("Please enter a valid username")
+document.inputmember.username.focus();
+return false;
+  } else if(document.inputmember.username.value.length < 6)
+   {
+   	alert("Username must be at least four(6) characters long")
+	document.inputmember.username.focus();
+	return false;
+   }
+    else if (document.inputmember.password1.value ==0)
+	{
+alert("Please enter a valid password1");
+document.inputmember.password1.focus();
+return false;
+  } else if(document.inputmember.password1.value.length < 6 )
+    {
+    		alert("Password must be at least four(4) characters long");
+		document.inputmember.password1.focus();
+		return false;
+    }
+    else if (document.inputmember.password2.value ==0)
+	{
+alert("Please enter a valid password2")
+document.inputmember.password2.focus();
+return false;
+  } else if(document.inputmember.password1.value != document.inputmember.password2.value)
+  {
+  	alert("Please enter same password")
+	document.inputmember.password2.focus();
+	return false;
+  }
+  
+  /*
+    else if (document.inputmember.player.value ==0)
+	{
+alert("Please enter a valid player")
+document.inputmember.player.focus();
+return false;
+  } 
+    else if (document.inputmember.player_other.value ==0)
+	{
+alert("Please enter a valid player_other")
+document.inputmember.player_other.focus();
+return false;
+  } 
+    else if (document.inputmember.interests1.value ==0)
+	{
+alert("Please enter a valid interests1")
+document.inputmember.interests1.focus();
+return false;
+  } 
+    else if (document.inputmember.interests2.value ==0)
+	{
+alert("Please enter a valid interests2")
+document.inputmember.interests2.focus();
+return false;
+  } 
+    else if (document.inputmember.interests3.value ==0)
+	{
+alert("Please enter a valid interests3")
+document.inputmember.interests3.focus();
+return false;
+  } 
+    else if (document.inputmember.interests4.value ==0)
+	{
+alert("Please enter a valid interests4")
+document.inputmember.interests4.focus();
+return false;
+  } 
+    else if (document.inputmember.interests5.value ==0)
+	{
+alert("Please enter a valid interests5")
+document.inputmember.interests5.focus();
+return false;
+  } 
+    else if (document.inputmember.interests_other.value ==0)
+	{
+alert("Please enter a valid interests_other")
+document.inputmember.interests_other.focus();
+return false;
+  } 
+    else if (document.inputmember.newsletter.value ==0)
+	{
+alert("Please enter a valid newsletter")
+document.inputmember.newsletter.focus();
+return false;
+  }  */
+    else if (document.inputmember.member_name.value ==0)
+	{
+alert("Please enter a valid member_name")
+document.inputmember.member_name.focus();
+return false;
+  } 
+    else if (document.inputmember.m_address.value ==0)
+	{
+alert("Please enter a valid m_address")
+document.inputmember.m_address.focus();
+return false;
+  } 
+    else if (document.inputmember.m_country.value ==0)
+	{
+alert("Please enter a valid m_country")
+document.inputmember.m_country.focus();
+return false;
+  } 
+    else if (document.inputmember.m_tel.value ==0)
+	{
+alert("Please enter a valid m_tel")
+document.inputmember.m_tel.focus();
+return false;
+  } /*
+    else if (document.inputmember.m_fax.value ==0)
+	{
+alert("Please enter a valid m_fax")
+document.inputmember.m_fax.focus();
+return false;
+  } 
+    else if (document.inputmember.m_email.value ==0)
+	{
+alert("Please enter a valid m_email")
+document.inputmember.m_email.focus();
+return false;
+  } 
+    else if (document.inputmember.m_homepage.value ==0)
+	{
+alert("Please enter a valid m_homepage")
+document.inputmember.m_homepage.focus();
+return false;
+  } 
+    else if (document.inputmember.m_establish.value ==0)
+	{
+alert("Please enter a valid m_establish")
+document.inputmember.m_establish.focus();
+return false;
+  } 
+    else if (document.inputmember.m_vision.value ==0)
+	{
+alert("Please enter a valid m_vision")
+document.inputmember.m_vision.focus();
+return false;
+  } 
+    else if (document.inputmember.m_mission.value ==0)
+	{
+alert("Please enter a valid m_mission")
+document.inputmember.m_mission.focus();
+return false;
+  } */
+    else if (document.inputmember.m_profile_as.value ==0)
+	{
+alert("Please enter a valid m_profile_as")
+document.inputmember.m_profile_as.focus();
+return false;
+  } /*
+    else if (document.inputmember.members_urban.value ==0)
+	{
+alert("Please enter a valid members_urban")
+document.inputmember.members_urban.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_low.value ==0)
+	{
+alert("Please enter a valid members_urban_low")
+document.inputmember.members_urban_low.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural.value ==0)
+	{
+alert("Please enter a valid members_rural")
+document.inputmember.members_rural.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_low.value ==0)
+	{
+alert("Please enter a valid members_rural_low")
+document.inputmember.members_rural_low.focus();
+return false;
+  } */
+    else if (document.inputmember.market_segmentation.value ==0)
+	{
+alert("Please enter a valid market_segmentation")
+document.inputmember.market_segmentation.focus();
+return false;
+  } /*
+    else if (document.inputmember.urban_male.value ==0)
+	{
+alert("Please enter a valid urban_male")
+document.inputmember.urban_male.focus();
+return false;
+  } 
+    else if (document.inputmember.urban_female.value ==0)
+	{
+alert("Please enter a valid urban_female")
+document.inputmember.urban_female.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_18_19.value ==0)
+	{
+alert("Please enter a valid members_urban_18_19")
+document.inputmember.members_urban_18_19.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_30_45.value ==0)
+	{
+alert("Please enter a valid members_urban_30_45")
+document.inputmember.members_urban_30_45.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_45_60.value ==0)
+	{
+alert("Please enter a valid members_urban_45_60")
+document.inputmember.members_urban_45_60.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_60.value ==0)
+	{
+alert("Please enter a valid members_urban_60")
+document.inputmember.members_urban_60.focus();
+return false;
+  } 
+    else if (document.inputmember.rural_male.value ==0)
+	{
+alert("Please enter a valid rural_male")
+document.inputmember.rural_male.focus();
+return false;
+  } 
+    else if (document.inputmember.rural_female.value ==0)
+	{
+alert("Please enter a valid rural_female")
+document.inputmember.rural_female.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_18_19.value ==0)
+	{
+alert("Please enter a valid members_rural_18_19")
+document.inputmember.members_rural_18_19.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_30_45.value ==0)
+	{
+alert("Please enter a valid members_rural_30_45")
+document.inputmember.members_rural_30_45.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_45_60.value ==0)
+	{
+alert("Please enter a valid members_rural_45_60")
+document.inputmember.members_rural_45_60.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_60.value ==0)
+	{
+alert("Please enter a valid members_rural_60")
+document.inputmember.members_rural_60.focus();
+return false;
+  } 
+    else if (document.inputmember.assets_total.value ==0)
+	{
+alert("Please enter a valid assets_total")
+document.inputmember.assets_total.focus();
+return false;
+  } */
+    else if (document.inputmember.Core_Business.value ==0)
+	{
+alert("Please enter a valid Core_Business")
+document.inputmember.Core_Business.focus();
+return false;
+  } /*
+    else if (document.inputmember.savings_amount.value ==0)
+	{
+alert("Please enter a valid savings_amount")
+document.inputmember.savings_amount.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_male.value ==0)
+	{
+alert("Please enter a valid savings_male")
+document.inputmember.savings_male.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_female.value ==0)
+	{
+alert("Please enter a valid savings_female")
+document.inputmember.savings_female.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_youth.value ==0)
+	{
+alert("Please enter a valid savings_youth")
+document.inputmember.savings_youth.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_nonmember.value ==0)
+	{
+alert("Please enter a valid savings_nonmember")
+document.inputmember.savings_nonmember.focus();
+return false;
+  } 
+    else if (document.inputmember.share_amount.value ==0)
+	{
+alert("Please enter a valid share_amount")
+document.inputmember.share_amount.focus();
+return false;
+  } 
+    else if (document.inputmember.share_male.value ==0)
+	{
+alert("Please enter a valid share_male")
+document.inputmember.share_male.focus();
+return false;
+  } 
+    else if (document.inputmember.share_female.value ==0)
+	{
+alert("Please enter a valid share_female")
+document.inputmember.share_female.focus();
+return false;
+  } 
+    else if (document.inputmember.share_youth.value ==0)
+	{
+alert("Please enter a valid share_youth")
+document.inputmember.share_youth.focus();
+return false;
+  } 
+    else if (document.inputmember.share_nonmember.value ==0)
+	{
+alert("Please enter a valid share_nonmember")
+document.inputmember.share_nonmember.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_total.value ==0)
+	{
+alert("Please enter a valid loan_total")
+document.inputmember.loan_total.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_male.value ==0)
+	{
+alert("Please enter a valid loan_male")
+document.inputmember.loan_male.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_female.value ==0)
+	{
+alert("Please enter a valid loan_female")
+document.inputmember.loan_female.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_youth.value ==0)
+	{
+alert("Please enter a valid loan_youth")
+document.inputmember.loan_youth.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_nonmember.value ==0)
+	{
+alert("Please enter a valid loan_nonmember")
+document.inputmember.loan_nonmember.focus();
+return false;
+  } 
+    else if (document.inputmember.reserve_total.value ==0)
+	{
+alert("Please enter a valid reserve_total")
+document.inputmember.reserve_total.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_1.value ==0)
+	{
+alert("Please enter a valid board_name_1")
+document.inputmember.board_name_1.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_1.value ==0)
+	{
+alert("Please enter a valid board_pos_1")
+document.inputmember.board_pos_1.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_2.value ==0)
+	{
+alert("Please enter a valid board_name_2")
+document.inputmember.board_name_2.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_2.value ==0)
+	{
+alert("Please enter a valid board_pos_2")
+document.inputmember.board_pos_2.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_3.value ==0)
+	{
+alert("Please enter a valid board_name_3")
+document.inputmember.board_name_3.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_3.value ==0)
+	{
+alert("Please enter a valid board_pos_3")
+document.inputmember.board_pos_3.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_4.value ==0)
+	{
+alert("Please enter a valid board_name_4")
+document.inputmember.board_name_4.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_4.value ==0)
+	{
+alert("Please enter a valid board_pos_4")
+document.inputmember.board_pos_4.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_5.value ==0)
+	{
+alert("Please enter a valid board_name_5")
+document.inputmember.board_name_5.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_5.value ==0)
+	{
+alert("Please enter a valid board_pos_5")
+document.inputmember.board_pos_5.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_6.value ==0)
+	{
+alert("Please enter a valid board_name_6")
+document.inputmember.board_name_6.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_6.value ==0)
+	{
+alert("Please enter a valid board_pos_6")
+document.inputmember.board_pos_6.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_7.value ==0)
+	{
+alert("Please enter a valid board_name_7")
+document.inputmember.board_name_7.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_7.value ==0)
+	{
+alert("Please enter a valid board_pos_7")
+document.inputmember.board_pos_7.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_8.value ==0)
+	{
+alert("Please enter a valid board_name_8")
+document.inputmember.board_name_8.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_8.value ==0)
+	{
+alert("Please enter a valid board_pos_8")
+document.inputmember.board_pos_8.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_9.value ==0)
+	{
+alert("Please enter a valid board_name_9")
+document.inputmember.board_name_9.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_9.value ==0)
+	{
+alert("Please enter a valid board_pos_9")
+document.inputmember.board_pos_9.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_10.value ==0)
+	{
+alert("Please enter a valid board_name_10")
+document.inputmember.board_name_10.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_10.value ==0)
+	{
+alert("Please enter a valid board_pos_10")
+document.inputmember.board_pos_10.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_1.value ==0)
+	{
+alert("Please enter a valid manage_name_1")
+document.inputmember.manage_name_1.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_1.value ==0)
+	{
+alert("Please enter a valid manage_pos_1")
+document.inputmember.manage_pos_1.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_2.value ==0)
+	{
+alert("Please enter a valid manage_name_2")
+document.inputmember.manage_name_2.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_2.value ==0)
+	{
+alert("Please enter a valid manage_pos_2")
+document.inputmember.manage_pos_2.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_3.value ==0)
+	{
+alert("Please enter a valid manage_name_3")
+document.inputmember.manage_name_3.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_3.value ==0)
+	{
+alert("Please enter a valid manage_pos_3")
+document.inputmember.manage_pos_3.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_4.value ==0)
+	{
+alert("Please enter a valid manage_name_4")
+document.inputmember.manage_name_4.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_4.value ==0)
+	{
+alert("Please enter a valid manage_pos_4")
+document.inputmember.manage_pos_4.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_5.value ==0)
+	{
+alert("Please enter a valid manage_name_5")
+document.inputmember.manage_name_5.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_5.value ==0)
+	{
+alert("Please enter a valid manage_pos_5")
+document.inputmember.manage_pos_5.focus();
+return false;
+  } 
+    else if (document.inputmember.Iagree.value ==0)
+	{
+alert("Please enter a valid Iagree")
+document.inputmember.Iagree.focus();
+return false;
+  } 
+    else if (document.inputmember.member_of.value ==0)
+	{
+alert("Please enter a valid member_of")
+document.inputmember.member_of.focus();
+return false;
+  } 
+    else if (document.inputmember.active.value ==0)
+	{
+alert("Please enter a valid active")
+document.inputmember.active.focus();
+return false;
+  } */
+  
+  else{
+ 		 return true;
+ 		 }
+		  } 
+//--> 
+      </SCRIPT>

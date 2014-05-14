@@ -1,0 +1,345 @@
+<?php
+//###############################################################
+//### Gen Code  By phpform V 4.012  
+//###  Module For db table  formula
+//###
+//###  By Mr. Piya Pimchankam
+//###  email : a_piya_p@hotmail.com
+//###############################################################
+$m		=	isset( $_GET['m'])?$_GET['m']:$_POST['m'];
+$op		=	isset( $_GET['op'])?$_GET['op']:$_POST['op'];
+$url	=	isset( $_GET['url'])?$_GET['url']:$_POST['url'];
+$MEMBER = $_GET['d'];
+				//$cookie = cookieAdmindecode($ADMIN);
+				$cookie = cookieMemberdecode($MEMBER);
+				$mem_id=$cookie[0];
+				$username=$cookie[1];
+				$password=$cookie[2];
+				$member_of=$cookie[3];
+				$com_id=$cookie[4];
+				$brance_id=$cookie[5];
+				
+				if( $member_of!=ADMINISTRATOR )
+				{
+					Header("Refresh: 0;url=$index_file?m=member&op=login");
+					exit();
+				}
+
+$module_name = "formula";
+$gr = "admin";
+$index_file = "admin.php";
+
+$template->set_filenames(array(
+		'body' => $mainframe[1])
+	);
+//######################
+
+if(empty($op)){$op="";}
+
+switch($op)
+{
+	    //#####   formula #########
+		case "saveformula":
+			Saveformula($S);
+			break;
+		case "inputformula":
+			Inputformula($for_id);
+			break;
+		case "listformula":
+			AListformula();
+			break;
+		case "detailformula":
+			Detailformula($for_id);
+			break;
+		//###########################
+		case "del":
+			Del($tb,$key,$id,$bk,$rt,$page);
+			break;
+	default :
+AListformula();
+		break;
+
+}
+
+function Del($tb,$key,$id,$bk,$rt,$page)
+{
+  global $admin,$db,$index_file,$module_name,$SaveSMPath,$SaveBGPath,$SaveFilePath, $template,$mainframe,$adminframe,$gr;
+
+
+		unset($query);
+		unset($result);
+
+		$query="DELETE FROM $tb WHERE $key=$id ";
+		$db->sql_query($query);
+			if(!empty($rt))
+			{
+			$goto = "$index_file?m=$module_name&op=$rt&gr=$gr";
+			}else{
+			$goto="$index_file?m=$module_name&op=game&page=$page&gr=$gr#$bk";
+			}
+	Header("Refresh: 0;url=$goto");
+
+	
+}
+
+
+function Saveformula($S)
+{
+  global $admin,$db,$index_file,$module_name,$SaveSMPath,$SaveBGPath,$SaveFilePath,$gr;
+
+$table="formula";
+
+while(list($k,$v)=each($S) )
+	{
+		//echo "K= $k: V=$v <br>\n";;
+		$dataset="comment='$v' ";
+		$condition=" for_id='$k' ";
+		SaveEditDB( $table,$dataset,$condition);
+	}
+
+/*
+		exit();
+
+		if(empty($for_id))
+		{
+		$field="for_id,code,name,goals,formula,comment";
+		$data="NULL,'$code','$name','$goals','$formula','$comment'";
+		SaveDB( $table,$field,$data);
+		}else{
+		$dataset="code='$code' ,name='$name' ,goals='$goals' ,formula='$formula' ,comment='$comment' ";
+		$condition=" for_id='$for_id' ";
+		SaveEditDB( $table,$dataset,$condition);
+		}
+*/
+		Header("Refresh: 0;url=$index_file?m=$module_name&op=listformula&gr=$gr");
+
+}
+
+
+
+function Inputformula($for_id)
+{
+  global $admin,$db,$index_file,$module_name,$SaveSMPath,$SaveBGPath,$SaveFilePath, $template,$mainframe,$adminframe,$gr;
+
+						$code="";
+				$name="";
+				$goals="";
+				$formula="";
+				$comment="";
+				
+		if( 1 and  !empty($for_id))
+		{
+			$table="formula";
+			$fieldArr ="for_id,code,name,goals,formula,comment";
+			$searchkey=" and for_id='$for_id' ";
+			$result=SearchDB( $searchkey,$table,$fieldArr);
+			if($db->sql_numrows())
+			{
+				$row = $db->sql_fetchrow($result);
+								$for_id=$row["for_id"];
+				$code=$row["code"];
+				$name=$row["name"];
+				$goals=$row["goals"];
+				$formula=$row["formula"];
+				$comment=$row["comment"];
+				
+			}
+
+		}else{
+		     $for_id="";
+	
+	
+		}//end if
+
+	if(!empty($gr))
+		{
+	 $module_file = "modules/$module_name/$gr/inputformula.php";
+	 $template->SetImagePath("modules/$module_name/$gr/");
+		}else{
+	 $module_file = "modules/$module_name/inputformula.php";
+	 $template->SetImagePath("modules/$module_name/");
+		}
+
+	 $template->set_filenames(array(
+		'inputform' => $module_file)
+		);
+
+	$template->assign_vars(array(
+       'FOR_ID'=>$for_id,
+			    'CODE'=>$code,
+			    'NAME'=>$name,
+			    'GOALS'=>$goals,
+			    'FORMULA'=>$formula,
+			    'COMMENT'=>$comment,
+			    
+	 'M'=>$module_name,
+	'OP'=>"saveformula",
+	'GR'=>$gr
+	)	);
+
+	   $menu=GetMenu();
+
+	$html_code =  $template->pparse_str('inputform');
+	$template->assign_vars(array(
+      'HTML_CODE'=> $html_code,
+		'MENU'=>$menu
+		)	);
+	 $template->SetImagePath("");
+   $template->pparse('body');
+	
+}
+
+function AListformula()
+{
+  global $admin,$db,$index_file,$module_name,$SaveSMPath,$SaveBGPath,$SaveFilePath, $template,$mainframe,$adminframe,$page,$gr;
+
+	if(!empty($gr))
+		{
+	 $module_file = "modules/$module_name/$gr/listformula.php";
+	 $template->SetImagePath("modules/$module_name/$gr/");
+		}else{
+	 $module_file = "modules/$module_name/listformula.php";
+	 $template->SetImagePath("modules/$module_name/");
+		}
+
+	 $template->set_filenames(array(
+		'listform' => $module_file)
+		);
+
+		if(empty($page))
+		{
+		$page=1;
+		}
+		$page_list=50;
+		$table="formula";
+		$fieldArr ="for_id,code,name,goals,formula,comment";
+		$searchkey="  order by for_id";
+
+		list($totalpage,$result)=SearchDBListPage( $searchkey,$table,$fieldArr,$page,$page_list);
+		 if($db->sql_numrows())
+		{
+		while($v= $db->sql_fetchrow($result) )
+		{
+
+						$for_id=$v["for_id"];
+				$code=$v["code"];
+				$name=$v["name"];
+				$goals=$v["goals"];
+				$formula=$v["formula"];
+				$comment=$v["comment"];
+				
+
+		$edit="$index_file?m=$module_name&op=inputformula&for_id=$for_id&gr=$gr";
+		$cap=str_replace("","",$cap);
+		 $del="javascript:Del('tb=formula&key=for_id&id=$for_id&op=del&rt=listformula&gr=$gr','$cap')";
+
+		$template->assign_block_vars('listrow', array(
+			'SN'=>"S[$for_id]",
+		 'FOR_ID'=>$for_id,
+			    'CODE'=>$code,
+			    'NAME'=>$name,
+			    'GOALS'=>$goals,
+			    'FORMULA'=>$formula,
+			    'COMMENT'=>$comment,
+			       
+        'U_DEL'=>$del,
+		'U_EDIT'=>$edit
+		)	);
+	} // end while
+}// end if
+
+	$link="$index_file?m=$module_name&op=listformula";
+	$template->assign_vars(array(
+      'PAGE_LIST'=>List_PageStr($page,$totalpage,$link),
+		'JAVA_URL'=>"$index_file?m=$module_name&op=del",
+		'U_ADD'=>"$index_file?m=$module_name&op=inputformula&gr=$gr",
+			 'M'=>$module_name,
+	'OP'=>"saveformula",
+	'GR'=>$gr,
+		'ACTION'=>"admin.php"
+		)	);
+
+	   $menu=GetMenu();
+
+	$html_code =  $template->pparse_str('listform');
+	$template->assign_vars(array(
+      'HTML_CODE'=> $html_code ,
+	  'MENU'=>$menu,
+		'COUNT'=>Counter()
+		)	);
+  $template->SetImagePath("");
+   $template->pparse('body');
+
+
+}
+
+function Detailformula($for_id)
+{
+  global $admin,$db,$index_file,$module_name,$SaveSMPath,$SaveBGPath,$SaveFilePath, $template,$mainframe,$adminframe;
+						$code="";
+				$name="";
+				$goals="";
+				$formula="";
+				$comment="";
+				
+		if( 1 and  !empty($for_id))
+		{
+			$table="formula";
+			$fieldArr ="for_id,code,name,goals,formula,comment";
+			$searchkey=" and for_id='$for_id' ";
+			$result=SearchDB( $searchkey,$table,$fieldArr);
+			if($db->sql_numrows())
+			{
+				$row = $db->sql_fetchrow($result);
+								$for_id=$row["for_id"];
+				$code=$row["code"];
+				$name=$row["name"];
+				$goals=$row["goals"];
+				$formula=$row["formula"];
+				$comment=$row["comment"];
+				
+			}
+
+		}else{
+		     $for_id="";
+	
+		}//end if
+		
+	if(!empty($gr))
+		{
+	 $module_file = "modules/$module_name/$gr/detailformula.php";
+	 $template->SetImagePath("modules/$module_name/$gr/");
+		}else{
+	 $module_file = "modules/$module_name/detailformula.php";
+	 $template->SetImagePath("modules/$module_name/");
+		}
+
+
+	 $template->set_filenames(array(
+		'detailform' => $module_file)
+		);
+
+	$template->assign_vars(array(
+       'FOR_ID'=>$for_id,
+			    'CODE'=>$code,
+			    'NAME'=>$name,
+			    'GOALS'=>$goals,
+			    'FORMULA'=>$formula,
+			    'COMMENT'=>$comment,
+			       
+		)	);
+
+	$menu=GetMenu();
+
+	$html_code =  $template->pparse_str('detailform');
+	$template->assign_vars(array(
+      'HTML_CODE'=> $html_code,
+	  'MENU'=>$menu
+		)	);
+   $template->SetImagePath("");
+   $template->pparse('body');
+	
+}
+
+
+?>

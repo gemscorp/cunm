@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- XTORT &copy; 2003 -->
+<html>
+<head>
+
+<title>::::::: ProtoPad V 2.5.1 :::::::</title>
+
+<script src="wysiwygsrc.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+
+<style type="text/css">
+<!--
+.nobs {  cursor: hand}
+-->
+</style>
+
+<script>
+function getInfoAndUpdate()
+{
+  
+   var callerWindowObj = dialogArguments;
+   callerWindowObj.imageAlt = formImageAlt.value;
+   callerWindowObj.imageSrc = formImageSrc.value;
+   
+   callerWindowObj.border = formImageBorder.value;
+
+   callerWindowObj.addImageToPage();
+   window.close();
+}
+</script>
+</head>
+<body leftmargin=5 topmargin=5 bgcolor=silver style="overflow: hidden;">
+<fieldset>
+<table border="0" align=center>
+<!-- table row 1 column 1 -->
+<tr>
+<td>
+<font size="2" face="Arial, Helvetica, Verdana">Image source:</font>
+</td>
+<td><!-- table row 1 column 2 -->
+<input type="file" id=formImageSrc size='2' value='' style="width: 150px">
+</td>
+<tr><!-- table row 2 column 1 -->
+<td>
+<font size="2" face="Arial, Helvetica, Verdana">Alternate Text :</font>
+</td>
+<td><!-- table row 2 column 2 -->
+<input type=text id=formImageAlt size='2' value='' style="width: 160px; height: 14px">
+</td>
+<tr>
+<td><!-- table row 3 column 1 -->
+<font size="2" face="Arial, Helvetica, Verdana">Border thickness:</font>
+</td>
+<td><!-- table row 3 column 2 -->
+<select id=formImageBorder size='1' style="width: 35px">	
+<option selected value='0'>0
+<option value='1'>1
+<option value='2'>2
+<option value='3'>3
+<option value='4'>4
+<option value='5'>5
+<option value='6'>6
+<option value='7'>7
+<option value='8'>8
+<option value='9'>9
+<option value='10'>10
+</select>
+ </td>
+ </tr>
+<tr><!-- table row 4 column 1&2 -->
+<td>
+<input type="button" class="clsButton" value="OK" onclick='getInfoAndUpdate();' style="width: 60px" onFocus="this.blur()"></input>
+</td>
+<td>
+<input type="button" class="clsButton" value="Cancel" onclick='window.close();' style="width: 60px" onFocus="this.blur()"></input>
+</td>
+</tr>
+</table>
+</fieldset>
+</body>
+</html>

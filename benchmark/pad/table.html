@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- XTORT &copy; 2003 -->
+<html>
+<head>
+<title>::::::: ProtoPad V 2.5.1 :::::::</title>
+<script src="wysiwygsrc.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+<script>
+function getInfoAndUpdate()
+{
+if (isNaN(formNumRows.value))
+{
+alert ('The rows field value should be a number.');return;
+}
+else if (isNaN(formNumCols.value))
+{
+alert ("The columns field value should be a number.");return;
+}
+var callerWindowObj = dialogArguments;
+callerWindowObj.rtNumRows = formNumRows.value;
+callerWindowObj.rtNumCols = formNumCols.value;
+callerWindowObj.rtTblAlign = formTblAlign.value;
+callerWindowObj.rtTblWidth = formTblWidth.value;
+
+callerWindowObj.rtTblSpacing = formTblSpacing.value;
+callerWindowObj.rtTblPadding = formTblPadding.value;
+callerWindowObj.rtTblColor = formTblColor.value;
+callerWindowObj.rtTblBorder = formTblBorder.value;
+
+callerWindowObj.rtTblBorderColor = formBorderColor.value;
+
+callerWindowObj.createTable();
+window.close();
+}
+</script>
+</head>
+
+<body leftmargin=5 topmargin=5 bgcolor="buttonface"style="overflow: hidden;">
+<table width="100%" border="0" cellpadding="2" cellspacing="2" align="left" valign="middle">
+<!-- row 1 -->
+<tr>										
+<td align="left" valign="middle">
+<!-- row no. # 1, column no. # 1-->
+<!-- Width properties -->
+<font size="-1">Table Width:</font><font size="-1"> (without the % sign)</font>
+</td>
+<td align="left" valign="middle">				 
+<!-- row no. # 1, column no. # 2-->
+<!-- Width property input Label -->
+<input maxlength="4" style="background-color:#FFFFFF";  id="formTblWidth"  size="10">
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 1, column no. # 3 -->
+<!-- Border property Label -->
+<font size="-1">Table Border - in pixels:</font>
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 1, column no. # 4 -->
+<!-- Border property input -->
+<input maxlength="4" style="background-color:#FFFFFF"; id="formTblBorder" size="10"> 
+</td>
+</tr>
+
+<!-- row 2 -->
+<tr>
+<td  align="left" valign="middle">
+<!-- row no. # 2, column no. # 1-->
+<!-- Row properties Label -->
+<font size="-1">Number of rows:</font>
+</td>
+<td  align="left" valign="middle">
+<!-- row no. # 2, column no. # 2 -->
+<!-- Row property  input  -->
+<input maxlength="4" style="background-color:#FFFFFF"; id="formNumRows" size="10">
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 2, column no. # 3 -->
+<!-- Column properties Label  -->
+<font size="-1">Number of columns per row:</font>
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 2, column no. # 4 -->
+<!-- Column property  input  -->
+<input maxlength="4" style="background-color:#FFFFFF"; id="formNumCols" size="10">
+</td>
+</tr>
+
+<!-- row 3 -->
+<tr>
+<td align="left" valign="middle">
+<!-- row no. # 3, column no. # 1-->
+<!-- Cellpadding properties Label -->
+<font size="-1">Cell Padding:</font>
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 3, column no. # 2-->
+<!-- Cellpadding property  input  -->
+<input maxlength="4" style="background-color:#FFFFFF"; id="formTblPadding" size="10">
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 3, column no. # 3 -->
+<!-- Cell spacing properties Label -->
+<font size="-1">Cell spacing:</font>
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 5, column no. # 4 -->
+<!-- Cell spacing:property  input   -->
+<input maxlength="4" style="background-color:#FFFFFF"; id="formTblSpacing" size="10">
+</td>
+</tr>
+
+<!-- row 4 -->
+<tr>
+<td align="left" valign="middle">			
+<!-- row no. # 4, column no. # 1-->
+<!-- BgColor properties Label -->
+<font size="-1">Background Color:</font>
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 4, column no. # 2-->
+<!-- BgColor  property  input -->
+<input maxlength="20" style="background-color:#FFFFFF"; id="formTblColor"  size="10">
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 4, column no. # 3 -->
+<!-- Table Align properties Label -->
+<font size="-1">Table Alignment:</font>
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 3, column no. # 4 -->
+<!-- Table Align property  input -->
+<select id="formTblAlign">
+<option selected style="background-color:#FFFFFF"; value="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<option style="background-color:#CCCCCC"; value="center">Center<option style="background-color:#CCCCCC";  value="right">Right</option></select>
+</td>
+</tr>
+
+<!-- row 5 -->
+<tr>
+<td align="left" valign="middle">
+<!-- row no. # 5, column no. # 1-->
+<!-- Border Color properties Label -->
+<font size="-1">BorderColor:</font>
+</td>
+<td  align="left" valign="middle">
+<!-- row no. # 5, column no. # 2-->
+<!--Border Color  input Label -->
+<input maxlength="20" style="background-color:#FFFFFF"; id="formBorderColor"  size="10">
+</td>
+<td align="left" valign="middle">
+<!-- row no. # 5, column no. # 3 -->
+<!-- OK button -->
+<input type=button name=batal value="OK" onclick='getInfoAndUpdate();' style="width: 55px" onFocus="this.blur()">
+</td>
+<td align="center" valign="middle">
+<!-- row no. # 5, column no. # 4 -->
+<!-- Cancel button -->
+<input type=button value="Cancel" onclick='window.close();' style="width: 55px" onFocus="this.blur()">
+&nbsp;&nbsp;
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>			  

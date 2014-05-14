@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Black Orpheus Design &copy; 2002/2003 -->
+<html>
+<head>
+
+<title>::::::: ProtoPad V 2.5.1 :::::::</title>
+<HTA:APPLICATION ID="oHTA"
+     APPLICATIONNAME=" ProtoPad ProtoPad V 2.5.1"
+     APPLICATION = "yes"
+     BORDER="thin"
+     BORDERSTYLE="sunken"
+     CAPTION="yes"
+     ICON="area51.ico"
+     MAXIMIZEBUTTON="no"
+     MINIMIZEBUTTON="yes"
+     INNERBORDER = "yes"
+     SHOWINTASKBAR="yes"
+     SELECTION = "yes"
+     NAVIGABLE = "yes"
+     SCROLL = "no"
+     CONTEXTMENU = "yes"
+     SINGLEINSTANCE="no"
+     SYSMENU="yes"
+     VERSION="V 2.5.0"
+     WINDOWSTATE="750x500"/>
+
+<script src="wysiwygsrc.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+
+<style type="text/css">
+<!--
+.nobs {  cursor: hand}
+-->
+</style>
+
+
+<script language="JavaScript">
+<!--
+
+function Init()
+{
+iView.document.designMode = 'On';
+}
+
+//-->
+</script>
+
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+          //make sure to specify the proper <ILAYER> name, i.e. the one you have used for your app 
+          //SaveDocument uses the common dialog box object to display the save as dialog, then writes a textstream object from the value of the div's innerHTML property
+               //Setting CancelError to true and using try/catch allows the user to click cancel on the save as dialog without causing a script error
+     function saveAsDialog(){
+     cDialog.CancelError=true;
+     try{
+     cDialog.Filter="HTML Files (*.html)|*.html|Form Files (*.frm)|*.frm|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+     cDialog.ShowSave();
+     var fso = new ActiveXObject("Scripting.FileSystemObject");
+     var f = fso.CreateTextFile(cDialog.filename, true);
+     f.write('<html>\n<head>\n<title>My Webpage</title>\n<\head>\n<body>' + iView.document.body.innerHTML + '\n</body>\n</html>');
+     f.Close();
+     sPersistValue=iView.document.body.innerHTML;}
+     catch(e){
+     var sCancel="true";
+     return sCancel;}
+     iView.focus(); 
+     }
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+          //make sure to specify the proper <ILAYER> name, i.e. the one you have used for your app 
+          //open dialog
+          //LoadDocument uses the common dialog box object to display the open dialog box, then reads the file and displays its contents in the div
+          //Setting CancelError to true and using try/catch allows the user to click cancel on the save as dialog without causing a script error
+          function LoadDocument(){
+          cDialog.CancelError=true;
+          try{
+          cDialog.Filter="HTML Files (*.html)|*.html|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+          cDialog.ShowOpen();
+          var ForReading = 1;
+          var fso = new ActiveXObject("Scripting.FileSystemObject");
+          var f = fso.OpenTextFile(cDialog.filename, ForReading);
+          var r = f.ReadAll();
+          f.close();
+          iView.document.body.innerHTML=r;
+          //This variable is used in the checkForSave function to see if there is new content in the div 
+          sPersistValue=iView.document.body.innerHTML;}
+          catch(e){
+          var sCancel="true";
+          return sCancel;}
+          iView.focus(); 
+          }
+          </SCRIPT>
+
+</head>
+
+<body bgcolor="buttonface" onLoad="Init(), iView.focus();" >
+          <!-- ACTIVE X CONTROLS BEGIN -->
+          <!--Create the Dialog Helper Object-->
+          <OBJECT ID=dlgHelper CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" WIDTH="0px" HEIGHT="0px"></OBJECT>
+          
+          <!-- Create the licensing object for the common dialog activex control -->
+          <OBJECT CLASSID="clsid:5220cb21-c88d-11cf-b347-00aa00a28331">
+          <PARAM NAME="LPKPath" VALUE="comdlg.lpk">
+          </OBJECT>
+          
+          <!--Create the Common Dialog Box activex control-->
+          <OBJECT ID="cDialog" WIDTH="0px" HEIGHT="0px"
+          CLASSID="CLSID:F9043C85-F6F2-101A-A3C9-08002B2F49FB"
+          CODEBASE="http://activex.microsoft.com/controls/vb5/comdlg32.cab">
+          </OBJECT>
+          <!-- ACTIVE X CONTROLS END -->
+       <br />
+
+<!-- begin editor -->
+<center>
+<!-- toolbar table -->
+<table id="toolbarCtrls" width="750px" height="25px" border="1" cellspacing="0" cellpadding="0" bgcolor="buttonface">
+<tr valign="top">
+<td class="toolz" align="left" valign="middle" ><!-- toolbar table row1 -->
+		<!-- grabber -->
+		<img src="separator-header.gif" width="5" height="18" border="0">
+		<!-- Open -->
+		<img alt="Open" class="nobs" src="open.gif" width="23" height="22" border="0" alt="open" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Open" onClick="LoadDocument()">
+		<!-- Save -->
+		<img alt="Save" class="nobs" src="save.gif" width="23" height="22" border="0" alt="save" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Save" onClick="saveAsDialog()">
+		 <!-- Update -->
+		 <img alt="Update" class="nobs" src="update.gif" width="23" height="22" border="0" alt="Update" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Update" onClick="doUpdate()">
+		<!-- Print -->
+		<img alt="Print" class="nobs" src="print.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Print" onClick="window.print()">
+		<img src="separator.gif" width="5" height="22" border="0">&nbsp;
+		<!-- Undo -->
+		<img alt="Undo" class="nobs" src="undo.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Undo" onClick="cmdExec('Undo')">
+		<!-- Redo -->
+		<img alt="Redo" class="nobs" src="redo.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Redo" onClick="cmdExec('Redo')">
+		<!--  SelectAll -->
+		<img alt="SelectAll" class="nobs" src="select.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="SelectAll" onClick="cmdExec('SelectAll')">
+		<!-- Cut -->
+		<img alt="Cut" class="nobs" src="cut.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Cut" onClick="cmdExec('Cut')">
+		<!-- Copy -->
+		<img alt="Copy" class="nobs" src="copy.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Copy" onClick="cmdExec('Copy')">
+		<!-- Paste -->
+		<img alt="Paste" class="nobs" src="paste.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Paste" onClick="cmdExec('Paste')">
+		<img src="separator.gif" width="5" height="22" border="0">&nbsp;
+		<!-- Bold -->
+		<img alt="Bold" class="nobs" src="bold.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Bold" onClick="cmdExec('Bold')">
+		<!-- Italic -->
+		<img alt="Italic" class="nobs" src="italic.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Italic" onClick="cmdExec('Italic')">
+		<!-- Underline -->
+		<img alt="Underline" class="nobs" src="underline.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Underline" onClick="cmdExec('Underline')">
+		<!-- Strikethrough -->
+		<img alt="Strikethrough" class="nobs" src="strikethrough.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Strikethrough" onClick="cmdExec('StrikeThrough')">
+		<!--   Left -->
+		<img alt="Left" class="nobs" src="left.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Left" onClick="cmdExec('Justifyleft')">
+		<!-- Center -->
+		<img alt="Center" class="nobs" src="centre.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Center" onClick="cmdExec('Justifycenter')">
+		<!--  Right -->
+		<img alt="Right" class="nobs" src="right.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Right" onClick="cmdExec('JustifyRight')">
+		<!--  Ordered List -->
+		<img alt="Ordered List" class="nobs" src="orderlist.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Ordered List" onClick="cmdExec('Insertorderedlist')">
+		<!-- Bulleted List -->
+		<img alt="Bulleted List" class="nobs" src="bulletlist.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Bulleted List" onClick="cmdExec('Insertunorderedlist')">
+		<img src="separator.gif" width="5" height="22" border="0">&nbsp;
+		<!-- Unindent -->
+		<img alt="Unindent" class="nobs" src="outdent.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Unindent" onClick="cmdExec('Outdent')">
+		<!-- Indent -->
+		<img alt="Indent" class="nobs" src="indent.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Indent" onClick="cmdExec('Indent')">
+		<!-- grabber -->
+		<img src="separator-header.gif" valign="middle" width="5" height="18" border="0">
+		</td>
+		</tr>
+		<tr><!-- toolbar table row2 -->
+		<td class="toolz" align="left" valign="middle">
+		<!-- grabber -->
+		<img src="separator-header.gif" valign="middle" width="5" height="18" border="0">
+		<!-- Make Text UpperCase -->
+		<img alt="Make Text UpperCase" class="nobs" src="upper.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Make Text UpperCase" onClick="upper()">
+		<!-- Make Text Lowercase -->
+		<img alt="Make Text LowerCase" class="nobs" src="lower.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Make Text Lowercase" onClick="lower()">
+		<!-- SuperScript -->
+		<img alt="SuperScript" class="nobs" src="superscript.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="SuperScript" onClick="cmdExec('SuperScript')">
+		<!-- SubScript -->
+		<img alt="SubScript" class="nobs" src="subscript.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="SubScript" onClick="cmdExec('SubScript')">
+		<!-- Add Horizontal Rule -->
+		<img alt="Add Horizontal Rule" class="nobs" src="hr.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Add Horizontal Rule" onClick="doRule()">
+		<!-- Text Color -->
+		<img alt="Text Color" class="nobs" src="color.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Text Color" onClick="foreColor()"/>
+		<!-- Text BG Color -->
+		<img alt="Text BG Color" class="nobs" src="fontback.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Text BG Color" onClick="backColor()"/>
+		<!-- Insert Symbol	 -->
+		<img alt="Insert Symbol" class="nobs" src="symbol.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Symbol" onClick="mySymbol()">
+		<img src="separator.gif" width="5" height="22" border="0">&nbsp;
+		<!-- Create A Table -->
+		<img alt="Create A Table" class="nobs" src="table.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Create A Table" onClick="addTableDialog()">
+		<!-- Add URL	 -->
+		<img alt="Add URL" class="nobs" src="link.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Add URL" onClick="doLink()">
+		<!-- Add Image -->
+		<img alt="Insert Image" class="nobs" src="image.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Add Image" onClick="insImg()">
+		 <img src="separator.gif" width="5" height="22" border="0">&nbsp;
+		<!-- Preview in Internet Explorer -->
+		<img alt="Preview in Internet Explorer" class="nobs" src="preview.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Preview in Internet Explorer" onClick="previewControl()">
+		<!-- Launch NotePad -->
+		<img alt="Launch NotePad" name=filename  class="nobs" src="notepad.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Launch NotePad" onClick="executeCommands()">
+		<!-- FTP Via Your Browser -->
+		<img alt="FTP Via Your Browser" class="nobs" src="ftp.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="FTP Via Your Browser" onClick="return popup6(this,'ftpref')">
+		 <!-- Email -->
+		<img alt="Email" class="nobs" src="mail.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Email" onClick="bugsome1()">
+		 <img src="separator.gif" width="5" height="22" border="0">&nbsp;
+		<!-- Delete -->
+		<img alt="Delete" class="nobs" src="delete.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Delete" onClick="cmdExec('Delete')">
+		 <!-- Help -->
+	       <img alt="Help" class="nobs" src="help.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="Help"  onClick="helpfile()">
+		<!-- About ProtoPad V 2.5.1 -->
+		<img alt="about" class="nobs" src="about.gif" width="23" height="22" border="0" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="ProtoPad V 2.5.1" onClick="alibi()">
+		<!-- exit WYSIWYG -->
+		<img alt="exit WYSIWYG" class="nobs" src="exit.gif" width="23" height="22" border="0" onClick=" finito()" onFocus="this.blur()" onMouseOver="selOn(this)" onMouseOut="selOff(this)" onMouseDown="selDown(this)" onMouseUp="selUp(this)" title="exit WYSIWYG">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<!-- grabber -->
+		<img src="separator-header.gif" valign="middle" width="5" height="18" border="0">
+		</td>
+		</tr>
+		</table>
+		<!-- iframe -->
+		<iframe id="iView" trusted="yes" width="750px"  height="380px" border="1">
+		</iframe> </div> 
+		<!-- bottom "status bar" row 1 -->
+		<table width="750px" height="30px" border="1" cellspacing="0" cellpadding="0" bgcolor="buttonface">	
+		<tr>
+		<td  align="left" valign="middle">
+		<!-- doToggleView -->
+		<input type="checkbox" onClick="doToggleView()" onFocus="this.blur()" checked><font size="2" face="Tahoma">wysiwyg</font>
+	       <select name="selHeading" onChange="doHead(this.options[this.selectedIndex].value)" style="font: 8pt verdana;">
+		<option style="background-color:buttonface;"  value="">Heading</option>
+		<option style="background-color:buttonface;" value="Heading 1">H1</option>
+		<option style="background-color:buttonface;" value="Heading 2">H2</option>
+		<option style="background-color:buttonface;" value="Heading 3">H3</option>
+		<option style="background-color:buttonface;" value="Heading 4">H4</option>
+		<option style="background-color:buttonface;" value="Heading 5">H5</option>
+		<option style="background-color:buttonface;" value="Heading 6">H6</option>
+		<option style="background-color:buttonface;" value="Numbered List">Num List</option>
+		<option style="background-color:buttonface;" value="Menu List">Menu List</option>
+		<option style="background-color:buttonface;" value="Address">Address</option>
+		<option style="background-color:buttonface;" value="Directory List">Directory List</option>
+		</select>
+		<select name="selFont" onChange="doFont(this.options[this.selectedIndex].value)" style="font: 8pt verdana;">
+		<option style="background-color:buttonface;" value="">Font Style</option>
+		<option style="background-color:buttonface;" value="Arial">Arial</option>
+		<option style="background-color:buttonface;" value="Arial Black">Arial Black</option>
+		<option style="background-color:buttonface;" value="Arial Narrow">Arial Narrow</option>
+		<option style="background-color:buttonface;" value="Century Schoolbook">Century Schoolbook</option>
+		<option style="background-color:buttonface;" value="Comic Sans MS">Comic Sans MS</option>
+		<option style="background-color:buttonface;" value="Courier New">Courier New</option>
+		<option style="background-color:buttonface;" value="Engravers MT">Engravers MT</option>
+		<option style="background-color:buttonface;" value="Franklin Gothic Demi">Franklin Gothic Demi</option>
+		<option style="background-color:buttonface;" value="Georgia">Georgia</option>
+		<option style="background-color:buttonface;" value="Sans Serif">Sans Serif</option>
+		<option style="background-color:buttonface;" value="System">System</option>
+		<option style="background-color:buttonface;" value="Tahoma">Tahoma</option>
+		<option style="background-color:buttonface;" value="Times New Roman">Times New Roman</option>
+		<option style="background-color:buttonface;" value="Trebuchet MS">Trebuchet MS</option>   
+		<option style="background-color:buttonface;" value="Verdana">Verdana</option>
+		</select>
+		<select name="selSize" onChange="doSize(this.options[this.selectedIndex].value);" style="font: 8pt verdana;">
+		<option style="background-color:buttonface;" value="">Font Size</option>
+		<option style="background-color:buttonface;" value="1">1</option>
+		<option style="background-color:buttonface;" value="2">2</option>
+		<option style="background-color:buttonface;" value="3">3</option>
+		<option style="background-color:buttonface;" value="4">4</option>
+		<option style="background-color:buttonface;" value="5">5</option>
+		<option style="background-color:buttonface;" value="6">6</option>
+		<option style="background-color:buttonface;" value="7">7</option>
+		<option style="background-color:buttonface;" value="+1">+1</option>
+		<option style="background-color:buttonface;" value="+2">+2</option>
+		<option style="background-color:buttonface;" value="+3">+3</option>
+		<option style="background-color:buttonface;" value="+4">+4</option>
+		<option style="background-color:buttonface;" value="+5">+5</option>
+		<option style="background-color:buttonface;" value="+6">+6</option>
+		<option style="background-color:buttonface;" value="+7">+7</option>
+		</select>
+		<form action="http://www.microsoft.com/windows2000/technologies/web/default.asp" method="post" name="ppadeditor" onsubmit="submitForm();">
+		<input id='submitData' type="hidden" name="form_submit_contents" size="20,5">
+		</form>
+		</td>
+		</tr>
+		</table>
+	</body>
+</html>
+

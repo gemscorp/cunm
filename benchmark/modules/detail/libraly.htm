@@ -1,0 +1,85 @@
+
+ <SCRIPT language=JavaScript> 
+<!-- 
+function Del(url,caption) { 
+ 
+ txt = " Are you sure you want to delete ?\n";
+ txt +=caption;
+ 
+  var rs=confirm(txt);
+     
+ if(rs==true)
+ {
+  location.href="{JAVA_URL}&"+url;
+ }    
+     
+} 
+//--> 
+ </SCRIPT>
+<div align="center">
+  <center>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="96%" id="AutoNumber1" height="209">
+  <tr>
+    <td width="98%" height="70">
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber3">
+      <tr>
+        <td width="100%"><b><font face="Arial" size="2"><span lang="en-us">&nbsp;</span>{MEMBER_NAME}<br>
+&nbsp;</font></b></td>
+      </tr>
+      <tr>
+        <td width="100%">
+                <p align="center"><font face="Arial" size="2">{TOPMENU}<br>
+&nbsp;</font></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="98%" bgcolor="#111111" height="22">
+    <font face="Arial" size="2" color="#FFFFFF"><b><span lang="en-us">&nbsp;Library</span></b></font></td>
+  </tr>
+  <tr>
+    <td width="98%" height="22"><b><font face="Arial" size="2">&nbsp;</font></b></td>
+  </tr>
+  <tr>
+    <td width="98%" height="95">
+<div align="center">
+  <center>
+  
+  <table border="0" cellpadding="2" cellspacing="1" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber6">
+    <tr>
+	   <td  bgcolor="#324F5D" width="165">
+      <p align="left"><b><font face="Arial" size="2" color="#FFFFFF">
+      <span lang="en-us">&nbsp; Date</span></font></b></td>
+	   <td  bgcolor="#324F5D" width="478">
+      <p align="left"><b><font face="Arial" size="2" color="#FFFFFF">
+      <span lang="en-us">Name</span></font></b></td>
+	   <td  bgcolor="#324F5D" width="165">
+      <p align="left"><b><font face="Arial" size="2" color="#FFFFFF">
+      <span lang="en-us">File Download</span></font></b></td>
+    </tr>
+<!-- BEGIN listrow -->
+	<tr>
+	   <td  bgcolor="#CCFFCC" width="165">
+      <p align="left"><font face="Arial" size="2" color="#800000">
+      <span lang="en-us">&nbsp; {listrow.PDATE}</span></font></td>
+	   <td  bgcolor="#CCFFCC" width="478">
+      <p align="left"><font face="Arial" size="2" color="#000080">
+      <span lang="en-us">{listrow.NAME}</span></font></td>
+	   <td  bgcolor="#CCFFCC" width="165">
+      <p align="left"><font face="Arial" size="2">
+      <span lang="en-us"><a href="{listrow.DW}" style="text-decoration: none">{listrow.FILE}</a></span></font></td>
+    </tr>
+<!-- END listrow -->
+  </table>
+  </center>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber7">
+  <tr>
+    <td width="100%">{PAGE_LIST}</td>
+  </tr>
+</table>&nbsp;</td>
+  </tr>
+</table></center>
+</div>

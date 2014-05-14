@@ -1,0 +1,58 @@
+body {
+scrollbar-face-color: #000000; 
+scrollbar-highlight-color: #CCCCCC; 
+scrollbar-shadow-color: #666666; 
+scrollbar-3dlight-color:#000000; 
+scrollbar-arrow-color: #888888; 
+scrollbar-track-color: #000000; 
+scrollbar-darkshadow-color: #111111;
+font: 8px, sans-serif;
+background:#efedde;
+color: #323232;
+padding:0px;
+margin:0px;
+}
+
+a { text-decoration:none }
+
+a:link {color: #0000FF;  font-family: variable; text-decoration: none}
+
+a:visited {color: #0000FF;  font-family: variable; text-decoration: none} 
+
+a:active {color: ##330099;  font-family: variable; text-decoration: none} 
+
+a:hover {text-decoration: none; color: #330099}
+
+cursor:default;
+behavior:url(#default#clientcaps) }
+.normaltext { font: 8pt Arial; }
+td { font-family:  font face="Sylfaen";  font-size: 12px; }
+
+toolbarCtrls 
+{
+background-color: buttonface; 
+height: 25px; left: 0px; 
+position: relative; top: 0px
+}
+
+.nobs
+{    
+border: 0px ;
+padding:0px;
+margin:0px;
+}
+
+.toolz
+{
+border: 0px ;
+padding:0px;
+margin:0px;
+}
+
+.h3 {
+font: 10px, sans-serif;
+}
+
+.h4 {
+font:12.5px, sans-serif;
+}

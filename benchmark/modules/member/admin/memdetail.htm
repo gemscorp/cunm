@@ -1,0 +1,1649 @@
+<style>
+<!--
+.MsoNormal
+	{
+	font-size:8.0pt;
+	font-family:"MS Sans Serif";
+	
+	}
+
+	
+-->
+</style>
+</head>
+
+<body>
+      <form name="inputmember"  action="{ACTION}"  method=post onsubmit="return chkvalid()" >
+<input type="hidden" name=m value="{M}" >
+<input type="hidden" name=op value="{OP}" >
+<input type="hidden" name=gr value="{GR}" >
+          <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber5" cellpadding="0">
+            <tr>
+              <td width="100%" colspan="2">
+
+  <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber28" cellpadding="0">
+    <tr>
+      <td width="100%">
+      <div align="center">
+        <center>
+      <table border="0" cellspacing="0" width="96%" id="AutoNumber31" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0">
+        <tr>
+          <td width="100%"> <b>
+          <font face="Arial" color="#800000" style="font-size: 14pt">MEMBER 
+          DETAIL</font></b></td>
+        </tr>
+      </table>
+        </center>
+      </div>
+      <div align="center">
+        <center>
+        <table border="0" cellspacing="1" width="96%" id="AutoNumber26" cellpadding="2" height="805">
+          <tr>
+          <td width="100%" colspan="2" bgcolor="#324F5D" height="16">
+          <p align="left"><font face="Arial"><b>
+          <span style="font-size: 10pt; color: white">&nbsp;Personal Information</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="23%" bgcolor="#D5FFD5" height="11">
+          <b><font size="2" face="Arial">Register Date</font></b></td>
+          <td width="77%" bgcolor="#D5FFD5" height="11">
+          <b><font face="Arial" size="2">{REGISTER_DATE}</font></b></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Title</font><font color="#FF0000"> *</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font face="Arial" size="2">
+            {TITLE}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">First name</font><font color="#FF0000"> *</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{FIRSTNAME}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Last name </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{LASTNAME}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">E-mail </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{EMAIL}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Please retype
+          <span lang="en-us">E</span>-mail </font><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{EMAIL_CONFIRMATION}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Organization 
+          Name </font><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{ORGANIZATION}</font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <b>
+          <font face="Arial" color="#000080">
+          <span style="font-size: 10pt">&nbsp;</span></font><span style="font-size: 10pt"><font face="Arial" color="#FFFFFF">Address</font></span></b></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Type </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{ADDRESSTYPE}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Street</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{STREET}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Street 2</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{STREET2}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">City </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{CITY}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">State</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{STATE}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">ZIP</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{ZIP}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Country </font>
+          <font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{COUNTRY}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><b>
+          <font face="Arial" size="2" color="#324F5D">Area Code</font></b></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font face="Arial" size="2">{AREA_CODE}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Direct Phone
+          </font><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{PHONE}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Fax</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{FAX}</font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <font face="Arial" color="#FFFFFF"><b>
+          <span style="font-size: 10pt">&nbsp;Account &amp; Login information</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="23"><font face="Arial">
+          <span style="font-size: 10pt"><b>
+          <font color="#324F5D">Username<br>
+          </font></b><font color="#FFFFFF">(minimum 
+          6 characters)</font><font color="#324F5D"><span lang="en-us"><b> </b>
+          </span> </font><b>
+          <font color="#FF0000">*</font></b></span></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="23" valign="middle">
+            <font face="Arial" size="2">{USERNAME}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial">
+          <span style="font-size: 10pt"><b>
+          <font color="#324F5D">Password <br>
+          </font></b><font color="#FFFFFF">(minimum 
+          6 characters)</font><font color="#324F5D"><span lang="en-us"><b> </b>
+          </span> </font><b>
+          <font color="#FF0000">*</font></b></span></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font face="Arial" size="2">{PASSWORD1}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="22"><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#324F5D">Password 
+          Confirmation </font><font color="#FF0000">*</font></span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="22">
+            <font face="Arial" size="2">{PASSWORD2}</font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <font face="Arial" color="#FFFFFF"><b>
+          <span style="font-size: 10pt">&nbsp;Please, tell us about yourself</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="28">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Position in CU</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="28">
+            <font face="Arial" size="2">{PLAYER}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="21">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">...if other, 
+          please specify</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="21">
+            <font face="Arial" size="2">{PLAYER_OTHER}</font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="25">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Your interests</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="25">
+            <font face="Arial" size="2">{INTERESTS1}</font><font face="Arial"><font style="font-size: 10pt">&nbsp;Learn 
+          about Benchmark services<br>
+            {INTERESTS2}&nbsp;Net working with 
+          partners CUs<br>
+            {INTERESTS3}&nbsp;Academic 
+          seeking information<br>
+          </font><font size="2">{INTERESTS4}</font><span style="font-size: 7.5pt"><font style="font-size: 10pt">&nbsp;contributing 
+          to this site<br>
+            {INTERESTS5}&nbsp;Network 
+          seeking to provide technical assistance</font></span></font></td>
+          </tr>
+          <tr>
+          <td width="2%" bgcolor="#7B9EBA" height="19">
+          <font face="Arial" color="#324F5D"><b>
+          <span style="font-size: 10pt">Other interests</span></b></font></td>
+          <td width="98%" bgcolor="#F3F3F3" height="19">
+            <font size="2" face="Arial">{INTERESTS_OTHER}</font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#324F5D" height="16" colspan="2">
+          <font face="Arial" color="#FFFFFF"><b>
+          <span style="font-size: 10pt">&nbsp;ACCU Newsletter</span></b></font></td>
+          </tr>
+          <tr>
+          <td width="100%" bgcolor="#F3F3F3" height="58" colspan="2"><br>
+          {NEWSLETTER}<font face="Arial"><font size="2">&nbsp;</font><font style="font-size: 10pt">Click here if you 
+          DO NOT wish to receive the <span class="GramE">ACCU&nbsp; Newsletter</span>.</font></font><br>
+&nbsp;</td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td width="96%" align="center">
+      <table border="0" cellspacing="0" width="100%" id="AutoNumber27" cellpadding="0">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      <table border="0" cellspacing="1" bordercolor="#324F5D" width="96%" id="AutoNumber29" cellpadding="2" height="355">
+        <tr>
+          <td width="100%" colspan="2" bgcolor="#324F5D" height="25">
+          <p align="center"><font face="Arial">
+          <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">Member 
+            Profile : </span><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;</font></span></b></font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Name of Credit Union:&nbsp; </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{MEMBER_NAME}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Address: </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{M_ADDRESS}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Country: </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{M_COUNTRY}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+          <font face="Arial" size="2" color="#324F5D">Area Code</font></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{M_AREA}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Telephone: </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{M_TEL}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Fax:
+            </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{M_FAX}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Email: </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{M_EMAIL}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="17"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Homepage:</span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="17">
+            <font size="2" face="Arial">{M_HOMEPAGE}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Established: (YYYY) </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="22">
+            <font size="2" face="Arial">{M_ESTABLISH}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="52"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Vision: </span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="52" valign="top">
+            <font size="2" face="Arial">{M_VISION}</font></td>
+        </tr>
+        <tr>
+          <td width="29%" bgcolor="#7B9EBA" height="52"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Mission:</span></b></td>
+          <td width="71%" bgcolor="#F3F3F3" height="52" valign="top">
+            <font size="2" face="Arial">{M_MISSION}</font></td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table border="0" cellspacing="1" width="100%" id="AutoNumber16">
+    <tr>
+      <td width="100%">&nbsp;</td>
+    </tr>
+</table>
+<div align="center">
+  <center>
+        <table class="MsoNormalTable" style="background: white" border="0" width="96%" height="21" cellpadding="2" cellspacing="1">
+          <tr>
+            <td style="padding: 0.75pt; background: #324f5d" colSpan="3" height="25">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
+            Membership <span class="GramE">Profile&nbsp; as</span> of &nbsp;</span><span style="font-size: 10pt; font-family: techno; font-weight:700"><font color="#FFFFFF">{M_PROFILE_AS}</font></span></font><b><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
+            (YYYY) </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75pt; background: #324f5d" height="1">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Type of Credit Union </span></font></td>
+            <td style="padding: 0.75pt; background: #324f5d" height="1">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Number of members </span></font></td>
+            <td style="padding: 0.75pt; background: #324f5d" height="1">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">Low 
+            income less then $30 per month members </span></font></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Urban </span></b></td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          {MEMBERS_URBAN}</td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          {MEMBERS_URBAN_LOW}</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            Rural </span></b></td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          {MEMBERS_RURAL}</td>
+            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
+            <p class="MsoNormal">
+          {MEMBERS_RURAL_LOW}</td>
+          </tr>
+        </table>
+      </center>
+</div>
+<table border="0" cellspacing="0" width="100%" id="AutoNumber18" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <td width="100%">&nbsp;</td>
+  </tr>
+</table>
+<div align="center">
+  <center>
+      <table class="MsoNormalTable" style="margin-left: -2.25pt; margin-right: -2.25pt; background: white" cellPadding="0" border="0" width="96%" height="132">
+        <tr>
+          <td style="width: 725; padding: 0.75pt; background: #324f5d" colSpan="7" height="12">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <b>
+          <font face="Arial">
+          <span style="font-size: 10pt; color: #FFFF00; font-family: techno">
+          Market <span class="GramE">segmentation&nbsp; as</span> of </span></font>
+          </b>
+            <b>
+            <span style="font-size: 8pt; color: black; font-family: Arial">
+            &nbsp;</span><font color="#FFFFFF"><span style="font-size: 8pt; font-family: Arial">{MARKET_SEGMENTATION}</span></font><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
+          (YYYY) </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="width: 69; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Type 
+          of Credit Union </span></font></td>
+          <td style="width: 82; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Male
+          </span></font></td>
+          <td style="width: 94; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          Female</span></font></td>
+          <td style="width: 468; padding: 0.75pt; background: #324f5d" colSpan="4" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Age 
+          Segment of CU Membership</span></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="width: 120; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          &lt;18-19 </span></font></td>
+          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">30-45
+          </span></font></td>
+          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">45-60
+          </span></font></td>
+          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">60&gt;
+          </span></font></td>
+        </tr>
+        <tr>
+          <td style="width: 69; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Urban
+          </span></b></td>
+          <td style="width: 82; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {URBAN_MALE}</td>
+          <td style="width: 94; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {URBAN_FEMALE}</td>
+          <td style="width: 120; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_URBAN_18_19}</td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_URBAN_30_45}</td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_URBAN_45_60}</td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_URBAN_60}</td>
+        </tr>
+        <tr>
+          <td style="width: 69; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Rural
+          </span></b></td>
+          <td style="width: 82; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {RURAL_MALE}</td>
+          <td style="width: 94; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {RURAL_FEMALE}</td>
+          <td style="width: 120; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_RURAL_18_19}</td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_RURAL_30_45}</td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_RURAL_45_60}</td>
+          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
+          <p class="MsoNormal">
+          {MEMBERS_RURAL_60}</td>
+        </tr>
+      </table>
+        </center>
+</div>
+<div align="center">
+  <center>
+  <table border="0" cellspacing="0" width="96%" id="AutoNumber20" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+    <tr>
+      <td width="100%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="100%" bgcolor="#F3F3F3">&nbsp;<div align="center">
+        <center>
+        <table class="MsoNormalTable" style="background: white" cellPadding="0" border="0" width="304">
+          <tr>
+            <td style="width: 141; padding: 0.75pt; background: #324f5d">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Type of Credit Union </span></font></td>
+            <td style="width: 153; padding: 0.75pt; background: #324f5d">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Total Assets </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 141; padding: 0.75pt; background: #e8e8e8">
+            <p class="MsoNormal"><b>
+            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+            &nbsp;Total Number</span></b></td>
+            <td style="width: 153; padding: 0.75pt; background: #e8e8e8">
+            <p class="MsoNormal">
+          {ASSETS_TOTAL}</td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      <table border="0" cellspacing="0" width="100%" id="AutoNumber17" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      </td>
+    </tr>
+  </table>
+  </center>
+</div>
+<table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber23" cellpadding="0">
+  <tr>
+    <td width="100%">&nbsp;</td>
+  </tr>
+</table>
+<div align="center">
+  <center>
+      <table class="MsoNormalTable" style="background: white" cellPadding="2" border="0" width="96%" cellspacing="1" height="174">
+        <tr>
+          <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="629" colSpan="6" height="31">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">Core
+          <span class="GramE">Business&nbsp; as</span> of </span>
+          <font color="#FFFFFF">
+          <span style="font-size: 10pt; font-family: techno; font-weight:700">{CORE_BUSINESS}</span></font></font><b><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
+          (YYYY) </span></b><font face="Arial"><b>
+          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="padding: 0.75pt; background: #324f5d" width="119" rowSpan="2">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          <span lang="en-us">&nbsp; </span>Type 
+          of Credit Union</span></font></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #324f5d" width="100" rowSpan="2" height="33">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          Amount in US$ </span></font></td>
+          <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="406" colSpan="4" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Usage 
+          of Service US$ </span></font></td>
+        </tr>
+        <tr style="page-break-inside: avoid">
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Male
+          </span></font></td>
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">
+          Female </span></font></td>
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Youth
+          </span></font></td>
+          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
+          <p class="MsoNormal" style="text-align: center" align="center">
+          <font face="Arial">
+          <span style="font-size: 10pt; color: white; font-family: techno">Non-Members
+          </span></font></td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
+          Savings</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SAVINGS_AMOUNT}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SAVINGS_MALE}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SAVINGS_FEMALE}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SAVINGS_YOUTH}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SAVINGS_NONMEMBER}</td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Share</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SHARE_AMOUNT}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SHARE_MALE}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SHARE_FEMALE}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SHARE_YOUTH}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {SHARE_NONMEMBER}</td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Loan 
+          Outstanding</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {LOAN_TOTAL}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {LOAN_MALE}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {LOAN_FEMALE}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {LOAN_YOUTH}</td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {LOAN_NONMEMBER}</td>
+        </tr>
+        <tr>
+          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
+          <p class="MsoNormal"><b>
+          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Total 
+          Reserve</span></b></td>
+          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
+          <p class="MsoNormal">
+          {RESERVE_TOTAL}</td>
+          <td style="width: 304.5pt; padding: 0.75pt; background: #F3F3F3; " width="406" colSpan="4" height="20">
+          <p class="MsoNormal">
+          <span style="font-size: 10pt; color: black; font-family: Arial">&nbsp;
+          </span></td>
+        </tr>
+      </table>
+        </center>
+</div>
+<div align="center">
+  <center>
+  <table border="0" cellspacing="0" width="96%" id="AutoNumber21" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+    <tr>
+      <td width="100%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="100%" bgcolor="#E8E8E8">
+      <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber24" cellpadding="0">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      <div align="center">
+        <center>
+        <table class="MsoNormalTable" style="background: white" border="0" height="307" cellspacing="1">
+          <tr>
+            <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="340" colSpan="2" height="25">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
+            Board Members and&nbsp; Other committee Members&nbsp; </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Name </span></font></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Position </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_1}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_1}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_2}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_2}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_3}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_3}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_4}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_4}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_5}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_5}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_6}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_6}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_7}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_7}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_8}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_8}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_9}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_9}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_NAME_10}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {BOARD_POS_10}</td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      <table border="0" cellspacing="1" width="100%" id="AutoNumber14">
+        <tr>
+          <td width="100%">&nbsp;</td>
+        </tr>
+      </table>
+      <div align="center">
+        <center>
+        <table class="MsoNormalTable" style="background: white" border="0" height="179" cellspacing="1">
+          <tr>
+            <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="340" colSpan="2" height="27">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
+            Senior Management </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Name </span></font></td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
+            <p class="MsoNormal" style="text-align: center" align="center">
+            <font face="Arial">
+            <span style="font-size: 10pt; color: white; font-family: techno">
+            Position </span></font></td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_NAME_1}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_POS_1}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_NAME_2}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_POS_2}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_NAME_3}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_POS_3}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_NAME_4}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_POS_4}</td>
+          </tr>
+          <tr>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_NAME_5}</td>
+            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
+            <p class="MsoNormal">
+          {MANAGE_POS_5}</td>
+          </tr>
+        </table>
+        <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber25" cellpadding="0">
+          <tr>
+            <td width="100%">&nbsp;</td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      </td>
+    </tr>
+  </table>
+  </center>
+</div>
+<table border="0" cellspacing="0" width="100%" id="AutoNumber22" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <td width="100%">&nbsp;</td>
+  </tr>
+</table>
+<div align="center">
+  <center>
+      <table border="0" cellspacing="1" width="96%" id="AutoNumber30" cellpadding="2" height="69">
+        <tr>
+          <td width="100%" height="1" bgcolor="#F3F3F3">
+          <div align="center">
+            <center>
+            <table border="0" cellspacing="0" width="95%" id="AutoNumber11" bgcolor="#FFFFFF" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0">
+              <tr>
+                <td width="88%"><b><font face="Arial"><span style="font-size: 8.5pt">
+                <font size="2">&nbsp;</font></span><font color="#FF0000" style="font-size: 10pt">I agree&nbsp;with</font></font></b><font face="Arial"><span style="font-size: 10pt"><i>
+                <font color="#000080">ACCU”S Benchmark services</font></i><span lang="en-us"><b>
+                </b></span></span><b><span style="font-size: 10pt">
+                <font color="#000080">'s 
+      Terms of Service and Privacy Policy </font></span></b></font></td>
+                <td width="12%"><b><font face="Arial" size="2" color="#FF0000">{IAGREE}</font></b></td>
+              </tr>
+            </table>
+            </center>
+          </div>
+          </td>
+        </tr>
+      </table>
+      </center>
+</div>
+	  <input type="hidden" name="mem_id" value="{MEM_ID}" >
+              </td>
+            </tr>
+            <tr>
+              <td width="50%">&nbsp;</td>
+              <td width="50%">&nbsp;</td>
+            </tr>
+          </table>
+</form> <SCRIPT language="JavaScript"> 
+<!--  
+
+function EmailCheck(email)
+{
+	if (email.value ==0)
+  	{
+  		alert("Please enter a valid Email")
+ 		email.focus();
+  		return false;
+    } else if (email.value.indexOf("@") < 0)
+		{
+			alert("Please enter a valid Email '@' ")
+ 			email.focus();
+			return false;
+		}else if (email.value.indexOf(".") < 0)
+			{
+			alert("Please enter a valid Email  '.(dot)'")
+ 			email.focus();
+			return false;
+			}else{
+			return true;
+			}
+
+}
+
+
+function chkvalid() {  
+ 
+     if (document.inputmember.title.value ==0)
+	{
+alert("Please enter a valid title")
+document.inputmember.title.focus();
+return false;
+  } 
+    else if (document.inputmember.firstname.value ==0)
+	{
+alert("Please enter a valid firstname")
+document.inputmember.firstname.focus();
+return false;
+  } 
+    else if (document.inputmember.lastname.value ==0)
+	{
+alert("Please enter a valid lastname")
+document.inputmember.lastname.focus();
+return false;
+  } 
+    else if (EmailCheck(document.inputmember.email)==false)
+	{
+	document.inputmember.email.focus();
+	return false;
+  } 
+    else if (EmailCheck(document.inputmember.email_confirmation)==false)
+	{
+
+	document.inputmember.email_confirmation.focus();
+	return false;
+  } else if(document.inputmember.email_confirmation.value!=document.inputmember.email.value)
+    {
+    alert("E-mail not match");
+    	document.inputmember.email_confirmation.focus();
+	return false;
+    }
+    else if (document.inputmember.organization.value ==0)
+	{
+alert("Please enter a valid organization")
+document.inputmember.organization.focus();
+return false;
+  } 
+    else if (document.inputmember.addresstype.value ==0)
+	{
+alert("Please enter a valid addresstype")
+document.inputmember.addresstype.focus();
+return false;
+  } 
+   /*
+    else if (document.inputmember.street.value ==0)
+	{
+alert("Please enter a valid street")
+document.inputmember.street.focus();
+return false;
+  } 
+    else if (document.inputmember.street2.value ==0)
+	{
+alert("Please enter a valid street2")
+document.inputmember.street2.focus();
+return false;
+  }  */
+    else if (document.inputmember.city.value ==0)
+	{
+alert("Please enter a valid city")
+document.inputmember.city.focus();
+return false;
+  } /*
+    else if (document.inputmember.state.value ==0)
+	{
+alert("Please enter a valid state")
+document.inputmember.state.focus();
+return false;
+  } 
+    else if (document.inputmember.zip.value ==0)
+	{
+alert("Please enter a valid zip")
+document.inputmember.zip.focus();
+return false;
+  } */
+    else if (document.inputmember.country.value ==0)
+	{
+alert("Please enter a valid country")
+document.inputmember.country.focus();
+return false;
+  } 
+    else if (document.inputmember.phone.value ==0)
+	{
+alert("Please enter a valid phone")
+document.inputmember.phone.focus();
+return false;
+  } /*
+    else if (document.inputmember.fax.value ==0)
+	{
+alert("Please enter a valid fax")
+document.inputmember.fax.focus();
+return false;
+  } */
+    else if (document.inputmember.username.value ==0)
+	{
+alert("Please enter a valid username")
+document.inputmember.username.focus();
+return false;
+  } else if(document.inputmember.username.value.length < 6)
+   {
+   	alert("Username must be at least four(6) characters long")
+	document.inputmember.username.focus();
+	return false;
+   }
+    else if (document.inputmember.password1.value ==0)
+	{
+alert("Please enter a valid password1");
+document.inputmember.password1.focus();
+return false;
+  } else if(document.inputmember.password1.value.length < 6 )
+    {
+    		alert("Password must be at least four(4) characters long");
+		document.inputmember.password1.focus();
+		return false;
+    }
+    else if (document.inputmember.password2.value ==0)
+	{
+alert("Please enter a valid password2")
+document.inputmember.password2.focus();
+return false;
+  } else if(document.inputmember.password1.value != document.inputmember.password2.value)
+  {
+  	alert("Please enter same password")
+	document.inputmember.password2.focus();
+	return false;
+  }
+  
+  /*
+    else if (document.inputmember.player.value ==0)
+	{
+alert("Please enter a valid player")
+document.inputmember.player.focus();
+return false;
+  } 
+    else if (document.inputmember.player_other.value ==0)
+	{
+alert("Please enter a valid player_other")
+document.inputmember.player_other.focus();
+return false;
+  } 
+    else if (document.inputmember.interests1.value ==0)
+	{
+alert("Please enter a valid interests1")
+document.inputmember.interests1.focus();
+return false;
+  } 
+    else if (document.inputmember.interests2.value ==0)
+	{
+alert("Please enter a valid interests2")
+document.inputmember.interests2.focus();
+return false;
+  } 
+    else if (document.inputmember.interests3.value ==0)
+	{
+alert("Please enter a valid interests3")
+document.inputmember.interests3.focus();
+return false;
+  } 
+    else if (document.inputmember.interests4.value ==0)
+	{
+alert("Please enter a valid interests4")
+document.inputmember.interests4.focus();
+return false;
+  } 
+    else if (document.inputmember.interests5.value ==0)
+	{
+alert("Please enter a valid interests5")
+document.inputmember.interests5.focus();
+return false;
+  } 
+    else if (document.inputmember.interests_other.value ==0)
+	{
+alert("Please enter a valid interests_other")
+document.inputmember.interests_other.focus();
+return false;
+  } 
+    else if (document.inputmember.newsletter.value ==0)
+	{
+alert("Please enter a valid newsletter")
+document.inputmember.newsletter.focus();
+return false;
+  }  */
+    else if (document.inputmember.member_name.value ==0)
+	{
+alert("Please enter a valid member_name")
+document.inputmember.member_name.focus();
+return false;
+  } 
+    else if (document.inputmember.m_address.value ==0)
+	{
+alert("Please enter a valid m_address")
+document.inputmember.m_address.focus();
+return false;
+  } 
+    else if (document.inputmember.m_country.value ==0)
+	{
+alert("Please enter a valid m_country")
+document.inputmember.m_country.focus();
+return false;
+  } 
+    else if (document.inputmember.m_tel.value ==0)
+	{
+alert("Please enter a valid m_tel")
+document.inputmember.m_tel.focus();
+return false;
+  } /*
+    else if (document.inputmember.m_fax.value ==0)
+	{
+alert("Please enter a valid m_fax")
+document.inputmember.m_fax.focus();
+return false;
+  } 
+    else if (document.inputmember.m_email.value ==0)
+	{
+alert("Please enter a valid m_email")
+document.inputmember.m_email.focus();
+return false;
+  } 
+    else if (document.inputmember.m_homepage.value ==0)
+	{
+alert("Please enter a valid m_homepage")
+document.inputmember.m_homepage.focus();
+return false;
+  } 
+    else if (document.inputmember.m_establish.value ==0)
+	{
+alert("Please enter a valid m_establish")
+document.inputmember.m_establish.focus();
+return false;
+  } 
+    else if (document.inputmember.m_vision.value ==0)
+	{
+alert("Please enter a valid m_vision")
+document.inputmember.m_vision.focus();
+return false;
+  } 
+    else if (document.inputmember.m_mission.value ==0)
+	{
+alert("Please enter a valid m_mission")
+document.inputmember.m_mission.focus();
+return false;
+  } */
+    else if (document.inputmember.m_profile_as.value ==0)
+	{
+alert("Please enter a valid m_profile_as")
+document.inputmember.m_profile_as.focus();
+return false;
+  } /*
+    else if (document.inputmember.members_urban.value ==0)
+	{
+alert("Please enter a valid members_urban")
+document.inputmember.members_urban.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_low.value ==0)
+	{
+alert("Please enter a valid members_urban_low")
+document.inputmember.members_urban_low.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural.value ==0)
+	{
+alert("Please enter a valid members_rural")
+document.inputmember.members_rural.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_low.value ==0)
+	{
+alert("Please enter a valid members_rural_low")
+document.inputmember.members_rural_low.focus();
+return false;
+  } */
+    else if (document.inputmember.market_segmentation.value ==0)
+	{
+alert("Please enter a valid market_segmentation")
+document.inputmember.market_segmentation.focus();
+return false;
+  } /*
+    else if (document.inputmember.urban_male.value ==0)
+	{
+alert("Please enter a valid urban_male")
+document.inputmember.urban_male.focus();
+return false;
+  } 
+    else if (document.inputmember.urban_female.value ==0)
+	{
+alert("Please enter a valid urban_female")
+document.inputmember.urban_female.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_18_19.value ==0)
+	{
+alert("Please enter a valid members_urban_18_19")
+document.inputmember.members_urban_18_19.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_30_45.value ==0)
+	{
+alert("Please enter a valid members_urban_30_45")
+document.inputmember.members_urban_30_45.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_45_60.value ==0)
+	{
+alert("Please enter a valid members_urban_45_60")
+document.inputmember.members_urban_45_60.focus();
+return false;
+  } 
+    else if (document.inputmember.members_urban_60.value ==0)
+	{
+alert("Please enter a valid members_urban_60")
+document.inputmember.members_urban_60.focus();
+return false;
+  } 
+    else if (document.inputmember.rural_male.value ==0)
+	{
+alert("Please enter a valid rural_male")
+document.inputmember.rural_male.focus();
+return false;
+  } 
+    else if (document.inputmember.rural_female.value ==0)
+	{
+alert("Please enter a valid rural_female")
+document.inputmember.rural_female.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_18_19.value ==0)
+	{
+alert("Please enter a valid members_rural_18_19")
+document.inputmember.members_rural_18_19.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_30_45.value ==0)
+	{
+alert("Please enter a valid members_rural_30_45")
+document.inputmember.members_rural_30_45.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_45_60.value ==0)
+	{
+alert("Please enter a valid members_rural_45_60")
+document.inputmember.members_rural_45_60.focus();
+return false;
+  } 
+    else if (document.inputmember.members_rural_60.value ==0)
+	{
+alert("Please enter a valid members_rural_60")
+document.inputmember.members_rural_60.focus();
+return false;
+  } 
+    else if (document.inputmember.assets_total.value ==0)
+	{
+alert("Please enter a valid assets_total")
+document.inputmember.assets_total.focus();
+return false;
+  } */
+    else if (document.inputmember.Core_Business.value ==0)
+	{
+alert("Please enter a valid Core_Business")
+document.inputmember.Core_Business.focus();
+return false;
+  } /*
+    else if (document.inputmember.savings_amount.value ==0)
+	{
+alert("Please enter a valid savings_amount")
+document.inputmember.savings_amount.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_male.value ==0)
+	{
+alert("Please enter a valid savings_male")
+document.inputmember.savings_male.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_female.value ==0)
+	{
+alert("Please enter a valid savings_female")
+document.inputmember.savings_female.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_youth.value ==0)
+	{
+alert("Please enter a valid savings_youth")
+document.inputmember.savings_youth.focus();
+return false;
+  } 
+    else if (document.inputmember.savings_nonmember.value ==0)
+	{
+alert("Please enter a valid savings_nonmember")
+document.inputmember.savings_nonmember.focus();
+return false;
+  } 
+    else if (document.inputmember.share_amount.value ==0)
+	{
+alert("Please enter a valid share_amount")
+document.inputmember.share_amount.focus();
+return false;
+  } 
+    else if (document.inputmember.share_male.value ==0)
+	{
+alert("Please enter a valid share_male")
+document.inputmember.share_male.focus();
+return false;
+  } 
+    else if (document.inputmember.share_female.value ==0)
+	{
+alert("Please enter a valid share_female")
+document.inputmember.share_female.focus();
+return false;
+  } 
+    else if (document.inputmember.share_youth.value ==0)
+	{
+alert("Please enter a valid share_youth")
+document.inputmember.share_youth.focus();
+return false;
+  } 
+    else if (document.inputmember.share_nonmember.value ==0)
+	{
+alert("Please enter a valid share_nonmember")
+document.inputmember.share_nonmember.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_total.value ==0)
+	{
+alert("Please enter a valid loan_total")
+document.inputmember.loan_total.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_male.value ==0)
+	{
+alert("Please enter a valid loan_male")
+document.inputmember.loan_male.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_female.value ==0)
+	{
+alert("Please enter a valid loan_female")
+document.inputmember.loan_female.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_youth.value ==0)
+	{
+alert("Please enter a valid loan_youth")
+document.inputmember.loan_youth.focus();
+return false;
+  } 
+    else if (document.inputmember.loan_nonmember.value ==0)
+	{
+alert("Please enter a valid loan_nonmember")
+document.inputmember.loan_nonmember.focus();
+return false;
+  } 
+    else if (document.inputmember.reserve_total.value ==0)
+	{
+alert("Please enter a valid reserve_total")
+document.inputmember.reserve_total.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_1.value ==0)
+	{
+alert("Please enter a valid board_name_1")
+document.inputmember.board_name_1.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_1.value ==0)
+	{
+alert("Please enter a valid board_pos_1")
+document.inputmember.board_pos_1.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_2.value ==0)
+	{
+alert("Please enter a valid board_name_2")
+document.inputmember.board_name_2.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_2.value ==0)
+	{
+alert("Please enter a valid board_pos_2")
+document.inputmember.board_pos_2.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_3.value ==0)
+	{
+alert("Please enter a valid board_name_3")
+document.inputmember.board_name_3.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_3.value ==0)
+	{
+alert("Please enter a valid board_pos_3")
+document.inputmember.board_pos_3.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_4.value ==0)
+	{
+alert("Please enter a valid board_name_4")
+document.inputmember.board_name_4.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_4.value ==0)
+	{
+alert("Please enter a valid board_pos_4")
+document.inputmember.board_pos_4.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_5.value ==0)
+	{
+alert("Please enter a valid board_name_5")
+document.inputmember.board_name_5.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_5.value ==0)
+	{
+alert("Please enter a valid board_pos_5")
+document.inputmember.board_pos_5.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_6.value ==0)
+	{
+alert("Please enter a valid board_name_6")
+document.inputmember.board_name_6.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_6.value ==0)
+	{
+alert("Please enter a valid board_pos_6")
+document.inputmember.board_pos_6.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_7.value ==0)
+	{
+alert("Please enter a valid board_name_7")
+document.inputmember.board_name_7.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_7.value ==0)
+	{
+alert("Please enter a valid board_pos_7")
+document.inputmember.board_pos_7.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_8.value ==0)
+	{
+alert("Please enter a valid board_name_8")
+document.inputmember.board_name_8.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_8.value ==0)
+	{
+alert("Please enter a valid board_pos_8")
+document.inputmember.board_pos_8.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_9.value ==0)
+	{
+alert("Please enter a valid board_name_9")
+document.inputmember.board_name_9.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_9.value ==0)
+	{
+alert("Please enter a valid board_pos_9")
+document.inputmember.board_pos_9.focus();
+return false;
+  } 
+    else if (document.inputmember.board_name_10.value ==0)
+	{
+alert("Please enter a valid board_name_10")
+document.inputmember.board_name_10.focus();
+return false;
+  } 
+    else if (document.inputmember.board_pos_10.value ==0)
+	{
+alert("Please enter a valid board_pos_10")
+document.inputmember.board_pos_10.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_1.value ==0)
+	{
+alert("Please enter a valid manage_name_1")
+document.inputmember.manage_name_1.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_1.value ==0)
+	{
+alert("Please enter a valid manage_pos_1")
+document.inputmember.manage_pos_1.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_2.value ==0)
+	{
+alert("Please enter a valid manage_name_2")
+document.inputmember.manage_name_2.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_2.value ==0)
+	{
+alert("Please enter a valid manage_pos_2")
+document.inputmember.manage_pos_2.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_3.value ==0)
+	{
+alert("Please enter a valid manage_name_3")
+document.inputmember.manage_name_3.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_3.value ==0)
+	{
+alert("Please enter a valid manage_pos_3")
+document.inputmember.manage_pos_3.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_4.value ==0)
+	{
+alert("Please enter a valid manage_name_4")
+document.inputmember.manage_name_4.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_4.value ==0)
+	{
+alert("Please enter a valid manage_pos_4")
+document.inputmember.manage_pos_4.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_name_5.value ==0)
+	{
+alert("Please enter a valid manage_name_5")
+document.inputmember.manage_name_5.focus();
+return false;
+  } 
+    else if (document.inputmember.manage_pos_5.value ==0)
+	{
+alert("Please enter a valid manage_pos_5")
+document.inputmember.manage_pos_5.focus();
+return false;
+  } 
+    else if (document.inputmember.Iagree.value ==0)
+	{
+alert("Please enter a valid Iagree")
+document.inputmember.Iagree.focus();
+return false;
+  } 
+    else if (document.inputmember.member_of.value ==0)
+	{
+alert("Please enter a valid member_of")
+document.inputmember.member_of.focus();
+return false;
+  } 
+    else if (document.inputmember.active.value ==0)
+	{
+alert("Please enter a valid active")
+document.inputmember.active.focus();
+return false;
+  } */
+  
+  else{
+ 		 return true;
+ 		 }
+		  } 
+//--> 
+      </SCRIPT>
