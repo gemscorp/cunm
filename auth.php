@@ -69,6 +69,15 @@ $app->post('/adduser', function () use ($app, $smarty) {
 	
 });
 
+$app->group("/member", function () use ($app, $smarty) {
+	
+	$app->get("/detail", function () use ($app, $smarty) {
+		
+		$smarty->display('member/detail.tpl');
+		
+	});
+});
+
 $app->get("/logout", function () use ($app, $smarty) {
 	session_destroy();
 	$app->redirect(APP_PATH);

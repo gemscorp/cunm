@@ -2,7 +2,7 @@
 	<ul class="nav navbar-nav">
 		{if isset($smarty.session.user_id)}
 			<li><a href="http://{$smarty.server.HTTP_HOST}/cunm/dashboard" class="nav">Dashboard</a></li>
-			
+			<li><a href="http://{$smarty.server.HTTP_HOST}/cunm/member/detail" class="nav">Member Detail</a></li>
 			{if $smarty.session.user_level neq "3"}
 				<li><a href="http://{$smarty.server.HTTP_HOST}/cunm/adduser" class="nav">Add User</a></li>
 			{/if}
