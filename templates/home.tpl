@@ -1,6 +1,6 @@
 {include file='header.tpl'}
 
-<h2> ChatBox Operations </h2>
+<h2> ACCU CUNM </h2>
 
 {if $error neq ""}
 	<div class="alert alert-danger">{$error}</div>
@@ -16,6 +16,15 @@
     <input type="password" name='password' class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Login</button>
+  <button type="button" class="btn btn-default" id='register'>Register</button>
 </form>
+
+<script type='text/javascript'>
+	$(function (e) {
+		$("#register").click(function (e) {
+			window.location.href = 'register';
+		});
+	});
+</script>
 
 {include file='footer.tpl'}

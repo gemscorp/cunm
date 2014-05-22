@@ -6,6 +6,8 @@ require_once 'vendor/autoload.php';
 require_once('db.php');
 require_once('smarty3/Smarty.class.php');
 
+define('APP_PATH', '/cunm');
+
 date_default_timezone_set('Asia/Bangkok');
 
 $app = new \Slim\Slim();
@@ -20,10 +22,24 @@ $app->get('/ping', function () use ($app, $smarty) {
 	echo "pong";
 });
 
+$app->get('/register', function () use ($app, $smarty) {
+	
+	$error = "";
+	
+	if (isset($_SESSION['error'])) {
+		$error = $_SESSION['error'];
+		unset($_SESSION['error']);
+	}
+	
+	$smarty->assign('error', $error);
+	
+	$smarty->display('register.tpl');
+});
+
 $app->get('/', function () use ($app, $smarty) {
 	
 	if (isset($_SESSION['user_id'])) {
-		$app->redirect('/bot/op/dashboard');
+		$app->redirect(APP_PATH . '/dashboard');
 		return;
 	}
 	
@@ -43,7 +59,7 @@ $app->post('/login', function () use ($app, $smarty) {
 	
 	$pdo = getDbHandler();
 	
-	$sql = "SELECT id, user_type FROM user WHERE username = :username AND password = PASSWORD(:password) AND status = 1";
+	$sql = "SELECT id, level, federation_id FROM user WHERE email = :username AND password = PASSWORD(:password) AND status = 1";
 	$sth = $pdo->prepare($sql);
 	$sth->execute(array(':username' => $_POST['username'], ':password' => $_POST['password']));
 	
@@ -58,16 +74,17 @@ $app->post('/login', function () use ($app, $smarty) {
 	$user = $sth->fetch();
 	
 	$_SESSION['user_id'] = $user['id'];
-	$_SESSION['user_level'] = $user['user_type'];
+	$_SESSION['user_level'] = (int) $user['level'];
+	$_SESSION['user_federation_id'] = $user['federation_id'];
 	
 	$sql = "UPDATE user SET lastlogin = NOW() WHERE id = :id ";
 	$sth = $pdo->prepare($sql);
 	$sth->execute(array(':id' => $user['id']));
 	
-	if ($_SESSION['user_level'] == 3) {
-		$app->redirect('/bot/op/mandashboard');
+	if ($_SESSION['user_level'] === 0) {
+		$app->redirect(APP_PATH . '/mandashboard');
 	} else {
-		$app->redirect('/bot/op/dashboard');
+		$app->redirect(APP_PATH . '/dashboard');
 	}
 });
 
@@ -76,7 +93,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $app->notFound(function () use ($app) {
-	$app->redirect("/bot/op");
+	$app->redirect(APP_PATH);
 });
 
 $app->run();
