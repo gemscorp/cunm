@@ -2,6 +2,105 @@
 {literal}
 <h3>Member Detail</h3>
           
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#profile" data-toggle="tab">Member Profile</a></li>
+  <li><a href="#operations" data-toggle="tab">Operations</a></li>
+  <li><a href="#area_gender" data-toggle="tab">Area &amp; Gender</a></li>
+  <li><a href="#area_market" data-toggle="tab">Area, Market &amp; Gender</a></li>
+  <li><a href="#service" data-toggle="tab">Service Distribution</a></li>
+  <li><a href="#assets" data-toggle="tab">Assets</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="profile">
+  	<div class="form-group">
+    	<label for="exampleInputEmail1">Country</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	<div class="form-group">
+    	<label for="exampleInputEmail1">Name of Credit Union</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	<div class="form-group">
+    	<label for="exampleInputEmail1">Address</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	  	<div class="form-group">
+    	<label for="exampleInputEmail1">City</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	<div class="form-group">
+    	<label for="exampleInputEmail1">Date of Establishment</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	  	<div class="form-group">
+    	<label for="exampleInputEmail1">Contact Person Name</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	  	<div class="form-group">
+    	<label for="exampleInputEmail1">Contact Person Position</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	  	<div class="form-group">
+    	<label for="exampleInputEmail1">Phone No.</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	<div class="form-group">
+    	<label for="exampleInputEmail1">Fax</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  	<div class="form-group">
+    	<label for="exampleInputEmail1">Email Address</label>
+    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+  	</div>
+  </div>
+  <div class="tab-pane" id="operations">
+  	 <div class="span7">
+          <legend>Operational Area</legend>
+           <div class="controls controls-row">
+             <input type="text" class='span1' placeholder='Urban' name="urban" />
+             <input type="text" class='span2' placeholder='Rural' name="rural" />
+             <input type="text" class='span3' placeholder='Industry' name="industry" />
+             <input type="text" class='span4' placeholder='Mixed' name="mixed" />
+           </div>
+        </div>
+       <div class="span7">
+          <legend>No of Employees</legend>
+           <div class="controls controls-row">
+             <input type="text" class='span1' placeholder='Male' name="male" />
+             <input type="text" class='span2' placeholder='Female' name="female" />
+           </div>
+        </div>
+  </div>
+  <div class="tab-pane" id="area_gender">
+  		<table>
+  			<thead>
+  				<tr>
+	  				<th rowspan='2'>Operational Areas of Credit Union</th>
+	  				<th rowspan='2'>Number of Members</th>
+	  				<th rowspan='2'>Male</th>
+	  				<th rowspan='2'>Female</th>
+	  				<th colspan='5'>Individual Membership Range</th>
+  				</tr>
+  				<tr>
+  				<th></th>
+  				<th></th>
+  				<th></th>
+  				<th></th>
+  				<th></th>
+  				</tr>
+  			</thead>
+  			<tbody></tbody>
+  		</table>
+  </div>
+  <div class="tab-pane" id="area_market">...</div>
+  <div class="tab-pane" id="service">...</div>
+  <div class="tab-pane" id="assets">...</div>
+</div>
+          
+ 
           <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber5" cellpadding="0">
             <tr>
               <td width="100%" colspan="2">
