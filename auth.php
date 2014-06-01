@@ -102,6 +102,54 @@ $app->post('/adduser', function () use ($app, $smarty) {
 $app->group("/member", function () use ($app, $smarty) {
 	
 	$app->get("/detail", function () use ($app, $smarty) {
+		
+		$db = getDbHandler();
+		
+		$sql = "SELECT area_id FROM pu_operations_area WHERE primary_union_id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+		
+		$oparea = array();
+		$area_ids = $sth->fetchAll();
+		foreach ($area_ids as $id) {
+			$oparea[] = $id['area_id'];
+		}
+		
+		$smarty->assign('opareas', $oparea);
+		
+		$sql = "SELECT id, name FROM area ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		
+		$areast = $sth->fetchAll();
+		$areas = array();
+		
+		foreach ($areast as $a) {
+			$areas[$a['id']] = $a['name'];
+		}
+		
+		$smarty->assign('areas', $areas);
+		
+		$sql = "SELECT b.name, bg.name AS group_name, bsg.name AS subgroup_name "
+				. "FROM balancesheet AS b "
+				. "JOIN balancesheet_group AS bg ON bg.id = b.group_id "
+				. "JOIN balancesheet_sub_group AS bsg ON bsg.id = b.sub_group_id "
+				. " ORDER BY bg.id, bsg.id ";
+		
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$bslines = $sth->fetchAll();
+		$smarty->assign('bslines', $bslines);
+		$smarty->assign('group', "");
+		$smarty->assign('subgroup', "");
+		
+		$sql = "SELECT id, name FROM asset_group ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$assetgroups = $sth->fetchAll();
+		
+		$smarty->assign('assetgroups', $assetgroups);
+		
 		$smarty->display('member/detail.tpl');
 	});
 	
@@ -136,8 +184,54 @@ $app->group("/member", function () use ($app, $smarty) {
 		
 		$smarty->assign('areas', $areas);
 		
+		$sql = "SELECT males, females FROM pu_operations WHERE primary_union_id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+		
+		$operations = $sth->fetch();
+		$smarty->assign('operations', $operations);
+			
+		$sql = "SELECT area_id FROM pu_operations_area WHERE primary_union_id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+		
+		$oparea = array();
+		$area_ids = $sth->fetchAll();
+		foreach ($area_ids as $id) {
+			$oparea[] = $id['area_id'];
+		}
+		
+		$smarty->assign('oparea', $oparea);
+		
 		$smarty->display('member/operations.tpl');
 	});
+	
+	$app->post("/operations", function () use ($app, $smarty) {
+		$db = getDbHandler();
+		
+		$sql = "DELETE FROM pu_operations WHERE primary_union_id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+		
+		$sql = "DELETE FROM pu_operations_area WHERE primary_union_id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+		
+		$sql = "INSERT INTO pu_operations (primary_union_id, males, females) VALUES (:id, :male, :female) ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_SESSION['user_primary_union_id'], ':male' => $_POST['male'], ':female' => $_POST['female']));
+		
+		foreach ($_POST['area'] as $area_id) {
+			$sql = "INSERT INTO pu_operations_area (primary_union_id, area_id) VALUES (:id, :area_id) ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':id' => $_SESSION['user_primary_union_id'], ':area_id' => $area_id));
+		}
+		
+		setSuccessMessage('Operations Area and Employees Updated');
+		
+		$app->redirect(APP_PATH . '/member/operations');
+	});
+	
 	$app->get("/datasheet", function () use ($app, $smarty) {
 		$smarty->display('member/datasheet.tpl');
 	});

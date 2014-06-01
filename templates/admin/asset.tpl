@@ -6,7 +6,7 @@
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/asset'>
   <div class="form-group">
     <label for="exampleInputEmail1">Asset Group</label>
-    <input type="text" name='name' class="form-control" id="exampleInputEmail1" placeholder="Enter Servie Area">
+    <input type="text" name='name' class="form-control" id="exampleInputEmail1" placeholder="Enter Asset Group">
   </div>
   <button type="submit" class="btn btn-default">Add Asset Group</button>
 </form>

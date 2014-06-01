@@ -7,6 +7,7 @@
   <li><a href="#area_market" data-toggle="tab">Area, Market &amp; Age</a></li>
   <li><a href="#service" data-toggle="tab">Less Member Service Distribution</a></li>
   <li><a href="#assets" data-toggle="tab">Assets</a></li>
+  <li><a href="#balancesheet" data-toggle="tab">Balance Sheet</a></li>
   <li><a href="#usage_services" data-toggle="tab">Usage of Services</a></li>
 </ul>
 
@@ -22,12 +23,14 @@
   				</tr>
   			</thead>
   			<tbody>
-  				<tr>
-  					<td>Urban</td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  				</tr>
+  				{foreach from=$opareas item=oparea}
+	  				<tr>
+	  					<td>{$areas[$oparea]}</td>
+	  					<td><input type='text' /></td>
+	  					<td><input type='text' /></td>
+	  					<td><input type='text' /></td>
+	  				</tr>
+  				{/foreach}
 				<tr>
   					<td>Total</td>
   					<td><input type='text' /></td>
@@ -56,8 +59,9 @@
   				</tr>
   			</thead>
   			<tbody>
+  				{foreach from=$opareas item=oparea}
   				<tr>
-  					<td>Urban</td>
+  					<td>{$areas[$oparea]}</td>
   					<td><input type='text' /></td>
   					<td><input type='text' /></td>
   					<td><input type='text' /></td>
@@ -67,28 +71,7 @@
   					<td><input type='text' /></td>
   					<td><input type='text' /></td>
   				</tr>
-  				  				<tr>
-  					<td>Rural</td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  				</tr>
-  				  				<tr>
-  					<td>Industry</td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  					<td><input type='text' /></td>
-  				</tr>
+				{/foreach}
 				<tr>
   					<td>Total</td>
   					<td><input type='text' /></td>
@@ -117,8 +100,9 @@
   				</tr>
   			</thead>
   			<tbody>
+  				{foreach from=$opareas item=oparea}
   				<tr>
-  					<td>Industrial</td>
+  					<td>{$areas[$oparea]}</td>
   					<td><input type='text' /></td>
   					<td><input type='text' /></td>
   					<td><input type='text' /></td>
@@ -126,6 +110,7 @@
   					<td><input type='text' /></td>
   					<td><input type='text' /></td>
   				</tr>
+  				{/foreach}
   				<tr>
   					<td>Total</td>
   					<td><input type='text' /></td>
@@ -135,37 +120,44 @@
   					<td><input type='text' /></td>
   					<td><input type='text' /></td>
   				</tr>
+  				
   			</tbody>
   		</table>
   </div>
   <div class="tab-pane" id="assets">
   		<div class="form-group">
     		<label for="exampleInputEmail1">Total Assets</label>
+    		{foreach from=$assetgroups item=assetgroup}
     		<div class="radio">
 			  <label>
-			    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-			    &lt; 100,000
+			    <input type="radio" name="optionsRadios" id="optionsRadios1" value="{$assetgroup.id}">
+			    {$assetgroup.name}
 			  </label>
 			</div>
-			<div class="radio">
-			  <label>
-			    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-			    100,101 - 500,000
-			  </label>
-			</div>
-			<div class="radio">
-			  <label>
-			    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-			    500,001 - 1,000,000
-			  </label>
-			</div>
-			<div class="radio">
-			  <label>
-			    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-			    1,000,000 &gt;
-			  </label>
-			</div>
+			{/foreach}
   		</div>
+  </div>
+  <div class="tab-pane" id="balancesheet">
+  		<table class="table">
+  			{foreach from=$bslines item=bsline}
+  				{if $group neq $bsline.group_name}
+  					{assign var=group value=$bsline.group_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  					</tr>
+  				{/if}
+  				{if $subgroup neq $bsline.subgroup_name}
+  					{assign var=subgroup value=$bsline.subgroup_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  					</tr>
+  				{/if}
+  					<tr>
+  						<td style='text-align: left; padding-left: 60px;'>{$bsline.name}</td>
+  						<td><input type='text' /></td>
+  					</tr>
+  			{/foreach}
+  		</table>
   </div>
   <div class="tab-pane" id="usage_services">
   		<table class="table">
