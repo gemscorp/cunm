@@ -47,5 +47,7 @@
 			<li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/" class="nav">Home</a></li>
 		{/if}
 	</ul>
-	<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">{$smarty.session.user_email}</a></p>
+	{if isset($smarty.session.user_id)}
+		<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">{$smarty.session.user_email}</a></p>
+	{/if}
 </nav>
