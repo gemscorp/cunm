@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="utf8">
 	<head>
-	<title>Send Message Statistics</title>
+	<title>CUNM</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<!-- Bootstrap -->
 	<base href='{$smarty.const.BASE_URL}'>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" media="screen">
+	<link href="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/css/datepicker.css" rel="stylesheet">
+	
+	
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -19,12 +22,12 @@
 	    }
 	</script>
 	
-	<script src="js/js/highcharts.js"></script>
-	<script src="js/js/modules/data.js"></script>
-	<script src="js/js/modules/exporting.js"></script>
+	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/js/highcharts.js"></script>
+	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/js/modules/data.js"></script>
+	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/js/modules/exporting.js"></script>
 	
-	<script src="js/jquery.stickytableheaders.min.js"></script>
-	
+	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/jquery.stickytableheaders.min.js"></script>
+	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/bootstrap-datepicker.js"></script>
 	<style>
 	
 	th
