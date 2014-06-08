@@ -419,7 +419,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 	
 		$db = getDbHandler();
 		
-		$sql = "SELECT f.id, f.name, c.name AS country_name, COUNT(*) AS pucount FROM federation AS f JOIN country AS c ON c.id = f.country_id JOIN primary_union AS pu ON pu.federation_id = f.id GROUP BY f.id ORDER BY f.name ";
+		$sql = "SELECT f.id, f.name, c.name AS country_name, COUNT(*) AS pucount FROM federation AS f JOIN country AS c ON c.id = f.country_id LEFT JOIN primary_union AS pu ON pu.federation_id = f.id GROUP BY f.id ORDER BY f.name ";
 		$sth = $db->prepare($sql);
 		$sth->execute();
 		$federations = $sth->fetchAll();
