@@ -131,6 +131,26 @@
 				}
 			});
 		});
+		$("#country_id").change(function (e) {
+			e.preventDefault();
+			var country_id = $(this).val();
+			
+			$.ajax({
+				url: 'http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/ajax/federations/' + country_id,
+				type: 'get',
+				dataType: 'json',
+				success: function (json) {
+					$("#federation_id").html("");
+					$.each(json.federations, function (i,v) {
+						$("#federation_id").append('<option value="' + v.id + '">' + v.name + '</option>');
+					});
+				},
+				error: function (error) {
+				
+				}
+			});
+		
+		});
 	});
 </script>
 

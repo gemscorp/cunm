@@ -3,7 +3,7 @@
 
 {include file='common/alert.tpl'}
 
-<form class="form-inline">
+<form class="form-inline" method='post'>
 <fieldset>
 
 <!-- Form Name -->
@@ -13,6 +13,7 @@
 <div class="control-group">
   <label class="control-label" for="country_id">Country</label>
     <select id="country_id" name="country_id" class="input-xlarge">
+    	<option value='-1'>All</option>
     	{foreach from=$countries item=country}
     		<option value='{$country.id}'>{$country.name}</option>
     	{/foreach}
@@ -40,10 +41,20 @@
 		{foreach from=$users item=user}
 			<tr>
 				<td>{$user.email}</td>
-				<td>{$user.level}</td>
-				<td>{$user.federation_id}</td>
-				<td>{$user.primary_union_id}</td>
-				<td>{$user.country_id}</td>
+				<td>
+					{if $user.level eq "0"}
+						ACCU ADMIN
+					{elseif $user.level eq "1"}
+						FEDERATION ADMIN
+					{elseif $user.level eq "2"}
+						PRIMARY CU USER
+					{elseif $user.level eq "3"}
+						REPORT USER
+					{/if}
+				</td>
+				<td>{$user.fedname}</td>
+				<td>{$user.puname}</td>
+				<td>{$user.country_name}</td>
 			</tr>
 		{/foreach}
 		</tbody>

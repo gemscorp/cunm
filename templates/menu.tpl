@@ -27,14 +27,14 @@
         	<li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/servicearea">Service Area</a></li>
+		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/servicearea">Operational Area</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/asset">Asset Groups</a></li>
-		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/service">Service</a></li>
+		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/service">Products and Services</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/balancesheet">Balance Sheet</a></li>
 		            <li class="divider"></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/country">Country List</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/federation">Federation List</a></li>
-		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/users">Users</a></li>
+		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/users">User List</a></li>
 		          </ul>
         	</li>
         	{/if}

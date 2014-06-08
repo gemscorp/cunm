@@ -312,6 +312,21 @@ $app->group("/ajax", function () use ($app, $smarty) {
 		echo json_encode($json);
 	
 	});
+	
+	$app->get("/federations/:country_id", function ($country_id) use ($app, $smarty) {
+		$db = getDbHandler();
+	
+		$sql = "SELECT id, name FROM federation WHERE country_id = :country_id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':country_id' => $country_id));
+	
+		$json['federations'] = $sth->fetchAll();
+	
+		$app->contentType('application/json');
+		echo json_encode($json);
+	
+	});
+	
 });
 
 $app->group("/admin", function () use ($app, $smarty) {
@@ -377,7 +392,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 	$app->get("/country", function () use ($app, $smarty) {
 	
 		$db = getDbHandler();
-		$sql = "SELECT id, name FROM country ";
+		$sql = "SELECT c.id, c.name, COUNT(*) AS fedcount FROM country AS c JOIN federation AS f ON f.country_id = c.id GROUP BY f.country_id ORDER BY c.name ";
 		$sth = $db->prepare($sql);
 		$sth->execute();
 		$countries = $sth->fetchAll();
@@ -404,7 +419,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 	
 		$db = getDbHandler();
 		
-		$sql = "SELECT f.id, f.name, c.name AS country_name FROM federation AS f JOIN country AS c ON c.id = f.country_id ";
+		$sql = "SELECT f.id, f.name, c.name AS country_name, COUNT(*) AS pucount FROM federation AS f JOIN country AS c ON c.id = f.country_id JOIN primary_union AS pu ON pu.federation_id = f.id GROUP BY f.id ORDER BY f.name ";
 		$sth = $db->prepare($sql);
 		$sth->execute();
 		$federations = $sth->fetchAll();
@@ -517,12 +532,57 @@ $app->group("/admin", function () use ($app, $smarty) {
 	$app->get("/users", function () use ($app, $smarty) {
 		
 		$db = getDbHandler();
-		$sql = "SELECT email, level, federation_id, primary_union_id, country_id "
-		     . "FROM user ";
+		$sql = "SELECT u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
+				. "FROM user AS u "
+				. "JOIN federation AS f ON f.id = u.federation_id "
+				. "JOIN primary_union AS pu ON pu.id = u.primary_union_id "
+				. "JOIN country AS c ON c.id = u.country_id "
+				. " WHERE 1=1 ";
 		
 		if ($_SESSION['user_level'] == 1) {
-			$sql .= " WHERE federation_id = :federation_id ";
+			$sql .= " AND federation_id = :federation_id ";
 		} 
+		
+		$sth = $db->prepare($sql);
+		
+		if ($_SESSION['user_level'] == 0) {
+			$sth->execute();
+		} else {
+			$sth->execute(array(':federation_id' => $_SESSION['user_federation_id']));
+		}
+		
+		$users = $sth->fetchAll();
+		
+		$smarty->assign('users', $users);
+		
+		$sql = "SELECT id, name FROM country ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$countries = $sth->fetchAll();
+		
+		$smarty->assign('countries', $countries);
+		
+		$smarty->display('admin/users.tpl');
+	});
+	
+	$app->post('/users', function () use ($app, $smarty) {
+		$db = getDbHandler();
+		$sql = "SELECT u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
+				. "FROM user AS u "
+				. "JOIN federation AS f ON f.id = u.federation_id "
+				. "JOIN primary_union AS pu ON pu.id = u.primary_union_id "
+				. "JOIN country AS c ON c.id = u.country_id "
+				. " WHERE 1=1 ";
+		
+		if ($_SESSION['user_level'] == 1) {
+			$sql .= " AND u.federation_id = :federation_id ";
+		}
+		
+		if (isset($_POST['country_id']) && $_POST['country_id'] != -1) {
+			$sql .= " AND u.country_id = " . $_POST['country_id'] . " ";
+		}
+		
+		$sql .= " ORDER BY u.email";
 		
 		$sth = $db->prepare($sql);
 		
@@ -550,7 +610,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 
 $app->get("/logout", function () use ($app, $smarty) {
 	session_destroy();
-	$app->redirect(APP_PATH);
+	$app->redirect(APP_PATH . "/");
 });
 
 

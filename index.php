@@ -96,7 +96,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $app->notFound(function () use ($app) {
-	$app->redirect(APP_PATH);
+	$app->redirect(APP_PATH . "/");
 });
 
 $app->run();

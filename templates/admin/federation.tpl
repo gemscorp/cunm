@@ -19,13 +19,14 @@
   <button type="submit" class="btn btn-default">Add Federation</button>
 </form>
 
-<h3>Countries</h3>
+<h3>Federations</h3>
 
 <table id='report' class='table table-striped table-bordered'>
 		<thead>
 		<tr>
 			<th>Country</th>
 			<th>Federation</th>
+			<th>Primary CU Count</th>
 		</tr>
 		</thead>
 		
@@ -34,6 +35,7 @@
 			<tr>
 				<td>{$federation.country_name}</td>
 				<td>{$federation.name}</td>
+				<td>{$federation.pucount}</td>
 			</tr>
 		{/foreach}
 		</tbody>
