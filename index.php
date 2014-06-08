@@ -6,8 +6,6 @@ require_once 'vendor/autoload.php';
 require_once('db.php');
 require_once('smarty3/Smarty.class.php');
 
-define('APP_PATH', '/cunm/cunm');
-
 date_default_timezone_set('Asia/Bangkok');
 
 $app = new \Slim\Slim();

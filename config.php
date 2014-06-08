@@ -21,3 +21,5 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('error_log', '/var/log/php.log');
 ini_set('memory_limit', '-1');
+
+define('APP_PATH', '/cunm/cunm');
