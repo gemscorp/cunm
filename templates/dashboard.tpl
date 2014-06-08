@@ -6,7 +6,7 @@
 
 <div class='well'>Federation Administrators should manage the list of primary credit unions under the federation</div> 
 
-<h3>Highlits</h3>
+<h3>Highlights</h3>
 
 
 {include file='footer.tpl'}

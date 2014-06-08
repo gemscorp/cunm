@@ -16,7 +16,6 @@
     <input type="password" name='password' class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Login</button>
-  <button type="button" class="btn btn-default" id='register'>Register</button>
 </form>
 
 <script type='text/javascript'>
