@@ -540,7 +540,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 				. " WHERE 1=1 ";
 		
 		if ($_SESSION['user_level'] == 1) {
-			$sql .= " AND federation_id = :federation_id ";
+			$sql .= " AND u.federation_id = :federation_id ";
 		} 
 		
 		$sth = $db->prepare($sql);
