@@ -66,7 +66,7 @@
   				{foreach from=$opareas item=oparea}
   				<tr>
   					<td>{$areas[$oparea]}</td>
-  					<td><input class='total' data-sum='ttotal' data-group='total' type='text' name="area[{$oparea}][total]" value="{$gender_groups[$oparea].total}" /></td>
+  					<td><input class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][totalx]" value="{$gender_groups[$oparea].total}" /></td>
   					<td><input class='farmer' data-sum='tfarmer' data-group='farmer' type='text' name="area[{$oparea}][farmer]" value="{$gender_groups[$oparea].farmer}" /></td>
   					<td><input class='employee' data-sum='temployee' data-group='employee' type='text' name="area[{$oparea}][employee]" value="{$gender_groups[$oparea].employee}" /></td>
   					<td><input class='microb' data-sum='tmicrob' data-group='microb' type='text' name="area[{$oparea}][microb]" value="{$gender_groups[$oparea].microb}" /></td>
@@ -78,7 +78,7 @@
 				{/foreach}
 				<tr>
   					<td>Total</td>
-  					<td><input id='ttotal' type='text' value='{$gender_total.total}' /></td>
+  					<td><input id='ttotalx' type='text' value='{$gender_total.total}' /></td>
   					<td><input id='tfarmer' type='text' value='{$gender_total.farmer}' /></td>
   					<td><input id='temployee' type='text' value='{$gender_total.employee}' /></td>
   					<td><input id='tmicrob' type='text' value='{$gender_total.microb}' /></td>
@@ -199,7 +199,7 @@
 <script type='text/javascript'>
 
 	$(function () {
-		$( ".total, .male, .female, .farmer, .employee, .microb, .group1, .group2, .group3, .group4, .less_total, .less_male, .less_female, .less_savings, .less_outstand, .less_totalg " ).change(function (e) {
+		$( ".total, .totalx, .male, .female, .farmer, .employee, .microb, .group1, .group2, .group3, .group4, .less_total, .less_male, .less_female, .less_savings, .less_outstand, .less_totalg " ).change(function (e) {
 			e.preventDefault();
 			var total = 0;
 			var sum_col = $(this).data('sum');
