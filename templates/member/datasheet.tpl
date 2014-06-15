@@ -1,10 +1,16 @@
 {include file='header.tpl'}
 <h3>Primary Credit Union - Data Sheet</h3>
 
-<div class="alert alert-danger">Please set Operational Areas before creating datasheet</div>
+{include file='common/alert.tpl'}
 
-Data Sheet Date: <input type="text" class="datepicker" value="" id="dp1"> 
-<button id='createsheet' type="button" class="btn btn-success">Create New Datasheet</button>
+{if $op_area_set eq 0}
+	<div class="alert alert-danger">Please set a href='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/operations'>Operational Areas</a> before creating datasheet</div>
+{/if}
+
+<form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/datasheet'>
+Data Sheet Date: <input type="text" class="datepicker" value="" id="date" name='date'> 
+<button id='createsheet' type="submit" class="btn btn-success">Create New Datasheet</button>
+</form>
 
 <hr>
 
@@ -20,33 +26,14 @@ Data Sheet Date: <input type="text" class="datepicker" value="" id="dp1">
 		</thead>
 		
 		<tbody>
-		
+		{foreach from=$ds item=d}
 		<tr>
-			<td>2014-01-01</td>
-			<td>2333</td>
-			<td><a href='#'>View</a></td>
+			<td>{$d.date}</td>
+			<td>{$d.total_members}</td>
+			<td><a href='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail/{$d.id}'>View</a></td>
 		</tr>
-		<tr>
-			<td>2014-02-01</td>
-			<td>2463</td>
-			<td><a href='#'>View</a></td>
-		</tr>
+		{/foreach}
 		</tbody>
 	</table>
-
-<script type='text/javascript'>
-
-$(function () {
-	$('.datepicker').datepicker( { format: 'yyyy-mm-dd' } ).on('changeDate', function(ev){
-		console.log('here');
-		$(this).datepicker('hide');
-  	});
-  	
-  	$('#createsheet').click(function (e) {
-  		window.location.href = 'http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail';
-  	});
-});
-
-</script>
 
 {include file='footer.tpl'}

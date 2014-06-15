@@ -8,7 +8,6 @@
 	<base href='{$smarty.const.BASE_URL}'>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" media="screen">
-	<link href="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/css/datepicker.css" rel="stylesheet">
 	
 	
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -27,7 +26,6 @@
 	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/js/modules/exporting.js"></script>
 	
 	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/jquery.stickytableheaders.min.js"></script>
-	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/bootstrap-datepicker.js"></script>
 	<style>
 	
 	th
