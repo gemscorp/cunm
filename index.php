@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 require_once('config.php');
 require_once 'vendor/autoload.php';
 require_once('db.php');
@@ -26,35 +27,12 @@ $app->get('/ping', function () use ($app, $smarty) {
 	echo "pong";
 });
 
-$app->get('/register', function () use ($app, $smarty) {
-	
-	$error = "";
-	
-	if (isset($_SESSION['error'])) {
-		$error = $_SESSION['error'];
-		unset($_SESSION['error']);
-	}
-	
-	$smarty->assign('error', $error);
-	
-	$smarty->display('register.tpl');
-});
-
 $app->get('/', function () use ($app, $smarty) {
 	
 	if (isset($_SESSION['user_id'])) {
 		$app->redirect(APP_PATH . '/dashboard');
 		return;
 	}
-	
-	$error = "";
-	
-	if (isset($_SESSION['error'])) {
-		$error = $_SESSION['error'];
-		unset($_SESSION['error']);
-	}
-	
-	$smarty->assign('error', $error);
 	
 	$smarty->display('home.tpl');
 });
@@ -69,9 +47,8 @@ $app->post('/login', function () use ($app, $smarty) {
 	
 	if ($sth->rowCount() == 0) {
 		
-		$_SESSION['error'] = 'Invalid Username or Password';
-		
-		$app->redirect('.');
+		setErrorMessage("Invalid Username or Password");
+		$app->redirect(APP_PATH . '/');
 		return;
 	}
 	
@@ -128,6 +105,13 @@ function setErrorMessage($message)
 function setSessionMessage($key, $value)
 {
 	$_SESSION[$key] = $value;
+}
+
+function clearSessionMessages(){
+	$labels = array('error_message', 'success_message');
+	foreach ($labels as $l) {
+		if (isset($_SESSION[$l])) unset($_SESSION[$l]);
+	}
 }
 
 function getSessionMessage($key)

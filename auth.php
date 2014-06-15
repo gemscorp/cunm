@@ -21,12 +21,13 @@ $app->post("/password", function () use ($app, $smarty) {
 	$sth->execute(array(':password_new' => $_POST['new_password'], ':id' => $_SESSION['user_id'], ':password_current' => $_POST['current_password']));
 	
 	if ($sth->rowCount() == 0) {
-		setErrorMessage("Password Not Saved, Maybe current password not match");	
+		setErrorMessage("Password Not Saved, Maybe current password not match");
 	} else {
 		setSuccessMessage("Password changed");
 	}
 	
-	$app->redirect(APP_PATH . '/password');
+	$app->redirect(APP_PATH . '/password', 301);
+	return;
 });
 
 $app->get("/adduser", function () use ($app, $smarty) {
@@ -56,8 +57,6 @@ $app->get("/adduser", function () use ($app, $smarty) {
 		$smarty->assign('primarycus', $primarycus);
 		
 	}
-	
-	
 	$smarty->display('adduser.tpl');	
 });
 
@@ -580,12 +579,6 @@ $app->group("/ajax", function () use ($app, $smarty) {
 });
 
 $app->group("/admin", function () use ($app, $smarty) {
-
-	$error = getErrorMessage();
-	$smarty->assign('error', $error);
-	
-	$success = getSuccessMessage();
-	$smarty->assign('success', $success);
 	
 	$app->get("/servicearea", function () use ($app, $smarty) {
 

@@ -2,9 +2,7 @@
 
 <h2> ACCU CUNM </h2>
 
-{if $error neq ""}
-	<div class="alert alert-danger">{$error}</div>
-{/if}
+{include file='common/alert.tpl'}
 
 <form role="form" method='post' action='login'>
   <div class="form-group">
