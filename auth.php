@@ -325,7 +325,7 @@ $app->group("/member", function () use ($app, $smarty) {
 		$sth = $db->prepare($sql);
 		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
 		
-		$secondary = array_flip(array('establishment', 'address', 'city', 'contact_person', 'position', 'phone', 'fax', 'email'));
+		$secondary = array_fill_keys(array('establishment', 'address', 'city', 'contact_person', 'position', 'phone', 'fax', 'email'), '');
 		
 		if ($sth->rowCount() == 1) {
 			$secondary = $sth->fetch();
