@@ -295,7 +295,7 @@ $app->group("/member", function () use ($app, $smarty) {
 					':s_id' => $s_id, ':total' => $val['total'], ':male' => $val['male'], ':female' => $val['female'], ':youth' => $val['youth'], ':none_member' => $val['none_member']));			
 		}
 		
-		$asset_group_id = $_POST['optionsRadios'];
+		$asset_group_id = isset($_POST['optionsRadios']) ? $_POST['optionsRadios'] : 0;
 		
 		$sql = "UPDATE pu_datasheet SET asset_group_id = :asset_id, total_members = :total_members WHERE primary_union_id = :pid AND id = :dsid ";
 		$sth = $db->prepare($sql);
