@@ -214,12 +214,36 @@ $app->group("/member", function () use ($app, $smarty) {
 		
 		$smarty->assign('serval', $serval);
 		
+		$sql = "SELECT * FROM pu_datasheet WHERE id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $idx));
+				
+		$smarty->assign('ds', $sth->fetch());
+		
 		$smarty->display('member/detail.tpl');
 	});
 	
 	$app->post("/detail", function () use ($app, $smarty) {
 		
 		$db = getDbHandler();
+		
+		$sql = "SELECT * FROM pu_datasheet WHERE id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_POST['dsid']));
+		
+		$ds = $sth->fetch();
+		
+		if ($ds['saved'] == 0) {
+			$sql = "UPDATE pu_datasheet SET saved = 1 WHERE id = :id ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':id' => $_POST['dsid']));
+		}
+		
+		if (isset($_POST['lock'])) {
+			$sql = "UPDATE pu_datasheet SET locked = 1 WHERE id = :id ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':id' => $_POST['dsid']));
+		}
 		
 		$sql = "DELETE FROM pu_gender WHERE primary_union_id = :pid AND pu_datasheet_id = :dsid ";
 		$sth = $db->prepare($sql);
@@ -320,11 +344,12 @@ $app->group("/member", function () use ($app, $smarty) {
 		
 		$primarycu = $sth->fetch();
 		
-		$sql = "SELECT establishment, address, city, contact_person, position, phone, fax, email  FROM pu_profile WHERE primary_union_id = :id ";
+		$sql = "SELECT primary_union_id, establishment, address, city, contact_person, position, phone, fax, email, saved, locked  FROM pu_profile WHERE primary_union_id = :id ";
 		$sth = $db->prepare($sql);
 		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
 		
 		$secondary = array_fill_keys(array('establishment', 'address', 'city', 'contact_person', 'position', 'phone', 'fax', 'email'), '');
+		$secondary = array_merge($secondary, array('primary_union_id' => 0, 'saved' => 0, 'locked' => 0));
 		
 		if ($sth->rowCount() == 1) {
 			$secondary = $sth->fetch();
@@ -346,10 +371,13 @@ $app->group("/member", function () use ($app, $smarty) {
 		$sth = $db->prepare($sql);
 		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
 		
+		$lock = 0;
+		if (isset($_POST['lock'])) $lock = 1;
+		
 		if ($sth->rowCount() == 0) {
 			
-			$sql = "INSERT INTO pu_profile (primary_union_id, establishment, address, city, contact_person, position, phone, fax, email) "
-				 . "VALUES (:pid, :doe, :address, :city, :contact_person, :position, :phone, :fax, :email) ";
+			$sql = "INSERT INTO pu_profile (primary_union_id, establishment, address, city, contact_person, position, phone, fax, email, saved) "
+				 . "VALUES (:pid, :doe, :address, :city, :contact_person, :position, :phone, :fax, :email, 1) ";
 			
 			$sth = $db->prepare($sql);
 			$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':doe' => $_POST['doe'], ':address' => $_POST['address'], 
@@ -362,12 +390,12 @@ $app->group("/member", function () use ($app, $smarty) {
 			$row = $sth->fetch();
 			
 			$sql = "UPDATE pu_profile SET establishment = :doe, address = :address, city = :city, contact_person = :contact_person, position = :position, 
-						phone = :phone, fax = :fax, email = :email "
+						phone = :phone, fax = :fax, email = :email, locked = :lock, saved = 1 "
 				. "WHERE id = :id ";
 			$sth = $db->prepare($sql);
 			$sth->execute(array(':doe' => $_POST['doe'], ':address' => $_POST['address'], 
 				':city' => $_POST['city'], ':contact_person' => $_POST['contact_person'], ':position' => $_POST['position'], 
-				':phone' => $_POST['phone'], ':fax' => $_POST['fax'], ':email' => $_POST['email'],
+				':phone' => $_POST['phone'], ':fax' => $_POST['fax'], ':email' => $_POST['email'], ':lock' => $lock,
 				':id' => $row['id']));
 			
 		}
@@ -518,6 +546,34 @@ $app->group("/federation", function () use ($app, $smarty) {
 
 $app->group("/ajax", function () use ($app, $smarty) {
 	
+	$app->post('/unlock/:id', function ($id) use ($app) {
+		
+		$db = getDbHandler();
+		
+		$sql = "INSERT INTO unlock_request (federation_id, primary_union_id, pu_datasheet_id, cdate, comment) "
+		     . "VALUES (:fid, :pid, :id, NOW(), :comment) ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':fid' => $_SESSION['user_federation_id'], ':pid' => $_SESSION['user_primary_union_id'], ':id' => $id, ':comment' => $_POST['comment']));
+		
+		$app->contentType('application/json');
+		echo json_encode(array());
+		
+	});
+	
+	$app->post('/unlockp/:id', function ($id) use ($app) {
+	
+		$db = getDbHandler();
+	
+		$sql = "INSERT INTO unlock_request (federation_id, primary_union_id, pu_profile_id, cdate, comment) "
+			 . " VALUES (:fid, :pid, :id, NOW(), :comment) ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':fid' => $_SESSION['user_federation_id'], ':pid' => $_SESSION['user_primary_union_id'], ':id' => $id, ':comment' => $_POST['comment']));
+		
+		$app->contentType('application/json');
+		echo json_encode(array());
+	
+	});
+	
 	$app->post("/bsgroup", function () use ($app, $smarty) {
 		$db = getDbHandler();
 		
@@ -579,6 +635,56 @@ $app->group("/ajax", function () use ($app, $smarty) {
 });
 
 $app->group("/admin", function () use ($app, $smarty) {
+	
+	
+	$app->get("/unlock", function () use ($app, $smarty) {
+		
+		$db = getDbHandler();
+		$sql = "SELECT ur.*, pu.name AS pu_name, IF(ur.pu_datasheet_id IS NULL, 'Profile', 'Datasheet') AS type FROM unlock_request AS ur "
+			 . "LEFT JOIN primary_union AS pu ON ur.primary_union_id = pu.id "
+			 . "WHERE unlock_date IS NULL ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$reqs = $sth->fetchAll();
+		
+		$smarty->assign('reqs', $reqs);
+		
+		$smarty->display('admin/unlocks.tpl');
+		
+	});
+	
+	$app->post('/unlock', function () use ($app) {
+		
+		$db = getDbHandler();
+		
+		$sql = "SELECT * FROM unlock_request WHERE id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_POST['id']));
+		
+		$req = $sth->fetch();
+		
+		if ($req['pu_profile_id'] !== null) {
+			
+			$sql = "UPDATE pu_profile SET locked = 0 WHERE id = :id ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':id' => $req['pu_profile_id']));
+			
+		} else if ($req['pu_datasheet_id'] !== null) {
+
+			$sql = "UPDATE pu_datasheet SET locked = 0 WHERE id = :id ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':id' => $req['pu_datasheet_id']));
+			
+		}
+		
+		$sql = "UPDATE unlock_request SET unlock_date = NOW() WHERE id = :id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':id' => $_POST['id']));
+		
+		$app->contentType('application/json');
+		echo json_encode(array());
+		
+	});
 	
 	$app->get("/servicearea", function () use ($app, $smarty) {
 

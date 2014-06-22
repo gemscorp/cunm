@@ -20,6 +20,8 @@
 		          <ul class="dropdown-menu">
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/federation/primarycu">Primary Credit Unions</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/users">Users</a></li>
+		            <li class="divider"></li>
+		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/unlock">Unlock Requests</a></li>
 		          </ul>
         	</li>
         	{/if}

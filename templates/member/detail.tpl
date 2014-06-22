@@ -99,8 +99,8 @@
 	  				<th>Female</th>
 	  				<th>Male</th>
 	  				<th>Total Savings</th>
-	  				<th>Loan Outstanding</th>
 	  				<th>Total Loans</th>
+	  				<th>Loan Outstanding</th>
   				</tr>
   			</thead>
   			<tbody>
@@ -111,8 +111,8 @@
   					<td><input class='less_male' data-sum='tless_male' data-group='less_male' type='text' name="area[{$oparea}][less_male]" value="{$gender_groups[$oparea].less_male}" /></td>
   					<td><input class='less_female' data-sum='tless_female' data-group='less_female' type='text' name="area[{$oparea}][less_female]" value="{$gender_groups[$oparea].less_female}" /></td>
   					<td><input class='less_savings' data-sum='tless_savings' data-group='less_savings' type='text' name="area[{$oparea}][less_savings]" value="{$gender_groups[$oparea].less_savings}" /></td>
-  					<td><input class='less_outstand' data-sum='tless_outstand' data-group='less_outstand' type='text' name="area[{$oparea}][less_outstand]" value="{$gender_groups[$oparea].less_outstand}" /></td>
   					<td><input class='less_totalg' data-sum='tless_totalg' data-group='less_totalg' type='text' name="area[{$oparea}][less_totalg]" value="{$gender_groups[$oparea].less_totalg}" /></td>
+  					<td><input class='less_outstand' data-sum='tless_outstand' data-group='less_outstand' type='text' name="area[{$oparea}][less_outstand]" value="{$gender_groups[$oparea].less_outstand}" /></td>
   				</tr>
   				{/foreach}
   				<tr>
@@ -121,8 +121,8 @@
   					<td><input id='tless_male' type='text' value='{$gender_total.less_male}' /></td>
   					<td><input id='tless_female' type='text' value='{$gender_total.less_female}' /></td>
   					<td><input id='tless_savings' type='text' value='{$gender_total.less_savings}' /></td>
-  					<td><input id='tless_outstand' type='text' value='{$gender_total.less_outstand}' /></td>
   					<td><input id='tless_totalg' type='text' value='{$gender_total.less_totalg}' /></td>
+  					<td><input id='tless_outstand' type='text' value='{$gender_total.less_outstand}' /></td>
   				</tr>
   				
   			</tbody>
@@ -192,8 +192,16 @@
   		</table>
   </div>
 </div>
-	<button type="submit" name='save' class="btn btn-default">Save</button>
-	<button type="submit" name='lock' class="btn btn-default">Save and Lock</button>
+	{if $ds.saved eq "0"}
+		<button type="submit" name='save' class="btn btn-default">Save</button>
+	{else}
+		{if $ds.locked eq "0"}
+			<button type="submit" name='save' class="btn btn-default">Save</button>
+			<button type="submit" name='lock' class="btn btn-default">Finalize</button>
+		{else}
+			<button type="button" id='unlock' name='unlock' class="btn btn-default">Unlock</button>
+		{/if}
+	{/if}
 </form>
 
 <script type='text/javascript'>
@@ -209,8 +217,47 @@
 			});
 			$("#" + sum_col).val(total);
 		});
+		
+		$( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Unlock Request": function() {
+          
+          	var comment = $("#reason").val();
+          	var that = $(this);
+          
+          	$.post("http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/ajax/unlock/{$ds.id}", { comment: comment } , function () {
+          		that.dialog( "close" );
+          	});
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+		$("#reason").val('');
+      }
+    });
+		
+		$("#unlock").click(function (e) {
+			e.preventDefault();
+			$( "#dialog-form" ).dialog( "open" );
+		});
 	});
 </script>
 
+<div id="dialog-form" title="Unlock Request" style='display: none;'>
+  <p class="validateTips">Request to unlock Datasheet</p>
+ 
+  <form>
+  <fieldset>
+    <label for="reason">Reason</label>
+    <textarea id='reason' name='reason' cols='40' rows='20'></textarea>
+  </fieldset>
+  </form>
+</div>
 
 {include file='footer.tpl'}
