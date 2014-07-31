@@ -10,6 +10,7 @@
   <li><a href="#service" data-toggle="tab">Have Less Member Service Distribution</a></li>
   <li><a href="#assets" data-toggle="tab">Assets</a></li>
   <li><a href="#balancesheet" data-toggle="tab">Balance Sheet</a></li>
+  <li><a href="#incomestatment" data-toggle="tab">Income Statement</a></li>
   <li><a href="#usage_services" data-toggle="tab">Usage of Services</a></li>
 </ul>
 
@@ -159,6 +160,28 @@
   					<tr>
   						<td style='text-align: left; padding-left: 60px;'>{$bsline.name}</td>
   						<td><input type='text' name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" /></td>
+  					</tr>
+  			{/foreach}
+  		</table>
+  </div>
+  <div class="tab-pane" id="incomestatment">
+  		<table class="table">
+  			{foreach from=$islines item=isline}
+  				{if $group neq $isline.group_name}
+  					{assign var=group value=$isline.group_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  					</tr>
+  				{/if}
+  				{if $subgroup neq $isline.subgroup_name}
+  					{assign var=subgroup value=$isline.subgroup_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  					</tr>
+  				{/if}
+  					<tr>
+  						<td style='text-align: left; padding-left: 60px;'>{$isline.name}</td>
+  						<td><input type='text' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" /></td>
   					</tr>
   			{/foreach}
   		</table>

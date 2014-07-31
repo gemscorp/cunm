@@ -129,6 +129,21 @@ $app->group("/member", function () use ($app, $smarty) {
 		$smarty->assign('group', "");
 		$smarty->assign('subgroup', "");
 		
+		//income statement
+		$sql = "SELECT i.id, i.name, ig.name AS group_name, isg.name AS subgroup_name "
+			 . "FROM `is` AS i "
+			 . "JOIN is_group AS ig ON ig.id = i.group_id "
+			 . "JOIN is_sub_group AS isg ON isg.id = i.sub_group_id "
+			 . " ORDER BY ig.id, isg.id ";
+		
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$islines = $sth->fetchAll();
+		$smarty->assign('islines', $islines);
+		$smarty->assign('igroup', "");
+		$smarty->assign('isubgroup', "");
+		
+		
 		$sql = "SELECT id, name FROM asset_group ";
 		$sth = $db->prepare($sql);
 		$sth->execute();
@@ -190,6 +205,28 @@ $app->group("/member", function () use ($app, $smarty) {
 		}
 		
 		$smarty->assign('bsvals', $bl_sheet);
+		
+		//income statement
+		$sql = "SELECT is_id, amount FROM pu_is WHERE primary_union_id = :pid AND pu_datasheet_id = :dsid ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $idx));
+		
+		$is_sheet = array();
+		foreach ($islines as $ist) {
+			$is_sheet[$ist['id']] = array('amount' => '');
+		}
+		
+		$is = $sth->fetchAll();
+		
+		foreach ($is as $i) {
+			$is_sheet[$i['is_id']] = array('amount' => $i['amount']);
+		}
+		
+		$smarty->assign('isvals', $is_sheet);
+		
+		//income statement end
+		
+		
 		
 		$sql = "SELECT id, name FROM service ";
 		$sth = $db->prepare($sql);
@@ -304,6 +341,21 @@ $app->group("/member", function () use ($app, $smarty) {
 			$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
 					':bs_id' => $bs_id, ':amount' => $val['amount']));
 		}
+		
+		//income statement
+		$sql = "DELETE FROM pu_is WHERE primary_union_id = :pid AND pu_datasheet_id = :dsid ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid']));
+		
+		foreach ($_POST['isline'] as $is_id => $val) {
+				
+			$sql = "INSERT INTO pu_is (primary_union_id, pu_datasheet_id, is_id, amount) "
+					. "VALUES (:pid, :dsid, :bs_id, :amount) ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
+					':bs_id' => $is_id, ':amount' => $val['amount']));
+		}
+		//income statement end
 		
 		$sql = "DELETE FROM pu_service_distribution WHERE primary_union_id = :pid AND pu_datasheet_id = :dsid ";
 		$sth = $db->prepare($sql);
