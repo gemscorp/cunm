@@ -30,6 +30,13 @@ $app->post("/password", function () use ($app, $smarty) {
 	return;
 });
 
+$app->group("/report", function () use ($app, $smarty) {
+	
+	$app->get("/main", function () use ($app, $smarty) {
+		$db = getDbHandler();
+	});
+});
+
 $app->get("/adduser", function () use ($app, $smarty) {
 	
 	$db = getDbHandler();

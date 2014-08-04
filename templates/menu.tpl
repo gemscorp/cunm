@@ -10,7 +10,7 @@
 			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/operations">Operations</a></li>
 			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/datasheet">Data Sheet</a></li>
 			            <li class="divider"></li>
-			            <li><a href="#">Report</a></li>
+			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/report/main">Report</a></li>
 			          </ul>
 	        	</li>
 	        {/if}
