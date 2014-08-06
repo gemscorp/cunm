@@ -25,6 +25,27 @@
            </div>
         </div>
         
+        <div class="span7">
+          <legend>No of Employees by Type</legend>
+           <div class="controls controls-row">
+             Managerial: <input type="text" class='span1' value='{$operations.males}' placeholder='Male' name="male" />
+             Operational: <input type="text" class='span2' value='{$operations.females}' placeholder='Female' name="female" />
+           </div>
+        </div>
+        
+        <div class="span7">
+          <legend>No of Employees by Department</legend>
+           <div class="controls controls-row">
+             General Managment: <input type="text" class='span1' value='{$operations.males}' placeholder='Male' name="male" />
+             Loan Management: <input type="text" class='span2' value='{$operations.females}' placeholder='Female' name="female" />
+             HR Management: <input type="text" class='span2' value='{$operations.females}' placeholder='Female' name="female" />
+             Finance &amp; Accounting: <input type="text" class='span2' value='{$operations.females}' placeholder='Female' name="female" />
+             Internal Audit: <input type="text" class='span2' value='{$operations.females}' placeholder='Female' name="female" />
+             Other: <input type="text" class='span2' value='{$operations.females}' placeholder='Female' name="female" />
+             BOD: <input type="text" class='span2' value='{$operations.females}' placeholder='Female' name="female" />
+           </div>
+        </div>
+        
         <button type="submit" class="btn btn-default">Update Operational Data</button>
         
   </div>
