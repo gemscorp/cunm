@@ -10,7 +10,7 @@
 			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/operations">Operations</a></li>
 			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/datasheet">Data Sheet</a></li>
 			            <li class="divider"></li>
-			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/report/main">Report</a></li>
+			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/report/">Report</a></li>
 			          </ul>
 	        	</li>
 	        {/if}
@@ -22,6 +22,8 @@
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/users">Users</a></li>
 		            <li class="divider"></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/unlock">Unlock Requests</a></li>
+		             <li class="divider"></li>
+			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/report/">Report</a></li>
 		          </ul>
         	</li>
         	{/if}
@@ -33,10 +35,13 @@
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/asset">Asset Groups</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/service">Products and Services</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/balancesheet">Balance Sheet</a></li>
+		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/incomestatement">Income Statement</a></li>
 		            <li class="divider"></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/country">Country List</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/federation">Federation List</a></li>
 		            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/admin/users">User List</a></li>
+		             <li class="divider"></li>
+			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/report/">Report</a></li>
 		          </ul>
         	</li>
         	{/if}

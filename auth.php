@@ -32,8 +32,71 @@ $app->post("/password", function () use ($app, $smarty) {
 
 $app->group("/report", function () use ($app, $smarty) {
 	
-	$app->get("/main", function () use ($app, $smarty) {
+	$app->get('/', function () use ($app, $smarty) {
 		$db = getDbHandler();
+		
+		$sql = "SELECT id, name FROM country";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$c = $sth->fetchAll();
+		$country = array();
+		foreach ($c as $ct) {
+			$country[$ct['id']] = $ct['name'];
+		}
+		$smarty->assign('country', $country);
+		
+		$sql = "SELECT id, name FROM federation ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$f = $sth->fetchAll();
+		$fed = array();
+		foreach ($f as $fd) {
+			$fed[$fd['id']] = $fd['name'];
+		}
+		$smarty->assign('federation', $fed);
+		
+		$smarty->display('member/report_search.tpl');
+	});
+	
+	$app->post("/main", function () use ($app, $smarty) {
+		$db = getDbHandler();
+		
+		require_once 'lib/report.php';
+		
+		if ($_POST['federation_id'] != 0) {
+			$cu_ids = getCuByFedId($_POST['federation_id']);
+		} else {
+			$cu_ids = getCuByCountry($_POST['country_id']);
+		}
+		
+		$dids = getLatestDataSheetByCuId($cu_ids);
+		
+		$less_member = getLessMemberAggr($dids);
+		$market = getMarketAggr($dids);
+		$age = getAgeAggr($dids);
+		$gender = getGenderAggr($dids);
+		$memcnt = getMemberCountGroup($dids);
+		$bl = getBalAggr($dids);
+		$is = getIsAggr($dids);
+		
+		$smarty->assign('less_member', $less_member);
+		$smarty->assign('market', $market);
+		$smarty->assign('age', $age);
+		$smarty->assign('gender', $gender);
+		$smarty->assign('memcnt', $memcnt);
+		$smarty->assign('bsvals', $bl);
+		$smarty->assign('isvals', $is);
+		$smarty->assign('bslines', getBsLines());
+		$smarty->assign('islines', getIsLines());
+		
+		$smarty->assign('group', "");
+		$smarty->assign('subgroup', "");
+		$smarty->assign('igroup', "");
+		$smarty->assign('isubgroup', "");
+		
+		
+		
+		$smarty->display('member/report.tpl');
 	});
 });
 
@@ -604,93 +667,7 @@ $app->group("/federation", function () use ($app, $smarty) {
 });
 
 $app->group("/ajax", function () use ($app, $smarty) {
-	
-	$app->post('/unlock/:id', function ($id) use ($app) {
-		
-		$db = getDbHandler();
-		
-		$sql = "INSERT INTO unlock_request (federation_id, primary_union_id, pu_datasheet_id, cdate, comment) "
-		     . "VALUES (:fid, :pid, :id, NOW(), :comment) ";
-		$sth = $db->prepare($sql);
-		$sth->execute(array(':fid' => $_SESSION['user_federation_id'], ':pid' => $_SESSION['user_primary_union_id'], ':id' => $id, ':comment' => $_POST['comment']));
-		
-		$app->contentType('application/json');
-		echo json_encode(array());
-		
-	});
-	
-	$app->post('/unlockp/:id', function ($id) use ($app) {
-	
-		$db = getDbHandler();
-	
-		$sql = "INSERT INTO unlock_request (federation_id, primary_union_id, pu_profile_id, cdate, comment) "
-			 . " VALUES (:fid, :pid, :id, NOW(), :comment) ";
-		$sth = $db->prepare($sql);
-		$sth->execute(array(':fid' => $_SESSION['user_federation_id'], ':pid' => $_SESSION['user_primary_union_id'], ':id' => $id, ':comment' => $_POST['comment']));
-		
-		$app->contentType('application/json');
-		echo json_encode(array());
-	
-	});
-	
-	$app->post("/bsgroup", function () use ($app, $smarty) {
-		$db = getDbHandler();
-		
-		$sql = "INSERT INTO balancesheet_group (name) VALUES (:name)";
-		$sth = $db->prepare($sql);
-		$sth->execute(array(':name' => $_POST['name']));
-		
-		$id = $db->lastInsertId();
-		
-		$json = array('id' => $id, 'name' => $_POST['name']);
-		$app->contentType('application/json');
-		echo json_encode($json);
-		
-	});
-	
-	$app->get("/bssubgroup/:group_id", function ($group_id) use ($app, $smarty) {
-		$db = getDbHandler();
-		
-		$sql = "SELECT id, name FROM balancesheet_sub_group WHERE group_id = :group_id ";
-		$sth = $db->prepare($sql);
-		$sth->execute(array(':group_id' => $group_id));
-		
-		$json['subgroups'] = $sth->fetchAll();
-		
-		$app->contentType('application/json');
-		echo json_encode($json);
-		
-	});
-	
-	$app->post("/bssubgroup", function () use ($app, $smarty) {
-		$db = getDbHandler();
-	
-		$sql = "INSERT INTO balancesheet_sub_group (group_id, name) VALUES (:group_id, :name)";
-		$sth = $db->prepare($sql);
-		$sth->execute(array(':group_id' => $_POST['mgroup_id'], ':name' => $_POST['name']));
-	
-		$id = $db->lastInsertId();
-	
-		$json = array('id' => $id, 'name' => $_POST['name']);
-		$app->contentType('application/json');
-		echo json_encode($json);
-	
-	});
-	
-	$app->get("/federations/:country_id", function ($country_id) use ($app, $smarty) {
-		$db = getDbHandler();
-	
-		$sql = "SELECT id, name FROM federation WHERE country_id = :country_id ";
-		$sth = $db->prepare($sql);
-		$sth->execute(array(':country_id' => $country_id));
-	
-		$json['federations'] = $sth->fetchAll();
-	
-		$app->contentType('application/json');
-		echo json_encode($json);
-	
-	});
-	
+	require_once 'controller/ajax.php';
 });
 
 $app->group("/admin", function () use ($app, $smarty) {
@@ -935,6 +912,61 @@ $app->group("/admin", function () use ($app, $smarty) {
 		setSuccessMessage('Balance Sheet Line Item Added');
 	
 		$app->redirect(APP_PATH . '/admin/balancesheet');
+	});
+	
+	
+	$app->get("/incomestatement", function () use ($app, $smarty) {
+	
+		$db = getDbHandler();
+	
+		$sql = "SELECT id, name FROM is_group ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$groups = $sth->fetchAll();
+		$smarty->assign('groups', $groups);
+	
+		$sql = "SELECT id, name FROM is_sub_group ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$subgroups = $sth->fetchAll();
+		$smarty->assign('subgroups', $subgroups);
+	
+	
+		$sql = "SELECT i.name, ig.name AS group_name, isg.name AS subgroup_name "
+				. "FROM `is` AS i "
+				. "JOIN is_group AS ig ON ig.id = i.group_id "
+			    . "JOIN is_sub_group AS isg ON isg.id = i.sub_group_id ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$bslines = $sth->fetchAll();
+		$smarty->assign('bslines', $bslines);
+	
+		$smarty->display('admin/incomestatement.tpl');
+	});
+		
+	$app->post('/incomestatement', function () use ($app, $smarty) {
+
+		if (!isset($_POST['group_id']) || $_POST['group_id'] == '') {
+			setErrorMessage('Select Group Name');
+			$app->redirect(APP_PATH . '/admin/incomestatement');
+			return;
+		}
+
+		if (!isset($_POST['subgroup_id']) || $_POST['subgroup_id'] == '') {
+			setErrorMessage('Select Sub Group Name');
+			$app->redirect(APP_PATH . '/admin/incomestatement');
+			return;
+		}
+
+		$db = getDbHandler();
+
+		$sql = "INSERT INTO `is` (group_id, sub_group_id, name) VALUES (:group_id, :sub_group_id, :name) ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':group_id' => $_POST['group_id'], ':sub_group_id' => $_POST['subgroup_id'], ':name' => $_POST['name']));
+
+		setSuccessMessage('Income Statement Line Item Added');
+
+		$app->redirect(APP_PATH . '/admin/incomestatement');
 	});
 	
 	$app->get("/users", function () use ($app, $smarty) {
