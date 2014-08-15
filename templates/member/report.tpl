@@ -58,19 +58,19 @@
   				</tr>
   			</thead>
   			<tbody>
-  				{foreach from=$opareas item=oparea}
+  				{foreach from=$gender item=g}
 	  				<tr>
-	  					<td>{$areas[$oparea]}</td>
-	  					<td><input class='total' data-sum='ttotal' data-group='total' type='text' name="area[{$oparea}][total]" value="{$gender_groups[$oparea].total}" /></td>
-	  					<td><input class='male' data-sum='tmale' data-group='male' type='text' name="area[{$oparea}][male]" value="{$gender_groups[$oparea].male}" /></td>
-	  					<td><input class='female' data-sum='tfemale' data-group='female' type='text' name="area[{$oparea}][female]" value="{$gender_groups[$oparea].female}"/></td>
+	  					<td>{$g.area_id}</td>
+	  					<td>{$g.total}</td>
+	  					<td>{$g.male}</td>
+	  					<td>{$g.female}</td>
 	  				</tr>
   				{/foreach}
 				<tr>
   					<td>Total</td>
-  					<td><input id='ttotal' type='text' value='{$gender_total.total}' /></td>
-  					<td><input id='tmale' type='text' value='{$gender_total.male}' /></td>
-  					<td><input id='tfemale' type='text' value='{$gender_total.female}' /></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
   				</tr>
   			</tbody>
   		</table>
@@ -80,18 +80,44 @@
   		<table class="table">
   			<thead>
   				<tr>
+	  				<th rowspan='2'>Type of CU</th>
+	  				<th rowspan='2'>Number of Members</th>
+	  				<th rowspan='2'>Farmers</th>
+	  				<th rowspan='2'>Employee</th>
+	  				<th rowspan='2'>Micro Business</th>
+	  				<th colspan='4'>Age Segmentation of CU Membership</th>
+  				</tr>
+  				<tr>
   				<th>18 - 35</th>
   				<th>36 - 45</th>
   				<th>46 - 60</th>
   				<th>&gt; 60</th>
-  				<th>Male</th>
-  				<th>Female</th>
-  				<th>Total</th>
   				</tr>
   			</thead>
   			<tbody>
+  				{foreach from=$market item=m}
+  				<tr>
+  					<td>{$m.area_id}</td>
+  					<td></td>
+  					<td>{$m.farmer}</td>
+  					<td>{$m.employee}</td>
+  					<td>{$m.microb}</td>
+  					<td>{$m.group1}</td>
+  					<td>{$m.group2}</td>
+  					<td>{$m.group3}</td>
+  					<td>{$m.group4}</td>
+  				</tr>
+				{/foreach}
 				<tr>
-  					
+  					<td>Total</td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
   				</tr>
   			</tbody>
   		</table>
@@ -133,7 +159,7 @@
   				{/if}
   					<tr>
   						<td style='text-align: left; padding-left: 60px;'>{$bsline.name}</td>
-  						<td><input type='text' name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" /></td>
+  						<td>{$bsvals[$bsline.id].amount}</td>
   					</tr>
   			{/foreach}
   		</table>
@@ -155,12 +181,11 @@
   				{/if}
   					<tr>
   						<td style='text-align: left; padding-left: 60px;'>{$isline.name}</td>
-  						<td><input type='text' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" /></td>
+  						<td>{$isvals[$isline.id].amount}</td>
   					</tr>
   			{/foreach}
   		</table>
   </div>
-  
 </div>
 </form>
 {include file='footer.tpl'}

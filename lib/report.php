@@ -55,6 +55,18 @@ function getMarketAggr($dids)
 	return $sth->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getMarketAgeAggr($dids)
+{
+	$dbo = getDbHandler();
+	$sql = "SELECT m.area_id, SUM(m.farmer) AS farmer, SUM(m.employee) AS employee, SUM(m.microb) AS microb, SUM(a.group1) AS group1, SUM(a.group2) AS group2, SUM(a.group3) AS group3, SUM(a.group4) AS group4 "
+		. "FROM pu_market AS m, pu_age AS a "
+		. "WHERE m.pu_datasheet_id = a.pu_datasheet_id AND m.area_id = a.area_id AND m.pu_datasheet_id IN (" . implode(",", $dids) . ") "
+		. "GROUP BY m.area_id ";
+	$sth = $dbo->prepare($sql);
+	$sth->execute();
+	return $sth->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getAgeAggr($dids)
 {
 	$dbo = getDbHandler();

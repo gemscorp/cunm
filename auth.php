@@ -72,8 +72,8 @@ $app->group("/report", function () use ($app, $smarty) {
 		$dids = getLatestDataSheetByCuId($cu_ids);
 		
 		$less_member = getLessMemberAggr($dids);
-		$market = getMarketAggr($dids);
-		$age = getAgeAggr($dids);
+		$market = getMarketAgeAggr($dids);
+		//$age = getAgeAggr($dids);
 		$gender = getGenderAggr($dids);
 		$memcnt = getMemberCountGroup($dids);
 		$bl = getBalAggr($dids);
@@ -81,7 +81,7 @@ $app->group("/report", function () use ($app, $smarty) {
 		
 		$smarty->assign('less_member', $less_member);
 		$smarty->assign('market', $market);
-		$smarty->assign('age', $age);
+		//$smarty->assign('age', $age);
 		$smarty->assign('gender', $gender);
 		$smarty->assign('memcnt', $memcnt);
 		$smarty->assign('bsvals', $bl);
