@@ -79,7 +79,7 @@ $app->get("/federations/:country_id", function ($country_id) use ($app, $smarty)
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':country_id' => $country_id));
 
-	$json['federations'] = $sth->fetchAll();
+	$json['federations'] = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 	$app->contentType('application/json');
 	echo json_encode($json);

@@ -45,7 +45,7 @@
 				success: function (json) {
 					$("#federation_id").html("");
 					$("#federation_id").append("<option value='0'>All</option>");
-					$.each(json, function (v,k) {
+					$.each(json.federations, function (v,k) {
 						$("#federation_id").append("<option value='" + k.id + "'>" + k.name + "</option>");
 					});
 				}				
