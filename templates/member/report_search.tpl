@@ -39,7 +39,7 @@
 			e.preventDefault();
 			var country_id = $(this).val();
 			$.ajax({
-				url: '{$smarty.const.APP_PATH}/ajax/federation/' + country_id,
+				url: '{$smarty.const.APP_PATH}/ajax/federations/' + country_id,
 				type: 'get',
 				dataType: 'json',
 				success: function (json) {
