@@ -34,7 +34,7 @@ function getLatestDataSheetByCuId($cu_ids)
 function getLessMemberAggr($dids)
 {
 	$dbo = getDbHandler();
-	$sql = "SELECT area_id, SUM(male) AS male, SUM(female) AS female, SUM(savings) AS savings, SUM(outstanding) AS outstanding, SUM(total_granted) AS total_granted "
+	$sql = "SELECT COUNT(pu_datasheet_id) AS ncu, area_id, SUM(male) AS male, SUM(female) AS female, SUM(savings) AS savings, SUM(outstanding) AS outstanding, SUM(total_granted) AS total_granted "
 		 . "FROM pu_less_member_service "
 		 . "WHERE pu_datasheet_id IN (" . implode(",", $dids) . ") "
 		 . "GROUP BY area_id ";
@@ -46,7 +46,7 @@ function getLessMemberAggr($dids)
 function getMarketAggr($dids)
 {
 	$dbo = getDbHandler();
-	$sql = "SELECT m.area_id, SUM(m.farmer) AS farmer, SUM(m.employee) AS employee, SUM(m.microb) AS microb "
+	$sql = "SELECT COUNT(M.pu_datasheet_id) AS ncu, m.area_id, SUM(m.farmer) AS farmer, SUM(m.employee) AS employee, SUM(m.microb) AS microb "
 	     . "FROM pu_market AS m "
 	     . "WHERE m.pu_datasheet_id IN (" . implode(",", $dids) . ") "
 	     . "GROUP BY m.area_id ";
@@ -58,7 +58,7 @@ function getMarketAggr($dids)
 function getMarketAgeAggr($dids)
 {
 	$dbo = getDbHandler();
-	$sql = "SELECT m.area_id, SUM(m.farmer) AS farmer, SUM(m.employee) AS employee, SUM(m.microb) AS microb, SUM(a.group1) AS group1, SUM(a.group2) AS group2, SUM(a.group3) AS group3, SUM(a.group4) AS group4 "
+	$sql = "SELECT COUNT(m.pu_datasheet_id) AS ncu, m.area_id, SUM(m.farmer) AS farmer, SUM(m.employee) AS employee, SUM(m.microb) AS microb, SUM(a.group1) AS group1, SUM(a.group2) AS group2, SUM(a.group3) AS group3, SUM(a.group4) AS group4 "
 		. "FROM pu_market AS m, pu_age AS a "
 		. "WHERE m.pu_datasheet_id = a.pu_datasheet_id AND m.area_id = a.area_id AND m.pu_datasheet_id IN (" . implode(",", $dids) . ") "
 		. "GROUP BY m.area_id ";
@@ -70,7 +70,7 @@ function getMarketAgeAggr($dids)
 function getAgeAggr($dids)
 {
 	$dbo = getDbHandler();
-	$sql = "SELECT area_id, SUM(group1) AS group1, SUM(group2) AS group2, SUM(group3) AS group3, SUM(group4) AS group4  "
+	$sql = "SELECT COUNT(pu_datasheet_id) AS ncu, area_id, SUM(group1) AS group1, SUM(group2) AS group2, SUM(group3) AS group3, SUM(group4) AS group4  "
 		 . "FROM pu_age "
 		 . "WHERE pu_datasheet_id IN (" . implode(",", $dids) . ") "
 		 . "GROUP BY area_id ";
@@ -82,7 +82,7 @@ function getAgeAggr($dids)
 function getGenderAggr($dids)
 {
 	$dbo = getDbHandler();
-	$sql = "SELECT area_id, SUM(male) AS male, SUM(female) AS female, SUM(total) AS total "
+	$sql = "SELECT COUNT(pu_datasheet_id) AS ncu, area_id, SUM(male) AS male, SUM(female) AS female, SUM(total) AS total "
 		 . "FROM pu_gender "
 		 . "WHERE pu_datasheet_id IN (" . implode(",", $dids) . ") "
 		 . "GROUP BY area_id ";
@@ -94,7 +94,7 @@ function getGenderAggr($dids)
 function getMemberCountGroup($dids)
 {
 	$dbo = getDbHandler();
-	$sql = "SELECT SUM(IF(total <= 300, 1, 0)) AS s1, SUM(IF(total >= 301 AND total <= 1000, 1, 0)) AS s2, SUM(IF(total >= 1001 AND total <= 3000, 1, 0)) AS s3, SUM(IF(total >= 3001 AND total <= 5000, 1, 0)) AS s4, SUM(IF(total >= 5001, 1, 0)) AS s5 "
+	$sql = "SELECT COUNT(pu_datasheet_id) AS ncu, SUM(IF(total <= 300, 1, 0)) AS s1, SUM(IF(total >= 301 AND total <= 1000, 1, 0)) AS s2, SUM(IF(total >= 1001 AND total <= 3000, 1, 0)) AS s3, SUM(IF(total >= 3001 AND total <= 5000, 1, 0)) AS s4, SUM(IF(total >= 5001, 1, 0)) AS s5 "
 		 . "FROM pu_gender "
 		 . "WHERE pu_datasheet_id IN (" . implode(",", $dids) . ") ";
 	$sth = $dbo->prepare($sql);

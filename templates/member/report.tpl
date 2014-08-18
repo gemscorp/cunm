@@ -19,6 +19,7 @@
   			<thead>
   				<tr>
   					<th>Operational Area</th>
+  					<th># Memebr CUs</th>
   					<th>Female</th>
 	  				<th>Male</th>
 	  				<th>Total Savings</th>
@@ -30,6 +31,7 @@
   				{foreach from=$less_member item=l}
   				<tr>
   					<td>{$l.area_id}</td>
+  					<td>{$l.ncu}</td>
   					<td>{$l.female}</td>
   					<td>{$l.male}</td>
   					<td>{$l.savings}</td>
@@ -52,6 +54,7 @@
   			<thead>
   				<tr>
 	  				<th>Operational Areas of Credit Union</th>
+	  				<th># Memebr CUs</th>
 	  				<th>Number of Members</th>
 	  				<th>Male</th>
 	  				<th>Female</th>
@@ -61,6 +64,7 @@
   				{foreach from=$gender item=g}
 	  				<tr>
 	  					<td>{$g.area_id}</td>
+	  					<td>{$g.ncu}</td>
 	  					<td>{$g.total}</td>
 	  					<td>{$g.male}</td>
 	  					<td>{$g.female}</td>
@@ -81,6 +85,7 @@
   			<thead>
   				<tr>
 	  				<th rowspan='2'>Type of CU</th>
+	  				<th rowspan='2'># Memebr CUs</th>
 	  				<th rowspan='2'>Number of Members</th>
 	  				<th rowspan='2'>Farmers</th>
 	  				<th rowspan='2'>Employee</th>
@@ -98,6 +103,7 @@
   				{foreach from=$market item=m}
   				<tr>
   					<td>{$m.area_id}</td>
+  					<td>{$g.ncu}</td>
   					<td></td>
   					<td>{$m.farmer}</td>
   					<td>{$m.employee}</td>
