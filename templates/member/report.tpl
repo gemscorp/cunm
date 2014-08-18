@@ -1,5 +1,5 @@
 {include file='header.tpl'}
-<h3>Datasheet</h3>
+<h3>Report</h3>
 
 {include file='common/alert.tpl'}
           
