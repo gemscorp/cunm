@@ -204,7 +204,7 @@ $app->group("/member", function () use ($app, $smarty) {
 			 . "FROM `is` AS i "
 			 . "JOIN is_group AS ig ON ig.id = i.group_id "
 			 . "JOIN is_sub_group AS isg ON isg.id = i.sub_group_id "
-			 . " ORDER BY ig.id, isg.id ";
+			 . " ORDER BY ig.id, isg.id, i.sort_order ";
 		
 		$sth = $db->prepare($sql);
 		$sth->execute();
