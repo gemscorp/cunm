@@ -190,7 +190,7 @@ $app->group("/member", function () use ($app, $smarty) {
 				. "FROM balancesheet AS b "
 				. "JOIN balancesheet_group AS bg ON bg.id = b.group_id "
 				. "JOIN balancesheet_sub_group AS bsg ON bsg.id = b.sub_group_id "
-				. " ORDER BY bg.id, bsg.id ";
+				. " ORDER BY bg.id, bsg.id, b.sort_order ";
 		
 		$sth = $db->prepare($sql);
 		$sth->execute();
