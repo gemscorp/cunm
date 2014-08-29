@@ -5,6 +5,15 @@
 
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/federation/primarycu'>
   <div class="form-group">
+    <label for="country">Region/Chapter</label>
+    <select id='chapter_id' name='chapter_id' class="form-control">
+    	{foreach from=$chapters item=chapter}
+    		<option value='{$chapter.id}'>{$chapter.name}</option>
+    	{/foreach}
+    </select>
+  </div>
+  
+  <div class="form-group">
     <label for="exampleInputEmail1">Primary Credit Union Name</label>
     <input type="text" name='name' class="form-control" id="exampleInputEmail1" placeholder="Enter Primary Credit Union Name">
   </div>

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.37, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: cunm
 -- ------------------------------------------------------
--- Server version	5.5.37-0ubuntu0.14.04.1
+-- Server version	5.5.38-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `area` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `area` (
 
 LOCK TABLES `area` WRITE;
 /*!40000 ALTER TABLE `area` DISABLE KEYS */;
-INSERT INTO `area` VALUES (1,'Rural'),(2,'Industrial');
+INSERT INTO `area` VALUES (1,'Rural'),(2,'Industrial'),(3,'Both');
 /*!40000 ALTER TABLE `area` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,7 +50,7 @@ CREATE TABLE `asset_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `asset_group` (
 
 LOCK TABLES `asset_group` WRITE;
 /*!40000 ALTER TABLE `asset_group` DISABLE KEYS */;
-INSERT INTO `asset_group` VALUES (1,'&lt; 100,000'),(2,'100,101 - 500,000');
+INSERT INTO `asset_group` VALUES (1,'&lt; 100,000'),(2,'100,101 - 500,000'),(3,'500,001 - 1,000,000'),(4,'< 1,000,001');
 /*!40000 ALTER TABLE `asset_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +77,7 @@ CREATE TABLE `balancesheet` (
   `sub_group_id` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `balancesheet` (
 
 LOCK TABLES `balancesheet` WRITE;
 /*!40000 ALTER TABLE `balancesheet` DISABLE KEYS */;
-INSERT INTO `balancesheet` VALUES (1,NULL,1,1,'Test'),(2,NULL,2,2,'Bad Loans'),(3,NULL,1,1,'Line Item 2'),(4,NULL,1,1,'Line Item 3'),(5,NULL,2,3,'Have Less Member loans');
+INSERT INTO `balancesheet` VALUES (6,1,5,4,'Non-Earning Liquid Assets'),(7,2,5,4,'Liquid Incestments (Short-Term Investments)'),(8,3,5,4,'Liquidity Reserves'),(9,1,5,5,'Loans Receivable - Current'),(10,1,5,6,'Loan Receivable - Restructured'),(11,2,5,6,'Loan Receivable - Past Due for 1-12 Months'),(12,3,5,6,'Total Loan Delinquent (1-12 Months)\n'),(13,1,5,7,'Loan Receivable - Past Due for >12 Months'),(14,2,5,7,'Loan Receivable - Loans in Litigation'),(15,3,5,7,'Total Loan Delinquent (>12 Months)'),(16,4,5,7,'Total Loan Delinquency'),(17,5,5,7,'Total Loan Portfolio'),(18,2,5,8,'Allowance for Probable Losses on Loans - >12 Months'),(19,1,5,8,'Allowance for Probable Losses on Loans - 1 to 12 Months'),(20,3,5,8,'Total Provision for Doubtful Loans'),(21,4,5,8,'Net Loans Outstanding'),(22,1,5,9,'Financial Investments'),(23,2,5,9,'Non-Financial Investments'),(24,3,5,9,'Total Investments'),(25,4,5,9,'Non-Earning Assets'),(27,5,5,9,'Problem Assets'),(28,6,5,9,'Total Assets'),(29,1,6,10,'Non-Interest Bearing Liabilities & Short-Term Payables'),(30,2,6,10,'Non-Interest Bearing Liabilities - Non-Short-Term Payables'),(31,3,6,10,'Total Non-Interest Bearing Liabilities'),(32,1,6,11,'Loans Payable - Short Term'),(33,2,6,11,'Loans Payable - Long Term'),(34,3,6,11,'Total External Credit '),(35,4,6,11,'Total Liabilities'),(36,1,7,12,'Member Share Capital'),(37,2,7,12,'Total Institutional Capital'),(38,3,7,12,'Transitory Capital'),(39,4,7,12,'Total Equities'),(40,5,7,12,'Total Liabilities & Equities');
 /*!40000 ALTER TABLE `balancesheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `balancesheet_group` (
   `sort_order` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `balancesheet_group` (
 
 LOCK TABLES `balancesheet_group` WRITE;
 /*!40000 ALTER TABLE `balancesheet_group` DISABLE KEYS */;
-INSERT INTO `balancesheet_group` VALUES (1,NULL,'INCOME'),(2,NULL,'Loans'),(3,NULL,'Othert'),(4,NULL,'alpha');
+INSERT INTO `balancesheet_group` VALUES (5,NULL,'Assets'),(6,NULL,'Liabilities'),(7,NULL,'Equities');
 /*!40000 ALTER TABLE `balancesheet_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `balancesheet_sub_group` (
   `sort_order` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,8 +137,32 @@ CREATE TABLE `balancesheet_sub_group` (
 
 LOCK TABLES `balancesheet_sub_group` WRITE;
 /*!40000 ALTER TABLE `balancesheet_sub_group` DISABLE KEYS */;
-INSERT INTO `balancesheet_sub_group` VALUES (1,1,NULL,'Major'),(2,2,NULL,'Longterm'),(3,2,NULL,'Shorterm');
+INSERT INTO `balancesheet_sub_group` VALUES (4,5,NULL,'Liquidity'),(5,5,NULL,'Loan Outstanding'),(6,5,NULL,'Loan Delinquent (1-12 Months)'),(7,5,NULL,'Loan Delinquent (>12 Months)'),(8,5,NULL,'Allowance for Probable Losses on Loans'),(9,5,NULL,'Investments'),(10,6,NULL,'Savings Deposits'),(11,6,NULL,'External Credit'),(12,7,NULL,'Equities');
 /*!40000 ALTER TABLE `balancesheet_sub_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `chapter`
+--
+
+DROP TABLE IF EXISTS `chapter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chapter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `federation_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chapter`
+--
+
+LOCK TABLES `chapter` WRITE;
+/*!40000 ALTER TABLE `chapter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `chapter` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -152,7 +176,7 @@ CREATE TABLE `country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +185,7 @@ CREATE TABLE `country` (
 
 LOCK TABLES `country` WRITE;
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
-INSERT INTO `country` VALUES (1,'Thailand'),(2,'Sri Lanka'),(3,'Global (No Country Specific)');
+INSERT INTO `country` VALUES (0,'Global (No Country Specific)'),(1,'Thailand'),(2,'Sri Lanka'),(4,'Bangladesh'),(5,'India'),(6,'Indonesia'),(7,'Philippines'),(8,'India');
 /*!40000 ALTER TABLE `country` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +201,7 @@ CREATE TABLE `federation` (
   `name` varchar(100) DEFAULT NULL,
   `country_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,8 +210,86 @@ CREATE TABLE `federation` (
 
 LOCK TABLES `federation` WRITE;
 /*!40000 ALTER TABLE `federation` DISABLE KEYS */;
-INSERT INTO `federation` VALUES (1,'FSCT',1);
+INSERT INTO `federation` VALUES (0,'No Federation',0),(1,'FSCT',1),(2,'CULT',1),(3,'CCULB',4),(4,'CUCO',6),(5,'PFCCO',7),(6,'NATCCO',7),(8,'MAFCOCS',8);
 /*!40000 ALTER TABLE `federation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `is`
+--
+
+DROP TABLE IF EXISTS `is`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `is` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sort_order` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `sub_group_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `is`
+--
+
+LOCK TABLES `is` WRITE;
+/*!40000 ALTER TABLE `is` DISABLE KEYS */;
+INSERT INTO `is` VALUES (6,1,5,4,'Loan Income'),(7,2,5,4,'Less: Insurance Premiums Paid on Loans'),(8,3,5,4,'Net Loan Income'),(9,1,5,5,'Total Liquid Investment Income'),(10,2,5,5,'Total Financial Investment Income'),(11,3,5,5,'Income from Non-Financial Investments'),(12,4,5,5,'Total Income'),(13,1,6,6,'Interest Cost on Savings Deposits'),(14,2,6,6,'Interest Cost on External Credit '),(15,3,6,6,'Total Financial Costs Excluding Interest Cost on Shares'),(16,4,6,6,'Gross Income Margin'),(17,1,7,7,'Personnel'),(18,2,7,7,'Governance'),(19,3,7,7,'Marketing'),(20,4,7,7,'Depreciation'),(21,5,7,7,'Administration'),(22,6,7,7,'Total Operating Expenses before Probable Loss on Delinquent Loans'),(23,7,7,7,'Provision for Probable Losses on Loans'),(24,8,7,7,'Total Operating Expenses'),(25,9,7,7,'Net Income Before other Income/Expense'),(26,10,7,7,'Other Income/Expense'),(27,11,7,7,'Net Income'),(28,1,8,8,'General Reserve Fund'),(29,2,8,8,'Interest Cost on Shares'),(30,3,8,8,'Patronage Refund'),(31,4,8,8,'Other Statutory Accounts'),(32,5,8,8,'Undivided Net Income'),(33,6,8,8,'Total'),(34,1,9,9,'Total Charge Off Delinquent Loans'),(35,2,9,9,'Quarterly Loan Charge Offs'),(36,3,9,9,'Accumulated Loan Recoveries'),(37,4,9,9,'Accumulated Loan Charge Offs');
+/*!40000 ALTER TABLE `is` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `is_group`
+--
+
+DROP TABLE IF EXISTS `is_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `is_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sort_order` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `is_group`
+--
+
+LOCK TABLES `is_group` WRITE;
+/*!40000 ALTER TABLE `is_group` DISABLE KEYS */;
+INSERT INTO `is_group` VALUES (5,NULL,'Income'),(6,NULL,'Financial Costs'),(7,NULL,'Operating Expenses'),(8,NULL,'Allocation of Net Income'),(9,NULL,'Other');
+/*!40000 ALTER TABLE `is_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `is_sub_group`
+--
+
+DROP TABLE IF EXISTS `is_sub_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `is_sub_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `is_sub_group`
+--
+
+LOCK TABLES `is_sub_group` WRITE;
+/*!40000 ALTER TABLE `is_sub_group` DISABLE KEYS */;
+INSERT INTO `is_sub_group` VALUES (4,5,NULL,'Loan'),(5,5,NULL,'Investment'),(6,6,NULL,'Financial Costs'),(7,7,NULL,'Operating Expenses'),(8,8,NULL,'Allocation of Net Income'),(9,9,NULL,'Other');
+/*!40000 ALTER TABLE `is_sub_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -201,8 +303,9 @@ CREATE TABLE `primary_union` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `federation_id` int(11) NOT NULL,
+  `chapter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +314,7 @@ CREATE TABLE `primary_union` (
 
 LOCK TABLES `primary_union` WRITE;
 /*!40000 ALTER TABLE `primary_union` DISABLE KEYS */;
-INSERT INTO `primary_union` VALUES (1,'Farmers Credit Union in Bangkapi',1);
+INSERT INTO `primary_union` VALUES (0,'No Primary CU',0,0),(1,'Farmers Credit Union in Bangkapi',1,0),(2,'St. Peter Credit Union, Nakornpathom',1,0),(3,'KU SACCO, Bangkok',1,0),(4,'Soon Klang Theva CU, Bangkok',2,0),(5,'Poo Kang Poon Sub CU, Chiang Rai',2,0);
 /*!40000 ALTER TABLE `primary_union` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,12 +330,13 @@ CREATE TABLE `pu_age` (
   `primary_union_id` int(11) DEFAULT NULL,
   `pu_datasheet_id` int(11) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
+  `gender_id` int(11) NOT NULL,
   `group1` int(11) DEFAULT NULL,
   `group2` int(11) DEFAULT NULL,
   `group3` int(11) DEFAULT NULL,
   `group4` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,6 +345,7 @@ CREATE TABLE `pu_age` (
 
 LOCK TABLES `pu_age` WRITE;
 /*!40000 ALTER TABLE `pu_age` DISABLE KEYS */;
+INSERT INTO `pu_age` VALUES (24,4,2,2,0,100,100,100,50),(25,4,2,3,0,350,100,50,50),(26,1,4,1,0,0,0,0,0),(27,1,4,2,0,0,0,0,0),(28,1,1,1,0,0,0,0,0),(29,1,1,2,0,0,0,0,0),(30,1,5,1,1,2,2,2,2),(31,1,5,1,2,100,1,2,3),(32,1,5,2,1,2,2,2,2),(33,1,5,2,2,2,2,2,3);
 /*!40000 ALTER TABLE `pu_age` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +363,7 @@ CREATE TABLE `pu_balancesheet` (
   `balancesheet_id` int(11) DEFAULT NULL,
   `amount` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,6 +372,7 @@ CREATE TABLE `pu_balancesheet` (
 
 LOCK TABLES `pu_balancesheet` WRITE;
 /*!40000 ALTER TABLE `pu_balancesheet` DISABLE KEYS */;
+INSERT INTO `pu_balancesheet` VALUES (66,1,4,6,50.00),(67,1,4,8,0.00),(68,1,4,26,0.00),(69,1,4,7,0.00),(70,1,4,9,0.00),(71,1,4,11,0.00),(72,1,4,10,0.00),(73,1,4,12,0.00),(74,1,4,14,0.00),(75,1,4,16,0.00),(76,1,4,13,0.00),(77,1,4,15,0.00),(78,1,4,17,0.00),(79,1,4,19,0.00),(80,1,4,21,0.00),(81,1,4,18,0.00),(82,1,4,20,0.00),(83,1,4,22,0.00),(84,1,4,27,0.00),(85,1,4,24,0.00),(86,1,4,23,0.00),(87,1,4,28,0.00),(88,1,4,25,0.00),(89,1,4,30,0.00),(90,1,4,29,0.00),(91,1,4,31,0.00),(92,1,4,35,0.00),(93,1,4,32,0.00),(94,1,4,34,0.00),(95,1,4,33,0.00),(96,1,4,38,0.00),(97,1,4,40,0.00),(98,1,4,37,0.00),(99,1,4,39,0.00),(100,1,4,36,0.00),(101,1,1,6,200.00),(102,1,1,8,0.00),(103,1,1,26,0.00),(104,1,1,7,0.00),(105,1,1,9,0.00),(106,1,1,11,0.00),(107,1,1,10,0.00),(108,1,1,12,0.00),(109,1,1,14,0.00),(110,1,1,16,0.00),(111,1,1,13,0.00),(112,1,1,15,0.00),(113,1,1,17,0.00),(114,1,1,19,0.00),(115,1,1,21,0.00),(116,1,1,18,0.00),(117,1,1,20,0.00),(118,1,1,22,0.00),(119,1,1,27,0.00),(120,1,1,24,0.00),(121,1,1,23,0.00),(122,1,1,28,0.00),(123,1,1,25,0.00),(124,1,1,30,0.00),(125,1,1,29,0.00),(126,1,1,31,0.00),(127,1,1,35,0.00),(128,1,1,32,0.00),(129,1,1,34,0.00),(130,1,1,33,0.00),(131,1,1,38,0.00),(132,1,1,40,0.00),(133,1,1,37,0.00),(134,1,1,39,0.00),(135,1,1,36,0.00),(136,1,5,6,0.00),(137,1,5,7,0.00),(138,1,5,8,0.00),(139,1,5,9,0.00),(140,1,5,10,0.00),(141,1,5,11,0.00),(142,1,5,12,0.00),(143,1,5,13,0.00),(144,1,5,14,0.00),(145,1,5,15,0.00),(146,1,5,16,0.00),(147,1,5,17,0.00),(148,1,5,19,0.00),(149,1,5,18,0.00),(150,1,5,20,0.00),(151,1,5,21,0.00),(152,1,5,22,0.00),(153,1,5,23,0.00),(154,1,5,24,0.00),(155,1,5,25,0.00),(156,1,5,27,0.00),(157,1,5,28,0.00),(158,1,5,29,0.00),(159,1,5,30,0.00),(160,1,5,31,0.00),(161,1,5,32,0.00),(162,1,5,33,0.00),(163,1,5,34,0.00),(164,1,5,35,0.00),(165,1,5,36,0.00),(166,1,5,37,0.00),(167,1,5,38,0.00),(168,1,5,39,0.00),(169,1,5,40,0.00);
 /*!40000 ALTER TABLE `pu_balancesheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,8 +388,12 @@ CREATE TABLE `pu_datasheet` (
   `primary_union_id` int(11) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `asset_group_id` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `total_members` int(11) DEFAULT NULL,
+  `saved` int(11) DEFAULT '0',
+  `locked` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,6 +402,7 @@ CREATE TABLE `pu_datasheet` (
 
 LOCK TABLES `pu_datasheet` WRITE;
 /*!40000 ALTER TABLE `pu_datasheet` DISABLE KEYS */;
+INSERT INTO `pu_datasheet` VALUES (1,1,'2014-06-15 01:22:17',4,'2014-06-01',500,1,0),(2,4,'2014-06-17 04:56:01',2,'0000-00-00',900,0,0),(3,1,'2014-08-13 12:13:11',NULL,'2014-08-13',NULL,0,0),(4,1,'2014-08-13 12:15:05',0,'2014-08-10',0,1,0),(5,1,'2014-08-29 14:52:41',0,'2014-08-31',809,1,0);
 /*!40000 ALTER TABLE `pu_datasheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,10 +418,12 @@ CREATE TABLE `pu_gender` (
   `primary_union_id` int(11) DEFAULT NULL,
   `pu_datasheet_id` int(11) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
+  `gender_id` int(11) NOT NULL,
   `male` int(11) DEFAULT NULL,
   `female` int(11) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +432,35 @@ CREATE TABLE `pu_gender` (
 
 LOCK TABLES `pu_gender` WRITE;
 /*!40000 ALTER TABLE `pu_gender` DISABLE KEYS */;
+INSERT INTO `pu_gender` VALUES (24,4,2,2,0,100,250,350),(25,4,2,3,0,250,300,550),(26,1,4,1,0,0,0,0),(27,1,4,2,0,0,0,0),(28,1,1,1,0,200,200,200),(29,1,1,2,0,300,200,300),(30,1,5,1,1,NULL,NULL,300),(31,1,5,1,2,NULL,NULL,500),(32,1,5,2,1,NULL,NULL,5),(33,1,5,2,2,NULL,NULL,4);
 /*!40000 ALTER TABLE `pu_gender` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pu_is`
+--
+
+DROP TABLE IF EXISTS `pu_is`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pu_is` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `primary_union_id` int(11) DEFAULT NULL,
+  `pu_datasheet_id` int(11) DEFAULT NULL,
+  `is_id` int(11) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pu_is`
+--
+
+LOCK TABLES `pu_is` WRITE;
+/*!40000 ALTER TABLE `pu_is` DISABLE KEYS */;
+INSERT INTO `pu_is` VALUES (16,1,3,3,0.00),(17,1,3,4,0.00),(18,1,3,1,0.00),(19,1,3,2,0.00),(20,1,3,5,0.00),(56,1,4,6,100.00),(57,1,4,8,0.00),(58,1,4,7,0.00),(59,1,4,11,0.00),(60,1,4,10,0.00),(61,1,4,12,0.00),(62,1,4,9,0.00),(63,1,4,14,0.00),(64,1,4,16,0.00),(65,1,4,13,0.00),(66,1,4,15,0.00),(67,1,4,22,0.00),(68,1,4,19,0.00),(69,1,4,27,0.00),(70,1,4,24,0.00),(71,1,4,21,0.00),(72,1,4,18,0.00),(73,1,4,26,0.00),(74,1,4,23,0.00),(75,1,4,20,0.00),(76,1,4,17,0.00),(77,1,4,25,0.00),(78,1,4,30,0.00),(79,1,4,32,0.00),(80,1,4,29,0.00),(81,1,4,31,0.00),(82,1,4,28,0.00),(83,1,4,33,0.00),(84,1,4,35,0.00),(85,1,4,37,0.00),(86,1,4,34,0.00),(87,1,4,36,0.00),(88,1,1,6,500.00),(89,1,1,8,0.00),(90,1,1,7,0.00),(91,1,1,11,0.00),(92,1,1,10,0.00),(93,1,1,12,0.00),(94,1,1,9,0.00),(95,1,1,14,0.00),(96,1,1,16,0.00),(97,1,1,13,0.00),(98,1,1,15,0.00),(99,1,1,22,0.00),(100,1,1,19,0.00),(101,1,1,27,0.00),(102,1,1,24,0.00),(103,1,1,21,0.00),(104,1,1,18,0.00),(105,1,1,26,0.00),(106,1,1,23,0.00),(107,1,1,20,0.00),(108,1,1,17,0.00),(109,1,1,25,0.00),(110,1,1,30,0.00),(111,1,1,32,0.00),(112,1,1,29,0.00),(113,1,1,31,0.00),(114,1,1,28,0.00),(115,1,1,33,0.00),(116,1,1,35,0.00),(117,1,1,37,0.00),(118,1,1,34,0.00),(119,1,1,36,0.00),(120,1,5,6,0.00),(121,1,5,7,0.00),(122,1,5,8,0.00),(123,1,5,9,0.00),(124,1,5,10,0.00),(125,1,5,11,0.00),(126,1,5,12,0.00),(127,1,5,13,0.00),(128,1,5,14,0.00),(129,1,5,15,0.00),(130,1,5,16,0.00),(131,1,5,17,0.00),(132,1,5,18,0.00),(133,1,5,19,0.00),(134,1,5,20,0.00),(135,1,5,21,0.00),(136,1,5,22,0.00),(137,1,5,23,0.00),(138,1,5,24,0.00),(139,1,5,25,0.00),(140,1,5,26,0.00),(141,1,5,27,0.00),(142,1,5,28,0.00),(143,1,5,29,0.00),(144,1,5,30,0.00),(145,1,5,31,0.00),(146,1,5,32,0.00),(147,1,5,33,0.00),(148,1,5,34,0.00),(149,1,5,35,0.00),(150,1,5,36,0.00),(151,1,5,37,0.00);
+/*!40000 ALTER TABLE `pu_is` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -334,13 +475,15 @@ CREATE TABLE `pu_less_member_service` (
   `primary_union_id` int(11) DEFAULT NULL,
   `pu_datasheet_id` int(11) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
+  `gender_id` int(11) NOT NULL,
   `male` int(11) DEFAULT NULL,
   `female` int(11) DEFAULT NULL,
   `savings` int(11) DEFAULT NULL,
   `outstanding` int(11) DEFAULT NULL,
   `total_granted` int(11) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -349,6 +492,7 @@ CREATE TABLE `pu_less_member_service` (
 
 LOCK TABLES `pu_less_member_service` WRITE;
 /*!40000 ALTER TABLE `pu_less_member_service` DISABLE KEYS */;
+INSERT INTO `pu_less_member_service` VALUES (24,4,2,2,0,0,0,0,0,0,0),(25,4,2,3,0,0,0,0,0,0,0),(26,1,4,1,0,0,0,0,0,0,0),(27,1,4,2,0,0,0,0,0,0,0),(28,1,1,1,0,200,0,0,0,0,500),(29,1,1,2,0,0,0,0,0,0,0),(30,1,5,1,1,NULL,NULL,0,0,0,0),(31,1,5,1,2,NULL,NULL,0,0,0,0),(32,1,5,2,1,NULL,NULL,0,0,0,0),(33,1,5,2,2,NULL,NULL,0,0,0,0);
 /*!40000 ALTER TABLE `pu_less_member_service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,11 +508,12 @@ CREATE TABLE `pu_market` (
   `primary_union_id` int(11) DEFAULT NULL,
   `pu_datasheet_id` int(11) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
+  `gender_id` int(11) NOT NULL,
   `farmer` int(11) DEFAULT NULL,
   `employee` int(11) DEFAULT NULL,
   `microb` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,6 +522,7 @@ CREATE TABLE `pu_market` (
 
 LOCK TABLES `pu_market` WRITE;
 /*!40000 ALTER TABLE `pu_market` DISABLE KEYS */;
+INSERT INTO `pu_market` VALUES (24,4,2,2,0,50,200,100),(25,4,2,3,0,250,100,200),(26,1,4,1,0,0,0,0),(27,1,4,2,0,0,0,0),(28,1,1,1,0,200,0,0),(29,1,1,2,0,500,0,0),(30,1,5,1,1,200,1,2),(31,1,5,1,2,200,200,200),(32,1,5,2,1,3,1,1),(33,1,5,2,2,2,1,1);
 /*!40000 ALTER TABLE `pu_market` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,8 +538,27 @@ CREATE TABLE `pu_operations` (
   `primary_union_id` int(11) DEFAULT NULL,
   `males` int(11) DEFAULT NULL,
   `females` int(11) DEFAULT NULL,
+  `manager` int(11) DEFAULT NULL,
+  `ops` int(11) DEFAULT NULL,
+  `gm` int(11) DEFAULT NULL,
+  `lm` int(11) DEFAULT NULL,
+  `hr` int(11) DEFAULT NULL,
+  `fa` int(11) DEFAULT NULL,
+  `audit` int(11) DEFAULT NULL,
+  `other` int(11) DEFAULT NULL,
+  `bod` int(11) DEFAULT NULL,
+  `bodmale` int(11) DEFAULT NULL,
+  `bodfemale` int(11) DEFAULT NULL,
+  `edumale` int(11) DEFAULT NULL,
+  `edufemale` int(11) DEFAULT NULL,
+  `creditmale` int(11) DEFAULT NULL,
+  `creditfemale` int(11) DEFAULT NULL,
+  `auditmale` int(11) DEFAULT NULL,
+  `auditfemale` int(11) DEFAULT NULL,
+  `othermale` int(11) DEFAULT NULL,
+  `otherfemale` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -402,7 +567,7 @@ CREATE TABLE `pu_operations` (
 
 LOCK TABLES `pu_operations` WRITE;
 /*!40000 ALTER TABLE `pu_operations` DISABLE KEYS */;
-INSERT INTO `pu_operations` VALUES (3,1,10,10);
+INSERT INTO `pu_operations` VALUES (9,1,10,10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(11,4,3,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pu_operations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,7 +583,7 @@ CREATE TABLE `pu_operations_area` (
   `primary_union_id` int(11) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -427,7 +592,7 @@ CREATE TABLE `pu_operations_area` (
 
 LOCK TABLES `pu_operations_area` WRITE;
 /*!40000 ALTER TABLE `pu_operations_area` DISABLE KEYS */;
-INSERT INTO `pu_operations_area` VALUES (2,1,1);
+INSERT INTO `pu_operations_area` VALUES (12,1,1),(13,1,2),(15,4,2),(16,4,3);
 /*!40000 ALTER TABLE `pu_operations_area` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,8 +616,10 @@ CREATE TABLE `pu_profile` (
   `phone` varchar(45) DEFAULT NULL,
   `fax` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
+  `saved` int(11) DEFAULT '0',
+  `locked` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,6 +628,7 @@ CREATE TABLE `pu_profile` (
 
 LOCK TABLES `pu_profile` WRITE;
 /*!40000 ALTER TABLE `pu_profile` DISABLE KEYS */;
+INSERT INTO `pu_profile` VALUES (1,1,'2014-06-15',NULL,NULL,'1600 Prince St Apt 306','Alexandria','James','Founder','8035538112','4554645656','af8924b8632b41e3923c2a590b29e1b7@mail.marketp',0,0),(2,4,'2012-01-13',NULL,NULL,'411 U Tower Srinakarin Rd., Suanluang','Bangkok','Mr. Vivit Chareonsin','Program Assistant','+662-704-4254','+662-704-4255','vivit@aaccu.coop',1,0);
 /*!40000 ALTER TABLE `pu_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -482,7 +650,7 @@ CREATE TABLE `pu_service_distribution` (
   `youth` int(11) DEFAULT NULL,
   `none_member` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,6 +659,7 @@ CREATE TABLE `pu_service_distribution` (
 
 LOCK TABLES `pu_service_distribution` WRITE;
 /*!40000 ALTER TABLE `pu_service_distribution` DISABLE KEYS */;
+INSERT INTO `pu_service_distribution` VALUES (37,4,2,1,0,0,0,0,0),(38,4,2,2,0,0,0,0,0),(39,4,2,3,0,0,0,0,0),(40,1,4,1,0,0,0,0,0),(41,1,4,2,0,0,0,0,0),(42,1,4,3,0,0,0,0,0),(43,1,1,1,100,200,0,0,0),(44,1,1,2,0,0,0,0,0),(45,1,1,3,0,0,0,0,0),(46,1,5,1,0,0,0,0,0),(47,1,5,2,0,0,0,0,0),(48,1,5,3,0,0,0,0,0);
 /*!40000 ALTER TABLE `pu_service_distribution` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -505,7 +674,7 @@ CREATE TABLE `service` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -514,7 +683,37 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
+INSERT INTO `service` VALUES (1,'Shares'),(2,'Savings'),(3,'Loans');
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `unlock_request`
+--
+
+DROP TABLE IF EXISTS `unlock_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `unlock_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pu_datasheet_id` int(11) DEFAULT NULL,
+  `pu_profile_id` int(11) DEFAULT NULL,
+  `cdate` date DEFAULT NULL,
+  `comment` text,
+  `federation_id` int(11) DEFAULT NULL,
+  `unlock_date` datetime DEFAULT NULL,
+  `primary_union_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unlock_request`
+--
+
+LOCK TABLES `unlock_request` WRITE;
+/*!40000 ALTER TABLE `unlock_request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `unlock_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -535,7 +734,7 @@ CREATE TABLE `user` (
   `primary_union_id` int(11) NOT NULL DEFAULT '0',
   `country_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -544,7 +743,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@aaccu.coop','*4AFE947663BFA0844F4C0F8B53B7ABF95379FB44',0,1,'2014-06-01 22:00:53',0,0,0),(2,'fsct@aaccu.coop','*D41381335C614615CCB6F68D12CE00E9309AF666',1,1,'2014-06-01 19:42:45',1,0,1),(3,'farmers@aaccu.coop','*21C69224FD52649343758BC0F110775F5066D101',2,1,'2014-06-01 21:58:27',1,1,1);
+INSERT INTO `user` VALUES (1,'admin@aaccu.coop','*4ACFE3202A5FF5CF467898FC58AAB1D615029441',0,1,'2014-08-13 12:06:30',0,0,0),(2,'fsct@aaccu.coop','*D41381335C614615CCB6F68D12CE00E9309AF666',1,1,'2014-07-08 23:55:48',1,0,1),(3,'farmers@aaccu.coop','*21C69224FD52649343758BC0F110775F5066D101',2,1,'2014-08-29 14:52:34',1,1,1),(4,'cult@aaccu.coop','*75A29E56315D1C906E7D08683551B78866A31391',1,1,'2014-06-09 00:17:14',2,0,1),(5,'pfcco@aaccu.coop','*971B99292A8F57A70D8F42D06A8BB56791F51C93',1,1,NULL,5,0,7),(6,'cculb@aaccu.coop','*B4169279D86413B7B858969AF590FC34DA16D61C',1,1,NULL,3,0,4),(7,'natcco@aaccu.coop','*59848E5ED131AA9D5565F4C979B57C1EDD3F54F0',1,1,NULL,6,0,7),(8,'stpeter@aaccu.coop','*79153D173D5E8C96C72B444051342A5C66C94E76',2,1,'2014-06-25 05:05:27',1,2,1),(9,'kusacco@aaccu.coop','*5032F503127C24A8E18052869EB7E0152BFAAD49',2,1,NULL,1,3,1),(10,'sktcu@aaccu.coop','*D3A0C3F7CB10434B0928742402B079D464BBD4AD',2,1,'2014-06-25 05:12:25',2,4,1),(11,'pkpscu@aaccu.coop','*19B7B73B0CEC25E7D565318DC909425FD9287F17',2,1,NULL,2,5,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -557,4 +756,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-06-01 22:01:53
+-- Dump completed on 2014-08-29 15:00:25

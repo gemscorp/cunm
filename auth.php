@@ -163,14 +163,22 @@ $app->group("/member", function () use ($app, $smarty) {
 		$oparea = array();
 		$area_ids = $sth->fetchAll();
 		$gender_groups = array();
+		$genders = array(1, 2);
 		$group_template = array('total' => '', 'male' => '', 'female' => '', 'farmer' => '', 'employee' => '', 
 					'microb' => '', 'group1' => '', 'group2' => '', 'group3' => '', 'group4' => '',
 					'less_male' => '', 'less_female' => '', 'less_savings' => '', 'less_outstand' => '', 'less_totalg' => '', 'less_total' => '');
 		foreach ($area_ids as $id) {
 			$oparea[] = $id['area_id'];
-			$gender_groups[$id['area_id']] = $group_template;
+			foreach ($genders as $gender_id) {
+				$gender_groups[$id['area_id']][$gender_id] = $group_template;
+			}
 		}
 		
+		$gtext = array('1' => 'Male', '2' => 'Female');
+		
+		
+		$smarty->assign('gtxt', $gtext);
+		$smarty->assign('genders', $genders);
 		$smarty->assign('opareas', $oparea);
 		
 		$sql = "SELECT id, name FROM area ";
@@ -187,10 +195,10 @@ $app->group("/member", function () use ($app, $smarty) {
 		$smarty->assign('areas', $areas);
 		
 		$sql = "SELECT b.id, b.name, bg.name AS group_name, bsg.name AS subgroup_name "
-				. "FROM balancesheet AS b "
-				. "JOIN balancesheet_group AS bg ON bg.id = b.group_id "
-				. "JOIN balancesheet_sub_group AS bsg ON bsg.id = b.sub_group_id "
-				. " ORDER BY bg.id, bsg.id, b.sort_order ";
+			. "FROM balancesheet AS b "
+			. "JOIN balancesheet_group AS bg ON bg.id = b.group_id "
+			. "JOIN balancesheet_sub_group AS bsg ON bsg.id = b.sub_group_id "
+			. " ORDER BY bg.id, bsg.id, b.sort_order ";
 		
 		$sth = $db->prepare($sql);
 		$sth->execute();
@@ -223,11 +231,11 @@ $app->group("/member", function () use ($app, $smarty) {
 		
 		$sql = "SELECT pug.area_id, pug.total, pug.male, pug.female, pum.farmer, pum.employee, pum.microb, "
 			 . "         pua.group1, pua.group2, pua.group3, pua.group4, "
-			 . "         pulms.male AS less_male, pulms.female AS less_female, pulms.savings AS less_savings, pulms.outstanding AS less_outstand, pulms.total_granted AS less_totalg, pulms.total AS less_total "
+			 . "         pulms.male AS less_male, pulms.female AS less_female, pulms.gender_id, pulms.savings AS less_savings, pulms.outstanding AS less_outstand, pulms.total_granted AS less_totalg, pulms.total AS less_total "
 			 . "FROM pu_gender AS pug "
-			 . "LEFT JOIN pu_age AS pua ON pua.area_id = pug.area_id AND pua.pu_datasheet_id = pug.pu_datasheet_id "
-			 . "LEFT JOIN pu_market AS pum ON pum.area_id = pug.area_id AND pum.pu_datasheet_id = pug.pu_datasheet_id "
-			 . "LEFT JOIN pu_less_member_service AS pulms ON pulms.area_id = pug.area_id AND pulms.pu_datasheet_id = pug.pu_datasheet_id "
+			 . "LEFT JOIN pu_age AS pua ON pua.area_id = pug.area_id AND pua.gender_id = pug.gender_id AND pua.pu_datasheet_id = pug.pu_datasheet_id "
+			 . "LEFT JOIN pu_market AS pum ON pum.area_id = pug.area_id AND pum.gender_id = pug.gender_id AND pum.pu_datasheet_id = pug.pu_datasheet_id "
+			 . "LEFT JOIN pu_less_member_service AS pulms ON pulms.area_id = pug.area_id AND pulms.gender_id = pug.gender_id AND pulms.pu_datasheet_id = pug.pu_datasheet_id "
 			 . "WHERE pug.primary_union_id = :pid AND pug.pu_datasheet_id = :dsid ";
 		$sth = $db->prepare($sql);
 		$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $idx));
@@ -236,7 +244,7 @@ $app->group("/member", function () use ($app, $smarty) {
 		$gender_total = $group_template;
 		
 		foreach ($pu_genders as $pu_gender) {
-			$gender_groups[$pu_gender['area_id']] = array_merge($gender_groups[$pu_gender['area_id']], $pu_gender);
+			$gender_groups[$pu_gender['area_id']][$pu_gender['gender_id']] = array_merge($gender_groups[$pu_gender['area_id']][$pu_gender['gender_id']], $pu_gender);
 			
 			$gkeys = array_keys($pu_gender);
 			foreach ($gkeys as $key) {
@@ -370,33 +378,36 @@ $app->group("/member", function () use ($app, $smarty) {
 		
 		$total = 0;
 		
-		foreach ($_POST['area'] as $area_id => $val) {
+		foreach ($_POST['area'] as $area_id => $vx) {
 			
-			$total += $val['total'];
+			foreach ($vx as $gender_id => $val) {
 			
-			$sql = "INSERT INTO pu_gender (primary_union_id, pu_datasheet_id, area_id, male, female, total) "
-				 . "VALUES (:pid, :dsid, :area_id, :male, :female, :total) ";
-			$sth = $db->prepare($sql);
-			$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'], 
-				':area_id' => $area_id, ':male' => $val['male'], ':female' => $val['female'], ':total' => $val['total']));	
-			
-			$sql = "INSERT INTO pu_market (primary_union_id, pu_datasheet_id, area_id, farmer, employee, microb) "
-					. "VALUES (:pid, :dsid, :area_id, :farmer, :employee, :microb) ";
-			$sth = $db->prepare($sql);
-			$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
-					':area_id' => $area_id, ':farmer' => $val['farmer'], ':employee' => $val['employee'], ':microb' => $val['microb']));			
-			
-			$sql = "INSERT INTO pu_age (primary_union_id, pu_datasheet_id, area_id, group1, group2, group3, group4) "
-					. "VALUES (:pid, :dsid, :area_id, :group1, :group2, :group3, :group4) ";
-			$sth = $db->prepare($sql);
-			$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
-					':area_id' => $area_id, ':group1' => $val['group1'], ':group2' => $val['group2'], ':group3' => $val['group3'], ':group4' => $val['group4']));
-			
-			$sql = "INSERT INTO pu_less_member_service (primary_union_id, pu_datasheet_id, area_id, male, female, savings, outstanding, total_granted, total) "
-					. "VALUES (:pid, :dsid, :area_id, :male, :female, :savings, :outstanding, :total_granted, :total) ";
-			$sth = $db->prepare($sql);
-			$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
-					':area_id' => $area_id, ':male' => $val['less_male'], ':female' => $val['less_female'], ':savings' => $val['less_savings'], ':outstanding' => $val['less_outstand'], ':total_granted' => $val['less_totalg'], ':total' => $val['less_total']));
+				$total += $val['total'];
+				
+				$sql = "INSERT INTO pu_gender (primary_union_id, pu_datasheet_id, area_id, gender_id, total) "
+					 . "VALUES (:pid, :dsid, :area_id, :gender_id, :total) ";
+				$sth = $db->prepare($sql);
+				$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'], 
+					':area_id' => $area_id, ':gender_id' => $gender_id, ':total' => $val['total'])); 
+				
+				$sql = "INSERT INTO pu_market (primary_union_id, pu_datasheet_id, area_id, gender_id, farmer, employee, microb) "
+						. "VALUES (:pid, :dsid, :area_id, :gender_id, :farmer, :employee, :microb) ";
+				$sth = $db->prepare($sql);
+				$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
+						':area_id' => $area_id, ':gender_id' => $gender_id, ':farmer' => $val['farmer'], ':employee' => $val['employee'], ':microb' => $val['microb']));			
+				
+				$sql = "INSERT INTO pu_age (primary_union_id, pu_datasheet_id, area_id, gender_id, group1, group2, group3, group4) "
+						. "VALUES (:pid, :dsid, :area_id, :gender_id, :group1, :group2, :group3, :group4) ";
+				$sth = $db->prepare($sql);
+				$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
+						':area_id' => $area_id, 'gender_id' => $gender_id, ':group1' => $val['group1'], ':group2' => $val['group2'], ':group3' => $val['group3'], ':group4' => $val['group4']));
+				
+				$sql = "INSERT INTO pu_less_member_service (primary_union_id, pu_datasheet_id, area_id, gender_id, savings, outstanding, total_granted, total) "
+						. "VALUES (:pid, :dsid, :area_id, :gender_id, :savings, :outstanding, :total_granted, :total) ";
+				$sth = $db->prepare($sql);
+				$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $_POST['dsid'],
+						':area_id' => $area_id, ':gender_id' => $gender_id, ':savings' => $val['less_savings'], ':outstanding' => $val['less_outstand'], ':total_granted' => $val['less_totalg'], ':total' => $val['less_total']));
+			}
 		}
 		
 		$sql = "DELETE FROM pu_balancesheet WHERE primary_union_id = :pid AND pu_datasheet_id = :dsid ";
@@ -539,7 +550,7 @@ $app->group("/member", function () use ($app, $smarty) {
 		
 		$smarty->assign('areas', $areas);
 		
-		$sql = "SELECT males, females FROM pu_operations WHERE primary_union_id = :id ";
+		$sql = "SELECT males, females, manager, ops, gm, lm, hr, fa, audit, other, bod, bodmale, bodfemale, edumale, edufemale, creditmale, creditfemale, auditmale, auditfemale, othermale, otherfemale FROM pu_operations WHERE primary_union_id = :id ";
 		$sth = $db->prepare($sql);
 		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
 		
@@ -572,9 +583,33 @@ $app->group("/member", function () use ($app, $smarty) {
 		$sth = $db->prepare($sql);
 		$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
 		
-		$sql = "INSERT INTO pu_operations (primary_union_id, males, females) VALUES (:id, :male, :female) ";
+		$sql = "INSERT INTO pu_operations (primary_union_id, males, females, manager, ops, gm, lm, hr, fa, audit, other, bod, bodmale, bodfemale, edumale, edufemale, creditmale, creditfemale, auditmale, auditfemale, othermale, otherfemale) "
+			 . "VALUES (:id, :male, :female, :manager, :ops, :gm, :lm, :hr, :fa, :audit, :other, :bod, :bodmale, :bodfemale, :edumale, :edufemale, :creditmale, :creditfemale, :auditmale, :auditfemale, :othermale, :otherfemale) ";
 		$sth = $db->prepare($sql);
-		$sth->execute(array(':id' => $_SESSION['user_primary_union_id'], ':male' => $_POST['male'], ':female' => $_POST['female']));
+		$sth->execute(array(
+				':id' => $_SESSION['user_primary_union_id'], 
+				':male' => $_POST['male'], 
+				':female' => $_POST['female'],
+				':manager' => $_POST['manager'], 
+				':ops' => $_POST['ops'], 
+				':gm' => $_POST['gm'], 
+				':lm' => $_POST['lm'], 
+				':hr' => $_POST['hr'], 
+				':fa' => $_POST['fa'], 
+				':audit' => $_POST['audit'], 
+				':other' => $_POST['other'], 
+				':bod' => $_POST['bod'], 
+				':bodmale' => $_POST['bodmale'], 
+				':bodfemale' => $_POST['bodfemale'], 
+				':edumale' => $_POST['edumale'], 
+				':edufemale' => $_POST['edufemale'], 
+				':creditmale' => $_POST['creditmale'], 
+				':creditfemale' => $_POST['creditfemale'], 
+				':auditmale' => $_POST['auditmale'], 
+				':auditfemale' => $_POST['auditfemale'], 
+				':othermale' => $_POST['othermale'], 
+				':otherfemale' => $_POST['otherfemale'], 
+		));
 		
 		foreach ($_POST['area'] as $area_id) {
 			$sql = "INSERT INTO pu_operations_area (primary_union_id, area_id) VALUES (:id, :area_id) ";
@@ -648,20 +683,53 @@ $app->group("/federation", function () use ($app, $smarty) {
 		$primarycus = $sth->fetchAll();
 		$smarty->assign('primarycus', $primarycus);
 		
+		$sql = "SELECT id, federation_id, name FROM chapter WHERE federation_id = :federation_id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':federation_id' => $_SESSION['user_federation_id']));
+		
+		$chapters = $sth->fetchAll();
+		$smarty->assign('chapters', $chapters);
+		
 		$smarty->display('federation/primarycu.tpl');
 	});
 	
 	$app->post("/primarycu", function () use ($app, $smarty) {
 		
 		$db = getDbHandler();
-		$sql = "INSERT INTO primary_union (federation_id, name) VALUES (:federation_id, :name) ";
+		$sql = "INSERT INTO primary_union (federation_id, chapter_id, name) VALUES (:federation_id, :chapter_id, :name) ";
 		$sth = $db->prepare($sql);
-		$sth->execute(array(':federation_id' => $_POST['federation_id'], ':name' => $_POST['name']));
+		$sth->execute(array(':federation_id' => $_POST['federation_id'], ':chapter_id' => $_POST['chapter_id'], ':name' => $_POST['name']));
 		
 		setSuccessMessage('Primary Credit Union Added');
 		
 		$app->redirect(APP_PATH . '/federation/primarycu');
 		
+	});
+	
+	$app->get("/chapter", function () use ($app, $smarty) {
+	
+		$db = getDbHandler();
+		$sql = "SELECT id, federation_id, name FROM chapter WHERE federation_id = :federation_id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':federation_id' => $_SESSION['user_federation_id']));
+	
+		$chapters = $sth->fetchAll();
+		$smarty->assign('chapters', $chapters);
+	
+		$smarty->display('federation/chapter.tpl');
+	});
+	
+	$app->post("/chapter", function () use ($app, $smarty) {
+
+		$db = getDbHandler();
+		$sql = "INSERT INTO chapter (federation_id, name) VALUES (:federation_id, :name) ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array(':federation_id' => $_POST['federation_id'], ':name' => $_POST['name']));
+
+		setSuccessMessage('Region/Chapter Added');
+
+		$app->redirect(APP_PATH . '/federation/chapter');
+
 	});
 	
 });
