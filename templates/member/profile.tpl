@@ -11,6 +11,10 @@
     	{$country.name}
   	</div>
   	<div class="form-group">
+    	<label for="exampleInputEmail1">Region/Chapter</label>
+    	{$primarycu.chapter_name}
+  	</div>
+  	<div class="form-group">
     	<label for="exampleInputEmail1">Name of Credit Union</label>
     	{$primarycu.name}
   	</div>

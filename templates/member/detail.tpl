@@ -2,7 +2,6 @@
 <h3>Datasheet</h3>
 
 {include file='common/alert.tpl'}
-{debug}          
           
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
@@ -17,22 +16,23 @@
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail'>
 <input type='hidden' name='dsid' value='{$pid}' />
 <div class="tab-content">
-  <div class="tab-pane" id="area_market">
+  <div class="tab-pane active" id="area_market">
   		<table class="table">
   			<thead>
   				<tr>
 	  				<th rowspan='2'>Type of CU</th>
-	  				<th rowspan='2'>Number of Members</th>
+	  				<th rowspan='2'>Number of Members by Market</th>
 	  				<th rowspan='2'>Farmers</th>
 	  				<th rowspan='2'>Employee</th>
 	  				<th rowspan='2'>Micro Business</th>
-	  				<th colspan='4'>Age Segmentation of CU Membership</th>
+	  				<th colspan='5'>Age Segmentation of CU Membership</th>
   				</tr>
   				<tr>
   				<th>18 - 35</th>
   				<th>36 - 45</th>
   				<th>46 - 60</th>
   				<th>&gt; 60</th>
+  				<th>Total</th>
   				</tr>
   			</thead>
   			<tbody>
@@ -48,6 +48,7 @@
 	  					<td><input class='group2' data-sum='tgroup2' data-group='group2' type='text' name="area[{$oparea}][{$gender}][group2]" value="{$gender_groups[$oparea][$gender].group2}" /></td>
 	  					<td><input class='group3' data-sum='tgroup3' data-group='group3' type='text' name="area[{$oparea}][{$gender}][group3]" value="{$gender_groups[$oparea][$gender].group3}" /></td>
 	  					<td><input class='group4' data-sum='tgroup4' data-group='group4' type='text' name="area[{$oparea}][{$gender}][group4]" value="{$gender_groups[$oparea][$gender].group4}" /></td>
+	  					<td><input class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
 	  				</tr>
 	  				{/foreach}
 				{/foreach}
@@ -61,11 +62,12 @@
   					<td><input id='tgroup2' type='text' value='{$gender_total.group2}' /></td>
   					<td><input id='tgroup3' type='text' value='{$gender_total.group3}' /></td>
   					<td><input id='tgroup4' type='text' value='{$gender_total.group4}' /></td>
+  					<td><input id='ttotalx' type='text' value='{$gender_total.total}' /></td>
   				</tr>
   			</tbody>
   		</table>
   </div>
-  <div class="tab-pane active" id="service">
+  <div class="tab-pane" id="service">
   		<table class="table">
   			<thead>
   				<tr>
@@ -163,8 +165,11 @@
   					<th>Type of Services</th>
 	  				<th>Amount in US$</th>
 	  				<th>Male</th>
+	  				<th>Ratio</th>
 	  				<th>Female</th>
+	  				<th>Ratio</th>
 	  				<th>Youth</th>
+	  				<th>Ratio</th>
 	  				<th>Non-members</th>
 	  				<th>Ratio</th>
   				</tr>
@@ -175,10 +180,13 @@
   					<td>{$service.name}</td>
   					<td><input type='text' name='service[{$service.id}][total]' value="{$serval[$service.id].total}" /></td>
   					<td><input type='text' name='service[{$service.id}][male]' value="{$serval[$service.id].male}" /></td>
+  					<td><input type='text' name='service[{$service.id}][male_ratio]' value="{$serval[$service.id].male_ratio}" /></td>
   					<td><input type='text' name='service[{$service.id}][female]' value="{$serval[$service.id].female}" /></td>
+  					<td><input type='text' name='service[{$service.id}][female_ratio]' value="{$serval[$service.id].female_ratio}" /></td>
   					<td><input type='text' name='service[{$service.id}][youth]' value="{$serval[$service.id].youth}" /></td>
+  					<td><input type='text' name='service[{$service.id}][youth_ratio]' value="{$serval[$service.id].youth_ratio}" /></td>
   					<td><input type='text' name='service[{$service.id}][none_member]' value="{$serval[$service.id].none_member}" /></td>
-  					<td><input type='text' /></td>
+  					<td><input type='text' name='service[{$service.id}][none_member_ratio]' value="{$serval[$service.id].none_member_ratio}" /></td>
   				</tr>
   			{/foreach}
   			</tbody>
