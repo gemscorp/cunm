@@ -22,13 +22,19 @@
           	<div class='panel-heading'>Total No. of Employees</div>
           	<div class='panel-body'>
 	           <div class="controls controls-row">
-	             Males: <input type="text" class='span1 digits male' value='{$operations.males}' placeholder='Male' name="male" />
-	             Females: <input type="text" class='span2 digits female' value='{$operations.females}' placeholder='Female' name="female" />
-	             Total: <input type="text" class='span3 digits total' value='{$operations.gtotal}' placeholder='Total' name="gtotal" />
+	             Males: <input type="text" class='span1 digits male' value='{$operations.males}' placeholder='Male' id='male' name="male" />
+	             Females: <input type="text" class='span2 digits female' value='{$operations.females}' placeholder='Female' id='female' name="female" />
+	             Total: <input type="text" class='span3 digits total' value='{$operations.gtotal}' placeholder='Total' id='gtotal' name="gtotal" />
 	           </div>
 	        </div>
        
-        
+        <script type='text/javascript'>
+        	$(function () {
+        		$("#male,#female").change(function (e) {
+        			$("#gtotal").val(parseInt($("#male").val()) + parseInt($("#female").val()));
+        		});
+        	});
+        </script>
        
           <div class='panel-heading'>Total No. of Employees by Type</div>
           <div class='panel-body'>
@@ -46,21 +52,23 @@
 	           		<td class='info'>
 	             		Managerial
 	             	</td>
-	             	<td><input type="text" class='span1 digits male' value='{$operations.manager_male}' placeholder='Male' name="manager_male" /></td> 
-	             	<td><input type="text" class='span1 digits female' value='{$operations.manager_female}' placeholder='FeMale' name="manager_female" /></td> 
-	             	<td><input type="text" class='span1 digits total' value='{$operations.manager_total}' placeholder='Total' name="manager_total" /> </td>
+	             	<td><input type="text" class='span1 digits male' value='{$operations.manager_male}' placeholder='Male' id='manager_male' name="manager_male" /></td> 
+	             	<td><input type="text" class='span1 digits female' value='{$operations.manager_female}' placeholder='FeMale' id='manager_female' name="manager_female" /></td> 
+	             	<td><input type="text" class='span1 digits total' value='{$operations.manager_total}' placeholder='Total' id='manager_total' name="manager_total" /> </td>
 	             </tr>
 	             <tr>
 	             	<td class='info'>
 	             		Operational
 	             	</td>
-	             	<td><input type="text" class='span2 digits male' value='{$operations.ops_male}' placeholder='Male' name="ops_male" /></td> 
-	             	<td><input type="text" class='span2 digits female' value='{$operations.ops_female}' placeholder='Female' name="ops_female" /></td> 
-	             	<td><input type="text" class='span2 digits total' value='{$operations.ops_total}' placeholder='Total' name="ops_total" /></td>
+	             	<td><input type="text" class='span2 digits male' value='{$operations.ops_male}' placeholder='Male' id='ops_male' name="ops_male" /></td> 
+	             	<td><input type="text" class='span2 digits female' value='{$operations.ops_female}' placeholder='Female' id='ops_female' name="ops_female" /></td> 
+	             	<td><input type="text" class='span2 digits total' value='{$operations.ops_total}' placeholder='Total' id='ops_total' name="ops_total" /></td>
 	             </tr>
 	             </tbody>
 	             </table>
 	           </div>
+	           
+	          
        
           <div class='panel-heading'>No of Employees by Department</div>
           <div class='panel-body'>
@@ -108,21 +116,39 @@
              		<td><input type="text" class='span3 digits total' value='{$operations.audit_total}' placeholder='Total' name="audit_total" /> </td>
              	</tr>
              	<tr>
-             		<td class='info'>Other:</td> 
-             		<td><input type="text" class='span1 digits male' value='{$operations.other_male}' placeholder='Male' name="other_male" /></td> 
-             		<td><input type="text" class='span2 digits female' value='{$operations.other_female}' placeholder='Female' name="other_female" /></td> 
-             		<td><input type="text" class='span3 digits total' value='{$operations.other_total}' placeholder='Female' name="other_total" /> </td>
-             	</tr>
-             	<tr>
              		<td class='info'>BOD:</td> 
              		<td><input type="text" class='span1 digits male' value='{$operations.bod_male}' placeholder='Male' name="bod_male" /></td> 
              		<td><input type="text" class='span2 digits female' value='{$operations.bod_female}' placeholder='Female' name="bod_female" /></td> 
              		<td><input type="text" class='span3 digits total' value='{$operations.bod_total}' placeholder='Total' name="bod_total" /> </td>
              	</tr>
+             	<tr>
+             		<td class='info'>Other: <input type='text' name='other_name' value='{$operations.other_name}' /> </td> 
+             		<td><input type="text" class='span1 digits male' value='{$operations.other_male}' placeholder='Male' name="other_male" /></td> 
+             		<td><input type="text" class='span2 digits female' value='{$operations.other_female}' placeholder='Female' name="other_female" /></td> 
+             		<td><input type="text" class='span3 digits total' value='{$operations.other_total}' placeholder='Female' name="other_total" /> </td>
+             	</tr>
              	</tbody>
              	</table>
            </div>
        	</div>
+        
+        <script type='text/javascript'>
+        	$(function () {
+        		$(".male, .female").change(function (e) {
+        			var name = $(this).attr('name');
+        			var tname = name.replace(/_?(male|female)/, "");
+        			if (tname != "") {
+        				if (name.match(/_/)) {
+        					var total = parseInt($("input[name='" + tname + "_male']").val()) + parseInt($("input[name='" + tname + "_female']").val());
+        					$("input[name='" + tname + "_total']").val(total);
+        				} else {
+        					var total = parseInt($("input[name='" + tname + "male']").val()) + parseInt($("input[name='" + tname + "female']").val());
+        					$("input[name='" + tname + "total']").val(total);
+        				}
+        			}
+        		});
+        	});
+        </script>
         
        
           <div class='panel-heading'>

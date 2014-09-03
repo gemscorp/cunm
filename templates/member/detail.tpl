@@ -40,15 +40,15 @@
   					{foreach from=$genders item=gender}
 	  				<tr>
 	  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
-	  					<td><input class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
-	  					<td><input class='farmer' data-sum='tfarmer' data-group='farmer' type='text' name="area[{$oparea}][{$gender}][farmer]" value="{$gender_groups[$oparea][$gender].farmer}" /></td>
-	  					<td><input class='employee' data-sum='temployee' data-group='employee' type='text' name="area[{$oparea}][{$gender}][employee]" value="{$gender_groups[$oparea][$gender].employee}" /></td>
-	  					<td><input class='microb' data-sum='tmicrob' data-group='microb' type='text' name="area[{$oparea}][{$gender}][microb]" value="{$gender_groups[$oparea][$gender].microb}" /></td>
-	  					<td><input class='group1' data-sum='tgroup1' data-group='group1' type='text' name="area[{$oparea}][{$gender}][group1]" value="{$gender_groups[$oparea][$gender].group1}" /></td>
-	  					<td><input class='group2' data-sum='tgroup2' data-group='group2' type='text' name="area[{$oparea}][{$gender}][group2]" value="{$gender_groups[$oparea][$gender].group2}" /></td>
-	  					<td><input class='group3' data-sum='tgroup3' data-group='group3' type='text' name="area[{$oparea}][{$gender}][group3]" value="{$gender_groups[$oparea][$gender].group3}" /></td>
-	  					<td><input class='group4' data-sum='tgroup4' data-group='group4' type='text' name="area[{$oparea}][{$gender}][group4]" value="{$gender_groups[$oparea][$gender].group4}" /></td>
-	  					<td><input class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
+	  					<td><input id='total_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
+	  					<td><input id='farmer_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='farmer' data-sum='tfarmer' data-group='farmer' type='text' name="area[{$oparea}][{$gender}][farmer]" value="{$gender_groups[$oparea][$gender].farmer}" /></td>
+	  					<td><input id='employee_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='employee' data-sum='temployee' data-group='employee' type='text' name="area[{$oparea}][{$gender}][employee]" value="{$gender_groups[$oparea][$gender].employee}" /></td>
+	  					<td><input id='microb_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='microb' data-sum='tmicrob' data-group='microb' type='text' name="area[{$oparea}][{$gender}][microb]" value="{$gender_groups[$oparea][$gender].microb}" /></td>
+	  					<td><input id='group1_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group1' data-sum='tgroup1' data-group='group1' type='text' name="area[{$oparea}][{$gender}][group1]" value="{$gender_groups[$oparea][$gender].group1}" /></td>
+	  					<td><input id='group2_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group2' data-sum='tgroup2' data-group='group2' type='text' name="area[{$oparea}][{$gender}][group2]" value="{$gender_groups[$oparea][$gender].group2}" /></td>
+	  					<td><input id='group3_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group3' data-sum='tgroup3' data-group='group3' type='text' name="area[{$oparea}][{$gender}][group3]" value="{$gender_groups[$oparea][$gender].group3}" /></td>
+	  					<td><input id='group4_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group4' data-sum='tgroup4' data-group='group4' type='text' name="area[{$oparea}][{$gender}][group4]" value="{$gender_groups[$oparea][$gender].group4}" /></td>
+	  					<td><input id='grouptotal_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
 	  				</tr>
 	  				{/foreach}
 				{/foreach}
@@ -217,6 +217,17 @@
 				total += parseInt($(this).val());
 			});
 			$("#" + sum_col).val(total);
+			
+			var id = $(this).attr('class');
+			var gender = $(this).data('gender');
+			var oparea = $(this).data('oparea');
+			
+			var total = parseInt($("#farmer_" + oparea + "_" + gender).val()) + parseInt($("#microb_" + oparea + "_" + gender).val()) + parseInt($("#employee_" + oparea + "_" + gender).val()); 
+			$("#total_" + oparea + "_" + gender).val(total);	
+			
+			var total = parseInt($("#group1_" + oparea + "_" + gender).val()) + parseInt($("#group2_" + oparea + "_" + gender).val()) + parseInt($("#group3_" + oparea + "_" + gender).val()) + parseInt($("#group4_" + oparea + "_" + gender).val()); 
+			$("#grouptotal_" + oparea + "_" + gender).val(total);
+			
 		});
 		
 		$( "#dialog-form" ).dialog({

@@ -410,12 +410,19 @@ $app->get("/operations", function () use ($app, $smarty) {
 	$areas = $sth->fetchAll();
 
 	$smarty->assign('areas', $areas);
+	
+	$sql = "DESCRIBE pu_operations ";
+	$sth = $db->prepare($sql);
+	$sth->execute();
+	$operations = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
 
 	$sql = "SELECT * FROM pu_operations WHERE primary_union_id = :id ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
 
-	$operations = $sth->fetch();
+	if ($sth->rowCount() != 0) {
+		$operations = $sth->fetch();
+	}
 	$smarty->assign('operations', $operations);
 		
 	$sql = "SELECT area_id FROM pu_operations_area WHERE primary_union_id = :id ";
@@ -456,7 +463,7 @@ $app->post("/operations", function () use ($app, $smarty) {
 			edumale, edufemale, edutotal,
 			creditmale, creditfemale, credittotal,
 			auditmale, auditfemale, audittotal,
-			othermale, otherfemale, othertotal) "
+			othermale, otherfemale, othertotal, other_name) "
 			. "VALUES (:id, :male, :female, :gtotal, 
 				:manager_male, :manager_female, :manager_total, 
 				:ops_male, :ops_female, :ops_total, 
@@ -471,7 +478,7 @@ $app->post("/operations", function () use ($app, $smarty) {
 				:edumale, :edufemale, :edutotal,
 				:creditmale, :creditfemale, :credittotal, 
 				:auditmale, :auditfemale, :audittotal,
-				:othermale, :otherfemale, :othertotal) ";
+				:othermale, :otherfemale, :othertotal, :other_name) ";
 	
 	$sth = $db->prepare($sql);
 	$sth->execute(array(
@@ -521,6 +528,7 @@ $app->post("/operations", function () use ($app, $smarty) {
 			':othermale' => $_POST['othermale'],
 			':otherfemale' => $_POST['otherfemale'],
 			':othertotal' => $_POST['othertotal'],
+			':other_name' => $_POST['other_name'],
 	));
 
 	foreach ($_POST['area'] as $area_id) {
