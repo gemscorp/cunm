@@ -61,9 +61,6 @@
 	             </tbody>
 	             </table>
 	           </div>
-	      </div>
-       
-        
        
           <div class='panel-heading'>No of Employees by Department</div>
           <div class='panel-body'>
