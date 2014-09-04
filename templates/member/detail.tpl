@@ -130,7 +130,21 @@
   					</tr>
   				{/if}
   					<tr>
-  						<td style='text-align: left; padding-left: 60px;'>{$bsline.name}</td>
+  						{if $bsline.total eq "1"}
+  							<td style='text-align: left; padding-left: 30px;'>
+  						{elseif $bsline.total eq "2"}
+  							<td style='text-align: left;'>
+  						{else}
+  							<td style='text-align: left; padding-left: 60px;'>
+  						{/if}
+  						
+  						{if $bsline.bold eq "1"}
+  							<strong>{$bsline.name}</strong>
+  						{else}
+  							{$bsline.name}
+  						{/if}
+  						
+  						</td>
   						<td><input type='text' name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" /></td>
   					</tr>
   			{/foreach}
@@ -152,7 +166,21 @@
   					</tr>
   				{/if}
   					<tr>
-  						<td style='text-align: left; padding-left: 60px;'>{$isline.name}</td>
+  						{if $isline.total eq "1"}
+  							<td style='text-align: left; padding-left: 30px;'>
+  						{elseif $isline.total eq "2"}
+  							<td style='text-align: left;'>
+  						{else}
+  							<td style='text-align: left; padding-left: 60px;'>
+  						{/if}
+  						
+  						{if $isline.bold eq "1"}
+  							<strong>{$isline.name}</strong>
+  						{else}
+  							{$isline.name}
+  						{/if}
+  						
+  						</td>
   						<td><input type='text' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" /></td>
   					</tr>
   			{/foreach}
