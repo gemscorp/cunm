@@ -145,7 +145,64 @@
   						{/if}
   						
   						</td>
-  						<td><input type='text' name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" /></td>
+  						<td>
+  							{if $bsline.total eq "0"}
+  								<input type='text' id='bs{$bsline.id}' class="bslines" name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" />
+  							{else}
+  								<input style='background-color: #99FF99' type='text' id='bs{$bsline.id}' class="bslines" name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" readonly/>
+  							{/if}
+  							
+  							{if $bsline.formula ne ""}
+  								<script type='text/javascript'>
+  								
+  									$(function () {
+  										$(".bslines").change(function (e) {
+  											calsum{$bsline.id}();
+  										});
+  									});
+  								
+  									function calsum{$bsline.id}() {
+  									
+		  								{assign var=formulas value=","|explode:$bsline.formula}
+		  								{assign var=grp value=0}
+		  							
+		  								var x = 
+		  								{foreach from=$formulas item=litem name=lloop}
+		  							
+		  								{if preg_match("/^\[/", $litem)}
+		  									{if $grp == 1}
+		  										var y = 
+		  									{/if}
+		  									{assign var=zx value=$litem|replace:"[":""}
+		  									
+		  										getval({$zx}) + 
+		  									
+		  									{assign var=grp value=1}
+		  									
+		  								{elseif preg_match("/\]/", $litem)}
+		  									{assign var=zx value=$litem|replace:"]":""}
+		  									getval({$zx})
+		  									;
+		  								{else}
+			  								{if $smarty.foreach.lloop.last}
+			  									getval({$litem});
+			  								{else}
+			  									getval({$litem}) + 
+			  								{/if}
+			  							{/if}
+		  							{/foreach}
+		  							
+		  							{if $grp == 1}
+		  								$("#bs{$bsline.id}").val(x - y);
+		  							{else}
+		  								$("#bs{$bsline.id}").val(x);
+		  							{/if}
+  									}
+	  								</script>
+	  						{/if}
+  							
+  						
+  						</td>
   					</tr>
   			{/foreach}
   		</table>
@@ -181,7 +238,69 @@
   						{/if}
   						
   						</td>
-  						<td><input type='text' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" /></td>
+  						<td>
+  						
+  							{if $isline.total eq "0"}
+  								<input type='text' id='is{$isline.id}' class='islines' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" />
+  							{else}
+  								<input type='text' style='background-color: #99FF99'  id='is{$isline.id}' class='islines' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" readonly />
+  							{/if}
+  						
+  							{if $isline.formula ne ""}
+  								<script type='text/javascript'>
+  								
+  									$(function () {
+  										$(".islines").change(function (e) {
+  											icalsum{$isline.id}();
+  										});
+  									});
+  								
+  									function icalsum{$isline.id}() {
+  									
+		  								{assign var=formulas value=","|explode:$isline.formula}
+		  								{assign var=grp value=0}
+		  							
+		  								var x = 
+		  								{foreach from=$formulas item=litem name=lloop}
+		  							
+		  								{if preg_match("/^\[/", $litem)}
+		  									{if $grp == 1}
+		  										var y = 
+		  									{/if}
+		  									{assign var=zx value=$litem|replace:"[":""}
+		  									{if preg_match("/\]/", $zx)}
+		  										{assign var=zy value=$zx|replace:"]":""}
+		  										igetval({$zy});
+		  									{else}
+		  										igetval({$zx}) +
+		  									{/if}
+		  									
+		  									{assign var=grp value=1}
+		  									
+		  								{elseif preg_match("/\]/", $litem)}
+		  									{assign var=zx value=$litem|replace:"]":""}
+		  									igetval({$zx})
+		  									;
+		  								{else}
+			  								{if $smarty.foreach.lloop.last}
+			  									igetval({$litem});
+			  								{else}
+			  									igetval({$litem}) + 
+			  								{/if}
+			  							{/if}
+		  							{/foreach}
+		  							
+		  							{if $grp == 1}
+		  								$("#is{$isline.id}").val(x - y);
+		  							{else}
+		  								$("#is{$isline.id}").val(x);
+		  							{/if}
+  									}
+	  								</script>
+	  						{/if}	
+  							
+  							
+  						</td>
   					</tr>
   			{/foreach}
   		</table>
@@ -235,6 +354,14 @@
 
 <script type='text/javascript'>
 
+	function getval(xid) {
+		return parseInt($("#bs" + xid).val());
+	}
+
+	function igetval(xid) {
+		return parseInt($("#is" + xid).val());
+	}
+	
 	$(function () {
 		$( ".total, .totalx, .male, .female, .farmer, .employee, .microb, .group1, .group2, .group3, .group4, .less_total, .less_male, .less_female, .less_savings, .less_outstand, .less_totalg " ).change(function (e) {
 			e.preventDefault();

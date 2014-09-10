@@ -44,7 +44,7 @@ $app->get("/detail/:id", function ($idx) use ($app, $smarty) {
 
 	$smarty->assign('areas', $areas);
 
-	$sql = "SELECT b.id, b.name, bg.name AS group_name, bsg.name AS subgroup_name, b.total, b.bold "
+	$sql = "SELECT b.id, b.name, bg.name AS group_name, bsg.name AS subgroup_name, b.total, b.bold, b.formula "
 			. "FROM balancesheet AS b "
 					. "JOIN balancesheet_group AS bg ON bg.id = b.group_id "
 							. "JOIN balancesheet_sub_group AS bsg ON bsg.id = b.sub_group_id "
@@ -58,7 +58,7 @@ $app->get("/detail/:id", function ($idx) use ($app, $smarty) {
 	$smarty->assign('subgroup', "");
 
 	//income statement
-	$sql = "SELECT i.id, i.name, ig.name AS group_name, isg.name AS subgroup_name, i.total, i.bold "
+	$sql = "SELECT i.id, i.name, ig.name AS group_name, isg.name AS subgroup_name, i.total, i.bold, i.formula "
 			. "FROM `is` AS i "
 					. "JOIN is_group AS ig ON ig.id = i.group_id "
 							. "JOIN is_sub_group AS isg ON isg.id = i.sub_group_id "
