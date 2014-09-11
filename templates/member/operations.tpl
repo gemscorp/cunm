@@ -76,7 +76,7 @@
            	<table class='table table-striped table-bordered table-hover'>
            		<thead>
            			<tr>
-           				<th>Department</th>
+           				<th style='width: 325px'>Department</th>
            				<th>Male</th>
            				<th>Female</th>
            				<th>Total</th>

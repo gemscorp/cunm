@@ -24,10 +24,9 @@ function getCuByCountry($country_id = 0)
 function getLatestDataSheetByCuId($cu_ids)
 {
 	$dbo = getDbHandler();
-	$sql = "SELECT id FROM pu_datasheet WHERE primary_union_id IN (" . implode(',', $cu_ids) . ") GROUP BY primary_union_id ORDER BY `date` DESC ";
+	$sql = "SELECT t1.id FROM pu_datasheet AS t1 WHERE t1.primary_union_id IN (" . implode(',', $cu_ids) . ") AND t1.date = (SELECT MAX(t2.date) FROM pu_datasheet AS t2 WHERE t2.primary_union_id = t1.primary_union_id) GROUP BY t1.primary_union_id";
 	$sth = $dbo->prepare($sql);
 	$sth->execute();
-	
 	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
 }
 
@@ -51,6 +50,26 @@ function getMarketAggr($dids)
 	     . "WHERE m.pu_datasheet_id IN (" . implode(",", $dids) . ") "
 	     . "GROUP BY m.area_id ";
 	$sth = $dbo->prepare($sql);
+	$sth->execute();
+	return $sth->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getReportData($dids)
+{
+	$db = getDbHandler();
+	$sql = "SELECT pug.area_id, pug.gender_id, SUM(pug.total) AS total, SUM(pug.male) AS male, SUM(pug.female) AS female, SUM(pum.farmer) AS farmer, 
+					SUM(pum.employee) AS employee, SUM(pum.microb) AS microb, "
+		. "         SUM(pua.group1) AS group1, SUM(pua.group2) AS group2, SUM(pua.group3) AS group3, SUM(pua.group4) AS group4, "
+		. "         SUM(pulms.male) AS less_male, SUM(pulms.female) AS less_female, pulms.gender_id, SUM(pulms.savings) AS less_savings, 
+					SUM(pulms.outstanding) AS less_outstand, SUM(pulms.total_granted) AS less_totalg, 
+					SUM(pulms.total) AS less_total "
+		. "FROM pu_gender AS pug "
+		. "LEFT JOIN pu_age AS pua ON pua.area_id = pug.area_id AND pua.gender_id = pug.gender_id AND pua.pu_datasheet_id = pug.pu_datasheet_id "
+		. "LEFT JOIN pu_market AS pum ON pum.area_id = pug.area_id AND pum.gender_id = pug.gender_id AND pum.pu_datasheet_id = pug.pu_datasheet_id "
+		. "LEFT JOIN pu_less_member_service AS pulms ON pulms.area_id = pug.area_id AND pulms.gender_id = pug.gender_id AND pulms.pu_datasheet_id = pug.pu_datasheet_id "
+		. "WHERE pug.pu_datasheet_id IN (" . implode(",", $dids) . ") "
+		. "GROUP BY pug.area_id, pug.gender_id ";
+	$sth = $db->prepare($sql);
 	$sth->execute();
 	return $sth->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -105,7 +124,7 @@ function getMemberCountGroup($dids)
 function getBsLines()
 {
 	$db = getDbHandler();
-	$sql = "SELECT b.id, b.name, bg.name AS group_name, bsg.name AS subgroup_name "
+	$sql = "SELECT b.id, b.name, bg.name AS group_name, bsg.name AS subgroup_name, b.total, b.bold "
 			. "FROM balancesheet AS b "
 			. "JOIN balancesheet_group AS bg ON bg.id = b.group_id "
 					. "JOIN balancesheet_sub_group AS bsg ON bsg.id = b.sub_group_id "
@@ -117,7 +136,7 @@ function getBsLines()
 	return $bslines;
 }
 
-function getBalAggr($dids)
+function getBalAggr($dids, $exchange)
 {
 	$db = getDbHandler();
 	$sql = "SELECT b.id, b.name, bg.name AS group_name, bsg.name AS subgroup_name "
@@ -130,19 +149,19 @@ function getBalAggr($dids)
 	$sth->execute();
 	$bslines = $sth->fetchAll();
 	
-	$sql = "SELECT balancesheet_id, SUM(amount) AS amount FROM pu_balancesheet WHERE pu_datasheet_id IN (" . implode(",", $dids) .") ";
+	$sql = "SELECT balancesheet_id, SUM(amount) AS amount, (SUM(amount) / $exchange) AS us_amount FROM pu_balancesheet WHERE pu_datasheet_id IN (" . implode(",", $dids) .") GROUP BY balancesheet_id ";
 	$sth = $db->prepare($sql);
 	$sth->execute();
 	
 	$bl_sheet = array();
 	foreach ($bslines as $blt) {
-		$bl_sheet[$blt['id']] = array('amount' => '');
+		$bl_sheet[$blt['id']] = array('amount' => '', 'us_amount' => '');
 	}
 	
 	$bl = $sth->fetchAll();
 	
 	foreach ($bl as $b) {
-		$bl_sheet[$b['balancesheet_id']] = array('amount' => $b['amount']);
+		$bl_sheet[$b['balancesheet_id']] = array('amount' => $b['amount'], 'us_amount' => $b['us_amount']);
 	}
 	
 	return $bl_sheet;
@@ -153,7 +172,7 @@ function getIsLines()
 	$db = getDbHandler();
 	
 	//income statement
-	$sql = "SELECT i.id, i.name, ig.name AS group_name, isg.name AS subgroup_name "
+	$sql = "SELECT i.id, i.name, ig.name AS group_name, isg.name AS subgroup_name, i.total, i.bold "
 			. "FROM `is` AS i "
 			. "JOIN is_group AS ig ON ig.id = i.group_id "
 					. "JOIN is_sub_group AS isg ON isg.id = i.sub_group_id "
@@ -166,7 +185,7 @@ function getIsLines()
 	return $islines;
 }
 
-function getIsAggr($dids) 
+function getIsAggr($dids, $exchange) 
 {
 
 	$db = getDbHandler();
@@ -183,19 +202,19 @@ function getIsAggr($dids)
 	$islines = $sth->fetchAll();
 
 	//income statement
-	$sql = "SELECT is_id, SUM(amount) AS amount FROM pu_is WHERE pu_datasheet_id IN (" . implode(',', $dids) .") ";
+	$sql = "SELECT is_id, SUM(amount) AS amount, (SUM(amount) / $exchange) AS us_amount FROM pu_is WHERE pu_datasheet_id IN (" . implode(',', $dids) .") GROUP BY is_id ";
 	$sth = $db->prepare($sql);
 	$sth->execute();
 	
 	$is_sheet = array();
 	foreach ($islines as $ist) {
-		$is_sheet[$ist['id']] = array('amount' => '');
+		$is_sheet[$ist['id']] = array('amount' => '', 'us_amount' => '');
 	}
 	
 	$is = $sth->fetchAll();
 	
 	foreach ($is as $i) {
-		$is_sheet[$i['is_id']] = array('amount' => $i['amount']);
+		$is_sheet[$i['is_id']] = array('amount' => $i['amount'], 'us_amount' => $i['us_amount']);
 	}
 	
 	return $is_sheet;

@@ -63,27 +63,75 @@ $app->group("/report", function () use ($app, $smarty) {
 		
 		require_once 'lib/report.php';
 		
+		$exchange = $_POST['exchange'];
+		
 		if ($_POST['federation_id'] != 0) {
 			$cu_ids = getCuByFedId($_POST['federation_id']);
 		} else {
 			$cu_ids = getCuByCountry($_POST['country_id']);
 		}
 		
+		
+		$sql = "SELECT DISTINCT area_id FROM pu_operations_area WHERE primary_union_id IN (" . implode(",", $cu_ids) . ") ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		
+		$oparea = array();
+		$area_ids = $sth->fetchAll();
+		$gender_groups = array();
+		$genders = array(1, 2);
+		$group_template = array('total' => '', 'male' => '', 'female' => '', 'farmer' => '', 'employee' => '',
+				'microb' => '', 'group1' => '', 'group2' => '', 'group3' => '', 'group4' => '',
+				'less_male' => '', 'less_female' => '', 'less_savings' => '', 'less_outstand' => '', 'less_totalg' => '', 'less_total' => '');
+		foreach ($area_ids as $id) {
+			$oparea[] = $id['area_id'];
+			foreach ($genders as $gender_id) {
+				$gender_groups[$id['area_id']][$gender_id] = $group_template;
+			}
+		}
+		
+		$gtext = array('1' => 'Male', '2' => 'Female');
+		
+		
+		$smarty->assign('gtxt', $gtext);
+		$smarty->assign('genders', $genders);
+		$smarty->assign('opareas', $oparea);
+		
+		$sql = "SELECT id, name FROM area ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		
+		$areast = $sth->fetchAll();
+		$areas = array();
+		
+		foreach ($areast as $a) {
+			$areas[$a['id']] = $a['name'];
+		}
+		
+		$smarty->assign('areas', $areas);
+		
 		$dids = getLatestDataSheetByCuId($cu_ids);
 		
-		$less_member = getLessMemberAggr($dids);
-		$market = getMarketAgeAggr($dids);
-		//$age = getAgeAggr($dids);
-		$gender = getGenderAggr($dids);
-		$memcnt = getMemberCountGroup($dids);
-		$bl = getBalAggr($dids);
-		$is = getIsAggr($dids);
+		$pu_genders = getReportData($dids);
 		
-		$smarty->assign('less_member', $less_member);
-		$smarty->assign('market', $market);
-		//$smarty->assign('age', $age);
-		$smarty->assign('gender', $gender);
-		$smarty->assign('memcnt', $memcnt);
+		$gender_total = $group_template;
+		
+		foreach ($pu_genders as $pu_gender) {
+			$gender_groups[$pu_gender['area_id']][$pu_gender['gender_id']] = $pu_gender;
+				
+			$gkeys = array_keys($pu_gender);
+			foreach ($gkeys as $key) {
+				if (!isset($gender_total[$key])) continue;
+				$gender_total[$key] += $pu_gender[$key];
+			}
+		}
+		
+		$smarty->assign('gender_groups', $gender_groups);
+		$smarty->assign('gender_total', $gender_total);
+		
+		$bl = getBalAggr($dids, $exchange);
+		$is = getIsAggr($dids, $exchange);
+				
 		$smarty->assign('bsvals', $bl);
 		$smarty->assign('isvals', $is);
 		$smarty->assign('bslines', getBsLines());
