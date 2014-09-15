@@ -71,6 +71,11 @@ $app->group("/report", function () use ($app, $smarty) {
 			$cu_ids = getCuByCountry($_POST['country_id']);
 		}
 		
+		if (count($cu_ids) == 0) {
+			$smarty->display('member/nodata.tpl');
+			return;
+		}
+		
 		
 		$sql = "SELECT DISTINCT area_id FROM pu_operations_area WHERE primary_union_id IN (" . implode(",", $cu_ids) . ") ";
 		$sth = $db->prepare($sql);
