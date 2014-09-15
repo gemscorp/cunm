@@ -112,6 +112,11 @@ $app->group("/report", function () use ($app, $smarty) {
 		
 		$dids = getLatestDataSheetByCuId($cu_ids);
 		
+		if (count($dids) == 0) {
+			$smarty->display('member/nodata.tpl');
+			return;
+		}
+		
 		$pu_genders = getReportData($dids);
 		
 		$gender_total = $group_template;
