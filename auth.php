@@ -144,15 +144,40 @@ $app->group("/report", function () use ($app, $smarty) {
 		$is = getIsAggr($dids, $exchange);
 		
 		$pearls = array();
-		$pearls['P1'] = $bl[15]['amount'] / $bl[18]['amount'];
-		$pearls['P2'] = $bl[12]['amount'] / $bl[19]['amount'];
+		if ($bl[18]['amount'] == 0) {
+			$pearls['P1'] = 'N/A';
+		} else {
+			$pearls['P1'] = $bl[15]['amount'] / $bl[18]['amount'];
+		}
 		
-		$pearls['E1'] = $bl[17]['amount'] / $bl[28]['amount'];
-		$pearls['E5'] = $bl[31]['amount'] / $bl[28]['amount'];
-		$pearls['E9'] = $bl[37]['amount'] / $bl[28]['amount'];
+		if ($bl[19]['amount'] == 0) {
+			$pearls['P2'] = 'N/A';
+		} else {
+			$pearls['P2'] = $bl[12]['amount'] / $bl[19]['amount'];
+		}
 		
-		$pearls['A1'] = $bl[16]['amount'] / $bl[17]['amount'];
-		$pearls['A2'] = $bl[25]['amount'] / $bl[28]['amount'];
+		if ($bl[28]['amount'] == 0) {
+			
+			$pearls['E1'] = 'N/A';
+			$pearls['E5'] = 'N/A';
+			$pearls['E9'] = 'N/A';
+				
+			$pearls['A2'] = 'N/A';
+			
+		} else {
+			$pearls['E1'] = $bl[17]['amount'] / $bl[28]['amount'];
+			$pearls['E5'] = $bl[31]['amount'] / $bl[28]['amount'];
+			$pearls['E9'] = $bl[37]['amount'] / $bl[28]['amount'];
+			
+			$pearls['A2'] = $bl[25]['amount'] / $bl[28]['amount'];
+		}
+		
+		if ($bl[17]['amount'] == 0) {
+			$pearls['A1'] = 'N/A';
+		} else {
+			$pearls['A1'] = $bl[16]['amount'] / $bl[17]['amount'];
+		}
+		
 		
 		if (getTotalMember($pdids) == 0) {
 			$pearls['S10'] = 'N/A';
