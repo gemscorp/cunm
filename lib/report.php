@@ -74,6 +74,39 @@ function getReportData($dids)
 	return $sth->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getPreviousDataSheetIds($cu_ids)
+{
+	$dbo = getDbHandler();
+	$sql = "SELECT t1.id FROM pu_datasheet AS t1 WHERE t1.primary_union_id IN (" . implode(',', $cu_ids) . ") AND t1.date = (SELECT MAX(t3.date) FROM pu_datasheet AS t3 WHERE t3.primary_union_id = t1.primary_union_id AND t3.date < (SELECT MAX(t2.date) FROM pu_datasheet AS t2 WHERE t2.primary_union_id = t1.primary_union_id)) GROUP BY t1.primary_union_id";
+	$sth = $dbo->prepare($sql);
+	$sth->execute();
+	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+}
+
+function getTotalMember($dids)
+{
+	$db = getDbHandler();
+	$sql = "SELECT SUM(pug.total) AS total"
+		 . "FROM pu_gender AS pug "
+		 . "WHERE pug.pu_datasheet_id IN (" . implode(",", $dids) . ") ";
+	$sth = $db->prepare($sql);
+	$sth->execute();
+	if ($sth->rowCount() == 0) return 0;
+	$row = $sth->fetch();
+	return $row['total'];
+}
+
+function getAggrBlItem($dids, $blid)
+{
+	$db = getDbHandler();
+	$sql = "SELECT balancesheet_id, SUM(amount) AS amount FROM pu_balancesheet WHERE pu_datasheet_id IN (" . implode(",", $dids) .") AND balancesheet_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $blid));
+	if ($sth->rowCount() == 0) return 0;
+	$row = $sth->fetch();
+	return $row['amount'];
+}
+
 function getMarketAgeAggr($dids)
 {
 	$dbo = getDbHandler();

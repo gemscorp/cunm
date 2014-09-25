@@ -8,9 +8,9 @@
   <li class='active'><a href="#area_market" data-toggle="tab">Area, Market, Gender &amp; Age</a></li>
   <li><a href="#service" data-toggle="tab">Have Less Member Service Distribution</a></li>
   <li><a href="#balancesheet" data-toggle="tab">Balance Sheet</a></li>
-  <li><a href="#incomestatment" data-toggle="tab">Income Statement</a></li>  
+  <li><a href="#incomestatment" data-toggle="tab">Income Statement</a></li>
+  <li><a href="#pearls" data-toggle="tab">PEARLS</a></li>    
 </ul>
-{debug}
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail'>
 <div class="tab-content">
   <div class="tab-pane active" id="area_market">
@@ -232,6 +232,83 @@
 						</td>
   					</tr>
   			{/foreach}
+  		</table>
+  </div>
+  <div class="tab-pane" id="pearls">
+  		<table class="table">
+  			<thead>
+  				<tr>
+	  				<th>Area</th>
+	  				<th>Code</th>
+	  				<th>Indicator</th>
+	  				<th>Actual</th>
+	  				<th>Goal</th>
+  				</tr>
+  			</thead>
+  			<tbody>
+  				<tr>
+  					<td rowspan='2'>P = Protection</td>
+  					<td>P1</td>
+  					<td>Allowance for Loan Losses / Allowance Required &lt; 12 Months</td>
+  					<td>{$pearls.P1}</td>
+  					<td>100%</td>
+  				</tr>
+  				<tr>
+  					<td>P2</td>
+  					<td>Net Allowance for Loan Losses / Allowance Required for Loans Delinquent less than 12 Months</td>
+  					<td>{$pearls.P2}</td>
+  					<td>35%</td>
+  				</tr>
+  				
+  				<tr>
+  					<td rowspan='3'>E = Effective Financial Structure</td>
+  					<td>E1</td>
+  					<td>Net Loans / Total Assets</td>
+  					<td>{$pearls.E1}</td>
+  					<td>70% - 80%</td>
+  				</tr>
+  				<tr>
+  					<td>E5</td>
+  					<td>Savings Deposits / Total Assets</td>
+  					<td>{$pearls.E5}</td>
+  					<td>70% - 80%</td>
+  				</tr>
+  				<tr>
+  					<td>E9</td>
+  					<td>Net Institutional Capital / Total Assets</td>
+  					<td>{$pearls.E9}</td>
+  					<td>Min 10%</td>
+  				</tr>
+  				
+  				<tr>
+  					<td rowspan='2'>A = Asset Quality</td>
+  					<td>A1</td>
+  					<td>Total Loan Delinquency / Gross Loan Portfolio</td>
+  					<td>{$pearls.A1}</td>
+  					<td>&lt; 5%</td>
+  				</tr>
+  				<tr>
+  					<td>A2</td>
+  					<td>Non-Earning Assets / Total Assets</td>
+  					<td>{$pearls.A2}</td>
+  					<td>&lt; 5%</td>
+  				</tr>
+  				
+  				<tr>
+  					<td rowspan='2'>S = Signs of Growth</td>
+  					<td>S10</td>
+  					<td>Growth in Membership</td>
+  					<td>{$pearls.S10}</td>
+  					<td>&gt; 12%</td>
+  				</tr>
+  				<tr>
+  					<td>S11</td>
+  					<td>Growth in Total Assets</td>
+  					<td>{$pearls.S11}</td>
+  					<td>&lt; inflation</td>
+  				</tr>
+  				
+  			</tbody>
   		</table>
   </div>
 </div>

@@ -116,6 +116,7 @@ $app->group("/report", function () use ($app, $smarty) {
 		$smarty->assign('areas', $areas);
 		
 		$dids = getLatestDataSheetByCuId($cu_ids);
+		$pdids = getPreviousDataSheetIds($cu_ids);
 		
 		if (count($dids) == 0) {
 			$smarty->display('member/nodata.tpl');
@@ -141,6 +142,22 @@ $app->group("/report", function () use ($app, $smarty) {
 		
 		$bl = getBalAggr($dids, $exchange);
 		$is = getIsAggr($dids, $exchange);
+		
+		$pearls = array();
+		$pearls['P1'] = $bl[15]['amount'] / $bl[18]['amount'];
+		$pearls['P2'] = $bl[12]['amount'] / $bl[19]['amount'];
+		
+		$pearls['E1'] = $bl[17]['amount'] / $bl[28]['amount'];
+		$pearls['E5'] = $bl[31]['amount'] / $bl[28]['amount'];
+		$pearls['E9'] = $bl[37]['amount'] / $bl[28]['amount'];
+		
+		$pearls['A1'] = $bl[16]['amount'] / $bl[17]['amount'];
+		$pearls['A2'] = $bl[25]['amount'] / $bl[28]['amount'];
+		
+		$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids);
+		$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28);
+		
+		$smarty->assign('pearls', $pearls);
 				
 		$smarty->assign('bsvals', $bl);
 		$smarty->assign('isvals', $is);
