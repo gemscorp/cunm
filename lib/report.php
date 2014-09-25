@@ -86,7 +86,7 @@ function getPreviousDataSheetIds($cu_ids)
 function getTotalMember($dids)
 {
 	$db = getDbHandler();
-	$sql = "SELECT SUM(pug.total) AS total"
+	$sql = "SELECT SUM(pug.total) AS total "
 		 . "FROM pu_gender AS pug "
 		 . "WHERE pug.pu_datasheet_id IN (" . implode(",", $dids) . ") ";
 	$sth = $db->prepare($sql);
