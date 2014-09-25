@@ -154,8 +154,17 @@ $app->group("/report", function () use ($app, $smarty) {
 		$pearls['A1'] = $bl[16]['amount'] / $bl[17]['amount'];
 		$pearls['A2'] = $bl[25]['amount'] / $bl[28]['amount'];
 		
-		$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids);
-		$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28);
+		if (getTotalMember($pdids) == 0) {
+			$pearls['S10'] = 'N/A';
+		} else {
+			$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids);
+		}
+		
+		if (getAggrBlItem($dids, 28) == 0) {
+			$pearls['S11'] = 'N/A';
+		} else {
+			$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28);
+		}
 		
 		$smarty->assign('pearls', $pearls);
 				
