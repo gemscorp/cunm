@@ -185,7 +185,7 @@ $app->group("/report", function () use ($app, $smarty) {
 			$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids);
 		}
 		
-		if (getAggrBlItem($dids, 28) == 0) {
+		if (getAggrBlItem($pdids, 28) == 0) {
 			$pearls['S11'] = 'N/A';
 		} else {
 			$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28);
