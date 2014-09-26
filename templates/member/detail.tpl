@@ -146,7 +146,7 @@
   						
   						</td>
   						<td>
-  							{if $bsline.total eq "0"}
+  							{if $bsline.formula eq ""}
   								<input type='text' id='bs{$bsline.id}' class="bslines" name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" />
   							{else}
   								<input style='background-color: #99FF99' type='text' id='bs{$bsline.id}' class="bslines" name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" readonly/>
@@ -240,7 +240,7 @@
   						</td>
   						<td>
   						
-  							{if $isline.total eq "0"}
+  							{if $isline.formula eq ""}
   								<input type='text' id='is{$isline.id}' class='islines' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" />
   							{else}
   								<input type='text' style='background-color: #99FF99'  id='is{$isline.id}' class='islines' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" readonly />
