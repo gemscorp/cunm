@@ -33,3 +33,8 @@ div.datasheet input {
 	border: 1px solid #002447;
 	border-radius: 4px;
 }
+
+div.datasheet .radio input[type=radio] {
+	width: none;
+	margin: none;
+}
