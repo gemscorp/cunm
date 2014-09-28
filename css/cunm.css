@@ -35,6 +35,6 @@ div.datasheet input {
 }
 
 div.datasheet .radio input[type=radio] {
-	width: none;
-	margin: none;
+	width: 20px;
+	margin: 5px;
 }
