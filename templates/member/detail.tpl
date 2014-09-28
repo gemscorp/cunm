@@ -310,30 +310,30 @@
   			<thead>
   				<tr>
   					<th>Type of Services</th>
-	  				<th>Amount in US$</th>
+	  				<th>Amount</th>
 	  				<th>Male</th>
-	  				<th>Ratio</th>
+	  				<th>Percentage</th>
 	  				<th>Female</th>
-	  				<th>Ratio</th>
+	  				<th>Percentage</th>
 	  				<th>Youth</th>
-	  				<th>Ratio</th>
+	  				<th>Percentage</th>
 	  				<th>Non-members</th>
-	  				<th>Ratio</th>
+	  				<th>Percentage</th>
   				</tr>
   			</thead>
   			<tbody>
   			{foreach from=$services item=service}
   				<tr>
   					<td>{$service.name}</td>
-  					<td><input type='text' name='service[{$service.id}][total]' value="{$serval[$service.id].total}" /></td>
-  					<td><input type='text' name='service[{$service.id}][male]' value="{$serval[$service.id].male}" /></td>
-  					<td><input type='text' name='service[{$service.id}][male_ratio]' value="{$serval[$service.id].male_ratio}" /></td>
-  					<td><input type='text' name='service[{$service.id}][female]' value="{$serval[$service.id].female}" /></td>
-  					<td><input type='text' name='service[{$service.id}][female_ratio]' value="{$serval[$service.id].female_ratio}" /></td>
-  					<td><input type='text' name='service[{$service.id}][youth]' value="{$serval[$service.id].youth}" /></td>
-  					<td><input type='text' name='service[{$service.id}][youth_ratio]' value="{$serval[$service.id].youth_ratio}" /></td>
-  					<td><input type='text' name='service[{$service.id}][none_member]' value="{$serval[$service.id].none_member}" /></td>
-  					<td><input type='text' name='service[{$service.id}][none_member_ratio]' value="{$serval[$service.id].none_member_ratio}" /></td>
+  					<td><input id='ustotal_{$service.id}' class='ustotal' data-service-id='{$service.id}' type='text' name='service[{$service.id}][total]' value="{$serval[$service.id].total}" /></td>
+  					<td><input id='usmale_{$service.id}' class='usmale' data-service-id='{$service.id}' type='text' name='service[{$service.id}][male]' value="{$serval[$service.id].male}" /></td>
+  					<td><input id='usmale_ratio_{$service.id}' type='text' name='service[{$service.id}][male_ratio]' value="{$serval[$service.id].male_ratio}" /></td>
+  					<td><input id='usfemale_{$service.id}' class='usfemale' data-service-id='{$service.id}' type='text' name='service[{$service.id}][female]' value="{$serval[$service.id].female}" /></td>
+  					<td><input id='usfemale_ratio_{$service.id}' type='text' name='service[{$service.id}][female_ratio]' value="{$serval[$service.id].female_ratio}" /></td>
+  					<td><input id='usyouth_{$service.id}' class='usyouth' data-service-id='{$service.id}' type='text' name='service[{$service.id}][youth]' value="{$serval[$service.id].youth}" /></td>
+  					<td><input id='usyouth_ratio_{$service.id}' type='text' name='service[{$service.id}][youth_ratio]' value="{$serval[$service.id].youth_ratio}" /></td>
+  					<td><input id='usnone_member_{$service.id}' class='usnone_member' data-service-id='{$service.id}' type='text' name='service[{$service.id}][none_member]' value="{$serval[$service.id].none_member}" /></td>
+  					<td><input id='usnone_member_ratio_{$service.id}' type='text' name='service[{$service.id}][none_member_ratio]' value="{$serval[$service.id].none_member_ratio}" /></td>
   				</tr>
   			{/foreach}
   			</tbody>
@@ -363,6 +363,42 @@
 	}
 	
 	$(function () {
+		
+		$( ".ustotal, .usmale, .usfemale, .usyouth, .usnone_member").change(function (e) {
+			e.preventDefault();
+			var service_id = $(this).data('service-id');
+			var total = parseInt($("#ustotal_" + service_id).val());
+			var male = parseInt($("#usmale_" + service_id).val());
+			var female = parseInt($("#usfemale_" + service_id).val());
+			var youth = parseInt($("#usyouth_" + service_id).val());
+			var none_member = parseInt($("#usnone_member_" + service_id).val());
+			
+			if (isNaN(total)) return false;
+			
+			if (!isNaN(male)) {
+				var male_ratio = (male / total)	* 100;
+				$("#usmale_ratio_" + service_id).val(male_ratio);
+			}
+			
+			if (!isNaN(female)) {
+				var female_ratio = (female / total)	* 100;
+				$("#usfemale_ratio_" + service_id).val(female_ratio);
+			}
+			
+			if (!isNaN(youth)) {
+				var youth_ratio = (youth / total)	* 100;
+				$("#usyouth_ratio_" + service_id).val(youth_ratio);
+			}
+			 
+			if (!isNaN(none_member)) {
+				var none_member_ratio = (none_member / total)	* 100;
+				$("#usnone_member_ratio_" + service_id).val(none_member_ratio);
+			}
+			
+			return true;
+			
+		});
+		
 		$( ".total, .totalx, .male, .female, .farmer, .employee, .microb, .group1, .group2, .group3, .group4, .less_total, .less_male, .less_female, .less_savings, .less_outstand, .less_totalg " ).change(function (e) {
 			e.preventDefault();
 			var total = 0;
