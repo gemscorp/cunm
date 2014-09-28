@@ -32,6 +32,7 @@ div.datasheet input {
 	margin: 10px;
 	border: 1px solid #002447;
 	border-radius: 4px;
+	text-align: right;
 }
 
 div.datasheet .radio input[type=radio] {
