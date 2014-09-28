@@ -15,7 +15,7 @@
 
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail'>
 <input type='hidden' name='dsid' value='{$pid}' />
-<div class="tab-content">
+<div class="tab-content datasheet">
   <div class="tab-pane active" id="area_market">
   		<table class="table">
   			<thead>
@@ -377,22 +377,22 @@
 			
 			if (!isNaN(male)) {
 				var male_ratio = (male / total)	* 100;
-				$("#usmale_ratio_" + service_id).val(male_ratio);
+				$("#usmale_ratio_" + service_id).val(male_ratio.toFixed(2));
 			}
 			
 			if (!isNaN(female)) {
 				var female_ratio = (female / total)	* 100;
-				$("#usfemale_ratio_" + service_id).val(female_ratio);
+				$("#usfemale_ratio_" + service_id).val(female_ratio.toFixed(2));
 			}
 			
 			if (!isNaN(youth)) {
 				var youth_ratio = (youth / total)	* 100;
-				$("#usyouth_ratio_" + service_id).val(youth_ratio);
+				$("#usyouth_ratio_" + service_id).val(youth_ratio.toFixed(2));
 			}
 			 
 			if (!isNaN(none_member)) {
 				var none_member_ratio = (none_member / total)	* 100;
-				$("#usnone_member_ratio_" + service_id).val(none_member_ratio);
+				$("#usnone_member_ratio_" + service_id).val(none_member_ratio.toFixed(2));
 			}
 			
 			return true;

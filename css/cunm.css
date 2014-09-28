@@ -26,3 +26,10 @@ input.total {
 	border: 1px solid #39CE4B;
 	border-radius: 4px;
 }
+
+div.datasheet input {
+	width: 100px;
+	margin: 10px;
+	border: 1px solid #002447;
+	border-radius: 4px;
+}
