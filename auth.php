@@ -145,24 +145,24 @@ $app->group("/report", function () use ($app, $smarty) {
 		
 		$pearls = array();
 		if ($bl[18]['amount'] == 0) {
-			$pearls['P1'] = 'N/A';
+			$pearls['P1'] = '0';
 		} else {
 			$pearls['P1'] = $bl[15]['amount'] / $bl[18]['amount'];
 		}
 		
 		if ($bl[19]['amount'] == 0) {
-			$pearls['P2'] = 'N/A';
+			$pearls['P2'] = '0';
 		} else {
 			$pearls['P2'] = $bl[12]['amount'] / $bl[19]['amount'];
 		}
 		
 		if ($bl[28]['amount'] == 0) {
 			
-			$pearls['E1'] = 'N/A';
-			$pearls['E5'] = 'N/A';
-			$pearls['E9'] = 'N/A';
+			$pearls['E1'] = '0';
+			$pearls['E5'] = '0';
+			$pearls['E9'] = '0';
 				
-			$pearls['A2'] = 'N/A';
+			$pearls['A2'] = '0';
 			
 		} else {
 			$pearls['E1'] = $bl[17]['amount'] / $bl[28]['amount'];
@@ -173,20 +173,20 @@ $app->group("/report", function () use ($app, $smarty) {
 		}
 		
 		if ($bl[17]['amount'] == 0) {
-			$pearls['A1'] = 'N/A';
+			$pearls['A1'] = '0';
 		} else {
 			$pearls['A1'] = $bl[16]['amount'] / $bl[17]['amount'];
 		}
 		
 		
 		if (getTotalMember($pdids) == 0) {
-			$pearls['S10'] = 'N/A';
+			$pearls['S10'] = '0';
 		} else {
 			$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids);
 		}
 		
 		if (getAggrBlItem($pdids, 28) == 0) {
-			$pearls['S11'] = 'N/A';
+			$pearls['S11'] = '0';
 		} else {
 			$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28);
 		}
