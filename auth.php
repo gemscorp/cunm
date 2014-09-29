@@ -147,13 +147,13 @@ $app->group("/report", function () use ($app, $smarty) {
 		if ($bl[18]['amount'] == 0) {
 			$pearls['P1'] = '0';
 		} else {
-			$pearls['P1'] = $bl[15]['amount'] / $bl[18]['amount'];
+			$pearls['P1'] = $bl[15]['amount'] / $bl[18]['amount'] * 100;
 		}
 		
 		if ($bl[19]['amount'] == 0) {
 			$pearls['P2'] = '0';
 		} else {
-			$pearls['P2'] = $bl[12]['amount'] / $bl[19]['amount'];
+			$pearls['P2'] = $bl[12]['amount'] / $bl[19]['amount'] * 100;
 		}
 		
 		if ($bl[28]['amount'] == 0) {
@@ -165,30 +165,30 @@ $app->group("/report", function () use ($app, $smarty) {
 			$pearls['A2'] = '0';
 			
 		} else {
-			$pearls['E1'] = $bl[17]['amount'] / $bl[28]['amount'];
-			$pearls['E5'] = $bl[31]['amount'] / $bl[28]['amount'];
-			$pearls['E9'] = $bl[37]['amount'] / $bl[28]['amount'];
+			$pearls['E1'] = $bl[17]['amount'] / $bl[28]['amount'] * 100;
+			$pearls['E5'] = $bl[31]['amount'] / $bl[28]['amount'] * 100;
+			$pearls['E9'] = $bl[37]['amount'] / $bl[28]['amount'] * 100;
 			
-			$pearls['A2'] = $bl[25]['amount'] / $bl[28]['amount'];
+			$pearls['A2'] = $bl[25]['amount'] / $bl[28]['amount'] * 100;
 		}
 		
 		if ($bl[17]['amount'] == 0) {
 			$pearls['A1'] = '0';
 		} else {
-			$pearls['A1'] = $bl[16]['amount'] / $bl[17]['amount'];
+			$pearls['A1'] = $bl[16]['amount'] / $bl[17]['amount'] * 100;
 		}
 		
 		
 		if (getTotalMember($pdids) == 0) {
 			$pearls['S10'] = '0';
 		} else {
-			$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids);
+			$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids) * 100;
 		}
 		
 		if (getAggrBlItem($pdids, 28) == 0) {
 			$pearls['S11'] = '0';
 		} else {
-			$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28);
+			$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28) * 100;
 		}
 		
 		$smarty->assign('pearls', $pearls);
