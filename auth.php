@@ -55,6 +55,27 @@ $app->group("/report", function () use ($app, $smarty) {
 		}
 		$smarty->assign('federation', $fed);
 		
+		$country = "";
+		if (isset($_SESSION['user_country_id'])) {
+			$sql = "SELECT id, name FROM country WHERE id = :id ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':id' => $_SESSION['user_country_id']));
+			$row = $sth->fetch();
+			$country = $row['name'];
+		}
+		
+		$smarty->assign('ucountry', $country);
+
+		$ufed = "";
+		if (isset($_SESSION['user_federation_id'])) {
+			$sql = "SELECT id, name FROM federation WHERE id = :id ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':id' => $_SESSION['user_federation_id']));
+			$row = $sth->fetch();
+			$ufed = $row['name'];
+		}
+		$smarty->assign('ufed', $ufed);
+		
 		$smarty->display('member/report_search.tpl');
 	});
 	
@@ -66,7 +87,12 @@ $app->group("/report", function () use ($app, $smarty) {
 		$exchange = $_POST['exchange'];
 		
 		if ($_POST['federation_id'] != 0) {
-			$cu_ids = getCuByFedId($_POST['federation_id']);
+			
+			if ($_SESSION['user_level'] == 2) {
+				$cu_ids = array($_SESSION['user_federation_id']);	
+			} else {
+				$cu_ids = getCuByFedId($_POST['federation_id']);
+			}
 		} else {
 			$cu_ids = getCuByCountry($_POST['country_id']);
 		}

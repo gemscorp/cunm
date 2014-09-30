@@ -11,9 +11,18 @@
 <table>
 	<tr>
 		<td>Country</td>
-		<td><select name='country_id' id='country_id'>
-			{html_options options=$country}
-			</select>
+		<td>
+			{if $smarty.session.user_level eq "0"}
+				<select name='country_id' id='country_id'>
+					{html_options options=$country}
+				</select>
+			{/if}
+			
+			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2"}
+				<span>{$ucountry}</span>
+				<input type='hidden' name='country_id' value='{$smarty.session.user_country_id}' />
+			{/if}
+			
 		</td>
 	</tr>
 	<tr>
@@ -21,10 +30,18 @@
 			Federation 
 		</td>
 		<td>
-			<select name='federation_id' id='federation_id'>
-					<option value='0'>All</option>
-					{html_options options=$federation}
+			{if $smarty.session.user_level eq "0"}
+					<select name='federation_id' id='federation_id'>
+						<option value='0'>All</option>
+						{html_options options=$federation}
 				   </select>
+			{/if}
+			
+			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2"}
+				<span>{$ufed}</span>
+				<input type='hidden' name='federation_id' value='{$smarty.session.user_federation_id}' />
+			{/if}
+			
 		</td>
 	</tr>
 	<tr>
