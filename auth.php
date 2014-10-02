@@ -230,6 +230,34 @@ $app->group("/report", function () use ($app, $smarty) {
 		$smarty->assign('isubgroup', "");
 		
 		
+		$sql = "SELECT id, name FROM service ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		
+		$services = $sth->fetchAll();
+		$smarty->assign('services', $services);
+		
+		$serval = array();
+		foreach ($services as $serv) {
+			$serval[$serv['id']] = array('total' => '', 'male' => '', 'male_ratio' => '', 'female' => '', 'female_ratio' => '', 'youth' => '', 'youth_ratio' => '', 'none_member' => '', 'none_member_ratio' => '');
+		}
+		
+		$sql = "SELECT service_id, SUM(total) AS total, 
+					SUM(male) AS male, (SUM(male) / SUM(total)) * 100 AS male_ratio, 
+					SUM(female) AS female, (SUM(female) / SUM(total)) * 100 AS female_ratio, 
+					SUM(youth) AS youth, (SUM(youth) / SUM(total)) * 100 AS youth_ratio,  
+					SUM(none_member) AS none_member, (SUM(none_member) / SUM(total)) * 100 AS none_member_ratio "
+			 . "FROM pu_service_distribution WHERE pu_datasheet_id IN (" . implode(",", $dids) . ") GROUP BY service_id ";
+		$sth = $db->prepare($sql);
+		$sth->execute(array());
+		
+		$ss = $sth->fetchAll();
+		foreach ($ss as $s) {
+			$serval[$s['service_id']] = $s;
+		}
+		
+		$smarty->assign('serval', $serval);
+		
 		
 		$smarty->display('member/report.tpl');
 	});

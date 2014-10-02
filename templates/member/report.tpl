@@ -7,12 +7,49 @@
 <ul class="nav nav-tabs">
   <li class='active'><a href="#area_market" data-toggle="tab">Area, Market, Gender &amp; Age</a></li>
   <li><a href="#service" data-toggle="tab">Have Less Member Service Distribution</a></li>
+  <li><a href="#usage_services" data-toggle="tab">Usage of Service</a></li>
   <li><a href="#balancesheet" data-toggle="tab">Balance Sheet</a></li>
   <li><a href="#incomestatment" data-toggle="tab">Income Statement</a></li>
   <li><a href="#pearls" data-toggle="tab">PEARLS</a></li>    
 </ul>
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail'>
 <div class="tab-content">
+
+	<div class="tab-pane" id="usage_services">
+  		<table class="table">
+  			<thead>
+  				<tr>
+  					<th>Type of Services</th>
+	  				<th>Amount</th>
+	  				<th>Male</th>
+	  				<th>Percentage</th>
+	  				<th>Female</th>
+	  				<th>Percentage</th>
+	  				<th>Youth</th>
+	  				<th>Percentage</th>
+	  				<th>Non-members</th>
+	  				<th>Percentage</th>
+  				</tr>
+  			</thead>
+  			<tbody>
+  			{foreach from=$services item=service}
+  				<tr>
+  					<td>{$service.name}</td>
+  					<td>{$serval[$service.id].total}</td>
+  					<td>{$serval[$service.id].male}</td>
+  					<td>{$serval[$service.id].male_ratio}</td>
+  					<td>{$serval[$service.id].female}</td>
+  					<td>{$serval[$service.id].female_ratio}</td>
+  					<td>{$serval[$service.id].youth}</td>
+  					<td>{$serval[$service.id].youth_ratio}</td>
+  					<td>{$serval[$service.id].none_member}</td>
+  					<td>{$serval[$service.id].none_member_ratio}</td>
+  				</tr>
+  			{/foreach}
+  			</tbody>
+  		</table>
+  </div>
+
   <div class="tab-pane active" id="area_market">
   		<table class="table">
   			<thead>
