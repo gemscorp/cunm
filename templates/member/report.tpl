@@ -35,15 +35,15 @@
   			{foreach from=$services item=service}
   				<tr>
   					<td>{$service.name}</td>
-  					<td>{$serval[$service.id].total|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].male|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].male_ratio|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].female|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].female_ratio|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].youth|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].youth_ratio|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].none_member|number_format:2:",":"."}</td>
-  					<td>{$serval[$service.id].none_member_ratio|number_format:2:",":"."}</td>
+  					<td>{$serval[$service.id].total|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].male|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].male_ratio|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].female|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].female_ratio|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].youth|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].youth_ratio|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].none_member|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].none_member_ratio|number_format:2:".":","}</td>
   				</tr>
   			{/foreach}
   			</tbody>
