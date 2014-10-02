@@ -11,6 +11,17 @@ function getCuByFedId($federation_id = 0)
 	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
 }
 
+function getAllCuIds()
+{
+	$dbo = getDbHandler();
+	$sql = "SELECT id FROM primary_union ";
+	
+	$sth = $dbo->prepare($sql);
+	$sth->execute();
+	
+	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+}
+
 function getCuByCountry($country_id = 0)
 {
 	$dbo = getDbHandler();

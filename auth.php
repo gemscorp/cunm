@@ -93,6 +93,8 @@ $app->group("/report", function () use ($app, $smarty) {
 			} else {
 				$cu_ids = getCuByFedId($_POST['federation_id']);
 			}
+		} else if ($_POST['country_id'] == 0) {
+			$cu_ids = getAllCuIds();
 		} else {
 			$cu_ids = getCuByCountry($_POST['country_id']);
 		}
