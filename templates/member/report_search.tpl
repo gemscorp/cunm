@@ -44,6 +44,103 @@
 			
 		</td>
 	</tr>
+	
+	<tr>
+		<td>
+			Report Type 
+		</td>
+		<td>
+			<select name='report_type' id='report_type'>
+				<option value='0'>Select Report Type</option>
+				<option value='1'>Individual</option>
+				<option value='2'>Comparison</option>
+			</select>
+		</td>
+	</tr>
+	
+	<tr id='rpt_individual' style='display: none;'>
+		<td>
+			Period
+		</td>
+		<td>
+			<table>
+				<tr>
+					<td>
+			<select name='date_type' id='date_type'>
+				<option value='3'>Latest</option>
+				<option value='0'>Monthly</option>
+				<option value='1'>Quaterly</option>
+				<option value='2'>Annually</option>
+			</select>
+				</td>
+				<td>
+					<select name='dt_month' id='dt_month' style='display: none;'>
+						<option value='1'>January</option>
+						<option value='2'>February</option>
+						<option value='3'>March</option>
+						<option value='4'>April</option>
+						<option value='5'>May</option>
+						<option value='6'>June</option>
+						<option value='7'>July</option>
+						<option value='8'>Auguest</option>
+						<option value='9'>September</option>
+						<option value='10'>October</option>
+						<option value='11'>November</option>
+						<option value='12'>December</option>
+					</select> 
+					<select name='dt_quater' id='dt_quater' style='display: none;'>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='4'>4</option>
+					</select> 
+					<select name='dt_year' id='dt_year' style='display: none;'>
+						<option value='2014'>2014</option>
+					</select> 
+				</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+		<tr id='rpt_comparison' style='display: none;'>
+		<td>
+			Period (Comparison)
+		</td>
+		<td>
+			<table>
+				<tr>
+					<td>
+			<select name='date_typer' id='date_typer'>
+				<option value='0'>Monthly</option>
+				<option value='1'>Quaterly</option>
+				<option value='2'>Annually</option>
+			</select>
+				</td>
+				<td>From</td>
+				<td>
+					<select name='rdt_month' id='rdt_month'>
+					</select> <br />
+					<select name='rdt_quarter' id='rdt_quater'>
+					</select> <br />
+					<select name='rdt_year'>
+					</select> <br />
+				</td>
+				<td>To</td>
+				<td>
+					<select name='rdt_month2' id='rdt_month2'>
+					</select> <br />
+					<select name='rdt_quarter2' id='rdt_quater2'>
+					</select> <br />
+					<select name='rdt_year2'>
+					</select> <br />
+				</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+	
 	<tr>
 		<td>
 			Exchange Rate (experimental) 
@@ -75,6 +172,34 @@
 					});
 				}				
 			});
+		});
+		
+		$("#report_type").change(function (e) {
+			e.preventDefault();
+			$("#rpt_individual").hide();
+			$("#rpt_comparison").hide();
+			if ($(this).val() == 1) {
+				$("#rpt_individual").show();
+			} else if ($(this).val() == 2) {
+				$("#rpt_comparison").show();
+			}
+		});
+		
+		$("#date_type").change(function (e) {
+			e.preventDefault();
+			if ($(this).val() == 0) {
+				$("#dt_month").show();
+				$("#dt_year").show();
+				$("#dt_quater").hide();
+			} else if ($(this).val() == 1) {
+				$("#dt_month").hide();
+				$("#dt_year").show();
+				$("#dt_quater").show();
+			} else if ($(this).val() == 2) {
+				$("#dt_month").hide();
+				$("#dt_year").show();
+				$("#dt_quater").hide();
+			}
 		});
 	});
 </script>

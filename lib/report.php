@@ -41,6 +41,44 @@ function getLatestDataSheetByCuId($cu_ids)
 	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
 }
 
+function getLatestDataSheetByCuIdByMonth($cu_ids, $month, $year)
+{
+	$dbo = getDbHandler();
+	$sql = "SELECT t1.id, t1.primary_union_id FROM pu_datasheet AS t1 WHERE t1.primary_union_id IN (" . implode(',', $cu_ids) . ") "
+		 . "     AND t1.date = (SELECT MAX(t2.date) FROM pu_datasheet AS t2 WHERE t2.primary_union_id = t1.primary_union_id AND MONTH(t2.date) = :month AND YEAR(t2.date) = :year) GROUP BY t1.primary_union_id";
+	$sth = $dbo->prepare($sql);
+	$sth->execute(array(':month' => $month, ':year' => $year));
+	$fdids = $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+	$fcuids = $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 1);
+	$fdids1 = array();
+	$fdids2 = array();
+	
+	$missing_ids = array_diff($cu_ids, $fcuids);
+	
+	if (count($missing_ids) > 0) {
+		
+		$sql = "SELECT t1.id, t1.primary_union_id FROM pu_datasheet AS t1 WHERE t1.primary_union_id IN (" . implode(',', $missing_ids) . ") "
+		     . "     AND t1.date = (SELECT MIN(t2.date) FROM pu_datasheet AS t2 WHERE t2.primary_union_id = t1.primary_union_id AND MONTH(t2.date) > :month AND YEAR(t2.date) = :year) GROUP BY t1.primary_union_id";
+		$sth = $dbo->prepare($sql);
+		$sth->execute(array(':month' => $month, ':year' => $year));
+		
+		$fdids1 = $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+		$fcuids1 = $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 1);
+		
+		$missing_ids2 = array_diff($missing_ids, $fcuids1);
+		
+		if (count($missing_ids2) > 0) {
+
+			$sql = "SELECT t1.id, t1.primary_union_id FROM pu_datasheet AS t1 WHERE t1.primary_union_id IN (" . implode(',', $missing_ids) . ") "
+					. "     AND t1.date = (SELECT MAX(t2.date) FROM pu_datasheet AS t2 WHERE t2.primary_union_id = t1.primary_union_id AND MONTH(t2.date) < :month AND YEAR(t2.date) = :year) GROUP BY t1.primary_union_id";
+			$sth = $dbo->prepare($sql);
+			$sth->execute(array(':month' => $month, ':year' => $year));
+			$fdids2 = $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+		}
+	}
+	return array_merge($fdids, $fdids1, $fdids2);
+}
+
 function getLessMemberAggr($dids)
 {
 	$dbo = getDbHandler();
@@ -91,6 +129,17 @@ function getPreviousDataSheetIds($cu_ids)
 	$sql = "SELECT t1.id FROM pu_datasheet AS t1 WHERE t1.primary_union_id IN (" . implode(',', $cu_ids) . ") AND t1.date = (SELECT MAX(t3.date) FROM pu_datasheet AS t3 WHERE t3.primary_union_id = t1.primary_union_id AND t3.date < (SELECT MAX(t2.date) FROM pu_datasheet AS t2 WHERE t2.primary_union_id = t1.primary_union_id)) GROUP BY t1.primary_union_id";
 	$sth = $dbo->prepare($sql);
 	$sth->execute();
+	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+}
+
+function getPreviousDataSheetIdsByMonth($cu_ids, $month, $year)
+{
+	$dbo = getDbHandler();
+	$sql = "SELECT t1.id FROM pu_datasheet AS t1 WHERE t1.primary_union_id IN (" . implode(',', $cu_ids) . ") AND "
+		 . " t1.date = (SELECT MAX(t3.date) FROM pu_datasheet AS t3 WHERE t3.primary_union_id = t1.primary_union_id AND t3.date < "
+		 . " (SELECT MAX(t2.date) FROM pu_datasheet AS t2 WHERE t2.primary_union_id = t1.primary_union_id AND MONTH(t2.date) = :month AND YEAR(t2.date) = :year)) GROUP BY t1.primary_union_id";
+	$sth = $dbo->prepare($sql);
+	$sth->execute(array(':month' => $month, ':year' => $year));
 	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
 }
 

@@ -143,8 +143,22 @@ $app->group("/report", function () use ($app, $smarty) {
 		
 		$smarty->assign('areas', $areas);
 		
-		$dids = getLatestDataSheetByCuId($cu_ids);
-		$pdids = getPreviousDataSheetIds($cu_ids);
+		if ($_POST['date_type'] == 3) {
+			$dids = getLatestDataSheetByCuId($cu_ids);
+			$pdids = getPreviousDataSheetIds($cu_ids);
+		} else if ($_POST['date_type'] == 0) {
+			$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $_POST['dt_month'], $_POST['dt_year']);
+			$pdids = getPreviousDataSheetIdsByMonth($cu_ids, $_POST['dt_month'], $_POST['dt_year']);
+		} else if ($_POST['date_type'] == 1) {
+			$month = 3 * $_POST['dt_quater'];
+			$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $month, $_POST['dt_year']);
+			$pdids = getPreviousDataSheetIdsByMonth($cu_ids, $month, $_POST['dt_year']);
+		} else if ($_POST['date_type'] == 2) {
+			if (date("Y") > $_POST['dt_year']) $month = 12;
+			else if (date("Y") == $_POST['dt_year']) $month = date("m");
+			$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $month, $_POST['dt_year']);
+			$pdids = getPreviousDataSheetIdsByMonth($cu_ids, $month, $_POST['dt_year']);
+		}
 		
 		if (count($dids) == 0) {
 			$smarty->display('member/nodata.tpl');
@@ -207,13 +221,13 @@ $app->group("/report", function () use ($app, $smarty) {
 		}
 		
 		
-		if (getTotalMember($pdids) == 0) {
+		if (count($pdids) == 0 || getTotalMember($pdids) == 0) {
 			$pearls['S10'] = '0';
 		} else {
 			$pearls['S10'] = getTotalMember($dids) / getTotalMember($pdids) * 100;
 		}
 		
-		if (getAggrBlItem($pdids, 28) == 0) {
+		if (count($pdids) == 0 || getAggrBlItem($pdids, 28) == 0) {
 			$pearls['S11'] = '0';
 		} else {
 			$pearls['S11'] = getAggrBlItem($dids, 28) / getAggrBlItem($pdids, 28) * 100;
@@ -241,7 +255,9 @@ $app->group("/report", function () use ($app, $smarty) {
 		
 		$serval = array();
 		foreach ($services as $serv) {
-			$serval[$serv['id']] = array('total' => '', 'male' => '', 'male_ratio' => '', 'female' => '', 'female_ratio' => '', 'youth' => '', 'youth_ratio' => '', 'none_member' => '', 'none_member_ratio' => '');
+			$serval[$serv['id']] = array('total' => 0, 'male' => 0, 'male_ratio' => 0, 
+						'female' => 0, 'female_ratio' => 0, 'youth' => 0, 'youth_ratio' => 0, 'none_member' => 0, 
+					'none_member_ratio' => 0);
 		}
 		
 		$sql = "SELECT service_id, SUM(total) AS total, 

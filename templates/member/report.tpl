@@ -2,7 +2,6 @@
 <h3>Report</h3>
 
 {include file='common/alert.tpl'}
-          
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class='active'><a href="#area_market" data-toggle="tab">Area, Market, Gender &amp; Age</a></li>
