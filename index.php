@@ -11,6 +11,9 @@ date_default_timezone_set('Asia/Bangkok');
 
 $app = new \Slim\Slim();
 
+//$app->config('debug', false);
+$app->config('mode', 'production');
+
 $smarty = new Smarty();
 $smarty->setTemplateDir('templates/');
 $smarty->setCompileDir('templates_c/');

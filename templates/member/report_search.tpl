@@ -111,7 +111,7 @@
 			<table>
 				<tr>
 					<td>
-			<select name='date_typer' id='date_typer'>
+			<select name='date_type_comp' id='date_type_comp'>
 				<option value='0'>Monthly</option>
 				<option value='1'>Quaterly</option>
 				<option value='2'>Annually</option>
@@ -119,21 +119,55 @@
 				</td>
 				<td>From</td>
 				<td>
-					<select name='rdt_month' id='rdt_month'>
-					</select> <br />
-					<select name='rdt_quarter' id='rdt_quater'>
-					</select> <br />
-					<select name='rdt_year'>
-					</select> <br />
+					<select name='dt_month_from' id='dt_month_from' style='display: block;'>
+						<option value='1'>January</option>
+						<option value='2'>February</option>
+						<option value='3'>March</option>
+						<option value='4'>April</option>
+						<option value='5'>May</option>
+						<option value='6'>June</option>
+						<option value='7'>July</option>
+						<option value='8'>Auguest</option>
+						<option value='9'>September</option>
+						<option value='10'>October</option>
+						<option value='11'>November</option>
+						<option value='12'>December</option>
+					</select> 
+					<select name='dt_quater_from' id='dt_quater_from' style='display: none;'>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='4'>4</option>
+					</select> 
+					<select name='dt_year_from' id='dt_year_from' style='display: block;'>
+						<option value='2014'>2014</option>
+					</select> 
 				</td>
 				<td>To</td>
 				<td>
-					<select name='rdt_month2' id='rdt_month2'>
-					</select> <br />
-					<select name='rdt_quarter2' id='rdt_quater2'>
-					</select> <br />
-					<select name='rdt_year2'>
-					</select> <br />
+					<select name='dt_month_to' id='dt_month_to' style='display: block;'>
+						<option value='1'>January</option>
+						<option value='2'>February</option>
+						<option value='3'>March</option>
+						<option value='4'>April</option>
+						<option value='5'>May</option>
+						<option value='6'>June</option>
+						<option value='7'>July</option>
+						<option value='8'>Auguest</option>
+						<option value='9'>September</option>
+						<option value='10'>October</option>
+						<option value='11'>November</option>
+						<option value='12'>December</option>
+					</select> 
+					<select name='dt_quater_to' id='dt_quater_to' style='display: none;'>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='4'>4</option>
+					</select> 
+					<select name='dt_year_to' id='dt_year_to' style='display: block;'>
+						<option value='2014'>2014</option>
+					</select> 
 				</td>
 				</tr>
 			</table>
@@ -201,7 +235,34 @@
 				$("#dt_quater").hide();
 			}
 		});
+		
+		$("#date_type_comp").change(function (e) {
+			e.preventDefault();
+			if ($(this).val() == 0) {
+				$("#dt_month_from").show();
+				$("#dt_month_to").show();
+				$("#dt_year_from").show();
+				$("#dt_quater_from").hide();
+				$("#dt_year_to").show();
+				$("#dt_quater_to").hide();
+			} else if ($(this).val() == 1) {
+				$("#dt_month_from").hide();
+				$("#dt_year_from").show();
+				$("#dt_quater_from").show();
+				$("#dt_month_to").hide();
+				$("#dt_year_to").show();
+				$("#dt_quater_to").show();
+			} else if ($(this).val() == 2) {
+				$("#dt_month_from").hide();
+				$("#dt_year_from").show();
+				$("#dt_quater_from").hide();
+				$("#dt_month_to").hide();
+				$("#dt_year_to").show();
+				$("#dt_quater_to").hide();
+			}
+		});
 	});
 </script>
 
 {include file='footer.tpl'}
+
