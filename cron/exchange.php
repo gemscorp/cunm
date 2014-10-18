@@ -23,6 +23,10 @@ foreach ($ds as $d) {
 	$sql = "UPDATE pu_balancesheet SET us_amount = (amount / $rate) WHERE primary_union_id = :id ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':id' => $d['primary_union_id']));
+	
+	$sql = "UPDATE pu_is SET us_amount = (amount / $rate) WHERE primary_union_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $d['primary_union_id']));
 }
 
 
