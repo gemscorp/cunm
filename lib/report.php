@@ -365,12 +365,12 @@ function RunComparisonReport($app, $smarty)
 	$gender_groups = array();
 	$genders = array(1, 2);
 	$periods = array(1, 2);
-	$group_template = array('total' => '', 'male' => '', 'female' => '', 'farmer' => '', 'employee' => '',
-			'microb' => '', 'group1' => '', 'group2' => '', 'group3' => '', 'group4' => '',
-			'less_male' => '', 'less_female' => '', 'less_savings' => '', 'less_outstand' => '', 'less_totalg' => '', 'less_total' => '');
-	$group_template_change = array('total_change' => '', 'male_change' => '', 'female_change' => '', 'farmer_change' => '', 'employee_change' => '',
-			'microb_change' => '', 'group1_change' => '', 'group2_change' => '', 'group3_change' => '', 'group4_change' => '',
-			'less_male_change' => '', 'less_female_change' => '', 'less_savings_change' => '', 'less_outstand_change' => '', 'less_totalg_change' => '', 'less_total_change' => '');
+	$group_template = array('total' => 0, 'male' => 0, 'female' => 0, 'farmer' => 0, 'employee' => 0,
+			'microb' => 0, 'group1' => 0, 'group2' => 0, 'group3' => 0, 'group4' => 0,
+			'less_male' => 0, 'less_female' => 0, 'less_savings' => 0, 'less_outstand' => 0, 'less_totalg' => 0, 'less_total' => 0);
+	$group_template_change = array('total_change' => 0, 'male_change' => 0, 'female_change' => 0, 'farmer_change' => 0, 'employee_change' => 0,
+			'microb_change' => 0, 'group1_change' => 0, 'group2_change' => 0, 'group3_change' => 0, 'group4_change' => 0,
+			'less_male_change' => 0, 'less_female_change' => 0, 'less_savings_change' => 0, 'less_outstand_change' => 0, 'less_totalg_change' => 0, 'less_total_change' => 0);
 	foreach ($area_ids as $id) {
 		$oparea[] = $id['area_id'];
 		foreach ($genders as $gender_id) {
@@ -754,9 +754,9 @@ function RunIndividualReport($app, $smarty)
 	$area_ids = $sth->fetchAll();
 	$gender_groups = array();
 	$genders = array(1, 2);
-	$group_template = array('total' => '', 'male' => '', 'female' => '', 'farmer' => '', 'employee' => '',
-			'microb' => '', 'group1' => '', 'group2' => '', 'group3' => '', 'group4' => '',
-			'less_male' => '', 'less_female' => '', 'less_savings' => '', 'less_outstand' => '', 'less_totalg' => '', 'less_total' => '');
+	$group_template = array('total' => 0, 'male' => 0, 'female' => 0, 'farmer' => 0, 'employee' => 0,
+			'microb' => 0, 'group1' => 0, 'group2' => 0, 'group3' => 0, 'group4' => 0,
+			'less_male' => 0, 'less_female' => 0, 'less_savings' => 0, 'less_outstand' => 0, 'less_totalg' => 0, 'less_total' => 0);
 	foreach ($area_ids as $id) {
 		$oparea[] = $id['area_id'];
 		foreach ($genders as $gender_id) {
