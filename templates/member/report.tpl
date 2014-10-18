@@ -140,13 +140,21 @@
   				{if $group neq $bsline.group_name}
   					{assign var=group value=$bsline.group_name}
   					<tr>
-  						<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  						{if $smarty.session.user_level neq 0}
+  							<td colspan='3' style='text-align: left;'><strong>{$group}</strong></td>
+  						{else}
+  							<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  						{/if}
   					</tr>
   				{/if}
   				{if $subgroup neq $bsline.subgroup_name}
   					{assign var=subgroup value=$bsline.subgroup_name}
   					<tr>
-  						<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  						{if $smarty.session.user_level neq 0}
+  							<td colspan='3' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  						{else}
+  							<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  						{/if}
   					</tr>
   				{/if}
   				
@@ -166,24 +174,26 @@
   						{/if}
   						
   						</td>
+  						{if $smarty.session.user_level neq 0}
+	  						<td>
+	  							{if $bsline.total eq "0"}
+	  								{if $bsvals[$bsline.id].amount < 0}
+	  									<span style='color: red;'>({$bsvals[$bsline.id].amount})</span>
+	  								{else}
+	  									{$bsvals[$bsline.id].amount}
+	  								{/if}
+	  							{else}
+	  								{if $bsvals[$bsline.id].amount < 0}
+	  									<strong><span style='color: red;'>({$bsvals[$bsline.id].amount})</span></strong>
+	  								{else}
+	  									<strong>{$bsvals[$bsline.id].amount}</strong>
+	  								{/if}
+	  							{/if}
+	  						</td>
+  						{/if}
   						<td>
   							{if $bsline.total eq "0"}
-  								{if $bsvals[$bsline.id].amount < 0}
-  									<span style='color: red;'>({$bsvals[$bsline.id].amount})</span>
-  								{else}
-  									{$bsvals[$bsline.id].amount}
-  								{/if}
-  							{else}
-  								{if $bsvals[$bsline.id].amount < 0}
-  									<strong><span style='color: red;'>({$bsvals[$bsline.id].amount})</span></strong>
-  								{else}
-  									<strong>{$bsvals[$bsline.id].amount}</strong>
-  								{/if}
-  							{/if}
-  						</td>
-  						<td>
-  							{if $bsline.total eq "0"}
-  								{if $bsvals[$bsline.id].amount < 0}
+  								{if $bsvals[$bsline.id].us_amount < 0}
   									US$<span style='color: red;'>({$bsvals[$bsline.id].us_amount|number_format:2})</span>
   								{else}
   									US${$bsvals[$bsline.id].us_amount|number_format:2}
@@ -206,13 +216,21 @@
   				{if $group neq $isline.group_name}
   					{assign var=group value=$isline.group_name}
   					<tr>
-  						<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  						{if $smarty.session.user_level neq 0}
+  							<td colspan='3' style='text-align: left;'><strong>{$group}</strong></td>
+  						{else}
+  							<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  						{/if}
   					</tr>
   				{/if}
   				{if $subgroup neq $isline.subgroup_name}
   					{assign var=subgroup value=$isline.subgroup_name}
   					<tr>
-  						<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  						{if $smarty.session.user_level neq 0}
+  							<td colspan='3' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  						{else}
+  							<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  						{/if}
   					</tr>
   				{/if}
   				
@@ -232,27 +250,27 @@
   						{/if}
   						
   						</td>
-  						<td>
-  						
-  							{if $isline.total eq "0"}
-  								{if $isvals[$isline.id].amount < 0}
-  									<span style='color: red;'>({$isvals[$isline.id].amount})</span>
-  								{else}
-  									{$isvals[$isline.id].amount}
-  								{/if}
-  							{else}
-  								{if $isvals[$isline.id].amount < 0}
-  									<strong><span style='color: red;'>({$isvals[$isline.id].amount})</span></strong>
-  								{else}
-  									<strong>{$isvals[$isline.id].amount}</strong>
-  								{/if}
-  							{/if}
-  				
-						</td>
+  						{if $smarty.session.user_level neq 0}
+	  						<td>
+	  							{if $isline.total eq "0"}
+	  								{if $isvals[$isline.id].amount < 0}
+	  									<span style='color: red;'>({$isvals[$isline.id].amount})</span>
+	  								{else}
+	  									{$isvals[$isline.id].amount}
+	  								{/if}
+	  							{else}
+	  								{if $isvals[$isline.id].amount < 0}
+	  									<strong><span style='color: red;'>({$isvals[$isline.id].amount})</span></strong>
+	  								{else}
+	  									<strong>{$isvals[$isline.id].amount}</strong>
+	  								{/if}
+	  							{/if}
+							</td>
+						{/if}
 						<td>
   						
   							{if $isline.total eq "0"}
-  								{if $isvals[$isline.id].amount < 0}
+  								{if $isvals[$isline.id].us_amount < 0}
   									US$<span style='color: red;'>({$isvals[$isline.id].us_amount|number_format:2})</span>
   								{else}
   									US${$isvals[$isline.id].us_amount|number_format:2}
