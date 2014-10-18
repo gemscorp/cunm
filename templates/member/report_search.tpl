@@ -177,10 +177,10 @@
 	
 	<tr>
 		<td>
-			Exchange Rate (experimental) 
+			Debug
 		</td>
 		<td>
-			<input type='text' name='exchange' value='30' /> 
+			<input type='checkbox' name='debug' value='1' /> 
 		</td>
 	</tr>
 	<tr>

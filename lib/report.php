@@ -714,8 +714,11 @@ function RunComparisonReport($app, $smarty)
 	
 	$smarty->assign('serval', $serval);
 	
-	
-	$smarty->display('member/report_compare.tpl');
+	if(isset($_POST['debug'])) {
+		$smarty->display('member/report_debug.tpl');
+	} else {
+		$smarty->display('member/report_compare.tpl');
+	}
 }
 
 function RunIndividualReport($app, $smarty)
@@ -914,6 +917,9 @@ function RunIndividualReport($app, $smarty)
 	
 	$smarty->assign('serval', $serval);
 	
-	
-	$smarty->display('member/report.tpl');	
+	if(isset($_POST['debug'])) {
+		$smarty->display('member/report_debug.tpl');
+	} else {
+		$smarty->display('member/report.tpl');
+	}	
 }
