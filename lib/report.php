@@ -335,7 +335,7 @@ function RunComparisonReport($app, $smarty)
 {
 	$db = getDbHandler();
 	
-	$exchange = $_POST['exchange'];
+	$exchange = 0; //$_POST['exchange'];
 	
 	if ($_POST['federation_id'] != 0) {
 			
@@ -725,7 +725,7 @@ function RunIndividualReport($app, $smarty)
 {
 	$db = getDbHandler();
 	
-	$exchange = $_POST['exchange'];
+	$exchange = 0; //$_POST['exchange'];
 	
 	if ($_POST['federation_id'] != 0) {
 			
