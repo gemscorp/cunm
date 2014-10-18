@@ -506,15 +506,15 @@
 						<td>
   							{if $isline.total eq "0"}
   								{if $isvals[$isline.id].amount_change < 0}
-  									US$<span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})</span>
+  									US$<span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span>
   								{else}
-  									US${$isvals[$isline.id].amount_change|number_format:2}
+  									US${$isvals[$isline.id].amount_change|number_format:2}%
   								{/if}
   							{else}
   								{if $isvals[$isline.id].amount_change < 0}
-  									US$<strong><span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})</span></strong>
+  									US$<strong><span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span></strong>
   								{else}
-  									US$<strong>{$isvals[$isline.id].amount_change|number_format:2}</strong>
+  									US$<strong>{$isvals[$isline.id].amount_change|number_format:2}%</strong>
   								{/if}
   							{/if}
 						</td>

@@ -175,14 +175,14 @@
 	</tr>
 	
 	
-	<tr>
+	<!-- <tr>
 		<td>
 			Debug
 		</td>
 		<td>
 			<input type='checkbox' name='debug' value='1' /> 
 		</td>
-	</tr>
+	</tr> -->
 	<tr>
 		<td colspan='2'><input type='submit' value='Search' /></td>
 	</tr>
