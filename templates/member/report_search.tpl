@@ -8,7 +8,7 @@
 <h3>Report Search</h3>
 
 <form method='post' action='{$smarty.const.APP_PATH}/report/main'>
-<table>
+<table class='table'>
 	<tr>
 		<td>Country</td>
 		<td>
@@ -63,7 +63,7 @@
 			Period
 		</td>
 		<td>
-			<table>
+			<table class='table'>
 				<tr>
 					<td>
 			<select name='date_type' id='date_type'>
@@ -108,7 +108,7 @@
 			Period (Comparison)
 		</td>
 		<td>
-			<table>
+			<table class='table'>
 				<tr>
 					<td>
 			<select name='date_type_comp' id='date_type_comp'>
