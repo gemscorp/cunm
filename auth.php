@@ -218,7 +218,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 		$db = getDbHandler();
 		$sql = "SELECT ur.*, pu.name AS pu_name, IF(ur.pu_datasheet_id IS NULL, 'Profile', 'Datasheet') AS type FROM unlock_request AS ur "
 			 . "LEFT JOIN primary_union AS pu ON ur.primary_union_id = pu.id "
-			 . "WHERE unlock_date IS NULL AND federation_id = :fid ";
+			 . "WHERE unlock_date IS NULL AND ur.federation_id = :fid ";
 		$sth = $db->prepare($sql);
 		$sth->execute(array(':fid' => $_SESSION['user_federation_id']));
 		$reqs = $sth->fetchAll();
