@@ -444,6 +444,11 @@
           
           	var comment = $("#reason").val();
           	var that = $(this);
+          	
+          	if (comment.trim() == "") {
+          		alert("You must provide a reason for unlock");
+          		return false;
+          	}
           
           	$.post("http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/ajax/unlock/{$ds.id}", { comment: comment } , function () {
           		that.dialog( "close" );
