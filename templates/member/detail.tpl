@@ -325,7 +325,7 @@
   			{foreach from=$services item=service}
   				<tr>
   					<td>{$service.name}</td>
-  					<td><input id='ustotal_{$service.id}' class='ustotal' data-service-id='{$service.id}' type='text' name='service[{$service.id}][total]' value="{$serval[$service.id].total}" /></td>
+  					<td><input id='ustotal_{$service.id}' class='ustotal' data-service-id='{$service.id}' type='text' name='service[{$service.id}][total]' value="{$serval[$service.id].total}" readonly /></td>
   					<td><input id='usmale_{$service.id}' class='usmale' data-service-id='{$service.id}' type='text' name='service[{$service.id}][male]' value="{$serval[$service.id].male}" /></td>
   					<td><input id='usmale_ratio_{$service.id}' type='text' name='service[{$service.id}][male_ratio]' value="{$serval[$service.id].male_ratio}" /></td>
   					<td><input id='usfemale_{$service.id}' class='usfemale' data-service-id='{$service.id}' type='text' name='service[{$service.id}][female]' value="{$serval[$service.id].female}" /></td>
@@ -362,12 +362,25 @@
 		return parseInt($("#is" + xid).val());
 	}
 	
+	function calcUsageTotal(service_id)
+	{
+		var male = parseInt($("#usmale_" + service_id).val());
+		var female = parseInt($("#usfemale_" + service_id).val());
+		var youth = parseInt($("#usyouth_" + service_id).val());
+		var none_member = parseInt($("#usnone_member_" + service_id).val());
+		
+		var total = male + female + youth + none_member;
+		$("#ustotal_" + service_id).val(total);
+		
+		return parseInt($("#ustotal_" + service_id).val());
+	}
+	
 	$(function () {
 		
-		$( ".ustotal, .usmale, .usfemale, .usyouth, .usnone_member").change(function (e) {
+		$( ".usmale, .usfemale, .usyouth, .usnone_member").change(function (e) {
 			e.preventDefault();
 			var service_id = $(this).data('service-id');
-			var total = parseInt($("#ustotal_" + service_id).val());
+			calcUsageTotal(service_id);
 			var male = parseInt($("#usmale_" + service_id).val());
 			var female = parseInt($("#usfemale_" + service_id).val());
 			var youth = parseInt($("#usyouth_" + service_id).val());

@@ -414,7 +414,8 @@ $app->get("/operations", function () use ($app, $smarty) {
 	$sql = "DESCRIBE pu_operations ";
 	$sth = $db->prepare($sql);
 	$sth->execute();
-	$operations = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
+	$operations = array_flip($sth->fetchAll(PDO::FETCH_COLUMN, 0));
+	$operations = array_fill_keys(array_keys($operations), 0);
 
 	$sql = "SELECT * FROM pu_operations WHERE primary_union_id = :id ";
 	$sth = $db->prepare($sql);
