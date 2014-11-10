@@ -380,7 +380,7 @@
 		$( ".usmale, .usfemale, .usyouth, .usnone_member").change(function (e) {
 			e.preventDefault();
 			var service_id = $(this).data('service-id');
-			calcUsageTotal(service_id);
+			var total = calcUsageTotal(service_id);
 			var male = parseInt($("#usmale_" + service_id).val());
 			var female = parseInt($("#usfemale_" + service_id).val());
 			var youth = parseInt($("#usyouth_" + service_id).val());
