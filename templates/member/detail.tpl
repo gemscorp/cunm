@@ -434,6 +434,8 @@
 			
 		});
 		
+		$('input[type=text]').number(true, 2);
+		
 		$( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 300,

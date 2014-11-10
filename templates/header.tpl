@@ -25,6 +25,7 @@
 	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/js/modules/exporting.js"></script>
 	
 	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/jquery.stickytableheaders.min.js"></script>
+	<script src="//{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/js/jquery.number.min.js"></script>
 	<style>
 	
 	th
