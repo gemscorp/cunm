@@ -434,7 +434,7 @@
 			
 		});
 		
-		$('input[type=text]').number(true, 2);
+		//$('input[type=text]').number(true, 2);
 		
 		$( "#dialog-form" ).dialog({
       autoOpen: false,
