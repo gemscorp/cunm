@@ -48,14 +48,14 @@
   				{else}
   					<tr>
   					<td>{$service.name}</td>
-  					<td>{$serval[$service.id].total_us|number_format:2:".":","}</td>
-  					<td>{$serval[$service.id].male_us|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].total_us|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].male_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].male_ratio|number_format:2:".":","}%</td>
-  					<td>{$serval[$service.id].female_us|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].female_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].female_ratio|number_format:2:".":","}%</td>
-  					<td>{$serval[$service.id].youth_us|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].youth_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].youth_ratio|number_format:2:".":","}%</td>
-  					<td>{$serval[$service.id].none_member_us|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].none_member_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].none_member_ratio|number_format:2:".":","}%</td>
   				</tr>
   				{/if}
@@ -88,29 +88,29 @@
   					{foreach from=$genders item=gender}
 	  				<tr>
 	  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
-	  					<td>{$gender_groups[$oparea][$gender].total}</td>
-	  					<td>{$gender_groups[$oparea][$gender].farmer}</td>
-	  					<td>{$gender_groups[$oparea][$gender].employee}</td>
-	  					<td>{$gender_groups[$oparea][$gender].microb}</td>
-	  					<td>{$gender_groups[$oparea][$gender].group1}</td>
-	  					<td>{$gender_groups[$oparea][$gender].group2}</td>
-	  					<td>{$gender_groups[$oparea][$gender].group3}</td>
-	  					<td>{$gender_groups[$oparea][$gender].group4}</td>
-	  					<td>{$gender_groups[$oparea][$gender].total}</td>
+	  					<td>{$gender_groups[$oparea][$gender].total|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].farmer|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].employee|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].microb|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].group1|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].group2|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].group3|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].group4|number_format:0}</td>
+	  					<td>{$gender_groups[$oparea][$gender].total|number_format:0}</td>
 	  				</tr>
 	  				{/foreach}
 				{/foreach}
 				<tr>
   					<td>Total</td>
-  					<td>{$gender_total.total}</td>
-  					<td>{$gender_total.farmer}</td>
-  					<td>{$gender_total.employee}</td>
-  					<td>{$gender_total.microb}</td>
-  					<td>{$gender_total.group1}</td>
-  					<td>{$gender_total.group2}</td>
-  					<td>{$gender_total.group3}</td>
-  					<td>{$gender_total.group4}</td>
-  					<td>{$gender_total.total}</td>
+  					<td>{$gender_total.total|number_format:0}</td>
+  					<td>{$gender_total.farmer|number_format:0}</td>
+  					<td>{$gender_total.employee|number_format:0}</td>
+  					<td>{$gender_total.microb|number_format:0}</td>
+  					<td>{$gender_total.group1|number_format:0}</td>
+  					<td>{$gender_total.group2|number_format:0}</td>
+  					<td>{$gender_total.group3|number_format:0}</td>
+  					<td>{$gender_total.group4|number_format:0}</td>
+  					<td>{$gender_total.total|number_format:0}</td>
   				</tr>
   			</tbody>
   		</table>
@@ -132,29 +132,39 @@
   					{if $smarty.session.user_level neq 0}
 		  				<tr>
 		  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_total}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_savings}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_totalg}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_outstand}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_total|number_format:2}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_savings|number_format:2}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_totalg|number_format:2}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_outstand|number_format:2}</td>
 		  				</tr>
 		  			{else}
 		  				<tr>
 		  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_total}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_savings_us}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_totalg_us}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_outstand_us}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_total|number_format:2}</td>
+		  					<td>${$gender_groups[$oparea][$gender].less_savings_us|number_format:2}</td>
+		  					<td>${$gender_groups[$oparea][$gender].less_totalg_us|number_format:2}</td>
+		  					<td>${$gender_groups[$oparea][$gender].less_outstand_us|number_format:2}</td>
 		  				</tr>
 		  			{/if}
   					{/foreach}
   				{/foreach}
+  				{if $smarty.session.user_level neq 0}
   				<tr>
   					<td>Total</td>
-  					<td>{$gender_total.less_total}</td>
-  					<td>{$gender_total.less_savings}</td>
-  					<td>{$gender_total.less_totalg}</td>
-  					<td>{$gender_total.less_outstand}</td>
+  					<td>{$gender_total.less_total|number_format:2}</td>
+  					<td>{$gender_total.less_savings|number_format:2}</td>
+  					<td>{$gender_total.less_totalg|number_format:2}</td>
+  					<td>{$gender_total.less_outstand|number_format:2}</td>
   				</tr>
+  				{else}
+  					<tr>
+  					<td>Total</td>
+  					<td>{$gender_total.less_total|number_format:2}</td>
+  					<td>${$gender_total.less_savings_us|number_format:2}</td>
+  					<td>${$gender_total.less_totalg_us|number_format:2}</td>
+  					<td>${$gender_total.less_outstand_us|number_format:2}</td>
+  				</tr>
+  				{/if}
   				
   			</tbody>
   		</table>

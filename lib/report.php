@@ -759,7 +759,7 @@ function RunIndividualReport($app, $smarty)
 	$genders = array(1, 2);
 	$group_template = array('total' => 0, 'male' => 0, 'female' => 0, 'farmer' => 0, 'employee' => 0,
 			'microb' => 0, 'group1' => 0, 'group2' => 0, 'group3' => 0, 'group4' => 0,
-			'less_male' => 0, 'less_female' => 0, 'less_savings_us' => 0, 'less_outstand_us' => 0, 'less_totalg_us' => 0, 'less_total' => 0);
+			'less_male' => 0, 'less_female' => 0, 'less_savings_us' => 0, 'less_outstand_us' => 0, 'less_totalg_us' => 0, 'less_savings' => 0, 'less_outstand' => 0, 'less_totalg' => 0, 'less_total' => 0);
 	foreach ($area_ids as $id) {
 		$oparea[] = $id['area_id'];
 		foreach ($genders as $gender_id) {
