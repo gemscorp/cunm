@@ -27,6 +27,24 @@ foreach ($ds as $d) {
 	$sql = "UPDATE pu_is SET us_amount = (amount / $rate) WHERE primary_union_id = :id ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':id' => $d['primary_union_id']));
+	
+	$sql = "UPDATE pu_less_member_service SET 
+				savings_us = (savings / $rate), 
+				outstanding_us = (outstanding / $rate),
+				total_granted_us = (total_granted / $rate)
+			 WHERE primary_union_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $d['primary_union_id']));
+	
+	$sql = "UPDATE pu_service_distribution SET
+	total_us = (total / $rate),
+	male_us = (male / $rate),
+	female_us = (female / $rate),
+	youth_us = (youth / $rate),
+	none_member_us = (none_member / $rate)
+	WHERE primary_union_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $d['primary_union_id']));
 }
 
 

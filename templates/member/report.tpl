@@ -32,6 +32,7 @@
   			</thead>
   			<tbody>
   			{foreach from=$services item=service}
+  				{if $smarty.session.user_level neq 0}
   				<tr>
   					<td>{$service.name}</td>
   					<td>{$serval[$service.id].total|number_format:2:".":","}</td>
@@ -44,6 +45,20 @@
   					<td>{$serval[$service.id].none_member|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].none_member_ratio|number_format:2:".":","}%</td>
   				</tr>
+  				{else}
+  					<tr>
+  					<td>{$service.name}</td>
+  					<td>{$serval[$service.id].total_us|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].male_us|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].male_ratio|number_format:2:".":","}%</td>
+  					<td>{$serval[$service.id].female_us|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].female_ratio|number_format:2:".":","}%</td>
+  					<td>{$serval[$service.id].youth_us|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].youth_ratio|number_format:2:".":","}%</td>
+  					<td>{$serval[$service.id].none_member_us|number_format:2:".":","}</td>
+  					<td>{$serval[$service.id].none_member_ratio|number_format:2:".":","}%</td>
+  				</tr>
+  				{/if}
   			{/foreach}
   			</tbody>
   		</table>
@@ -114,13 +129,23 @@
   			<tbody>
   				{foreach from=$opareas item=oparea}
   					{foreach from=$genders item=gender}
-  				<tr>
-  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
-  					<td>{$gender_groups[$oparea][$gender].less_total}</td>
-  					<td>{$gender_groups[$oparea][$gender].less_savings}</td>
-  					<td>{$gender_groups[$oparea][$gender].less_totalg}</td>
-  					<td>{$gender_groups[$oparea][$gender].less_outstand}</td>
-  				</tr>
+  					{if $smarty.session.user_level neq 0}
+		  				<tr>
+		  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_total}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_savings}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_totalg}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_outstand}</td>
+		  				</tr>
+		  			{else}
+		  				<tr>
+		  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_total}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_savings_us}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_totalg_us}</td>
+		  					<td>{$gender_groups[$oparea][$gender].less_outstand_us}</td>
+		  				</tr>
+		  			{/if}
   					{/foreach}
   				{/foreach}
   				<tr>

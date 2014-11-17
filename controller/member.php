@@ -16,7 +16,9 @@ $app->get("/detail/:id", function ($idx) use ($app, $smarty) {
 	$genders = array(1, 2);
 	$group_template = array('total' => '', 'male' => '', 'female' => '', 'farmer' => '', 'employee' => '',
 			'microb' => '', 'group1' => '', 'group2' => '', 'group3' => '', 'group4' => '',
-			'less_male' => '', 'less_female' => '', 'less_savings' => '', 'less_outstand' => '', 'less_totalg' => '', 'less_total' => '');
+			'less_male' => '', 'less_female' => '', 'less_savings' => '', 'less_savings_us' => '', 
+			'less_outstand' => '', 'less_outstand_us' => '', 'less_totalg' => '', 'less_totalg' => '', 
+			'less_total' => '', 'less_total_us' => '');
 	foreach ($area_ids as $id) {
 		$oparea[] = $id['area_id'];
 		foreach ($genders as $gender_id) {
@@ -80,13 +82,18 @@ $app->get("/detail/:id", function ($idx) use ($app, $smarty) {
 	$smarty->assign('assetgroups', $assetgroups);
 
 	$sql = "SELECT pug.area_id, pug.total, pug.male, pug.female, pum.farmer, pum.employee, pum.microb, "
-			. "         pua.group1, pua.group2, pua.group3, pua.group4, "
-					. "         pulms.male AS less_male, pulms.female AS less_female, pulms.gender_id, pulms.savings AS less_savings, pulms.outstanding AS less_outstand, pulms.total_granted AS less_totalg, pulms.total AS less_total "
-							. "FROM pu_gender AS pug "
-									. "LEFT JOIN pu_age AS pua ON pua.area_id = pug.area_id AND pua.gender_id = pug.gender_id AND pua.pu_datasheet_id = pug.pu_datasheet_id "
-											. "LEFT JOIN pu_market AS pum ON pum.area_id = pug.area_id AND pum.gender_id = pug.gender_id AND pum.pu_datasheet_id = pug.pu_datasheet_id "
-													. "LEFT JOIN pu_less_member_service AS pulms ON pulms.area_id = pug.area_id AND pulms.gender_id = pug.gender_id AND pulms.pu_datasheet_id = pug.pu_datasheet_id "
-															. "WHERE pug.primary_union_id = :pid AND pug.pu_datasheet_id = :dsid ";
+		. "         pua.group1, pua.group2, pua.group3, pua.group4, "
+		. "         pulms.male AS less_male, pulms.female AS less_female,   
+				    pulms.gender_id, pulms.savings AS less_savings, pulms.savings_us AS less_savings_us,
+				    pulms.outstanding AS less_outstand, pulms.outstanding_us AS less_outstand_us,
+					pulms.total_granted AS less_totalg, pulms.total_granted_us AS less_totalg_us,
+					pulms.total AS less_total, pulms.total AS less_total_us "
+		. "FROM pu_gender AS pug "
+		. "LEFT JOIN pu_age AS pua ON pua.area_id = pug.area_id AND pua.gender_id = pug.gender_id AND pua.pu_datasheet_id = pug.pu_datasheet_id "
+		. "LEFT JOIN pu_market AS pum ON pum.area_id = pug.area_id AND pum.gender_id = pug.gender_id AND pum.pu_datasheet_id = pug.pu_datasheet_id "
+		. "LEFT JOIN pu_less_member_service AS pulms ON pulms.area_id = pug.area_id AND pulms.gender_id = pug.gender_id AND pulms.pu_datasheet_id = pug.pu_datasheet_id "
+		. "WHERE pug.primary_union_id = :pid AND pug.pu_datasheet_id = :dsid ";
+	
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $idx));
 	$pu_genders = $sth->fetchAll();
@@ -165,10 +172,10 @@ $app->get("/detail/:id", function ($idx) use ($app, $smarty) {
 
 	$serval = array();
 	foreach ($services as $serv) {
-		$serval[$serv['id']] = array('total' => '', 'male' => '', 'male_ratio' => '', 'female' => '', 'female_ratio' => '', 'youth' => '', 'youth_ratio' => '', 'none_member' => '', 'none_member_ratio' => '');
+		$serval[$serv['id']] = array('total' => '', 'total_us' => '', 'male' => '', 'male_ratio' => '', 'female' => '', 'female_us' => '', 'female_ratio' => '', 'youth' => '', 'youth_us' => '', 'youth_ratio' => '', 'none_member' => '', 'none_member_us' => '', 'none_member_ratio' => '');
 	}
 
-	$sql = "SELECT service_id, total, male, male_ratio, female, female_ratio, youth, youth_ratio,  none_member, none_member_ratio FROM pu_service_distribution WHERE primary_union_id = :pid AND pu_datasheet_id = :dsid ";
+	$sql = "SELECT service_id, total, total_us, male, male_us, male_ratio, female, female_us, female_ratio, youth, youth_us, youth_ratio,  none_member, none_member_us, none_member_ratio FROM pu_service_distribution WHERE primary_union_id = :pid AND pu_datasheet_id = :dsid ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':pid' => $_SESSION['user_primary_union_id'], ':dsid' => $idx));
 

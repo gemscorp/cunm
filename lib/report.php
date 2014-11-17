@@ -111,8 +111,10 @@ function getReportData($dids)
 	$sql = "SELECT pug.area_id, pug.gender_id, SUM(pug.total) AS total, SUM(pug.male) AS male, SUM(pug.female) AS female, SUM(pum.farmer) AS farmer, 
 					SUM(pum.employee) AS employee, SUM(pum.microb) AS microb, "
 		. "         SUM(pua.group1) AS group1, SUM(pua.group2) AS group2, SUM(pua.group3) AS group3, SUM(pua.group4) AS group4, "
-		. "         SUM(pulms.male) AS less_male, SUM(pulms.female) AS less_female, pulms.gender_id, SUM(pulms.savings) AS less_savings, 
-					SUM(pulms.outstanding) AS less_outstand, SUM(pulms.total_granted) AS less_totalg, 
+		. "         SUM(pulms.male) AS less_male, SUM(pulms.female) AS less_female, pulms.gender_id, 
+				    SUM(pulms.savings) AS less_savings, SUM(pulms.savings_us) AS less_savings_us,
+					SUM(pulms.outstanding) AS less_outstand, SUM(pulms.outstanding_us) AS less_outstand_us,
+					SUM(pulms.total_granted) AS less_totalg, SUM(pulms.total_granted_us) AS less_totalg_us,  
 					SUM(pulms.total) AS less_total "
 		. "FROM pu_gender AS pug "
 		. "LEFT JOIN pu_age AS pua ON pua.area_id = pug.area_id AND pua.gender_id = pug.gender_id AND pua.pu_datasheet_id = pug.pu_datasheet_id "
@@ -367,7 +369,8 @@ function RunComparisonReport($app, $smarty)
 	$periods = array(1, 2);
 	$group_template = array('total' => 0, 'male' => 0, 'female' => 0, 'farmer' => 0, 'employee' => 0,
 			'microb' => 0, 'group1' => 0, 'group2' => 0, 'group3' => 0, 'group4' => 0,
-			'less_male' => 0, 'less_female' => 0, 'less_savings' => 0, 'less_outstand' => 0, 'less_totalg' => 0, 'less_total' => 0);
+			'less_male' => 0, 'less_female' => 0, 'less_savings' => 0, 'less_outstand' => 0, 'less_totalg' => 0, 'less_total' => 0,
+			'less_savings_us' => 0, 'less_outstand_us' => 0, 'less_totalg_us' => 0,);
 	$group_template_change = array('total_change' => 0, 'male_change' => 0, 'female_change' => 0, 'farmer_change' => 0, 'employee_change' => 0,
 			'microb_change' => 0, 'group1_change' => 0, 'group2_change' => 0, 'group3_change' => 0, 'group4_change' => 0,
 			'less_male_change' => 0, 'less_female_change' => 0, 'less_savings_change' => 0, 'less_outstand_change' => 0, 'less_totalg_change' => 0, 'less_total_change' => 0);
@@ -667,16 +670,16 @@ function RunComparisonReport($app, $smarty)
 	
 	$serval = array();
 	foreach ($services as $serv) {
-		$serval[$serv['id']] = array('total' => 0, 'male' => 0, 'male_ratio' => 0,
-				'female' => 0, 'female_ratio' => 0, 'youth' => 0, 'youth_ratio' => 0, 'none_member' => 0,
+		$serval[$serv['id']] = array('total' => 0, 'total_us' => 0, 'male' => 0, 'male_us' => 0,  'male_ratio' => 0,
+				'female' => 0, 'female_us' => 0, 'female_ratio' => 0, 'youth' => 0, 'youth_us' => 0, 'youth_ratio' => 0, 'none_member' => 0, 'none_member_us' => 0,
 				'none_member_ratio' => 0);
 	}
 	
-	$sql = "SELECT service_id, SUM(total) AS total,
-					SUM(male) AS male, (SUM(male) / SUM(total)) * 100 AS male_ratio,
-					SUM(female) AS female, (SUM(female) / SUM(total)) * 100 AS female_ratio,
-					SUM(youth) AS youth, (SUM(youth) / SUM(total)) * 100 AS youth_ratio,
-					SUM(none_member) AS none_member, (SUM(none_member) / SUM(total)) * 100 AS none_member_ratio "
+	$sql = "SELECT service_id, SUM(total) AS total, SUM(total_us) AS total_us,
+					SUM(male) AS male, SUM(male_us) AS male_us, (SUM(male) / SUM(total)) * 100 AS male_ratio,
+					SUM(female) AS female, SUM(female_us) AS female_us, (SUM(female) / SUM(total)) * 100 AS female_ratio,
+					SUM(youth) AS youth, SUM(youth_us) AS youth_us, (SUM(youth) / SUM(total)) * 100 AS youth_ratio,
+					SUM(none_member) AS none_member, SUM(none_member_us) AS none_member_us, (SUM(none_member) / SUM(total)) * 100 AS none_member_ratio "
 			. "FROM pu_service_distribution WHERE pu_datasheet_id IN (" . implode(",", $dids) . ") GROUP BY service_id ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array());
@@ -686,11 +689,11 @@ function RunComparisonReport($app, $smarty)
 		$serval[$s['service_id']][2] = $s;
 	}
 	
-	$sql = "SELECT service_id, SUM(total) AS total,
-					SUM(male) AS male, (SUM(male) / SUM(total)) * 100 AS male_ratio,
-					SUM(female) AS female, (SUM(female) / SUM(total)) * 100 AS female_ratio,
-					SUM(youth) AS youth, (SUM(youth) / SUM(total)) * 100 AS youth_ratio,
-					SUM(none_member) AS none_member, (SUM(none_member) / SUM(total)) * 100 AS none_member_ratio "
+	$sql = "SELECT service_id, SUM(total) AS total, SUM(total_us) AS total_us,
+					SUM(male) AS male, SUM(male_us) AS male_us, (SUM(male) / SUM(total)) * 100 AS male_ratio,
+					SUM(female) AS female, SUM(female_us) AS female_us, (SUM(female) / SUM(total)) * 100 AS female_ratio,
+					SUM(youth) AS youth, SUM(youth_us) AS youth_us, (SUM(youth) / SUM(total)) * 100 AS youth_ratio,
+					SUM(none_member) AS none_member, SUM(none_member_us) AS none_member_us, (SUM(none_member) / SUM(total)) * 100 AS none_member_ratio "
 			. "FROM pu_service_distribution WHERE pu_datasheet_id IN (" . implode(",", $pdids) . ") GROUP BY service_id ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array());
@@ -756,7 +759,7 @@ function RunIndividualReport($app, $smarty)
 	$genders = array(1, 2);
 	$group_template = array('total' => 0, 'male' => 0, 'female' => 0, 'farmer' => 0, 'employee' => 0,
 			'microb' => 0, 'group1' => 0, 'group2' => 0, 'group3' => 0, 'group4' => 0,
-			'less_male' => 0, 'less_female' => 0, 'less_savings' => 0, 'less_outstand' => 0, 'less_totalg' => 0, 'less_total' => 0);
+			'less_male' => 0, 'less_female' => 0, 'less_savings_us' => 0, 'less_outstand_us' => 0, 'less_totalg_us' => 0, 'less_total' => 0);
 	foreach ($area_ids as $id) {
 		$oparea[] = $id['area_id'];
 		foreach ($genders as $gender_id) {
@@ -896,16 +899,17 @@ function RunIndividualReport($app, $smarty)
 	
 	$serval = array();
 	foreach ($services as $serv) {
-		$serval[$serv['id']] = array('total' => 0, 'male' => 0, 'male_ratio' => 0,
-				'female' => 0, 'female_ratio' => 0, 'youth' => 0, 'youth_ratio' => 0, 'none_member' => 0,
+		$serval[$serv['id']] = array('total' => 0, 'male' => 0, 'total_us' => 0, 'male_us' => 0, 'male_ratio' => 0,
+				'female' => 0, 'female_us' => 0, 'female_ratio' => 0, 'youth' => 0, 'youth_us' => 0, 'youth_ratio' => 0, 
+				'none_member' => 0, 'none_member_us' => 0,
 				'none_member_ratio' => 0);
 	}
 	
-	$sql = "SELECT service_id, SUM(total) AS total,
-					SUM(male) AS male, (SUM(male) / SUM(total)) * 100 AS male_ratio,
-					SUM(female) AS female, (SUM(female) / SUM(total)) * 100 AS female_ratio,
-					SUM(youth) AS youth, (SUM(youth) / SUM(total)) * 100 AS youth_ratio,
-					SUM(none_member) AS none_member, (SUM(none_member) / SUM(total)) * 100 AS none_member_ratio "
+	$sql = "SELECT service_id, SUM(total) AS total, SUM(total_us) AS total_us,
+					SUM(male) AS male, SUM(male_us) AS male_us, (SUM(male) / SUM(total)) * 100 AS male_ratio,
+					SUM(female) AS female, SUM(female_us) AS female_us, (SUM(female) / SUM(total)) * 100 AS female_ratio,
+					SUM(youth) AS youth, SUM(youth_us) AS youth_us, (SUM(youth) / SUM(total)) * 100 AS youth_ratio,
+					SUM(none_member) AS none_member, SUM(none_member_us) AS none_member_us, (SUM(none_member) / SUM(total)) * 100 AS none_member_ratio "
 			. "FROM pu_service_distribution WHERE pu_datasheet_id IN (" . implode(",", $dids) . ") GROUP BY service_id ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array());

@@ -42,52 +42,101 @@
   			</thead>
   			<tbody>
   			{foreach from=$services item=service}
-  				<tr>
-  					<td rowspan='2'>{$service.name}</td>
-  					{foreach from=$periods item=period name='periods'}
-  						{if $smarty.foreach.periods.last}
-  							<tr>
-  						{/if}
-  						<td>Period {$period} </td>
-  						<td>{$serval[$service.id][$period].total|number_format:2:".":","}</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].total_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].male|number_format:2:".":","}</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].male_ratio|number_format:2:".":","}%</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_ratio_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].female|number_format:2:".":","}</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].female_ratio|number_format:2:".":","}%</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_ratio_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].youth|number_format:2:".":","}</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].youth_ratio|number_format:2:".":","}%</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_ratio_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].none_member|number_format:2:".":","}</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_change|number_format:2:".":","}%</td>
-  						{/if}
-  						<td>{$serval[$service.id][$period].none_member_ratio|number_format:2:".":","}%</td>
-  						{if $smarty.foreach.periods.first}
-  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_ratio_change|number_format:2:".":","}%</td>
-  							</tr>
-  						{/if}
-  						{/foreach}
-  				</tr>
+  				{if $smarty.session.user_level neq 0}
+	  				<tr>
+	  					<td rowspan='2'>{$service.name}</td>
+	  					{foreach from=$periods item=period name='periods'}
+	  						{if $smarty.foreach.periods.last}
+	  							<tr>
+	  						{/if}
+	  						<td>Period {$period} </td>
+	  						<td>{$serval[$service.id][$period].total|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].total_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].male|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].male_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_ratio_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].female|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].female_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_ratio_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].youth|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].youth_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_ratio_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].none_member|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].none_member_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_ratio_change|number_format:2:".":","}%</td>
+	  							</tr>
+	  						{/if}
+	  						{/foreach}
+	  				</tr>
+	  			{else}
+	  				<tr>
+	  					<td rowspan='2'>{$service.name}</td>
+	  					{foreach from=$periods item=period name='periods'}
+	  						{if $smarty.foreach.periods.last}
+	  							<tr>
+	  						{/if}
+	  						<td>Period {$period} </td>
+	  						<td>${$serval[$service.id][$period].total_us|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].total_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>${$serval[$service.id][$period].male_us|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].male_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_ratio_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>${$serval[$service.id][$period].female_us|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].female_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_ratio_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>${$serval[$service.id][$period].youth_us|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].youth_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_ratio_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>${$serval[$service.id][$period].none_member_us|number_format:2:".":","}</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_change|number_format:2:".":","}%</td>
+	  						{/if}
+	  						<td>{$serval[$service.id][$period].none_member_ratio|number_format:2:".":","}%</td>
+	  						{if $smarty.foreach.periods.first}
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_ratio_change|number_format:2:".":","}%</td>
+	  							</tr>
+	  						{/if}
+	  						{/foreach}
+	  				</tr>
+	  			{/if}
   			{/foreach}
   			</tbody>
   		</table>
@@ -195,32 +244,61 @@
   			<tbody>
   				{foreach from=$opareas item=oparea}
   					{foreach from=$genders item=gender}
-  				<tr>
-  					<td rowspan='2'>{$areas[$oparea]} - {$gtxt[$gender]}</td>
-  					{foreach from=$periods item=period name='period'}
-  						{if $smarty.foreach.period.last}
-	  						<tr>
-	  					{/if}
-	  					<td>Period {$period}</td>
-	  					<td>{$gender_groups[$oparea][$gender][$period].less_total}</td>
-	  					{if $smarty.foreach.period.first}
-	  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_total_change|number_format:2}%</td>
-	  					{/if}
-	  					<td>{$gender_groups[$oparea][$gender][$period].less_savings}</td>
-	  					{if $smarty.foreach.period.first}
-	  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_savings_change|number_format:2}%</td>
-	  					{/if}
-	  					<td>{$gender_groups[$oparea][$gender][$period].less_totalg}</td>
-	  					{if $smarty.foreach.period.first}
-	  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_totalg_change|number_format:2}%</td>
-	  					{/if}
-	  					<td>{$gender_groups[$oparea][$gender][$period].less_outstand}</td>
-	  					{if $smarty.foreach.period.first}
-	  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_outstand_change|number_format:2}%</td>
-	  						</tr>
-	  					{/if}
-	  				{/foreach}
-  				</tr>
+  					{if $smarty.session.user_level neq 0}
+		  				<tr>
+		  					<td rowspan='2'>{$areas[$oparea]} - {$gtxt[$gender]}</td>
+		  					{foreach from=$periods item=period name='period'}
+		  						{if $smarty.foreach.period.last}
+			  						<tr>
+			  					{/if}
+			  					<td>Period {$period}</td>
+			  					<td>{$gender_groups[$oparea][$gender][$period].less_total|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_total_change|number_format:2}%</td>
+			  					{/if}
+			  					<td>{$gender_groups[$oparea][$gender][$period].less_savings|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_savings_change|number_format:2}%</td>
+			  					{/if}
+			  					<td>{$gender_groups[$oparea][$gender][$period].less_totalg|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_totalg_change|number_format:2}%</td>
+			  					{/if}
+			  					<td>{$gender_groups[$oparea][$gender][$period].less_outstand|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_outstand_change|number_format:2}%</td>
+			  						</tr>
+			  					{/if}
+			  				{/foreach}
+		  				</tr>
+		  			{else}
+		  				<tr>
+		  					<td rowspan='2'>{$areas[$oparea]} - {$gtxt[$gender]}</td>
+		  					{foreach from=$periods item=period name='period'}
+		  						{if $smarty.foreach.period.last}
+			  						<tr>
+			  					{/if}
+			  					<td>Period {$period}</td>
+			  					<td>{$gender_groups[$oparea][$gender][$period].less_total|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_total_change|number_format:2}%</td>
+			  					{/if}
+			  					<td>${$gender_groups[$oparea][$gender][$period].less_savings_us|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_savings_change|number_format:2}%</td>
+			  					{/if}
+			  					<td>${$gender_groups[$oparea][$gender][$period].less_totalg_us|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_totalg_change|number_format:2}%</td>
+			  					{/if}
+			  					<td>${$gender_groups[$oparea][$gender][$period].less_outstand_us|number_format:2}</td>
+			  					{if $smarty.foreach.period.first}
+			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_outstand_change|number_format:2}%</td>
+			  						</tr>
+			  					{/if}
+			  				{/foreach}
+		  				</tr>
+		  			{/if}
   					{/foreach}
   				{/foreach}  				
   			</tbody>
