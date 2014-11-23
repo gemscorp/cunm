@@ -40,7 +40,7 @@
   					{foreach from=$genders item=gender}
 	  				<tr>
 	  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
-	  					<td><input id='total_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
+	  					<td><input id='total_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalxl' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
 	  					<td><input id='farmer_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='farmer' data-sum='tfarmer' data-group='farmer' type='text' name="area[{$oparea}][{$gender}][farmer]" value="{$gender_groups[$oparea][$gender].farmer}" /></td>
 	  					<td><input id='employee_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='employee' data-sum='temployee' data-group='employee' type='text' name="area[{$oparea}][{$gender}][employee]" value="{$gender_groups[$oparea][$gender].employee}" /></td>
 	  					<td><input id='microb_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='microb' data-sum='tmicrob' data-group='microb' type='text' name="area[{$oparea}][{$gender}][microb]" value="{$gender_groups[$oparea][$gender].microb}" /></td>
@@ -48,13 +48,13 @@
 	  					<td><input id='group2_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group2' data-sum='tgroup2' data-group='group2' type='text' name="area[{$oparea}][{$gender}][group2]" value="{$gender_groups[$oparea][$gender].group2}" /></td>
 	  					<td><input id='group3_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group3' data-sum='tgroup3' data-group='group3' type='text' name="area[{$oparea}][{$gender}][group3]" value="{$gender_groups[$oparea][$gender].group3}" /></td>
 	  					<td><input id='group4_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group4' data-sum='tgroup4' data-group='group4' type='text' name="area[{$oparea}][{$gender}][group4]" value="{$gender_groups[$oparea][$gender].group4}" /></td>
-	  					<td><input id='grouptotal_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalx' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
+	  					<td><input id='grouptotal_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalxr' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
 	  				</tr>
 	  				{/foreach}
 				{/foreach}
 				<tr>
   					<td>Total</td>
-  					<td><input id='ttotalx' type='text' value='{$gender_total.total}' /></td>
+  					<td><input id='ttotalxl' type='text' value='{$gender_total.total}' /></td>
   					<td><input id='tfarmer' type='text' value='{$gender_total.farmer}' /></td>
   					<td><input id='temployee' type='text' value='{$gender_total.employee}' /></td>
   					<td><input id='tmicrob' type='text' value='{$gender_total.microb}' /></td>
@@ -62,7 +62,7 @@
   					<td><input id='tgroup2' type='text' value='{$gender_total.group2}' /></td>
   					<td><input id='tgroup3' type='text' value='{$gender_total.group3}' /></td>
   					<td><input id='tgroup4' type='text' value='{$gender_total.group4}' /></td>
-  					<td><input id='ttotalx' type='text' value='{$gender_total.total}' /></td>
+  					<td><input id='ttotalxr' type='text' value='{$gender_total.total}' /></td>
   				</tr>
   			</tbody>
   		</table>
@@ -431,6 +431,15 @@
 			
 			var total = parseInt($("#group1_" + oparea + "_" + gender).val()) + parseInt($("#group2_" + oparea + "_" + gender).val()) + parseInt($("#group3_" + oparea + "_" + gender).val()) + parseInt($("#group4_" + oparea + "_" + gender).val()); 
 			$("#grouptotal_" + oparea + "_" + gender).val(total);
+			
+			var totall = 0, totalr = 0;
+			$(".totalx").each(function (index) {
+				if ($(this).data('sum') == 'ttotalxr') totalr += parseInt($(this).val());
+				else if ($(this).data('sum') == 'ttotalxl') totall +=  parseInt($(this).val());
+			});
+			
+			$("#ttotalxl").val(totall);
+			$("#ttotalxr").val(totalr);
 			
 		});
 		
