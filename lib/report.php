@@ -411,6 +411,8 @@ function RunComparisonReport($app, $smarty)
 		$dids = getLatestDataSheetByCuId($cu_ids);
 		$pdids = getPreviousDataSheetIds($cu_ids);
 	} else if ($_POST['date_type_comp'] == 0) {
+		$smarty->assign('date_range1', date("F, Y", strtotime($_POST['dt_year_from'] . "-" . $_POST['dt_month_from'] . "-28")));
+		$smarty->assign('date_range2', date("F, Y", strtotime($_POST['dt_year_to'] . "-" . $_POST['dt_month_to'] . "-28")));
 		$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $_POST['dt_month_to'], $_POST['dt_year_to']);
 		$pdids = getLatestDataSheetByCuIdByMonth($cu_ids, $_POST['dt_month_from'], $_POST['dt_year_from']);
 		
@@ -420,7 +422,8 @@ function RunComparisonReport($app, $smarty)
 	} else if ($_POST['date_type_comp'] == 1) {
 		$month_to = 3 * $_POST['dt_quater_to'];
 		$month_from = 3 * $_POST['dt_quater_from'];
-		
+		$smarty->assign('date_range1', "Quater " . $_POST['dt_quater_from'] . " of " . $_POST['dt_year_from']);
+		$smarty->assign('date_range2', "Quater " . $_POST['dt_quater_to'] . " of " . $_POST['dt_year_to']);
 		$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $month_to, $_POST['dt_year_to']);
 		$pdids = getLatestDataSheetByCuIdByMonth($cu_ids, $month_from, $_POST['dt_year_from']);
 		
@@ -433,6 +436,8 @@ function RunComparisonReport($app, $smarty)
 		if (date("Y") > $_POST['dt_year_from']) $month_from = 12;
 		else if (date("Y") == $_POST['dt_year_from']) $month_from = date("m");
 		
+		$smarty->assign('date_range1', "Year " . $_POST['dt_year_from']);
+		$smarty->assign('date_range2', "Year " . $_POST['dt_year_to']);
 		$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $month_to, $_POST['dt_year_to']);
 		$pdids = getLatestDataSheetByCuIdByMonth($cu_ids, $month_from, $_POST['dt_year_from']);
 		
@@ -788,18 +793,22 @@ function RunIndividualReport($app, $smarty)
 	$smarty->assign('areas', $areas);
 	
 	if ($_POST['date_type'] == 3) {
+		$smarty->assign('date_range', 'Latest');
 		$dids = getLatestDataSheetByCuId($cu_ids);
 		$pdids = getPreviousDataSheetIds($cu_ids);
 	} else if ($_POST['date_type'] == 0) {
+		$smarty->assign('date_range', date("F, Y", strtotime($_POST['dt_year'] . "-" . $_POST['dt_month'] . "-28")));
 		$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $_POST['dt_month'], $_POST['dt_year']);
 		$pdids = getPreviousDataSheetIdsByMonth($cu_ids, $_POST['dt_month'], $_POST['dt_year']);
 	} else if ($_POST['date_type'] == 1) {
 		$month = 3 * $_POST['dt_quater'];
+		$smarty->assign('date_range', "Quater " . $_POST['dt_quater'] . " of " . $_POST['dt_year']);
 		$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $month, $_POST['dt_year']);
 		$pdids = getPreviousDataSheetIdsByMonth($cu_ids, $month, $_POST['dt_year']);
 	} else if ($_POST['date_type'] == 2) {
 		if (date("Y") > $_POST['dt_year']) $month = 12;
 		else if (date("Y") == $_POST['dt_year']) $month = date("m");
+		$smarty->assign('date_range', "Year " . $_POST['dt_year']);
 		$dids = getLatestDataSheetByCuIdByMonth($cu_ids, $month, $_POST['dt_year']);
 		$pdids = getPreviousDataSheetIdsByMonth($cu_ids, $month, $_POST['dt_year']);
 	}

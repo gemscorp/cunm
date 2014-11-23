@@ -1,5 +1,5 @@
 {include file='header.tpl'}
-<h3>Report</h3>
+<h3>{$report_type} Report, Period - {$date_range1} vs {$date_range2}</h3>
 
 {include file='common/alert.tpl'}
 <!-- Nav tabs -->

@@ -83,9 +83,11 @@ $app->group("/report", function () use ($app, $smarty) {
 		require_once 'lib/report.php';
 		
 		if ($_POST['report_type'] == 2) {
+			$smarty->assign('report_type', 'Comparison');
 			RunComparisonReport($app, $smarty);
 			return;
 		} else {
+			$smarty->assign('report_type', 'Individual');
 			RunIndividualReport($app, $smarty);
 		}
 	});
