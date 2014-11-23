@@ -342,7 +342,7 @@ function RunComparisonReport($app, $smarty)
 	if ($_POST['federation_id'] != 0) {
 			
 		if ($_SESSION['user_level'] == 2) {
-			$cu_ids = array($_SESSION['user_federation_id']);
+			$cu_ids = array($_SESSION['user_primary_union_id']);
 		} else {
 			$cu_ids = getCuByFedId($_POST['federation_id']);
 		}
@@ -733,7 +733,7 @@ function RunIndividualReport($app, $smarty)
 	if ($_POST['federation_id'] != 0) {
 			
 		if ($_SESSION['user_level'] == 2) {
-			$cu_ids = array($_SESSION['user_federation_id']);
+			$cu_ids = array($_SESSION['user_primary_union_id']);
 		} else {
 			$cu_ids = getCuByFedId($_POST['federation_id']);
 		}
