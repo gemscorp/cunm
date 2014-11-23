@@ -82,6 +82,14 @@ $app->group("/report", function () use ($app, $smarty) {
 	$app->post("/main", function () use ($app, $smarty) {
 		require_once 'lib/report.php';
 		
+		if ($_SESSION['user_level'] != 0) {
+			
+			list($cur, $rate) =  GetCurrencyAndRate();
+			
+			$smarty->assign('local_currency', $cur);
+			$smarty->assign('exchange_rate', $rate);
+		}
+		
 		if ($_POST['report_type'] == 2) {
 			$smarty->assign('report_type', 'Comparison');
 			RunComparisonReport($app, $smarty);

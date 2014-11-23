@@ -936,3 +936,17 @@ function RunIndividualReport($app, $smarty)
 		$smarty->display('member/report.tpl');
 	}	
 }
+
+function GetCurrencyAndRate()
+{
+	$db = getDbHandler();
+	$sql = "SELECT c.currency, c.exchange_rate "
+		. "FROM country AS c "
+       . "WHERE c.id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $_SESSION['user_country_id']));
+	
+	$row = $sth->fetch();
+	
+	return array($row['currency'], $row['exchange_rate']);
+}

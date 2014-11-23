@@ -11,6 +11,7 @@ $sth = $db->prepare($sql);
 $sth->execute();
 
 $ds = $sth->fetchAll();
+$updates = array();
 
 foreach ($ds as $d) {
 	
@@ -19,6 +20,10 @@ foreach ($ds as $d) {
 	if (!isset($json['rates'][$cur])) continue;
 	
 	$rate = $json['rates'][$cur];
+	if (!in_array($cur, $updates)) {
+		setCurrency($cur, $rate);
+		$updates[] = $cur;
+	}
 	
 	$sql = "UPDATE pu_balancesheet SET us_amount = (amount / $rate) WHERE primary_union_id = :id ";
 	$sth = $db->prepare($sql);
@@ -47,6 +52,15 @@ foreach ($ds as $d) {
 	$sth->execute(array(':id' => $d['primary_union_id']));
 }
 
+function setCurrency($cur, $rate)
+{
+	$db = getDbHandler();
+	$sql = "UPDATE country SET exchange_rate = :exchange_rate WHERE currency = :currency";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':exchange_rate' => $rate, ':currency' => $cur));
+
+	return true;
+}
 
 function getCurrency($primary_union_id)
 {

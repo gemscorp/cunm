@@ -1,5 +1,5 @@
 {include file='header.tpl'}
-<h3>{$report_type} Report, Period - {$date_range}</h3>
+<h3>{$report_type} Report, Period - {$date_range}, {if $smarty.session.user_level neq 0} Exchange Rate 1 USD = {$exchange_rate} {$local_currency} {/if} </h3>
 
 {include file='common/alert.tpl'}
 <!-- Nav tabs -->
