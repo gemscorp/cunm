@@ -2,6 +2,14 @@
 	<ul class="nav navbar-nav">
 		{if isset($smarty.session.user_id)}
 			<li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/dashboard" class="nav">Dashboard</a></li>
+			{if $smarty.session.user_level eq "3"}
+				<li class="dropdown">
+	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reporting User <b class="caret"></b></a>
+			          <ul class="dropdown-menu">
+			            <li><a href="http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/report/">Report</a></li>
+			          </ul>
+	        	</li>
+	        {/if}
 			{if $smarty.session.user_level eq "2"}
 				<li class="dropdown">
 	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Primary Credit Union <b class="caret"></b></a>

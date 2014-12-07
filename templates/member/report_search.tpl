@@ -18,7 +18,7 @@
 				</select>
 			{/if}
 			
-			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2"}
+			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2" || $smarty.session.user_level eq "3"}
 				<span>{$ucountry}</span>
 				<input type='hidden' name='country_id' value='{$smarty.session.user_country_id}' />
 			{/if}
@@ -37,8 +37,12 @@
 				   </select>
 			{/if}
 			
-			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2"}
-				<span>{$ufed}</span>
+			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2" || $smarty.session.user_level eq "3"}
+				{if $smarty.session.user_federation_id eq "0"}
+					<span>No Federation</span>
+				{else}
+					<span>{$ufed}</span>
+				{/if}
 				<input type='hidden' name='federation_id' value='{$smarty.session.user_federation_id}' />
 			{/if}
 			

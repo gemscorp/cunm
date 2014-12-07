@@ -141,6 +141,7 @@
 				dataType: 'json',
 				success: function (json) {
 					$("#federation_id").html("");
+					$("#federation_id").append('<option value="0">No Federation</option>');
 					$.each(json.federations, function (i,v) {
 						$("#federation_id").append('<option value="' + v.id + '">' + v.name + '</option>');
 					});
