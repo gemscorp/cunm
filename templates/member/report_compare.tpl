@@ -184,39 +184,39 @@
 	  							<tr>
 	  						{/if}
 	  						<td>Period {$period}</td>
-	  						<td>{$gender_groups[$oparea][$gender][$period].total}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].total|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].total_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].farmer}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].farmer|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].farmer_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].employee}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].employee|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].employee_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].microb}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].microb|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].microb_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].group1}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].group1|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].group1_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].group2}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].group2|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].group2_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].group3}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].group3|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].group3_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].group4}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].group4|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].group4_change|number_format:2}%</td>
 	  						{/if}
-	  						<td>{$gender_groups[$oparea][$gender][$period].total}</td>
+	  						<td>{$gender_groups[$oparea][$gender][$period].total|number_format:0}</td>
 	  						{if $smarty.foreach.period.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].total_change|number_format:2}%</td>
 	  							</tr>
