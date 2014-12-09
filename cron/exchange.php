@@ -58,7 +58,7 @@ function setCurrency($cur, $rate)
 	$sql = "UPDATE country SET exchange_rate = :exchange_rate WHERE currency = :currency";
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':exchange_rate' => $rate, ':currency' => $cur));
-
+	echo $sth->rowCount();
 	return true;
 }
 

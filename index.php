@@ -64,6 +64,15 @@ $app->post('/login', function () use ($app, $smarty) {
 	$_SESSION['user_country_id'] = $user['country_id'];
 	$_SESSION['user_primary_union_id'] = $user['primary_union_id'];
 	
+	$currency = '';
+	$sql = "SELECT currency FROM country WHERE id = :id ";
+	$sth = $pdo->prepare($sql);
+	$sth->execute(array(':id' => $user['country_id']));
+	if ($sth->rowCount() == 1) {
+		$currency = $sth->fetch()['currency'];
+	}
+	$_SESSION['user_currency'] = $currency;
+	
 	$sql = "UPDATE user SET lastlogin = NOW() WHERE id = :id ";
 	$sth = $pdo->prepare($sql);
 	$sth->execute(array(':id' => $user['id']));

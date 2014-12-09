@@ -17,32 +17,54 @@
 	<div class="tab-pane" id="usage_services">
   		<table class="table">
   			<thead>
+  				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   				<tr>
+  					<th>Type of Services</th>
+  					<th>Period</th>
+	  				<th>Amount</th>
+	  				<th>Amount US$</th>
+	  				<th>Change</th>
+	  				<th>Male</th>
+	  				<th>Male US$</th>
+	  				<th>Percentage</th>
+	  				<th>Change</th>
+	  				<th>Female</th>
+	  				<th>Female US$</th>
+	  				<th>Percentage</th>
+	  				<th>Change</th>
+	  				<th>Youth</th>
+	  				<th>Youth US$</th>
+	  				<th>Percentage</th>
+	  				<th>Change</th>
+	  				<th>Non-members</th>
+	  				<th>Non-members US$</th>
+	  				<th>Percentage</th>
+	  				<th>Change</th>
+  				</tr>
+  				{else}
+  					<tr>
   					<th>Type of Services</th>
   					<th>Period</th>
 	  				<th>Amount</th>
 	  				<th>Change</th>
 	  				<th>Male</th>
-	  				<th>Change</th>
 	  				<th>Percentage</th>
 	  				<th>Change</th>
 	  				<th>Female</th>
-	  				<th>Change</th>
 	  				<th>Percentage</th>
 	  				<th>Change</th>
 	  				<th>Youth</th>
-	  				<th>Change</th>
 	  				<th>Percentage</th>
 	  				<th>Change</th>
 	  				<th>Non-members</th>
-	  				<th>Change</th>
 	  				<th>Percentage</th>
 	  				<th>Change</th>
   				</tr>
+  				{/if}
   			</thead>
   			<tbody>
   			{foreach from=$services item=service}
-  				{if $smarty.session.user_level neq 0}
+  				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
 	  				<tr>
 	  					<td rowspan='2'>{$service.name}</td>
 	  					{foreach from=$periods item=period name='periods'}
@@ -50,41 +72,34 @@
 	  							<tr>
 	  						{/if}
 	  						<td>Period {$period} </td>
-	  						<td>{$serval[$service.id][$period].total|number_format:2:".":","}</td>
+	  						<td>{$smarty.session.user_currency} {$serval[$service.id][$period].total|number_format:2:".":","}</td>
+	  						<td>${$serval[$service.id][$period].total_us|number_format:2:".":","}</td>
 	  						{if $smarty.foreach.periods.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].total_change|number_format:2:".":","}%</td>
 	  						{/if}
-	  						<td>{$serval[$service.id][$period].male|number_format:2:".":","}</td>
+	  						<td>{$smarty.session.user_currency} {$serval[$service.id][$period].male|number_format:2:".":","}</td>
+	  						<td>${$serval[$service.id][$period].male_us|number_format:2:".":","}</td>
+	  						<td>{$serval[$service.id][$period].male_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_change|number_format:2:".":","}%</td>
 	  						{/if}
-	  						<td>{$serval[$service.id][$period].male_ratio|number_format:2:".":","}%</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_ratio_change|number_format:2:".":","}%</td>
-	  						{/if}
-	  						<td>{$serval[$service.id][$period].female|number_format:2:".":","}</td>
+	  						<td>{$smarty.session.user_currency} {$serval[$service.id][$period].female|number_format:2:".":","}</td>
+	  						<td>${$serval[$service.id][$period].female_us|number_format:2:".":","}</td>
+	  						<td>{$serval[$service.id][$period].female_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_change|number_format:2:".":","}%</td>
 	  						{/if}
-	  						<td>{$serval[$service.id][$period].female_ratio|number_format:2:".":","}%</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_ratio_change|number_format:2:".":","}%</td>
-	  						{/if}
-	  						<td>{$serval[$service.id][$period].youth|number_format:2:".":","}</td>
+	  						<td>{$smarty.session.user_currency} {$serval[$service.id][$period].youth|number_format:2:".":","}</td>
+	  						<td>${$serval[$service.id][$period].youth_us|number_format:2:".":","}</td>
+	  						<td>{$serval[$service.id][$period].youth_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_change|number_format:2:".":","}%</td>
 	  						{/if}
-	  						<td>{$serval[$service.id][$period].youth_ratio|number_format:2:".":","}%</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_ratio_change|number_format:2:".":","}%</td>
-	  						{/if}
-	  						<td>{$serval[$service.id][$period].none_member|number_format:2:".":","}</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_change|number_format:2:".":","}%</td>
-	  						{/if}
+	  						<td>{$smarty.session.user_currency} {$serval[$service.id][$period].none_member|number_format:2:".":","}</td>
+	  						<td>${$serval[$service.id][$period].none_member_us|number_format:2:".":","}</td>
 	  						<td>{$serval[$service.id][$period].none_member_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_ratio_change|number_format:2:".":","}%</td>
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_change|number_format:2:".":","}%</td>
 	  							</tr>
 	  						{/if}
 	  						{/foreach}
@@ -102,36 +117,24 @@
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].total_change|number_format:2:".":","}%</td>
 	  						{/if}
 	  						<td>${$serval[$service.id][$period].male_us|number_format:2:".":","}</td>
+	  						<td>{$serval[$service.id][$period].male_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_change|number_format:2:".":","}%</td>
 	  						{/if}
-	  						<td>{$serval[$service.id][$period].male_ratio|number_format:2:".":","}%</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].male_ratio_change|number_format:2:".":","}%</td>
-	  						{/if}
 	  						<td>${$serval[$service.id][$period].female_us|number_format:2:".":","}</td>
+	  						<td>{$serval[$service.id][$period].female_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_change|number_format:2:".":","}%</td>
 	  						{/if}
-	  						<td>{$serval[$service.id][$period].female_ratio|number_format:2:".":","}%</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].female_ratio_change|number_format:2:".":","}%</td>
-	  						{/if}
 	  						<td>${$serval[$service.id][$period].youth_us|number_format:2:".":","}</td>
+	  						<td>{$serval[$service.id][$period].youth_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
 	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_change|number_format:2:".":","}%</td>
 	  						{/if}
-	  						<td>{$serval[$service.id][$period].youth_ratio|number_format:2:".":","}%</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].youth_ratio_change|number_format:2:".":","}%</td>
-	  						{/if}
 	  						<td>${$serval[$service.id][$period].none_member_us|number_format:2:".":","}</td>
-	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_change|number_format:2:".":","}%</td>
-	  						{/if}
 	  						<td>{$serval[$service.id][$period].none_member_ratio|number_format:2:".":","}%</td>
 	  						{if $smarty.foreach.periods.first}
-	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_ratio_change|number_format:2:".":","}%</td>
+	  							<td rowspan='2' style='vertical-align: middle;'>{$serval[$service.id].none_member_change|number_format:2:".":","}%</td>
 	  							</tr>
 	  						{/if}
 	  						{/foreach}
@@ -228,23 +231,39 @@
   <div class="tab-pane" id="service">
   		<table class="table">
   			<thead>
-  				<tr>
+  				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   					<th>&nbsp;</th>
-  					<th>Period</th>
-	  				<th>Total Member</th>
-	  				<th>Change</th>
-	  				<th>Total Savings</th>
-	  				<th>Change</th>
-	  				<th>Total Loans</th>
-	  				<th>Change</th>
-	  				<th>Loan Outstanding</th>
-	  				<th>Change</th>
-  				</tr>
+	  					<th>Period</th>
+		  				<th>Total Member</th>
+		  				<th>Change</th>
+		  				<th>Total Savings</th>
+		  				<th>Total Savings US$</th>
+		  				<th>Change</th>
+		  				<th>Total Loans</th>
+		  				<th>Total Loans US$</th>
+		  				<th>Change</th>
+		  				<th>Loan Outstanding</th>
+		  				<th>Loan Outstanding US$</th>
+		  				<th>Change</th>
+  				{else}
+	  				<tr>
+	  					<th>&nbsp;</th>
+	  					<th>Period</th>
+		  				<th>Total Member</th>
+		  				<th>Change</th>
+		  				<th>Total Savings</th>
+		  				<th>Change</th>
+		  				<th>Total Loans</th>
+		  				<th>Change</th>
+		  				<th>Loan Outstanding</th>
+		  				<th>Change</th>
+	  				</tr>
+	  			{/if}
   			</thead>
   			<tbody>
   				{foreach from=$opareas item=oparea}
   					{foreach from=$genders item=gender}
-  					{if $smarty.session.user_level neq 0}
+  					{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
 		  				<tr>
 		  					<td rowspan='2'>{$areas[$oparea]} - {$gtxt[$gender]}</td>
 		  					{foreach from=$periods item=period name='period'}
@@ -256,15 +275,18 @@
 			  					{if $smarty.foreach.period.first}
 			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_total_change|number_format:2}%</td>
 			  					{/if}
-			  					<td>{$gender_groups[$oparea][$gender][$period].less_savings|number_format:2}</td>
+			  					<td>{$smarty.session.user_currency} {$gender_groups[$oparea][$gender][$period].less_savings|number_format:2}</td>
+			  					<td>${$gender_groups[$oparea][$gender][$period].less_savings_us|number_format:2}</td>
 			  					{if $smarty.foreach.period.first}
 			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_savings_change|number_format:2}%</td>
 			  					{/if}
-			  					<td>{$gender_groups[$oparea][$gender][$period].less_totalg|number_format:2}</td>
+			  					<td>{$smarty.session.user_currency} {$gender_groups[$oparea][$gender][$period].less_totalg|number_format:2}</td>
+			  					<td>${$gender_groups[$oparea][$gender][$period].less_totalg_us|number_format:2}</td>
 			  					{if $smarty.foreach.period.first}
 			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_totalg_change|number_format:2}%</td>
 			  					{/if}
-			  					<td>{$gender_groups[$oparea][$gender][$period].less_outstand|number_format:2}</td>
+			  					<td>{$smarty.session.user_currency} {$gender_groups[$oparea][$gender][$period].less_outstand|number_format:2}</td>
+			  					<td>${$gender_groups[$oparea][$gender][$period].less_outstand_us|number_format:2}</td>
 			  					{if $smarty.foreach.period.first}
 			  						<td rowspan='2' style='vertical-align: middle;'>{$gender_groups[$oparea][$gender].less_outstand_change|number_format:2}%</td>
 			  						</tr>
@@ -308,7 +330,7 @@
   		<table class="table">
   					<tr>
   						<td>Line Item</td>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   						<td>Period 1</td>
   						<td>Period 2</td>
   						<td>Change</td>
@@ -321,7 +343,7 @@
   				{if $group neq $bsline.group_name}
   					{assign var=group value=$bsline.group_name}
   					<tr>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   							<td colspan='7' style='text-align: left;'><strong>{$group}</strong></td>
   						{else}
   							<td colspan='4' style='text-align: left;'><strong>{$group}</strong></td>
@@ -331,7 +353,7 @@
   				{if $subgroup neq $bsline.subgroup_name}
   					{assign var=subgroup value=$bsline.subgroup_name}
   					<tr>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   							<td colspan='7' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
   						{else}
   							<td colspan='4' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
@@ -355,34 +377,34 @@
   						{/if}
   						
   						</td>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
 	  						<td>
 	  							{if $bsline.total eq "0"}
 	  								{if $bsvals[$bsline.id][1].amount < 0}
-	  									<span style='color: red;'>({$bsvals[$bsline.id][1].amount})</span>
+	  									<span style='color: red;'>{$smarty.session.user_currency} ({$bsvals[$bsline.id][1].amount|number_format:2})</span>
 	  								{else}
-	  									{$bsvals[$bsline.id][1].amount}
+	  									{$smarty.session.user_currency} {$bsvals[$bsline.id][1].amount|number_format:2}
 	  								{/if}
 	  							{else}
 	  								{if $bsvals[$bsline.id][1].amount < 0}
-	  									<strong><span style='color: red;'>({$bsvals[$bsline.id][1].amount})</span></strong>
+	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$bsvals[$bsline.id][1].amount|number_format:2})</span></strong>
 	  								{else}
-	  									<strong>{$bsvals[$bsline.id][1].amount}</strong>
+	  									<strong>{$smarty.session.user_currency} {$bsvals[$bsline.id][1].amount|number_format:2}</strong>
 	  								{/if}
 	  							{/if}
 	  						</td>
 	  						<td>
 	  							{if $bsline.total eq "0"}
 	  								{if $bsvals[$bsline.id][2].amount < 0}
-	  									<span style='color: red;'>({$bsvals[$bsline.id][2].amount})</span>
+	  									<span style='color: red;'>{$smarty.session.user_currency} ({$bsvals[$bsline.id][2].amount|number_format:2})</span>
 	  								{else}
-	  									{$bsvals[$bsline.id][2].amount}
+	  									{$smarty.session.user_currency} {$bsvals[$bsline.id][2].amount|number_format:2}
 	  								{/if}
 	  							{else}
 	  								{if $bsvals[$bsline.id][2].amount < 0}
-	  									<strong><span style='color: red;'>({$bsvals[$bsline.id][2].amount})</span></strong>
+	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$bsvals[$bsline.id][2].amount|number_format:2})</span></strong>
 	  								{else}
-	  									<strong>{$bsvals[$bsline.id][2].amount}</strong>
+	  									<strong>{$smarty.session.user_currency} {$bsvals[$bsline.id][2].amount|number_format:2}</strong>
 	  								{/if}
 	  							{/if}
 	  						</td>
@@ -455,7 +477,7 @@
   		<table class="table">
   					<tr>
   						<td>Line Item</td>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   							<td>Period 1</td>
   							<td>Period 2</td>
   							<td>Change</td>
@@ -468,7 +490,7 @@
   				{if $group neq $isline.group_name}
   					{assign var=group value=$isline.group_name}
   					<tr>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   							<td colspan='7' style='text-align: left;'><strong>{$group}</strong></td>
   						{else}
   							<td colspan='4' style='text-align: left;'><strong>{$group}</strong></td>
@@ -478,7 +500,7 @@
   				{if $subgroup neq $isline.subgroup_name}
   					{assign var=subgroup value=$isline.subgroup_name}
   					<tr>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   							<td colspan='7' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
   						{else}
   							<td colspan='4' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
@@ -502,19 +524,19 @@
   						{/if}
   						
   						</td>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
 	  						<td>
 	  							{if $isline.total eq "0"}
 	  								{if $isvals[$isline.id][1].amount < 0}
-	  									<span style='color: red;'>({$isvals[$isline.id][1].amount})</span>
+	  									<span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id][1].amount|number_format:2})</span>
 	  								{else}
-	  									{$isvals[$isline.id][1].amount}
+	  									{$smarty.session.user_currency} {$isvals[$isline.id][1].amount|number_format:2}
 	  								{/if}
 	  							{else}
 	  								{if $isvals[$isline.id][1].amount < 0}
-	  									<strong><span style='color: red;'>({$isvals[$isline.id][1].amount})</span></strong>
+	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id][1].amount|number_format:2})</span></strong>
 	  								{else}
-	  									<strong>{$isvals[$isline.id][1].amount}</strong>
+	  									<strong>{$smarty.session.user_currency} {$isvals[$isline.id][1].amount|number_format:2}</strong>
 	  								{/if}
 	  							{/if}
 							</td>
@@ -522,15 +544,15 @@
 	  						
 	  							{if $isline.total eq "0"}
 	  								{if $isvals[$isline.id][2].amount < 0}
-	  									<span style='color: red;'>({$isvals[$isline.id][2].amount})</span>
+	  									<span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id][2].amount|number_format:2})</span>
 	  								{else}
-	  									{$isvals[$isline.id][2].amount}
+	  									{$smarty.session.user_currency} {$isvals[$isline.id][2].amount|number_format:2}
 	  								{/if}
 	  							{else}
 	  								{if $isvals[$isline.id][2].amount < 0}
-	  									<strong><span style='color: red;'>({$isvals[$isline.id][2].amount})</span></strong>
+	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id][2].amount|number_format:2})</span></strong>
 	  								{else}
-	  									<strong>{$isvals[$isline.id][2].amount}</strong>
+	  									<strong>{$smarty.session.user_currency} {$isvals[$isline.id][2].amount|number_format:2}</strong>
 	  								{/if}
 	  							{/if}
 							</td>
@@ -538,15 +560,15 @@
 	  						
 	  							{if $isline.total eq "0"}
 	  								{if $isvals[$isline.id].amount_change < 0}
-	  									<span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span>
+	  									<span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id].amount_change|number_format:2})%</span>
 	  								{else}
-	  									{$isvals[$isline.id].amount_change|number_format:2}%
+	  									{$smarty.session.user_currency} {$isvals[$isline.id].amount_change|number_format:2}%
 	  								{/if}
 	  							{else}
 	  								{if $isvals[$isline.id].amount_change < 0}
-	  									<strong><span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span></strong>
+	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id].amount_change|number_format:2})%</span></strong>
 	  								{else}
-	  									<strong>{$isvals[$isline.id].amount_change|number_format:2}%</strong>
+	  									<strong>{$smarty.session.user_currency} {$isvals[$isline.id].amount_change|number_format:2}%</strong>
 	  								{/if}
 	  							{/if}
 							</td>

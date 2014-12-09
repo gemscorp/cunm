@@ -17,32 +17,57 @@
 	<div class="tab-pane" id="usage_services">
   		<table class="table">
   			<thead>
+  				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   				<tr>
   					<th>Type of Services</th>
 	  				<th>Amount</th>
+	  				<th>Amount US$</th>
 	  				<th>Male</th>
+	  				<th>Male US$</th>
 	  				<th>Percentage</th>
 	  				<th>Female</th>
+	  				<th>Female US$</th>
 	  				<th>Percentage</th>
 	  				<th>Youth</th>
+	  				<th>Youth US$</th>
 	  				<th>Percentage</th>
 	  				<th>Non-members</th>
+	  				<th>Non-members US$</th>
 	  				<th>Percentage</th>
   				</tr>
+  				{else}
+  					<tr>
+  					<th>Type of Services</th>
+	  				<th>Amount US$</th>
+	  				<th>Male US$</th>
+	  				<th>Percentage</th>
+	  				<th>Female US$</th>
+	  				<th>Percentage</th>
+	  				<th>Youth US$</th>
+	  				<th>Percentage</th>>
+	  				<th>Non-members US$</th>
+	  				<th>Percentage</th>
+  				</tr>
+  				{/if}
   			</thead>
   			<tbody>
   			{foreach from=$services item=service}
-  				{if $smarty.session.user_level neq 0}
+  				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   				<tr>
   					<td>{$service.name}</td>
-  					<td>{$serval[$service.id].total|number_format:2:".":","}</td>
-  					<td>{$serval[$service.id].male|number_format:2:".":","}</td>
+  					<td>{$smarty.session.user_currency} {$serval[$service.id].total|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].total_us|number_format:2:".":","}</td>
+  					<td>{$smarty.session.user_currency} {$serval[$service.id].male|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].male_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].male_ratio|number_format:2:".":","}%</td>
-  					<td>{$serval[$service.id].female|number_format:2:".":","}</td>
+  					<td>{$smarty.session.user_currency} {$serval[$service.id].female|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].female_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].female_ratio|number_format:2:".":","}%</td>
-  					<td>{$serval[$service.id].youth|number_format:2:".":","}</td>
+  					<td>{$smarty.session.user_currency} {$serval[$service.id].youth|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].youth_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].youth_ratio|number_format:2:".":","}%</td>
-  					<td>{$serval[$service.id].none_member|number_format:2:".":","}</td>
+  					<td>{$smarty.session.user_currency} {$serval[$service.id].none_member|number_format:2:".":","}</td>
+  					<td>${$serval[$service.id].none_member_us|number_format:2:".":","}</td>
   					<td>{$serval[$service.id].none_member_ratio|number_format:2:".":","}%</td>
   				</tr>
   				{else}
@@ -118,24 +143,40 @@
   <div class="tab-pane" id="service">
   		<table class="table">
   			<thead>
-  				<tr>
-  					<th>&nbsp;</th>
-	  				<th>Total Member</th>
-	  				<th>Total Savings</th>
-	  				<th>Total Loans</th>
-	  				<th>Loan Outstanding</th>
-  				</tr>
+  				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
+  					<tr>
+	  					<th>&nbsp;</th>
+		  				<th>Total Member</th>
+		  				<th>Total Savings</th>
+		  				<th>Total Savings US$</th>
+		  				<th>Total Loans</th>
+		  				<th>Total Loans US$</th>
+		  				<th>Loan Outstanding</th>
+		  				<th>Loan Outstanding US$</th>
+	  				</tr>
+  				{else}
+	  				<tr>
+	  					<th>&nbsp;</th>
+		  				<th>Total Member</th>
+		  				<th>Total Savings</th>
+		  				<th>Total Loans</th>
+		  				<th>Loan Outstanding</th>
+	  				</tr>
+  				{/if}
   			</thead>
   			<tbody>
   				{foreach from=$opareas item=oparea}
   					{foreach from=$genders item=gender}
-  					{if $smarty.session.user_level neq 0}
+  					{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
 		  				<tr>
 		  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
 		  					<td>{$gender_groups[$oparea][$gender].less_total|number_format:2}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_savings|number_format:2}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_totalg|number_format:2}</td>
-		  					<td>{$gender_groups[$oparea][$gender].less_outstand|number_format:2}</td>
+		  					<td>{$smarty.session.user_currency} {$gender_groups[$oparea][$gender].less_savings|number_format:2}</td>
+		  					<td>${$gender_groups[$oparea][$gender].less_savings_us|number_format:2}</td>
+		  					<td>{$smarty.session.user_currency} {$gender_groups[$oparea][$gender].less_totalg|number_format:2}</td>
+		  					<td>${$gender_groups[$oparea][$gender].less_totalg_us|number_format:2}</td>
+		  					<td>{$smarty.session.user_currency} {$gender_groups[$oparea][$gender].less_outstand|number_format:2}</td>
+		  					<td>${$gender_groups[$oparea][$gender].less_outstand_us|number_format:2}</td>
 		  				</tr>
 		  			{else}
 		  				<tr>
@@ -148,13 +189,16 @@
 		  			{/if}
   					{/foreach}
   				{/foreach}
-  				{if $smarty.session.user_level neq 0}
+  				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   				<tr>
   					<td>Total</td>
   					<td>{$gender_total.less_total|number_format:2}</td>
-  					<td>{$gender_total.less_savings|number_format:2}</td>
-  					<td>{$gender_total.less_totalg|number_format:2}</td>
-  					<td>{$gender_total.less_outstand|number_format:2}</td>
+  					<td>{$smarty.session.user_currency} {$gender_total.less_savings|number_format:2}</td>
+  					<td>${$gender_total.less_savings_us|number_format:2}</td>
+  					<td>{$smarty.session.user_currency} {$gender_total.less_totalg|number_format:2}</td>
+  					<td>${$gender_total.less_totalg_us|number_format:2}</td>
+  					<td>{$smarty.session.user_currency} {$gender_total.less_outstand|number_format:2}</td>
+  					<td>${$gender_total.less_outstand_us|number_format:2}</td>
   				</tr>
   				{else}
   					<tr>
@@ -209,19 +253,19 @@
   						{/if}
   						
   						</td>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
 	  						<td>
 	  							{if $bsline.total eq "0"}
 	  								{if $bsvals[$bsline.id].amount < 0}
-	  									<span style='color: red;'>({$bsvals[$bsline.id].amount})</span>
+	  									<span style='color: red;'>{$smarty.session.user_currency} ({$bsvals[$bsline.id].amount|number_format:2})</span>
 	  								{else}
-	  									{$bsvals[$bsline.id].amount}
+	  									{$smarty.session.user_currency} {$bsvals[$bsline.id].amount|number_format:2}
 	  								{/if}
 	  							{else}
 	  								{if $bsvals[$bsline.id].amount < 0}
-	  									<strong><span style='color: red;'>({$bsvals[$bsline.id].amount})</span></strong>
+	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$bsvals[$bsline.id].amount|number_format:2})</span></strong>
 	  								{else}
-	  									<strong>{$bsvals[$bsline.id].amount}</strong>
+	  									<strong>{$smarty.session.user_currency} {$bsvals[$bsline.id].amount|number_format:2}</strong>
 	  								{/if}
 	  							{/if}
 	  						</td>
@@ -285,19 +329,19 @@
   						{/if}
   						
   						</td>
-  						{if $smarty.session.user_level neq 0}
+  						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
 	  						<td>
 	  							{if $isline.total eq "0"}
 	  								{if $isvals[$isline.id].amount < 0}
-	  									<span style='color: red;'>({$isvals[$isline.id].amount})</span>
+	  									<span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id].amount|number_format:2})</span>
 	  								{else}
-	  									{$isvals[$isline.id].amount}
+	  									{$smarty.session.user_currency} {$isvals[$isline.id].amount|number_format:2}
 	  								{/if}
 	  							{else}
 	  								{if $isvals[$isline.id].amount < 0}
-	  									<strong><span style='color: red;'>({$isvals[$isline.id].amount})</span></strong>
+	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id].amount|number_format:2})</span></strong>
 	  								{else}
-	  									<strong>{$isvals[$isline.id].amount}</strong>
+	  									<strong>{$smarty.session.user_currency} {$isvals[$isline.id].amount|number_format:2}</strong>
 	  								{/if}
 	  							{/if}
 							</td>
