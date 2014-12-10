@@ -333,7 +333,6 @@
   						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   						<td>Period 1</td>
   						<td>Period 2</td>
-  						<td>Change</td>
   						{/if}
   						<td>Period 1</td>
   						<td>Period 2</td>
@@ -344,7 +343,7 @@
   					{assign var=group value=$bsline.group_name}
   					<tr>
   						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
-  							<td colspan='7' style='text-align: left;'><strong>{$group}</strong></td>
+  							<td colspan='6' style='text-align: left;'><strong>{$group}</strong></td>
   						{else}
   							<td colspan='4' style='text-align: left;'><strong>{$group}</strong></td>
   						{/if}
@@ -354,7 +353,7 @@
   					{assign var=subgroup value=$bsline.subgroup_name}
   					<tr>
   						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
-  							<td colspan='7' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  							<td colspan='6' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
   						{else}
   							<td colspan='4' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
   						{/if}
@@ -408,21 +407,6 @@
 	  								{/if}
 	  							{/if}
 	  						</td>
-	  						<td>
-	  							{if $bsline.total eq "0"}
-	  								{if $bsvals[$bsline.id].amount_change < 0}
-	  									<span style='color: red;'>({$bsvals[$bsline.id].amount_change|number_format:2})%</span>
-	  								{else}
-	  									{$bsvals[$bsline.id].amount_change|number_format:2}%
-	  								{/if}
-	  							{else}
-	  								{if $bsvals[$bsline.id].amount_change < 0}
-	  									<strong><span style='color: red;'>({$bsvals[$bsline.id].amount_change|number_format:2})</span></strong>
-	  								{else}
-	  									<strong>{$bsvals[$bsline.id].amount_change|number_format:2}%</strong>
-	  								{/if}
-	  							{/if}
-	  						</td>
 	  					{/if}
   						<td>
   							{if $bsline.total eq "0"}
@@ -457,15 +441,15 @@
   						<td>
   							{if $bsline.total eq "0"}
   								{if $bsvals[$bsline.id].amount_change < 0}
-  									US$<span style='color: red;'>({$bsvals[$bsline.id].amount_change|number_format:2})%</span>
+  									<span style='color: red;'>({$bsvals[$bsline.id].amount_change|number_format:2})%</span>
   								{else}
-  									US${$bsvals[$bsline.id].amount_change|number_format:2}%
+  									{$bsvals[$bsline.id].amount_change|number_format:2}%
   								{/if}
   							{else}
   								{if $bsvals[$bsline.id].amount_change < 0}
-  									US$<strong><span style='color: red;'>({$bsvals[$bsline.id].amount_change|number_format:2})%</span></strong>
+  									<strong><span style='color: red;'>({$bsvals[$bsline.id].amount_change|number_format:2})%</span></strong>
   								{else}
-  									US$<strong>{$bsvals[$bsline.id].amount_change|number_format:2}%</strong>
+  									<strong>{$bsvals[$bsline.id].amount_change|number_format:2}%</strong>
   								{/if}
   							{/if}
   						</td>
@@ -480,7 +464,6 @@
   						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   							<td>Period 1</td>
   							<td>Period 2</td>
-  							<td>Change</td>
   						{/if}
   						<td>Period 1</td>
   						<td>Period 2</td>
@@ -491,7 +474,7 @@
   					{assign var=group value=$isline.group_name}
   					<tr>
   						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
-  							<td colspan='7' style='text-align: left;'><strong>{$group}</strong></td>
+  							<td colspan='6' style='text-align: left;'><strong>{$group}</strong></td>
   						{else}
   							<td colspan='4' style='text-align: left;'><strong>{$group}</strong></td>
   						{/if}
@@ -501,7 +484,7 @@
   					{assign var=subgroup value=$isline.subgroup_name}
   					<tr>
   						{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
-  							<td colspan='7' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  							<td colspan='6' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
   						{else}
   							<td colspan='4' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
   						{/if}
@@ -556,22 +539,6 @@
 	  								{/if}
 	  							{/if}
 							</td>
-							<td>
-	  						
-	  							{if $isline.total eq "0"}
-	  								{if $isvals[$isline.id].amount_change < 0}
-	  									<span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id].amount_change|number_format:2})%</span>
-	  								{else}
-	  									{$smarty.session.user_currency} {$isvals[$isline.id].amount_change|number_format:2}%
-	  								{/if}
-	  							{else}
-	  								{if $isvals[$isline.id].amount_change < 0}
-	  									<strong><span style='color: red;'>{$smarty.session.user_currency} ({$isvals[$isline.id].amount_change|number_format:2})%</span></strong>
-	  								{else}
-	  									<strong>{$smarty.session.user_currency} {$isvals[$isline.id].amount_change|number_format:2}%</strong>
-	  								{/if}
-	  							{/if}
-							</td>
 						{/if}
 						<td>
   							{if $isline.total eq "0"}
@@ -606,15 +573,15 @@
 						<td>
   							{if $isline.total eq "0"}
   								{if $isvals[$isline.id].amount_change < 0}
-  									US$<span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span>
+  									<span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span>
   								{else}
-  									US${$isvals[$isline.id].amount_change|number_format:2}%
+  									{$isvals[$isline.id].amount_change|number_format:2}%
   								{/if}
   							{else}
   								{if $isvals[$isline.id].amount_change < 0}
-  									US$<strong><span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span></strong>
+  									<strong><span style='color: red;'>({$isvals[$isline.id].amount_change|number_format:2})%</span></strong>
   								{else}
-  									US$<strong>{$isvals[$isline.id].amount_change|number_format:2}%</strong>
+  									<strong>{$isvals[$isline.id].amount_change|number_format:2}%</strong>
   								{/if}
   							{/if}
 						</td>
