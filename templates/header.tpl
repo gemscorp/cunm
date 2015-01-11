@@ -48,7 +48,7 @@
 		background-color:#f2e8da;
 	}
 	
-	li a.nav
+	nav.navbar ul li a
 	{
 		color: #1B1A1A;
 	}
