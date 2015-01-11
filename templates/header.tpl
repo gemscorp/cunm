@@ -61,6 +61,19 @@
     	background-color: #91af1e;
 	}
 	
+	li.dropdown.open a.dropdown-toggle:hover {
+    	background-color: #91af1e;
+	}
+	
+	li.dropdown.open a.dropdown-toggle {
+    	background-color: #91af1e;
+	}
+	
+	ul.dropdown-menu {
+		background-color: #007bb6;
+		color: #341F1F;
+	}
+	
 	.navbar 
 	{
 		background-color: #007bb6;
