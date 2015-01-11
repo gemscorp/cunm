@@ -56,6 +56,7 @@
 	.navbar 
 	{
 		background-color: #007bb6;
+		color: #341F1F;
 	}
 	
 	
