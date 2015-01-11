@@ -57,7 +57,7 @@
 	}
 	
 	
-	.dropdown .dropdown-toggle {
+	.dropdown.open .dropdown-toggle {
     	background-color: #91af1e;
 	}
 	
