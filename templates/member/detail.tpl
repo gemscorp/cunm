@@ -20,14 +20,15 @@
   		<table class="table">
   			<thead>
   				<tr>
-	  				<th rowspan='2'>Type of CU</th>
-	  				<th rowspan='2'>Number of Members by Market</th>
-	  				<th rowspan='2'>Farmers</th>
-	  				<th rowspan='2'>Employee</th>
-	  				<th rowspan='2'>Micro Business</th>
+  					<th rowspan='2'>Type of CU</th>
+  					<th rowspan='2'>Number of Members by Market</th>
+	  				<th colspan='3'>Occupation Segmentation</th>
 	  				<th colspan='5'>Age Segmentation of CU Membership</th>
   				</tr>
   				<tr>
+	  			<th>Farmers</th>
+	  			<th>Employee</th>
+	  			<th>Micro Business</th>
   				<th>18 - 35</th>
   				<th>36 - 45</th>
   				<th>46 - 60</th>

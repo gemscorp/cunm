@@ -153,25 +153,26 @@
 	  				<th rowspan='2'>Period</th>
 	  				<th rowspan='2'>Number of Members by Market</th>
 	  				<th rowspan='2'>Change</th>
-	  				<th rowspan='2'>Farmers</th>
-	  				<th rowspan='2'>Change</th>
-	  				<th rowspan='2'>Employee</th>
-	  				<th rowspan='2'>Change</th>
-	  				<th rowspan='2'>Micro Business</th>
-	  				<th rowspan='2'>Change</th>
+	  				<th colspan='6'>Occupation Segmentation</th>
 	  				<th colspan='10'>Age Segmentation of CU Membership</th>
   				</tr>
   				<tr>
-  				<th>18 - 35</th>
-  				<th>Change</th>
-  				<th>36 - 45</th>
-  				<th>Change</th>
-  				<th>46 - 60</th>
-  				<th>Change</th>
-  				<th>&gt; 60</th>
-  				<th>Change</th>
-  				<th>Total</th>
-  				<th>Change</th>
+	  				<th>Farmers</th>
+	  				<th>Change</th>
+	  				<th>Employee</th>
+	  				<th>Change</th>
+	  				<th>Micro Business</th>
+	  				<th>Change</th>
+	  				<th>18 - 35</th>
+	  				<th>Change</th>
+	  				<th>36 - 45</th>
+	  				<th>Change</th>
+	  				<th>46 - 60</th>
+	  				<th>Change</th>
+	  				<th>&gt; 60</th>
+	  				<th>Change</th>
+	  				<th>Total</th>
+	  				<th>Change</th>
   				</tr>
   			</thead>
   			<tbody>
