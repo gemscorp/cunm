@@ -70,6 +70,11 @@
 	}
 	
 	ul.dropdown-menu {
+		background-color: #91af1e;
+		color: #341F1F;
+	}
+	
+	ul.dropdown-menu li a:focus {
 		background-color: #007bb6;
 		color: #341F1F;
 	}
