@@ -49,13 +49,17 @@
 	}
 	
 	body {
-		color: #341F1F
+		color: #341F1F;
 	}
 	
 	nav.navbar.navbar-default ul.nav.navbar-nav li a {
-		color: #341F1F
+		color: #341F1F;
 	}
 	
+	p.narbar-test.navbar-right a.navbar-link 
+	{
+		color: #341F1F;
+	} 
 	
 	li.dropdown.open a.dropdown-toggle:focus {
     	background-color: #91af1e;
