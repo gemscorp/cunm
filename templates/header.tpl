@@ -79,6 +79,11 @@
 		color: #341F1F;
 	}
 	
+	ul.dropdown-menu li a:hover {
+		background-color: #007bb6;
+		color: #341F1F;
+	}
+	
 	.navbar 
 	{
 		background-color: #007bb6;
