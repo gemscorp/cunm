@@ -56,7 +56,12 @@
 		color: #341F1F;
 	}
 	
-	p.narbar-test.navbar-right a.navbar-link 
+	p.navbar-text.navbar-right
+	{
+		color: #341F1F;
+	} 
+	
+	p.navbar-text.navbar-right a.navbar-link
 	{
 		color: #341F1F;
 	} 
