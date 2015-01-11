@@ -57,7 +57,7 @@
 	}
 	
 	
-	li.dropdown.open a.dropdown-toggle {
+	li.dropdown.open a.dropdown-toggle:focus {
     	background-color: #91af1e;
 	}
 	
