@@ -52,6 +52,10 @@
 		color: #341F1F
 	}
 	
+	.navbar-default li a {
+		color: #341F1F
+	}
+	
 	.navbar 
 	{
 		background-color: #007bb6;
