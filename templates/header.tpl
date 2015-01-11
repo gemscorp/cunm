@@ -48,9 +48,8 @@
 		background-color:#f2e8da;
 	}
 	
-	nav.navbar ul li a
-	{
-		color: #1B1A1A;
+	body {
+		color: #341F1F
 	}
 	
 	.navbar 
