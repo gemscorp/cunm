@@ -1,13 +1,6 @@
 {include file='header.tpl'}
 
-{if $error neq ""}
-	<div class="alert alert-danger">{$error}</div>
-{/if}
-
-{if $success neq ""}
-	<div class="alert alert-success">{$success}</div>
-{/if}
-
+{include file='common/alert.tpl'}
 
 <form role="form" method='post' action='password'>
   <div class="form-group">

@@ -1,16 +1,18 @@
 <?php
 
 session_start();
+
 require_once('config.php');
 require_once 'vendor/autoload.php';
 require_once('db.php');
 require_once('smarty3/Smarty.class.php');
 
-define('APP_PATH', '/cunm');
-
 date_default_timezone_set('Asia/Bangkok');
 
 $app = new \Slim\Slim();
+
+//$app->config('debug', false);
+$app->config('mode', 'production');
 
 $smarty = new Smarty();
 $smarty->setTemplateDir('templates/');
@@ -18,22 +20,14 @@ $smarty->setCompileDir('templates_c/');
 $smarty->setConfigDir('configs/');
 $smarty->setCacheDir('cache/');
 
+$error = getErrorMessage();
+$smarty->assign('error', $error);
+
+$success = getSuccessMessage();
+$smarty->assign('success', $success);
+
 $app->get('/ping', function () use ($app, $smarty) {
 	echo "pong";
-});
-
-$app->get('/register', function () use ($app, $smarty) {
-	
-	$error = "";
-	
-	if (isset($_SESSION['error'])) {
-		$error = $_SESSION['error'];
-		unset($_SESSION['error']);
-	}
-	
-	$smarty->assign('error', $error);
-	
-	$smarty->display('register.tpl');
 });
 
 $app->get('/', function () use ($app, $smarty) {
@@ -43,15 +37,6 @@ $app->get('/', function () use ($app, $smarty) {
 		return;
 	}
 	
-	$error = "";
-	
-	if (isset($_SESSION['error'])) {
-		$error = $_SESSION['error'];
-		unset($_SESSION['error']);
-	}
-	
-	$smarty->assign('error', $error);
-	
 	$smarty->display('home.tpl');
 });
 
@@ -59,23 +44,34 @@ $app->post('/login', function () use ($app, $smarty) {
 	
 	$pdo = getDbHandler();
 	
-	$sql = "SELECT id, level, federation_id FROM user WHERE email = :username AND password = PASSWORD(:password) AND status = 1";
+	$sql = "SELECT id, email, level, federation_id, country_id, primary_union_id FROM user WHERE email = :username AND password = PASSWORD(:password) AND status = 1";
 	$sth = $pdo->prepare($sql);
 	$sth->execute(array(':username' => $_POST['username'], ':password' => $_POST['password']));
 	
 	if ($sth->rowCount() == 0) {
 		
-		$_SESSION['error'] = 'Invalid Username or Password';
-		
-		$app->redirect('.');
+		setErrorMessage("Invalid Username or Password");
+		$app->redirect(APP_PATH . '/');
 		return;
 	}
 	
 	$user = $sth->fetch();
 	
 	$_SESSION['user_id'] = $user['id'];
+	$_SESSION['user_email'] = $user['email'];
 	$_SESSION['user_level'] = (int) $user['level'];
 	$_SESSION['user_federation_id'] = $user['federation_id'];
+	$_SESSION['user_country_id'] = $user['country_id'];
+	$_SESSION['user_primary_union_id'] = $user['primary_union_id'];
+	
+	$currency = '';
+	$sql = "SELECT currency FROM country WHERE id = :id ";
+	$sth = $pdo->prepare($sql);
+	$sth->execute(array(':id' => $user['country_id']));
+	if ($sth->rowCount() == 1) {
+		$currency = $sth->fetch()['currency'];
+	}
+	$_SESSION['user_currency'] = $currency;
 	
 	$sql = "UPDATE user SET lastlogin = NOW() WHERE id = :id ";
 	$sth = $pdo->prepare($sql);
@@ -93,283 +89,49 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $app->notFound(function () use ($app) {
-	$app->redirect(APP_PATH);
+	$app->redirect(APP_PATH . "/");
 });
 
 $app->run();
 
-function getTotalProfiles($user_id, $start, $finish)
+function getErrorMessage()
 {
-	$pdo = getDbHandler();
-	
-	$sql = "SELECT COUNT(*) AS cnt FROM user_profiles WHERE profiler_id = :user_id ";
-	
-	if ($start !== null) {
-		$sql .= " AND created_datetime BETWEEN :start AND :finish ";
-	}
-	
-	$sth = $pdo->prepare($sql);
-	if ($start === null) {
-		$sth->execute(array(':user_id' => $user_id));
-	} else {
-		$sth->execute(array(':user_id' => $user_id, ':start' => $start . " 00:00:00", ':finish' => $finish . ' 23:59:59'));
-	}
-	
-	$row = $sth->fetch();
-	
-	return $row['cnt'];
+	return getSessionMessage('error_message');
 }
 
-function getProfileHealthBySite($user_id, $start, $finish)
+function getSuccessMessage()
 {
-	$pdo = getDbHandler();
-	
-	$sql = "SELECT site_id, COUNT(*) AS cnt, SUM(IF(login_count=0,1,0)) AS bad FROM user_profiles WHERE profiler_id = :user_id ";
-	
-	if ($start !== null) {
-		$sql .= " AND created_datetime BETWEEN :start AND :finish ";
-	}
-	
-	$sql .= " GROUP BY site_id ";
-	
-	$sth = $pdo->prepare($sql);
-	
-	if ($start === null) {
-		$sth->execute(array(':user_id' => $user_id));
-	} else {
-		$sth->execute(array(':user_id' => $user_id, ':start' => $start . " 00:00:00", ':finish' => $finish . ' 23:59:59'));
-	}
-	
-	$rows = $sth->fetchAll();
-	
-	$user = array();
-	
-	$sql = "SELECT id, name, profile_req FROM sites WHERE status = 'true' ORDER BY name ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute();
-	$sites = $sth->fetchAll();
-	
-	foreach ($sites as $site) {
-		$user['all_' . $site['id']] = 0;
-		$user['bad_' . $site['id']] = 0;
-		$user['percent_' . $site['id']] = 0;
-	}
-		
-	foreach ($rows as $row) {
-		$user['all_' . $row['site_id']] = $row['cnt'];
-		$user['bad_' . $row['site_id']] = $row['bad'];
-		$user['percent_' . $row['site_id']] = $user['bad_' . $row['site_id']] / $user['all_' . $row['site_id']] * 100;  
-	}
-	
-	return $user;
+	return getSessionMessage('success_message');
 }
 
-function getProfilesBad($user_id, $start, $finish)
+function setSuccessMessage($message)
 {
-	$pdo = getDbHandler();
-	
-	$sql = "SELECT COUNT(*) AS cnt FROM user_profiles WHERE profiler_id = :user_id AND login_count = 0 ";
-	
-	if ($start !== null) {
-		$sql .= " AND created_datetime BETWEEN :start AND :finish ";
-	}
-	
-	$sth = $pdo->prepare($sql);
-	
-	if ($start === null) {
-		$sth->execute(array(':user_id' => $user_id));
-	} else {
-		$sth->execute(array(':user_id' => $user_id, ':start' => $start . " 00:00:00", ':finish' => $finish . ' 23:59:59'));
-	}
-	
-	$row = $sth->fetch();
-	
-	return $row['cnt'];
+	setSessionMessage('success_message', $message);
 }
 
-function setSiteQuota($site_id, $user_id, $quota)
+function setErrorMessage($message)
 {
-	$pdo = getDbHandler();
-
-	$sql = "SELECT quota FROM user_quota WHERE site_id = :site_id AND user_id = :user_id ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id));
-
-	if ($sth->rowCount() == 0) {
-		$sql = "INSERT INTO user_quota (site_id, user_id, quota) VALUES (:site_id, :user_id, :quota) ";
-		$sth = $pdo->prepare($sql);
-		$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id, ':quota' => $quota));	
-	} else {
-		$sql = "UPDATE user_quota SET quota = :quota WHERE site_id = :site_id AND user_id = :user_id ";
-		$sth = $pdo->prepare($sql);
-		$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id, ':quota' => $quota));
-	}
-
-	$pdo = null;
-	
-	return true;	
+	setSessionMessage('error_message', $message);
 }
 
-function setSiteQuotaDay($site_id, $user_id, $day, $quota)
+function setSessionMessage($key, $value)
 {
-	$pdo = getDbHandler();
-
-	$sql = "SELECT quota FROM user_quota_day WHERE site_id = :site_id AND user_id = :user_id AND quota_date = :quota_date ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id, ':quota_date' => $day));
-
-	if ($sth->rowCount() == 0) {
-		$sql = "INSERT INTO user_quota_day (site_id, user_id, quota_date, quota) VALUES (:site_id, :user_id, :quota_date, :quota) ";
-		$sth = $pdo->prepare($sql);
-		$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id, ':quota_date' => $day, ':quota' => $quota));
-	} else {
-		$sql = "UPDATE user_quota_day SET quota = :quota WHERE site_id = :site_id AND user_id = :user_id AND quota_date = :quota_date ";
-		$sth = $pdo->prepare($sql);
-		$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id, ':quota' => $quota, ':quota_date' => $day));
-	}
-
-	$pdo = null;
-	
-	return true;
+	$_SESSION[$key] = $value;
 }
 
-
-function getSiteQuota($site_id, $user_id)
-{
-	$pdo = getDbHandler();
-
-	$sql = "SELECT quota FROM user_quota WHERE site_id = :site_id AND user_id = :user_id ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id));
-
-	if ($sth->rowCount() == 0) return 0;
-
-	$row = $sth->fetch();
-	
-	$pdo = null;
-
-	return $row['quota'];
+function clearSessionMessages(){
+	$labels = array('error_message', 'success_message');
+	foreach ($labels as $l) {
+		if (isset($_SESSION[$l])) unset($_SESSION[$l]);
+	}
 }
 
-function getDailyOverride($site_id, $user_id, $day = null)
+function getSessionMessage($key)
 {
-	$pdo = getDbHandler();
-	
-	if (is_null($day)) {
-		$day = date("Y-m-d");
+	$msg = "";
+	if (isset($_SESSION[$key])) {
+		$msg = $_SESSION[$key];
+		unset($_SESSION[$key]);
 	}
-	
-	$sql = "SELECT quota FROM user_quota_day WHERE site_id = :site_id AND user_id = :user_id AND quota_date = :date ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id, ':date' => $day));
-	
-	if ($sth->rowCount() == 0) return 0;
-	
-	$row = $sth->fetch();
-	
-	$pdo = null;
-	
-	return $row['quota'];
-}
-
-function isDailyQuotaMet($user_id, $day = null)
-{
-	$pdo = getDbHandler();
-	
-	if (is_null($day)) {
-		$day = date("Y-m-d");
-	}	
-	
-	$sql = "SELECT uq.user_id, SUM(uq.quota) AS quota, SUM(IF(uqd.quota = 0, uq.quota, uqd.quota)) AS total "
-	     . "FROM user_quota AS uq "
-	     . "LEFT JOIN user_quota_day AS uqd ON uqd.site_id = uq.site_id AND uq.user_id = uqd.user_id AND uqd.quota_date = :date "
-	     . "WHERE uq.user_id = :user_id ";
-	
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':user_id' => $user_id, ':date' => $day));
-	$quota = $sth->fetch();
-	
-	$sql = "SELECT COUNT(*) AS cnt FROM user_profiles WHERE profiler_id = :user_id AND DATE(created_datetime) = :date ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':user_id' => $user_id, ':date' => $day));
-	$created = $sth->fetch();
-	
-	$pdo = null;
-	
-	if (is_null($quota['total'])) {
-		if ($quota['quota'] <= $created['cnt']) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	if ($quota['total'] <= $created['cnt']) {
-		return true;
-	}
-	
-	return false;
-}
-
-function getDailyCreated($site_id, $user_id, $day = null)
-{
-	$pdo = getDbHandler();
-	
-	if (is_null($day)) {
-		$day = date("Y-m-d");
-	}
-	
-	$sql = "SELECT COUNT(*) AS cnt FROM user_profiles WHERE site_id = :site_id AND profiler_id = :user_id AND DATE(created_datetime) = :date ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':user_id' => $user_id, ':site_id' => $site_id, ':date' => $day));
-	
-	if ($sth->rowCount() == 0) return 0;
-	
-	$row = $sth->fetch();
-	
-	$pdo = null;
-	
-	return $row['cnt'];
-}
-
-function getSiteUserNote($site_id, $user_id, $note_date = null)
-{
-	if ($note_date === null) $note_date = date("Y-m-d");
-	
-	$pdo = getDbHandler();
-	
-	$sql = "SELECT id, note FROM user_sitenote WHERE site_id = :site_id AND user_id = :user_id AND note_date = :note_date ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute(array(':site_id' => $site_id, ':user_id' => $user_id, ':note_date' => $note_date));
-	
-	if ($sth->rowCount() == 0) {
-		return null;
-	}
-	
-	$row = $sth->fetch();
-	
-	$pdo = null;
-	
-	return $row;
-}
-
-function getSitesList()
-{
-	$pdo = getDbHandler();
-	
-	$sql = "SELECT id, name FROM sites WHERE status = 'true' ";
-	$sth = $pdo->prepare($sql);
-	$sth->execute();
-	
-	$sites = $sth->fetchAll();
-	
-	$site_list = array();
-	
-	foreach ($sites as $site) {
-		$site_list[$site['id']] = $site['name'];
-	}
-	
-	$pdo = null;
-	
-	return $site_list;
+	return $msg;
 }

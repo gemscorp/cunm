@@ -1,796 +1,495 @@
 {include file='header.tpl'}
-{literal}
-<h3>Member Detail</h3>
+<h3>Datasheet</h3>
+
+{include file='common/alert.tpl'}
           
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#profile" data-toggle="tab">Member Profile</a></li>
-  <li><a href="#operations" data-toggle="tab">Operations</a></li>
-  <li><a href="#area_gender" data-toggle="tab">Area &amp; Gender</a></li>
-  <li><a href="#area_market" data-toggle="tab">Area, Market &amp; Gender</a></li>
-  <li><a href="#service" data-toggle="tab">Service Distribution</a></li>
+  <li class='active'><a href="#area_market" data-toggle="tab">Area, Market, Gender &amp; Age</a></li>
+  <li><a href="#service" data-toggle="tab">Have Less Member Service Distribution</a></li>
   <li><a href="#assets" data-toggle="tab">Assets</a></li>
+  <li><a href="#balancesheet" data-toggle="tab">Balance Sheet</a></li>
+  <li><a href="#incomestatment" data-toggle="tab">Income Statement</a></li>
+  <li><a href="#usage_services" data-toggle="tab">Usage of Services</a></li>
 </ul>
 
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="profile">
-  	<div class="form-group">
-    	<label for="exampleInputEmail1">Country</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	<div class="form-group">
-    	<label for="exampleInputEmail1">Name of Credit Union</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	<div class="form-group">
-    	<label for="exampleInputEmail1">Address</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	  	<div class="form-group">
-    	<label for="exampleInputEmail1">City</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	<div class="form-group">
-    	<label for="exampleInputEmail1">Date of Establishment</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	  	<div class="form-group">
-    	<label for="exampleInputEmail1">Contact Person Name</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	  	<div class="form-group">
-    	<label for="exampleInputEmail1">Contact Person Position</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	  	<div class="form-group">
-    	<label for="exampleInputEmail1">Phone No.</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	<div class="form-group">
-    	<label for="exampleInputEmail1">Fax</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  	<div class="form-group">
-    	<label for="exampleInputEmail1">Email Address</label>
-    	<input type="text" name='username' class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-  	</div>
-  </div>
-  <div class="tab-pane" id="operations">
-  	 <div class="span7">
-          <legend>Operational Area</legend>
-           <div class="controls controls-row">
-             <input type="text" class='span1' placeholder='Urban' name="urban" />
-             <input type="text" class='span2' placeholder='Rural' name="rural" />
-             <input type="text" class='span3' placeholder='Industry' name="industry" />
-             <input type="text" class='span4' placeholder='Mixed' name="mixed" />
-           </div>
-        </div>
-       <div class="span7">
-          <legend>No of Employees</legend>
-           <div class="controls controls-row">
-             <input type="text" class='span1' placeholder='Male' name="male" />
-             <input type="text" class='span2' placeholder='Female' name="female" />
-           </div>
-        </div>
-  </div>
-  <div class="tab-pane" id="area_gender">
-  		<table>
+<form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail'>
+<input type='hidden' name='dsid' value='{$pid}' />
+<div class="tab-content datasheet">
+  <div class="tab-pane active" id="area_market">
+  		<table class="table">
   			<thead>
   				<tr>
-	  				<th rowspan='2'>Operational Areas of Credit Union</th>
-	  				<th rowspan='2'>Number of Members</th>
-	  				<th rowspan='2'>Male</th>
-	  				<th rowspan='2'>Female</th>
-	  				<th colspan='5'>Individual Membership Range</th>
+	  				<th rowspan='2'>Type of CU</th>
+	  				<th rowspan='2'>Number of Members by Market</th>
+	  				<th rowspan='2'>Farmers</th>
+	  				<th rowspan='2'>Employee</th>
+	  				<th rowspan='2'>Micro Business</th>
+	  				<th colspan='5'>Age Segmentation of CU Membership</th>
   				</tr>
   				<tr>
-  				<th></th>
-  				<th></th>
-  				<th></th>
-  				<th></th>
-  				<th></th>
+  				<th>18 - 35</th>
+  				<th>36 - 45</th>
+  				<th>46 - 60</th>
+  				<th>&gt; 60</th>
+  				<th>Total</th>
   				</tr>
   			</thead>
-  			<tbody></tbody>
+  			<tbody>
+  				{foreach from=$opareas item=oparea}
+  					{foreach from=$genders item=gender}
+	  				<tr>
+	  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
+	  					<td><input id='total_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalxl' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
+	  					<td><input id='farmer_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='farmer' data-sum='tfarmer' data-group='farmer' type='text' name="area[{$oparea}][{$gender}][farmer]" value="{$gender_groups[$oparea][$gender].farmer}" /></td>
+	  					<td><input id='employee_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='employee' data-sum='temployee' data-group='employee' type='text' name="area[{$oparea}][{$gender}][employee]" value="{$gender_groups[$oparea][$gender].employee}" /></td>
+	  					<td><input id='microb_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='microb' data-sum='tmicrob' data-group='microb' type='text' name="area[{$oparea}][{$gender}][microb]" value="{$gender_groups[$oparea][$gender].microb}" /></td>
+	  					<td><input id='group1_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group1' data-sum='tgroup1' data-group='group1' type='text' name="area[{$oparea}][{$gender}][group1]" value="{$gender_groups[$oparea][$gender].group1}" /></td>
+	  					<td><input id='group2_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group2' data-sum='tgroup2' data-group='group2' type='text' name="area[{$oparea}][{$gender}][group2]" value="{$gender_groups[$oparea][$gender].group2}" /></td>
+	  					<td><input id='group3_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group3' data-sum='tgroup3' data-group='group3' type='text' name="area[{$oparea}][{$gender}][group3]" value="{$gender_groups[$oparea][$gender].group3}" /></td>
+	  					<td><input id='group4_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='group4' data-sum='tgroup4' data-group='group4' type='text' name="area[{$oparea}][{$gender}][group4]" value="{$gender_groups[$oparea][$gender].group4}" /></td>
+	  					<td><input id='grouptotal_{$oparea}_{$gender}' data-oparea='{$oparea}' data-gender='{$gender}' class='totalx' data-sum='ttotalxr' data-group='totalx' type='text' name="area[{$oparea}][{$gender}][total]" value="{$gender_groups[$oparea][$gender].total}" /></td>
+	  				</tr>
+	  				{/foreach}
+				{/foreach}
+				<tr>
+  					<td>Total</td>
+  					<td><input id='ttotalxl' type='text' value='{$gender_total.total}' /></td>
+  					<td><input id='tfarmer' type='text' value='{$gender_total.farmer}' /></td>
+  					<td><input id='temployee' type='text' value='{$gender_total.employee}' /></td>
+  					<td><input id='tmicrob' type='text' value='{$gender_total.microb}' /></td>
+  					<td><input id='tgroup1' type='text' value='{$gender_total.group1}' /></td>
+  					<td><input id='tgroup2' type='text' value='{$gender_total.group2}' /></td>
+  					<td><input id='tgroup3' type='text' value='{$gender_total.group3}' /></td>
+  					<td><input id='tgroup4' type='text' value='{$gender_total.group4}' /></td>
+  					<td><input id='ttotalxr' type='text' value='{$gender_total.total}' /></td>
+  				</tr>
+  			</tbody>
   		</table>
   </div>
-  <div class="tab-pane" id="area_market">...</div>
-  <div class="tab-pane" id="service">...</div>
-  <div class="tab-pane" id="assets">...</div>
+  <div class="tab-pane" id="service">
+  		<table class="table">
+  			<thead>
+  				<tr>
+  					<th>&nbsp;</th>
+	  				<th>Total Member</th>
+	  				<th>Total Savings</th>
+	  				<th>Total Loans</th>
+	  				<th>Loan Outstanding</th>
+  				</tr>
+  			</thead>
+  			<tbody>
+  				{foreach from=$opareas item=oparea}
+  					{foreach from=$genders item=gender}
+  				<tr>
+  					<td>{$areas[$oparea]} - {$gtxt[$gender]}</td>
+  					<td><input class='less_total' data-sum='tless_total' data-group='less_total' type='text' name="area[{$oparea}][{$gender}][less_total]" value="{$gender_groups[$oparea][$gender].less_total}" /></td>
+  					<td><input class='less_savings' data-sum='tless_savings' data-group='less_savings' type='text' name="area[{$oparea}][{$gender}][less_savings]" value="{$gender_groups[$oparea][$gender].less_savings}" /></td>
+  					<td><input class='less_totalg' data-sum='tless_totalg' data-group='less_totalg' type='text' name="area[{$oparea}][{$gender}][less_totalg]" value="{$gender_groups[$oparea][$gender].less_totalg}" /></td>
+  					<td><input class='less_outstand' data-sum='tless_outstand' data-group='less_outstand' type='text' name="area[{$oparea}][{$gender}][less_outstand]" value="{$gender_groups[$oparea][$gender].less_outstand}" /></td>
+  				</tr>
+  					{/foreach}
+  				{/foreach}
+  				<tr>
+  					<td>Total</td>
+  					<td><input id='tless_total' type='text' value='{$gender_total.less_total}' /></td>
+  					<td><input id='tless_savings' type='text' value='{$gender_total.less_savings}' /></td>
+  					<td><input id='tless_totalg' type='text' value='{$gender_total.less_totalg}' /></td>
+  					<td><input id='tless_outstand' type='text' value='{$gender_total.less_outstand}' /></td>
+  				</tr>
+  				
+  			</tbody>
+  		</table>
+  </div>
+  <div class="tab-pane" id="assets">
+  		<div class="form-group">
+    		<label for="exampleInputEmail1">Total Assets</label>
+    		{foreach from=$assetgroups item=assetgroup}
+    		<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" id="optionsRadios1" value="{$assetgroup.id}" {if $asset_group_id eq $assetgroup.id}checked{/if}>
+			    {$assetgroup.name}
+			  </label>
+			</div>
+			{/foreach}
+  		</div>
+  </div>
+  <div class="tab-pane" id="balancesheet">
+  		<table class="table">
+  			{foreach from=$bslines item=bsline}
+  				{if $group neq $bsline.group_name}
+  					{assign var=group value=$bsline.group_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  					</tr>
+  				{/if}
+  				{if $subgroup neq $bsline.subgroup_name}
+  					{assign var=subgroup value=$bsline.subgroup_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  					</tr>
+  				{/if}
+  					<tr>
+  						{if $bsline.total eq "1"}
+  							<td style='text-align: left; padding-left: 30px;'>
+  						{elseif $bsline.total eq "2"}
+  							<td style='text-align: left;'>
+  						{else}
+  							<td style='text-align: left; padding-left: 60px;'>
+  						{/if}
+  						
+  						{if $bsline.bold eq "1"}
+  							<strong>{$bsline.name}</strong>
+  						{else}
+  							{$bsline.name}
+  						{/if}
+  						
+  						</td>
+  						<td>
+  							{if $bsline.formula eq ""}
+  								<input type='text' id='bs{$bsline.id}' class="bslines" name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" />
+  							{else}
+  								<input style='background-color: #99FF99' type='text' id='bs{$bsline.id}' class="bslines" name='bsline[{$bsline.id}][amount]' value="{$bsvals[$bsline.id].amount}" readonly/>
+  							{/if}
+  							
+  							{if $bsline.formula ne ""}
+  								<script type='text/javascript'>
+  								
+  									$(function () {
+  										$(".bslines").change(function (e) {
+  											calsum{$bsline.id}();
+  										});
+  									});
+  								
+  									function calsum{$bsline.id}() {
+  									
+		  								{assign var=formulas value=","|explode:$bsline.formula}
+		  								{assign var=grp value=0}
+		  							
+		  								var x = 
+		  								{foreach from=$formulas item=litem name=lloop}
+		  							
+		  								{if preg_match("/^\[/", $litem)}
+		  									{if $grp == 1}
+		  										var y = 
+		  									{/if}
+		  									{assign var=zx value=$litem|replace:"[":""}
+		  									
+		  										getval({$zx}) + 
+		  									
+		  									{assign var=grp value=1}
+		  									
+		  								{elseif preg_match("/\]/", $litem)}
+		  									{assign var=zx value=$litem|replace:"]":""}
+		  									getval({$zx})
+		  									;
+		  								{else}
+			  								{if $smarty.foreach.lloop.last}
+			  									getval({$litem});
+			  								{else}
+			  									getval({$litem}) + 
+			  								{/if}
+			  							{/if}
+		  							{/foreach}
+		  							
+		  							{if $grp == 1}
+		  								$("#bs{$bsline.id}").val(x - y);
+		  							{else}
+		  								$("#bs{$bsline.id}").val(x);
+		  							{/if}
+  									}
+	  								</script>
+	  						{/if}
+  							
+  						
+  						</td>
+  					</tr>
+  			{/foreach}
+  		</table>
+  </div>
+  <div class="tab-pane" id="incomestatment">
+  		<table class="table">
+  			{foreach from=$islines item=isline}
+  				{if $group neq $isline.group_name}
+  					{assign var=group value=$isline.group_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left;'><strong>{$group}</strong></td>
+  					</tr>
+  				{/if}
+  				{if $subgroup neq $isline.subgroup_name}
+  					{assign var=subgroup value=$isline.subgroup_name}
+  					<tr>
+  						<td colspan='2' style='text-align: left; padding-left: 30px;'><i>{$subgroup}</i></td>
+  					</tr>
+  				{/if}
+  					<tr>
+  						{if $isline.total eq "1"}
+  							<td style='text-align: left; padding-left: 30px;'>
+  						{elseif $isline.total eq "2"}
+  							<td style='text-align: left;'>
+  						{else}
+  							<td style='text-align: left; padding-left: 60px;'>
+  						{/if}
+  						
+  						{if $isline.bold eq "1"}
+  							<strong>{$isline.name}</strong>
+  						{else}
+  							{$isline.name}
+  						{/if}
+  						
+  						</td>
+  						<td>
+  						
+  							{if $isline.formula eq ""}
+  								<input type='text' id='is{$isline.id}' class='islines' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" />
+  							{else}
+  								<input type='text' style='background-color: #99FF99'  id='is{$isline.id}' class='islines' name='isline[{$isline.id}][amount]' value="{$isvals[$isline.id].amount}" readonly />
+  							{/if}
+  						
+  							{if $isline.formula ne ""}
+  								<script type='text/javascript'>
+  								
+  									$(function () {
+  										$(".islines").change(function (e) {
+  											icalsum{$isline.id}();
+  										});
+  									});
+  								
+  									function icalsum{$isline.id}() {
+  									
+		  								{assign var=formulas value=","|explode:$isline.formula}
+		  								{assign var=grp value=0}
+		  							
+		  								var x = 
+		  								{foreach from=$formulas item=litem name=lloop}
+		  							
+		  								{if preg_match("/^\[/", $litem)}
+		  									{if $grp == 1}
+		  										var y = 
+		  									{/if}
+		  									{assign var=zx value=$litem|replace:"[":""}
+		  									{if preg_match("/\]/", $zx)}
+		  										{assign var=zy value=$zx|replace:"]":""}
+		  										igetval({$zy});
+		  									{else}
+		  										igetval({$zx}) +
+		  									{/if}
+		  									
+		  									{assign var=grp value=1}
+		  									
+		  								{elseif preg_match("/\]/", $litem)}
+		  									{assign var=zx value=$litem|replace:"]":""}
+		  									igetval({$zx})
+		  									;
+		  								{else}
+			  								{if $smarty.foreach.lloop.last}
+			  									igetval({$litem});
+			  								{else}
+			  									igetval({$litem}) + 
+			  								{/if}
+			  							{/if}
+		  							{/foreach}
+		  							
+		  							{if $grp == 1}
+		  								$("#is{$isline.id}").val(x - y);
+		  							{else}
+		  								$("#is{$isline.id}").val(x);
+		  							{/if}
+  									}
+	  								</script>
+	  						{/if}	
+  							
+  							
+  						</td>
+  					</tr>
+  			{/foreach}
+  		</table>
+  </div>
+  <div class="tab-pane" id="usage_services">
+  		<table class="table">
+  			<thead>
+  				<tr>
+  					<th>Type of Services</th>
+	  				<th>Amount</th>
+	  				<th>Male</th>
+	  				<th>Percentage</th>
+	  				<th>Female</th>
+	  				<th>Percentage</th>
+	  				<th>Youth</th>
+	  				<th>Percentage</th>
+	  				<th>Non-members</th>
+	  				<th>Percentage</th>
+  				</tr>
+  			</thead>
+  			<tbody>
+  			{foreach from=$services item=service}
+  				<tr>
+  					<td>{$service.name}</td>
+  					<td><input id='ustotal_{$service.id}' class='ustotal' data-service-id='{$service.id}' type='text' name='service[{$service.id}][total]' value="{$serval[$service.id].total}" readonly /></td>
+  					<td><input id='usmale_{$service.id}' class='usmale' data-service-id='{$service.id}' type='text' name='service[{$service.id}][male]' value="{$serval[$service.id].male}" /></td>
+  					<td><input id='usmale_ratio_{$service.id}' type='text' name='service[{$service.id}][male_ratio]' value="{$serval[$service.id].male_ratio}" /></td>
+  					<td><input id='usfemale_{$service.id}' class='usfemale' data-service-id='{$service.id}' type='text' name='service[{$service.id}][female]' value="{$serval[$service.id].female}" /></td>
+  					<td><input id='usfemale_ratio_{$service.id}' type='text' name='service[{$service.id}][female_ratio]' value="{$serval[$service.id].female_ratio}" /></td>
+  					<td><input id='usyouth_{$service.id}' class='usyouth' data-service-id='{$service.id}' type='text' name='service[{$service.id}][youth]' value="{$serval[$service.id].youth}" /></td>
+  					<td><input id='usyouth_ratio_{$service.id}' type='text' name='service[{$service.id}][youth_ratio]' value="{$serval[$service.id].youth_ratio}" /></td>
+  					<td><input id='usnone_member_{$service.id}' class='usnone_member' data-service-id='{$service.id}' type='text' name='service[{$service.id}][none_member]' value="{$serval[$service.id].none_member}" /></td>
+  					<td><input id='usnone_member_ratio_{$service.id}' type='text' name='service[{$service.id}][none_member_ratio]' value="{$serval[$service.id].none_member_ratio}" /></td>
+  				</tr>
+  			{/foreach}
+  			</tbody>
+  		</table>
+  </div>
 </div>
-          
- 
-          <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber5" cellpadding="0">
-            <tr>
-              <td width="100%" colspan="2">
-
-  <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber28" cellpadding="0">
-    <tr>
-      <td width="96%" align="center">
-      
-      <table border="0" cellspacing="1" bordercolor="#324F5D" width="96%" id="AutoNumber29" cellpadding="2" height="355">
-        <tr>
-          <td width="100%" colspan="2" bgcolor="#324F5D" height="25">
-          <p align="center"><font face="Arial">
-          <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">Member 
-            Profile : </span><b>
-          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;</font></span></b></font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Name of Credit Union:&nbsp; </span></b><font face="Arial"><b>
-          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
-          <td width="71%" bgcolor="#F3F3F3" height="22">
-            <font size="2" face="Arial">{MEMBER_NAME}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Address: </span></b><font face="Arial"><b>
-          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
-          <td width="71%" bgcolor="#F3F3F3" height="22">
-            <font size="2" face="Arial">{M_ADDRESS}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Country: </span></b><font face="Arial"><b>
-          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
-          <td width="71%" bgcolor="#F3F3F3" height="22">
-            <font size="2" face="Arial">{M_COUNTRY}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Telephone: </span></b><font face="Arial"><b>
-          <span style="font-size: 10pt"> <font color="#FF0000">*</font></span></b></font></td>
-          <td width="71%" bgcolor="#F3F3F3" height="22">
-            <font size="2" face="Arial">{M_TEL}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Fax:
-            </span></b></td>
-          <td width="71%" bgcolor="#F3F3F3" height="22">
-            <font size="2" face="Arial">{M_FAX}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Email: </span></b></td>
-          <td width="71%" bgcolor="#F3F3F3" height="22">
-            <font size="2" face="Arial">{M_EMAIL}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="17"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Homepage:</span></b></td>
-          <td width="71%" bgcolor="#F3F3F3" height="17">
-            <font size="2" face="Arial">{M_HOMEPAGE}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="22"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Established: (YYYY) </span></b></td>
-          <td width="71%" bgcolor="#F3F3F3" height="22">
-            <font size="2" face="Arial">{M_ESTABLISH}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="52"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Vision: </span></b></td>
-          <td width="71%" bgcolor="#F3F3F3" height="52" valign="top">
-            <font size="2" face="Arial">{M_VISION}</font></td>
-        </tr>
-        <tr>
-          <td width="29%" bgcolor="#7B9EBA" height="52"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Mission:</span></b></td>
-          <td width="71%" bgcolor="#F3F3F3" height="52" valign="top">
-            <font size="2" face="Arial">{M_MISSION}</font></td>
-        </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-  <table border="0" cellspacing="1" width="100%" id="AutoNumber16">
-    <tr>
-      <td width="100%">&nbsp;</td>
-    </tr>
-</table>
-<div align="center">
-  <center>
-        <table class="MsoNormalTable" style="background: white" border="0" width="96%" height="21" cellpadding="2" cellspacing="1">
-          <tr>
-            <td style="padding: 0.75pt; background: #324f5d" colSpan="3" height="25">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
-            Membership <span class="GramE">Profile&nbsp; as</span> of &nbsp;</span><span style="font-size: 10pt; font-family: techno; font-weight:700"><font color="#FFFFFF">{M_PROFILE_AS}</font></span></font><b><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
-            (YYYY) </span></b><font face="Arial"><b>
-          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
-          </tr>
-          <tr>
-            <td style="padding: 0.75pt; background: #324f5d" height="1">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Type of Credit Union </span></font></td>
-            <td style="padding: 0.75pt; background: #324f5d" height="1">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Number of members </span></font></td>
-            <td style="padding: 0.75pt; background: #324f5d" height="1">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">Low 
-            income less then $30 per month members </span></font></td>
-          </tr>
-          <tr>
-            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
-            <p class="MsoNormal"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Urban </span></b></td>
-            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
-            <p class="MsoNormal">
-          {MEMBERS_URBAN}</td>
-            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
-            <p class="MsoNormal">
-          {MEMBERS_URBAN_LOW}</td>
-          </tr>
-          <tr>
-            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
-            <p class="MsoNormal"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            Rural </span></b></td>
-            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
-            <p class="MsoNormal">
-          {MEMBERS_RURAL}</td>
-            <td style="padding: 0.75pt; background: #F3F3F3; " height="1">
-            <p class="MsoNormal">
-          {MEMBERS_RURAL_LOW}</td>
-          </tr>
-        </table>
-      </center>
-</div>
-<table border="0" cellspacing="0" width="100%" id="AutoNumber18" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
-  <tr>
-    <td width="100%">&nbsp;</td>
-  </tr>
-</table>
-<div align="center">
-  <center>
-      <table class="MsoNormalTable" style="margin-left: -2.25pt; margin-right: -2.25pt; background: white" cellPadding="0" border="0" width="96%" height="132">
-        <tr>
-          <td style="width: 725; padding: 0.75pt; background: #324f5d" colSpan="7" height="12">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <b>
-          <font face="Arial">
-          <span style="font-size: 10pt; color: #FFFF00; font-family: techno">
-          Market <span class="GramE">segmentation&nbsp; as</span> of </span></font>
-          </b>
-            <b>
-            <span style="font-size: 8pt; color: black; font-family: Arial">
-            &nbsp;</span><font color="#FFFFFF"><span style="font-size: 8pt; font-family: Arial">{MARKET_SEGMENTATION}</span></font><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
-          (YYYY) </span></b><font face="Arial"><b>
-          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
-        </tr>
-        <tr style="page-break-inside: avoid">
-          <td style="width: 69; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">Type 
-          of Credit Union </span></font></td>
-          <td style="width: 82; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">Male
-          </span></font></td>
-          <td style="width: 94; padding: 0.75pt; background: #324f5d" rowSpan="2" height="64">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">
-          Female</span></font></td>
-          <td style="width: 468; padding: 0.75pt; background: #324f5d" colSpan="4" height="31">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">Age 
-          Segment of CU Membership</span></font></td>
-        </tr>
-        <tr style="page-break-inside: avoid">
-          <td style="width: 120; padding: 0.75pt; background: #324f5d" height="31">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">
-          &lt;18-19 </span></font></td>
-          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">30-45
-          </span></font></td>
-          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">45-60
-          </span></font></td>
-          <td style="width: 112; padding: 0.75pt; background: #324f5d" height="31">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">60&gt;
-          </span></font></td>
-        </tr>
-        <tr>
-          <td style="width: 69; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal"><b>
-          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Urban
-          </span></b></td>
-          <td style="width: 82; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {URBAN_MALE}</td>
-          <td style="width: 94; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {URBAN_FEMALE}</td>
-          <td style="width: 120; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_URBAN_18_19}</td>
-          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_URBAN_30_45}</td>
-          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_URBAN_45_60}</td>
-          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_URBAN_60}</td>
-        </tr>
-        <tr>
-          <td style="width: 69; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal"><b>
-          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Rural
-          </span></b></td>
-          <td style="width: 82; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {RURAL_MALE}</td>
-          <td style="width: 94; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {RURAL_FEMALE}</td>
-          <td style="width: 120; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_RURAL_18_19}</td>
-          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_RURAL_30_45}</td>
-          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_RURAL_45_60}</td>
-          <td style="width: 112; padding: 0.75pt; background: #F3F3F3; " height="24">
-          <p class="MsoNormal">
-          {MEMBERS_RURAL_60}</td>
-        </tr>
-      </table>
-        </center>
-</div>
-<div align="center">
-  <center>
-  <table border="0" cellspacing="0" width="96%" id="AutoNumber20" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
-    <tr>
-      <td width="100%">&nbsp;</td>
-    </tr>
-    <tr>
-      <td width="100%" bgcolor="#F3F3F3">&nbsp;<div align="center">
-        <center>
-        <table class="MsoNormalTable" style="background: white" cellPadding="0" border="0" width="304">
-          <tr>
-            <td style="width: 141; padding: 0.75pt; background: #324f5d">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Type of Credit Union </span></font></td>
-            <td style="width: 153; padding: 0.75pt; background: #324f5d">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Total Assets </span></font></td>
-          </tr>
-          <tr>
-            <td style="width: 141; padding: 0.75pt; background: #e8e8e8">
-            <p class="MsoNormal"><b>
-            <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-            &nbsp;Total Number</span></b></td>
-            <td style="width: 153; padding: 0.75pt; background: #e8e8e8">
-            <p class="MsoNormal">
-          {ASSETS_TOTAL}</td>
-          </tr>
-        </table>
-        </center>
-      </div>
-      <table border="0" cellspacing="0" width="100%" id="AutoNumber17" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
-        <tr>
-          <td width="100%">&nbsp;</td>
-        </tr>
-      </table>
-      </td>
-    </tr>
-  </table>
-  </center>
-</div>
-<table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber23" cellpadding="0">
-  <tr>
-    <td width="100%">&nbsp;</td>
-  </tr>
-</table>
-<div align="center">
-  <center>
-      <table class="MsoNormalTable" style="background: white" cellPadding="2" border="0" width="96%" cellspacing="1" height="174">
-        <tr>
-          <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="629" colSpan="6" height="31">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">Core
-          <span class="GramE">Business&nbsp; as</span> of </span>
-          <font color="#FFFFFF">
-          <span style="font-size: 10pt; font-family: techno; font-weight:700">{CORE_BUSINESS}</span></font></font><b><span style="font-size: 10pt; color: #FFFFFF; font-family: Arial"> 
-          (YYYY) </span></b><font face="Arial"><b>
-          <span style="font-size: 10pt"><font color="#FF0000">&nbsp;*</font></span></b></font></td>
-        </tr>
-        <tr style="page-break-inside: avoid">
-          <td style="padding: 0.75pt; background: #324f5d" width="119" rowSpan="2">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">
-          <span lang="en-us">&nbsp; </span>Type 
-          of Credit Union</span></font></td>
-          <td style="width: 75pt; padding: 0.75pt; background: #324f5d" width="100" rowSpan="2" height="33">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">
-          Amount in US$ </span></font></td>
-          <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="406" colSpan="4" height="14">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">Usage 
-          of Service US$ </span></font></td>
-        </tr>
-        <tr style="page-break-inside: avoid">
-          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">Male
-          </span></font></td>
-          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">
-          Female </span></font></td>
-          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">Youth
-          </span></font></td>
-          <td style="padding: 0.75pt; background: #324f5d" width="100" align="center" height="14">
-          <p class="MsoNormal" style="text-align: center" align="center">
-          <font face="Arial">
-          <span style="font-size: 10pt; color: white; font-family: techno">Non-Members
-          </span></font></td>
-        </tr>
-        <tr>
-          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
-          <p class="MsoNormal"><b>
-          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">
-          Savings</span></b></td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SAVINGS_AMOUNT}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SAVINGS_MALE}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SAVINGS_FEMALE}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SAVINGS_YOUTH}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SAVINGS_NONMEMBER}</td>
-        </tr>
-        <tr>
-          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
-          <p class="MsoNormal"><b>
-          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Share</span></b></td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SHARE_AMOUNT}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SHARE_MALE}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SHARE_FEMALE}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SHARE_YOUTH}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {SHARE_NONMEMBER}</td>
-        </tr>
-        <tr>
-          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
-          <p class="MsoNormal"><b>
-          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Loan 
-          Outstanding</span></b></td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {LOAN_TOTAL}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {LOAN_MALE}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {LOAN_FEMALE}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {LOAN_YOUTH}</td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {LOAN_NONMEMBER}</td>
-        </tr>
-        <tr>
-          <td style="width: 89.4pt; padding: 0.75pt; background: #F3F3F3; " width="119" height="20">
-          <p class="MsoNormal"><b>
-          <span style="font-size: 10pt; color: #324f5d; font-family: Arial">Total 
-          Reserve</span></b></td>
-          <td style="width: 75pt; padding: 0.75pt; background: #F3F3F3; " width="100" height="20">
-          <p class="MsoNormal">
-          {RESERVE_TOTAL}</td>
-          <td style="width: 304.5pt; padding: 0.75pt; background: #F3F3F3; " width="406" colSpan="4" height="20">
-          <p class="MsoNormal">
-          <span style="font-size: 10pt; color: black; font-family: Arial">&nbsp;
-          </span></td>
-        </tr>
-      </table>
-        </center>
-</div>
-<div align="center">
-  <center>
-  <table border="0" cellspacing="0" width="96%" id="AutoNumber21" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
-    <tr>
-      <td width="100%">&nbsp;</td>
-    </tr>
-    <tr>
-      <td width="100%" bgcolor="#E8E8E8">
-      <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber24" cellpadding="0">
-        <tr>
-          <td width="100%">&nbsp;</td>
-        </tr>
-      </table>
-      <div align="center">
-        <center>
-        <table class="MsoNormalTable" style="background: white" border="0" height="307" cellspacing="1">
-          <tr>
-            <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="340" colSpan="2" height="25">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
-            Board Members and&nbsp; Other committee Members&nbsp; </span></font></td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Name </span></font></td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Position </span></font></td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_1}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_1}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_2}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_2}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_3}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_3}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_4}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_4}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_5}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_5}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_6}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_6}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_7}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_7}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_8}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_8}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_9}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_9}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_NAME_10}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {BOARD_POS_10}</td>
-          </tr>
-        </table>
-        </center>
-      </div>
-      <table border="0" cellspacing="1" width="100%" id="AutoNumber14">
-        <tr>
-          <td width="100%">&nbsp;</td>
-        </tr>
-      </table>
-      <div align="center">
-        <center>
-        <table class="MsoNormalTable" style="background: white" border="0" height="179" cellspacing="1">
-          <tr>
-            <td style="width: 100%; padding: 0.75pt; background: #324f5d" width="340" colSpan="2" height="27">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: #FFFF00; font-family: techno; font-weight:700">
-            Senior Management </span></font></td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Name </span></font></td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #324f5d" width="169" height="18">
-            <p class="MsoNormal" style="text-align: center" align="center">
-            <font face="Arial">
-            <span style="font-size: 10pt; color: white; font-family: techno">
-            Position </span></font></td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_NAME_1}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_POS_1}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_NAME_2}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_POS_2}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_NAME_3}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_POS_3}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_NAME_4}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_POS_4}</td>
-          </tr>
-          <tr>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_NAME_5}</td>
-            <td style="width: 126.75pt; padding: 0.75pt; background: #e8e8e8" width="169" height="24">
-            <p class="MsoNormal">
-          {MANAGE_POS_5}</td>
-          </tr>
-        </table>
-        <table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber25" cellpadding="0">
-          <tr>
-            <td width="100%">&nbsp;</td>
-          </tr>
-        </table>
-        </center>
-      </div>
-      </td>
-    </tr>
-  </table>
-  </center>
-</div>
-<table border="0" cellspacing="0" width="100%" id="AutoNumber22" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
-  <tr>
-    <td width="100%">&nbsp;</td>
-  </tr>
-</table>
-<div align="center">
-  <center>
-      <table border="0" cellspacing="1" width="96%" id="AutoNumber30" cellpadding="2" height="69">
-        <tr>
-          <td width="100%" height="1" bgcolor="#F3F3F3">
-          <div align="center">
-            <center>
-            <table border="0" cellspacing="1" width="95%" id="AutoNumber11" bgcolor="#FFFFFF">
-              <tr>
-                <td width="50%"><b><font face="Arial"><span style="font-size: 8.5pt">
-                <font size="2">&nbsp;</font></span><font color="#FF0000" style="font-size: 10pt">I agree&nbsp;with</font></font></b><font face="Arial"><span style="font-size: 10pt"><i>
-                <font color="#000080">ACCU�S Benchmark services</font></i><span lang="en-us"><b>
-                </b></span></span><b><span style="font-size: 10pt">
-                <font color="#000080">'s 
-      Terms of Service and Privacy Policy </font></span></b></font></td>
-                <td width="50%"><b><font face="Arial" size="2" color="#000080">{IAGREE}</font></b></td>
-              </tr>
-            </table>
-            </center>
-          </div>
-          </td>
-        </tr>
-      </table>
-      </center>
-</div>
-	  <input type="hidden" name="mem_id" value="{MEM_ID}" >
-              </td>
-            </tr>
-            <tr>
-              <td width="50%">&nbsp;</td>
-              <td width="50%">&nbsp;</td>
-            </tr>
-          </table>
+	{if $ds.saved eq "0"}
+		<button type="submit" name='save' class="btn btn-default">Save</button>
+	{else}
+		{if $ds.locked eq "0"}
+			<button type="submit" name='save' class="btn btn-default">Save</button>
+			<button type="submit" name='lock' class="btn btn-default">Finalize</button>
+		{else}
+			<button type="button" id='unlock' name='unlock' class="btn btn-default">Unlock</button>
+		{/if}
+	{/if}
 </form>
-{/literal}
+
+<script type='text/javascript'>
+
+	function getval(xid) {
+		return parseInt($("#bs" + xid).val());
+	}
+
+	function igetval(xid) {
+		return parseInt($("#is" + xid).val());
+	}
+	
+	function calcUsageTotal(service_id)
+	{
+		var male = parseInt($("#usmale_" + service_id).val());
+		var female = parseInt($("#usfemale_" + service_id).val());
+		var youth = parseInt($("#usyouth_" + service_id).val());
+		var none_member = parseInt($("#usnone_member_" + service_id).val());
+		
+		var total = male + female + youth + none_member;
+		$("#ustotal_" + service_id).val(total);
+		
+		return parseInt($("#ustotal_" + service_id).val());
+	}
+	
+	$(function () {
+		
+		$( ".usmale, .usfemale, .usyouth, .usnone_member").change(function (e) {
+			e.preventDefault();
+			var service_id = $(this).data('service-id');
+			var total = calcUsageTotal(service_id);
+			var male = parseInt($("#usmale_" + service_id).val());
+			var female = parseInt($("#usfemale_" + service_id).val());
+			var youth = parseInt($("#usyouth_" + service_id).val());
+			var none_member = parseInt($("#usnone_member_" + service_id).val());
+			
+			if (isNaN(total)) return false;
+			
+			if (!isNaN(male)) {
+				var male_ratio = (male / total)	* 100;
+				$("#usmale_ratio_" + service_id).val(male_ratio.toFixed(2));
+			}
+			
+			if (!isNaN(female)) {
+				var female_ratio = (female / total)	* 100;
+				$("#usfemale_ratio_" + service_id).val(female_ratio.toFixed(2));
+			}
+			
+			if (!isNaN(youth)) {
+				var youth_ratio = (youth / total)	* 100;
+				$("#usyouth_ratio_" + service_id).val(youth_ratio.toFixed(2));
+			}
+			 
+			if (!isNaN(none_member)) {
+				var none_member_ratio = (none_member / total)	* 100;
+				$("#usnone_member_ratio_" + service_id).val(none_member_ratio.toFixed(2));
+			}
+			
+			return true;
+			
+		});
+		
+		$( ".total, .totalx, .male, .female, .farmer, .employee, .microb, .group1, .group2, .group3, .group4, .less_total, .less_male, .less_female, .less_savings, .less_outstand, .less_totalg " ).change(function (e) {
+			e.preventDefault();
+			var total = 0;
+			var sum_col = $(this).data('sum');
+			var group = $(this).data('group');
+			$("." + group).each(function (index) {
+				total += parseInt($(this).val());
+			});
+			$("#" + sum_col).val(total);
+			
+			var id = $(this).attr('class');
+			var gender = $(this).data('gender');
+			var oparea = $(this).data('oparea');
+			
+			var total = parseInt($("#farmer_" + oparea + "_" + gender).val()) + parseInt($("#microb_" + oparea + "_" + gender).val()) + parseInt($("#employee_" + oparea + "_" + gender).val()); 
+			$("#total_" + oparea + "_" + gender).val(total);	
+			
+			var total = parseInt($("#group1_" + oparea + "_" + gender).val()) + parseInt($("#group2_" + oparea + "_" + gender).val()) + parseInt($("#group3_" + oparea + "_" + gender).val()) + parseInt($("#group4_" + oparea + "_" + gender).val()); 
+			$("#grouptotal_" + oparea + "_" + gender).val(total);
+			
+			var totall = 0, totalr = 0;
+			$(".totalx").each(function (index) {
+				if ($(this).data('sum') == 'ttotalxr') totalr += parseInt($(this).val());
+				else if ($(this).data('sum') == 'ttotalxl') totall +=  parseInt($(this).val());
+			});
+			
+			$("#ttotalxl").val(totall);
+			$("#ttotalxr").val(totalr);
+			
+		});
+		
+		//$('input[type=text]').number(true, 2);
+		
+		$( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Unlock Request": function() {
+          
+          	var comment = $("#reason").val();
+          	var that = $(this);
+          	
+          	if (comment.trim() == "") {
+          		alert("You must provide a reason for unlock");
+          		return false;
+          	}
+          
+          	$.post("http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/ajax/unlock/{$ds.id}", { comment: comment } , function () {
+          		that.dialog( "close" );
+          	});
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+		$("#reason").val('');
+      }
+    });
+		
+		$("#unlock").click(function (e) {
+			e.preventDefault();
+			$( "#dialog-form" ).dialog( "open" );
+		});
+	});
+</script>
+
+<div id="dialog-form" title="Unlock Request" style='display: none;'>
+  <p class="validateTips">Request to unlock Datasheet</p>
+ 
+  <form>
+  <fieldset>
+    <label for="reason">Reason</label>
+    <textarea id='reason' name='reason' cols='40' rows='20'></textarea>
+  </fieldset>
+  </form>
+</div>
+
 {include file='footer.tpl'}

@@ -1,0 +1,45 @@
+/* boxes formatting */
+
+input.digits {
+	width: 50px;
+	margin: 10px;
+}
+
+input.checks {
+	width: 50px;
+}
+
+input.male {
+	border-color: #5F29E9;
+	border: 1px solid #5F29E9;
+	border-radius: 4px;
+}
+
+input.female {
+	border-color: #D82DD8;
+	border: 1px solid #D82DD8;
+	border-radius: 4px;
+}
+
+input.total {
+	border-color: #39CE4B;
+	border: 1px solid #39CE4B;
+	border-radius: 4px;
+}
+
+div.datasheet input {
+	width: 100px;
+	margin: 10px;
+	border: 1px solid #002447;
+	border-radius: 4px;
+	text-align: right;
+}
+
+div.datasheet .radio input[type=radio] {
+	width: 20px;
+	margin: 5px;
+}
+
+table tr td {
+	white-space: nowrap;
+}

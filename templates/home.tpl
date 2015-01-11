@@ -2,9 +2,7 @@
 
 <h2> ACCU CUNM </h2>
 
-{if $error neq ""}
-	<div class="alert alert-danger">{$error}</div>
-{/if}
+{include file='common/alert.tpl'}
 
 <form role="form" method='post' action='login'>
   <div class="form-group">
@@ -16,7 +14,6 @@
     <input type="password" name='password' class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Login</button>
-  <button type="button" class="btn btn-default" id='register'>Register</button>
 </form>
 
 <script type='text/javascript'>
