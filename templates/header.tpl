@@ -52,7 +52,7 @@
 		color: #341F1F
 	}
 	
-	.navbar-default li a {
+	nav.navbar.navbar-default ul.nav.navbar-nav li a {
 		color: #341F1F
 	}
 	
