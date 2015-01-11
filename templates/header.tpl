@@ -48,6 +48,17 @@
 		background-color:#f2e8da;
 	}
 	
+	li a.nav
+	{
+		color: #1B1A1A;
+	}
+	
+	.navbar 
+	{
+		background-color: #007bb6;
+	}
+	
+	
 	</style>
 	
 	</head>
