@@ -6,5 +6,7 @@
 	});
 </script>
 
+<footer style="text-align: center">Copyright Asian Confederations of Credit Union 2015. All Rights Reserved</footer>
+
 </body>
 </html>
