@@ -70,7 +70,7 @@
 	           
 	          
        
-          <div class='panel-heading'>No of Employees by Department</div>
+          <div class='panel-heading'>No. of Employees by Department</div>
           <div class='panel-body'>
            <div class="controls controls-row">
            	<table class='table table-striped table-bordered table-hover'>
@@ -152,7 +152,7 @@
         
        
           <div class='panel-heading'>
-          		Total no. of Board of Directors and Committee Members
+          		Total No. of Board of Directors and Committee Members
 		  </div>
 		  <div class='panel-body'>
            <div class="controls controls-row">
@@ -207,7 +207,7 @@
            			</tr>
            
            			<tr>
-             			<td class='info'>Other</td> 
+             			<td class='info'>Other <input type='text' name='com_other_name' value='{$operations.com_other_name}' /></td>
              			<td><input type="text" class='span1 digits male' value='{$operations.othermale}' placeholder='Male' name="othermale" /></td>
              			<td><input type="text" class='span2 digits female' value='{$operations.otherfemale}' placeholder='Female' name="otherfemale" /></td>
              			<td><input type="text" class='span3 digits total' value='{$operations.othertotal}' placeholder='Female' name="othertotal" /></td>

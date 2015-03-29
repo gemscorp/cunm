@@ -471,7 +471,7 @@ $app->post("/operations", function () use ($app, $smarty) {
 			edumale, edufemale, edutotal,
 			creditmale, creditfemale, credittotal,
 			auditmale, auditfemale, audittotal,
-			othermale, otherfemale, othertotal, other_name) "
+			othermale, otherfemale, othertotal, other_name, com_other_name) "
 			. "VALUES (:id, :male, :female, :gtotal, 
 				:manager_male, :manager_female, :manager_total, 
 				:ops_male, :ops_female, :ops_total, 
@@ -486,7 +486,7 @@ $app->post("/operations", function () use ($app, $smarty) {
 				:edumale, :edufemale, :edutotal,
 				:creditmale, :creditfemale, :credittotal, 
 				:auditmale, :auditfemale, :audittotal,
-				:othermale, :otherfemale, :othertotal, :other_name) ";
+				:othermale, :otherfemale, :othertotal, :other_name, :com_other_name) ";
 	
 	$sth = $db->prepare($sql);
 	$sth->execute(array(
@@ -537,6 +537,7 @@ $app->post("/operations", function () use ($app, $smarty) {
 			':otherfemale' => $_POST['otherfemale'],
 			':othertotal' => $_POST['othertotal'],
 			':other_name' => $_POST['other_name'],
+            ':com_other_name' => $_POST['com_other_name']
 	));
 
 	foreach ($_POST['area'] as $area_id) {

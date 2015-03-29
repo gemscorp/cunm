@@ -10,7 +10,7 @@
 		<tr>
 			<th>Request Date</th>
 			<th>Request Type</th>
-			<th>Primary Union Name</th>
+			<th>Primary Credit Union Name</th>
 			<th>Reason</th>
 			<th>Action</th>
 		</tr>

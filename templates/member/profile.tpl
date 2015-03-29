@@ -43,7 +43,7 @@
     	<input type="text" name='phone' class="form-control" id="phone" placeholder="Enter Phone" value='{$primarycu.phone}' required>
   	</div>
   	<div class="form-group">
-    	<label for="exampleInputEmail1">Fax</label>
+    	<label for="exampleInputEmail1">Fax No.</label>
     	<input type="text" name='fax' class="form-control" id="fax" placeholder="Enter Fax" value='{$primarycu.fax}' required>
   	</div>
   	<div class="form-group">

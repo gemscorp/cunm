@@ -73,7 +73,7 @@
 			<select name='date_type' id='date_type'>
 				<option value='3'>Latest</option>
 				<option value='0'>Monthly</option>
-				<option value='1'>Quaterly</option>
+				<option value='1'>Quarterly</option>
 				<option value='2'>Annually</option>
 			</select>
 				</td>
@@ -86,7 +86,7 @@
 						<option value='5'>May</option>
 						<option value='6'>June</option>
 						<option value='7'>July</option>
-						<option value='8'>Auguest</option>
+						<option value='8'>August</option>
 						<option value='9'>September</option>
 						<option value='10'>October</option>
 						<option value='11'>November</option>
@@ -117,7 +117,7 @@
 					<td>
 			<select name='date_type_comp' id='date_type_comp'>
 				<option value='0'>Monthly</option>
-				<option value='1'>Quaterly</option>
+				<option value='1'>Quarterly</option>
 				<option value='2'>Annually</option>
 			</select>
 				</td>
@@ -131,7 +131,7 @@
 						<option value='5'>May</option>
 						<option value='6'>June</option>
 						<option value='7'>July</option>
-						<option value='8'>Auguest</option>
+						<option value='8'>August</option>
 						<option value='9'>September</option>
 						<option value='10'>October</option>
 						<option value='11'>November</option>
@@ -157,7 +157,7 @@
 						<option value='5'>May</option>
 						<option value='6'>June</option>
 						<option value='7'>July</option>
-						<option value='8'>Auguest</option>
+						<option value='8'>August</option>
 						<option value='9'>September</option>
 						<option value='10'>October</option>
 						<option value='11'>November</option>
