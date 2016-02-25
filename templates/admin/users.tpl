@@ -59,8 +59,8 @@
 				<td>{$user.puname}</td>
 				<td>{$user.country_name}</td>
 				<td><a href="/admin/user/edit/{$user.id}">Edit</a></td>
-				<td><a href="/admin/user/delete/{$user.id}">Edit</a></td>
 				<td><a href="/admin/user/password/{$user.id}">Edit</a></td>
+				<td><a href="/admin/user/delete/{$user.id}">Edit</a></td>
 			</tr>
 		{/foreach}
 		</tbody>
