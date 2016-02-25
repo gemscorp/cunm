@@ -14,8 +14,12 @@
   <div class="form-group">
     <label for="primary_union">Primary Credit Union</label>
     <select id='primary_union_id' name='primary_union_id' class="form-control">
-    	{foreach from=$primarycus item=primarycu selected=$user.primary_union_id}
-    		<option value='{$primarycu.id}'>{$primarycu.name}</option>
+    	{foreach from=$primarycus item=primarycu}
+			{if $user.primary_union_id eq $primarycu.id}
+				<option value='{$primarycu.id}' selected>{$primarycu.name}</option>
+			{else}
+    			<option value='{$primarycu.id}'>{$primarycu.name}</option>
+			{/if}
     	{/foreach}
     </select>
     <input type='hidden' name='country_id' value='{$smarty.session.user_country_id}' />
@@ -24,16 +28,24 @@
   <div class="form-group">
     <label for="country">Country</label>
     <select id='country_id' name='country_id' class="form-control">
-    	{foreach from=$countries item=country selected=$user.country_id}
-    		<option value='{$country.id}'>{$country.name}</option>
+    	{foreach from=$countries item=country}
+			{if $user.country_id eq $country.id}
+				<option value='{$country.id}' selected>{$country.name}</option>
+			{else}
+    			<option value='{$country.id}'>{$country.name}</option>
+			{/if}
     	{/foreach}
     </select>
   </div>
   <div class="form-group">
     <label for="federation">Federation</label>
     <select id='federation_id' name='federation_id' class="form-control">
-    	{foreach from=$federations item=federation selected=$user.federation_id}
-    		<option value='{$federation.id}'>{$federation.name}</option>
+    	{foreach from=$federations item=federation}
+			{if $user.federation_id eq $federation.id}
+				<option value='{$federation.id}' selected>{$federation.name}</option>
+			{else}
+    			<option value='{$federation.id}'>{$federation.name}</option>
+			{/if}
     	{/foreach}
     </select>
   </div>
