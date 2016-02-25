@@ -554,6 +554,115 @@ $app->group("/admin", function () use ($app, $smarty) {
 		
 		$smarty->display('admin/users.tpl');
 	});
+
+	$app->get("/users/edit/:id", function ($id) use ($app, $smarty) {
+
+		$db = getDbHandler();
+		$sql = "SELECT u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
+			. "FROM user AS u "
+			. "JOIN federation AS f ON f.id = u.federation_id "
+			. "JOIN primary_union AS pu ON pu.id = u.primary_union_id "
+			. "JOIN country AS c ON c.id = u.country_id "
+			. " WHERE 1=1 AND id = :id ";
+
+		if ($_SESSION['user_level'] == 1) {
+			$sql .= " AND u.federation_id = :federation_id ";
+		}
+
+		$sth = $db->prepare($sql);
+
+		if ($_SESSION['user_level'] == 0) {
+			$sth->execute([':id' => $id]);
+		} else {
+			$sth->execute(array(':federation_id' => $_SESSION['user_federation_id'], ':id' => $id));
+		}
+
+		$user = $sth->fetch();
+
+		$smarty->assign('user', $user);
+
+		$sql = "SELECT id, name FROM country ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$countries = $sth->fetchAll();
+
+		$smarty->assign('countries', $countries);
+
+		$smarty->display('admin/edituser.tpl');
+	});
+
+	$app->post("/users/edit/:id", function ($id) use ($app, $smarty) {
+
+		$pdo = getDbHandler();
+
+		$sql = "UPDATE user SET email = :email, federation_id = :federation_id, primary_union_id = :primary_union_id, country_id = :country_id "
+			 . "WHERE id = :id ";
+
+		$sth = $pdo->prepare($sql);
+		$sth->execute(array(':email' => $_POST['username'], ':federation_id' => $_POST['federation_id'],
+			':primary_union_id' => $_POST['primary_union_id'], ':country_id' => $_POST['country_id'], ':id' => $id));
+
+		setSuccessMessage('User Added');
+
+		$app->redirect(APP_PATH . "/admin/users");
+	});
+
+	$app->get("/users/delete/:id", function ($id) use ($app, $smarty) {
+
+		$pdo = getDbHandler();
+
+		$sql = "DELETE FROM user WHERE id = :id ";
+
+		$sth = $pdo->prepare($sql);
+		$sth->execute(array(':id' => $id));
+
+		setSuccessMessage('User Deleted');
+
+		$app->redirect(APP_PATH . "/admin/users");
+	});
+
+	$app->get("/users/password/:id", function ($id) use ($app, $smarty) {
+
+		$db = getDbHandler();
+		$sql = "SELECT u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
+			. "FROM user AS u "
+			. "JOIN federation AS f ON f.id = u.federation_id "
+			. "JOIN primary_union AS pu ON pu.id = u.primary_union_id "
+			. "JOIN country AS c ON c.id = u.country_id "
+			. " WHERE 1=1 AND id = :id ";
+
+		if ($_SESSION['user_level'] == 1) {
+			$sql .= " AND u.federation_id = :federation_id ";
+		}
+
+		$sth = $db->prepare($sql);
+
+		if ($_SESSION['user_level'] == 0) {
+			$sth->execute([':id' => $id]);
+		} else {
+			$sth->execute(array(':federation_id' => $_SESSION['user_federation_id'], ':id' => $id));
+		}
+
+		$user = $sth->fetch();
+
+		$smarty->assign('user', $user);
+
+		$smarty->display('admin/password.tpl');
+	});
+
+	$app->post("/users/password/:id", function ($id) use ($app, $smarty) {
+
+		$pdo = getDbHandler();
+
+		$sql = "UPDATE user SET password = PASSWORD(:password) WHERE id = :id ";
+
+		$sth = $pdo->prepare($sql);
+		$sth->execute(array(':password' => $_POST['password'], ':id' => $id));
+
+		setSuccessMessage('Password Changed');
+
+		$app->redirect(APP_PATH . "/admin/users");
+	});
 	
 	$app->post('/users', function () use ($app, $smarty) {
 		$db = getDbHandler();
