@@ -588,6 +588,23 @@ $app->group("/admin", function () use ($app, $smarty) {
 
 		$smarty->assign('countries', $countries);
 
+		$sql = "SELECT id,name FROM federation ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$federations = $sth->fetchAll();
+
+		$smarty->assign('federations', $federations);
+
+		if ($_SESSION['user_level'] == 1) {
+			$sql = "SELECT id, name FROM primary_union WHERE federation_id = :federation_id ";
+			$sth = $db->prepare($sql);
+			$sth->execute(array(':federation_id' => $_SESSION['user_federation_id']));
+
+			$primarycus = $sth->fetchAll();
+			$smarty->assign('primarycus', $primarycus);
+
+		}
+
 		$smarty->display('admin/edituser.tpl');
 	});
 
