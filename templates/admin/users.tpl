@@ -34,6 +34,9 @@
 			<th>Federation</th>
 			<th>Primary Credit Union</th>
 			<th>Country</th>
+			<th>Edit User</th>
+			<th>Reset Password</th>
+			<th>Delete User</th>
 		</tr>
 		</thead>
 		
@@ -54,6 +57,9 @@
 				</td>
 				<td>{$user.fedname}</td>
 				<td>{$user.puname}</td>
+				<td>{$user.country_name}</td>
+				<td>{$user.country_name}</td>
+				<td>{$user.country_name}</td>
 				<td>{$user.country_name}</td>
 			</tr>
 		{/foreach}
