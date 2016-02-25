@@ -563,7 +563,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 			. "JOIN federation AS f ON f.id = u.federation_id "
 			. "JOIN primary_union AS pu ON pu.id = u.primary_union_id "
 			. "JOIN country AS c ON c.id = u.country_id "
-			. " WHERE 1=1 AND id = :id ";
+			. " WHERE 1=1 AND u.id = :id ";
 
 		if ($_SESSION['user_level'] == 1) {
 			$sql .= " AND u.federation_id = :federation_id ";
@@ -629,7 +629,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 			. "JOIN federation AS f ON f.id = u.federation_id "
 			. "JOIN primary_union AS pu ON pu.id = u.primary_union_id "
 			. "JOIN country AS c ON c.id = u.country_id "
-			. " WHERE 1=1 AND id = :id ";
+			. " WHERE 1=1 AND u.id = :id ";
 
 		if ($_SESSION['user_level'] == 1) {
 			$sql .= " AND u.federation_id = :federation_id ";
