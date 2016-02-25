@@ -555,7 +555,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 		$smarty->display('admin/users.tpl');
 	});
 
-	$app->get("/users/edit/:id", function ($id) use ($app, $smarty) {
+	$app->get("/user/edit/:id", function ($id) use ($app, $smarty) {
 
 		$db = getDbHandler();
 		$sql = "SELECT u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
@@ -591,7 +591,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 		$smarty->display('admin/edituser.tpl');
 	});
 
-	$app->post("/users/edit/:id", function ($id) use ($app, $smarty) {
+	$app->post("/user/edit/:id", function ($id) use ($app, $smarty) {
 
 		$pdo = getDbHandler();
 
@@ -607,7 +607,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 		$app->redirect(APP_PATH . "/admin/users");
 	});
 
-	$app->get("/users/delete/:id", function ($id) use ($app, $smarty) {
+	$app->get("/user/delete/:id", function ($id) use ($app, $smarty) {
 
 		$pdo = getDbHandler();
 
@@ -621,7 +621,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 		$app->redirect(APP_PATH . "/admin/users");
 	});
 
-	$app->get("/users/password/:id", function ($id) use ($app, $smarty) {
+	$app->get("/user/password/:id", function ($id) use ($app, $smarty) {
 
 		$db = getDbHandler();
 		$sql = "SELECT u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
@@ -650,7 +650,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 		$smarty->display('admin/password.tpl');
 	});
 
-	$app->post("/users/password/:id", function ($id) use ($app, $smarty) {
+	$app->post("/user/password/:id", function ($id) use ($app, $smarty) {
 
 		$pdo = getDbHandler();
 
