@@ -558,7 +558,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 	$app->get("/user/edit/:id", function ($id) use ($app, $smarty) {
 
 		$db = getDbHandler();
-		$sql = "SELECT u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
+		$sql = "SELECT u.id, u.email, u.level, u.federation_id, u.primary_union_id, u.country_id, f.name AS fedname, pu.name AS puname, c.name AS country_name  "
 			. "FROM user AS u "
 			. "JOIN federation AS f ON f.id = u.federation_id "
 			. "JOIN primary_union AS pu ON pu.id = u.primary_union_id "
