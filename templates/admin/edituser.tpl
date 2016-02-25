@@ -63,7 +63,7 @@
     	<option value='3'>Reports User</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-default">Create User</button>
+  <button type="submit" class="btn btn-default">Update User</button>
 </form>
 
 <script type='text/javascript'>

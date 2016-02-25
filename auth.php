@@ -619,7 +619,7 @@ $app->group("/admin", function () use ($app, $smarty) {
 		$sth->execute(array(':email' => $_POST['username'], ':federation_id' => $_POST['federation_id'],
 			':primary_union_id' => $_POST['primary_union_id'], ':country_id' => $_POST['country_id'], ':id' => $id));
 
-		setSuccessMessage('User Added');
+		setSuccessMessage('User Updated');
 
 		$app->redirect(APP_PATH . "/admin/users");
 	});
