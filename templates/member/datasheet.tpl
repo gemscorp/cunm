@@ -9,8 +9,18 @@
 
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/datasheet'>
 Data Sheet Date: <input type="text" class="datepicker" value="" id="date" name='date'> 
-<button id='createsheet' type="submit" class="btn btn-success">Create New Datasheet</button>
+<button id='createsheet' type="submit" onclick="return validateDate();" class="btn btn-success">Create New Datasheet</button>
 </form>
+
+<script type="text/javascript">
+	function validateDate() {
+		if (document.getElementById('date').value === "") {
+			alert("Please select Date Sheet Date");
+			return false;
+		}
+		return true;
+	}
+</script>
 
 <hr>
 
