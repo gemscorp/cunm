@@ -269,7 +269,7 @@
 				success: function (json) {
 					$("#chapter_id").html("");
 					$("#chapter_id").append("<option value='0'>All</option>");
-					$.each(json.chapter, function (v,k) {
+					$.each(json.chapters, function (v,k) {
 						$("#chapter_id").append("<option value='" + k.id + "'>" + k.name + "</option>");
 					});
 				}
