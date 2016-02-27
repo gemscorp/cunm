@@ -18,7 +18,13 @@
 		             {/foreach}
 		           </div>
 		       </div>
-           
+			  <div class='panel-heading'>Total No. of Branches</div>
+			  <div class='panel-body'>
+				  <div class="controls controls-row">
+				  	Branches <input type="text" value="{$operations.branches}" name="branches" />
+				  </div>
+			  </div>
+
           	<div class='panel-heading'>Total No. of Employees</div>
           	<div class='panel-body'>
 	           <div class="controls controls-row">
