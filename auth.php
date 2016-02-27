@@ -34,36 +34,39 @@ $app->group("/report", function () use ($app, $smarty) {
 	
 	$app->get('/', function () use ($app, $smarty) {
 		$db = getDbHandler();
-		
-		$sql = "SELECT id, name FROM country";
-		$sth = $db->prepare($sql);
-		$sth->execute();
-		$c = $sth->fetchAll();
-		$country = array();
-		foreach ($c as $ct) {
-			$country[$ct['id']] = $ct['name'];
-		}
-		$smarty->assign('country', $country);
-		
-		$sql = "SELECT id, name FROM federation ";
-		$sth = $db->prepare($sql);
-		$sth->execute();
-		$f = $sth->fetchAll();
-		$fed = array();
-		foreach ($f as $fd) {
-			$fed[$fd['id']] = $fd['name'];
-		}
-		$smarty->assign('federation', $fed);
 
-		$sql = "SELECT id, name FROM chapter ";
-		$sth = $db->prepare($sql);
-		$sth->execute();
-		$f = $sth->fetchAll();
-		$fed = array();
-		foreach ($f as $fd) {
-			$fed[$fd['id']] = $fd['name'];
+		if ($_SESSION['user_level'] == 0) {
+
+			$sql = "SELECT id, name FROM country";
+			$sth = $db->prepare($sql);
+			$sth->execute();
+			$c = $sth->fetchAll();
+			$country = array();
+			foreach ($c as $ct) {
+				$country[$ct['id']] = $ct['name'];
+			}
+			$smarty->assign('country', $country);
+
+			$sql = "SELECT id, name FROM federation ";
+			$sth = $db->prepare($sql);
+			$sth->execute();
+			$f = $sth->fetchAll();
+			$fed = array();
+			foreach ($f as $fd) {
+				$fed[$fd['id']] = $fd['name'];
+			}
+			$smarty->assign('federation', $fed);
+
+			$sql = "SELECT id, name FROM chapter ";
+			$sth = $db->prepare($sql);
+			$sth->execute();
+			$f = $sth->fetchAll();
+			$chapters = array();
+			foreach ($f as $fd) {
+				$chapters[$fd['id']] = $fd['name'];
+			}
+			$smarty->assign('chapters', $chapters);
 		}
-		$smarty->assign('chapters', $fed);
 		
 		$country = "";
 		if (isset($_SESSION['user_country_id'])) {

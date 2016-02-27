@@ -72,6 +72,30 @@
 
 		</td>
 	</tr>
+
+	<tr>
+		<td>
+			Primary Credit Union
+		</td>
+		<td>
+			{if $smarty.session.user_level eq "0"}
+				<select name='cu_id' id='cu_id'>
+					<option value='0'>All</option>
+					{html_options options=$cus}
+				</select>
+			{/if}
+
+			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2" || $smarty.session.user_level eq "3"}
+				{if $smarty.session.user_federation_id eq "0"}
+					<span>No Federation</span>
+				{else}
+					<span>{$ufed}</span>
+				{/if}
+				<input type='hidden' name='chapter_id' value='{$smarty.session.user_federation_id}' />
+			{/if}
+
+		</td>
+	</tr>
 	
 	<tr>
 		<td>
