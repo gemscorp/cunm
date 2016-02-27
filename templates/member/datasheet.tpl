@@ -8,7 +8,7 @@
 {/if}
 
 <form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/datasheet'>
-Data Sheet Date: <input type="text" class="datepicker" value="" id="date" name='date'> 
+Data Sheet Date: <input type="text" class="datepicker1" value="" id="date" name='date'>
 <button id='createsheet' type="submit" onclick="return validateDate();" class="btn btn-success">Create New Datasheet</button>
 </form>
 
@@ -20,6 +20,9 @@ Data Sheet Date: <input type="text" class="datepicker" value="" id="date" name='
 		}
 		return true;
 	}
+	$(function () {
+		$( ".datepicker1" ).datepicker( { dateFormat: "yy-mm-25", changeMonth: true, changeYear: true } );
+	});
 </script>
 
 <hr>
