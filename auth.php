@@ -63,7 +63,7 @@ $app->group("/report", function () use ($app, $smarty) {
 		foreach ($f as $fd) {
 			$fed[$fd['id']] = $fd['name'];
 		}
-		$smarty->assign('chapter', $fed);
+		$smarty->assign('chapters', $fed);
 		
 		$country = "";
 		if (isset($_SESSION['user_country_id'])) {
