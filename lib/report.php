@@ -1,12 +1,19 @@
 <?php 
 
-function getCuByFedId($federation_id = 0)
+function getCuByFedId($federation_id = 0, $chapter_id = 0, $cu_id = 0)
 {
+	if ($cu_id !== 0) return array($cu_id);
+
 	$dbo = getDbHandler();
 	$sql = "SELECT id FROM primary_union WHERE federation_id = :id ";
+	$params = array(':id' => $federation_id);
+	if ($chapter_id !== 0) {
+		$sql .= " AND chapter_id = :chapter_id ";
+		$params[':chapter_id'] = $chapter_id;
+	}
 	
 	$sth = $dbo->prepare($sql);
-	$sth->execute(array(':id' => $federation_id));
+	$sth->execute($params);
 	
 	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
 }
@@ -22,14 +29,30 @@ function getAllCuIds()
 	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
 }
 
-function getCuByCountry($country_id = 0)
+function getCuByCountry($country_id = 0, $fed_id = 0, $chap_id = 0, $cu_id = 0)
 {
+	if ($cu_id !== 0) return array($cu_id);
 	$dbo = getDbHandler();
-	$sql = "SELECT id FROM primary_union WHERE federation_id IN ( SELECT id FROM federation WHERE country_id = :id ) ";
+	if ($fed_id === 0) {
+		$sql = "SELECT id FROM primary_union WHERE federation_id IN ( SELECT id FROM federation WHERE country_id = :id ) ";
+		$sth = $dbo->prepare($sql);
+		$sth->execute(array(':id' => $country_id));
+		return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+	}
+
+	if ($chap_id === 0) {
+		$sql = "SELECT id FROM primary_union WHERE federation_id = :fed_id ";
+		$sth = $dbo->prepare($sql);
+		$sth->execute(array(':fed_id' => $fed_id));
+		return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
+	}
+
+	$sql = "SELECT id FROM primary_union WHERE chapter_id = :chap_id ";
 	$sth = $dbo->prepare($sql);
-	$sth->execute(array(':id' => $country_id));
+	$sth->execute(array(':chap_id' => $chap_id));
+	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);
 	
-	return $sth->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_NUM, 0);	
+
 }
 
 function getLatestDataSheetByCuId($cu_ids)
@@ -734,18 +757,17 @@ function RunIndividualReport($app, $smarty)
 	$db = getDbHandler();
 	
 	$exchange = 0; //$_POST['exchange'];
-	
 	if ($_POST['federation_id'] != 0) {
 			
 		if ($_SESSION['user_level'] == 2) {
 			$cu_ids = array($_SESSION['user_primary_union_id']);
 		} else {
-			$cu_ids = getCuByFedId($_POST['federation_id']);
+			$cu_ids = getCuByFedId($_POST['federation_id'], $_POST['chapter_id'], $_POST['cu_id']);
 		}
 	} else if ($_POST['country_id'] == 0) {
 		$cu_ids = getAllCuIds();
 	} else {
-		$cu_ids = getCuByCountry($_POST['country_id']);
+		$cu_ids = getCuByCountry($_POST['country_id'], $_POST['federation_id'], $_POST['chapter_id'], $_POST['cu_id']);
 	}
 	
 	if (count($cu_ids) == 0) {

@@ -54,6 +54,16 @@ $app->group("/report", function () use ($app, $smarty) {
 			$fed[$fd['id']] = $fd['name'];
 		}
 		$smarty->assign('federation', $fed);
+
+		$sql = "SELECT id, name FROM chapter ";
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$f = $sth->fetchAll();
+		$fed = array();
+		foreach ($f as $fd) {
+			$fed[$fd['id']] = $fd['name'];
+		}
+		$smarty->assign('chapter', $fed);
 		
 		$country = "";
 		if (isset($_SESSION['user_country_id'])) {

@@ -48,6 +48,30 @@
 			
 		</td>
 	</tr>
+
+	<tr>
+		<td>
+			Chapter
+		</td>
+		<td>
+			{if $smarty.session.user_level eq "0"}
+				<select name='chapter_id' id='chapter_id'>
+					<option value='0'>All</option>
+					{html_options options=$chapters}
+				</select>
+			{/if}
+
+			{if $smarty.session.user_level eq "1" || $smarty.session.user_level eq "2" || $smarty.session.user_level eq "3"}
+				{if $smarty.session.user_federation_id eq "0"}
+					<span>No Federation</span>
+				{else}
+					<span>{$ufed}</span>
+				{/if}
+				<input type='hidden' name='chapter_id' value='{$smarty.session.user_federation_id}' />
+			{/if}
+
+		</td>
+	</tr>
 	
 	<tr>
 		<td>
@@ -209,6 +233,34 @@
 						$("#federation_id").append("<option value='" + k.id + "'>" + k.name + "</option>");
 					});
 				}				
+			});
+		});
+		$("#federation_id").change(function (e) {
+			e.preventDefault();
+			var federation_id = $(this).val();
+			$.ajax({
+				url: '{$smarty.const.APP_PATH}/ajax/chapter/' + federation_id,
+				type: 'get',
+				dataType: 'json',
+				success: function (json) {
+					$("#chapter_id").html("");
+					$("#chapter_id").append("<option value='0'>All</option>");
+					$.each(json.chapter, function (v,k) {
+						$("#chapter_id").append("<option value='" + k.id + "'>" + k.name + "</option>");
+					});
+				}
+			});
+			$.ajax({
+				url: '{$smarty.const.APP_PATH}/ajax/primarycubyfed/' + federation_id,
+				type: 'get',
+				dataType: 'json',
+				success: function (json) {
+					$("#cu_id").html("");
+					$("#cu_id").append("<option value='0'>All</option>");
+					$.each(json.unions, function (v,k) {
+						$("#cu_id").append("<option value='" + k.id + "'>" + k.name + "</option>");
+					});
+				}
 			});
 		});
 		

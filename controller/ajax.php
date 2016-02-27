@@ -86,6 +86,48 @@ $app->get("/federations/:country_id", function ($country_id) use ($app, $smarty)
 
 });
 
+$app->get("/chapter/:federation_id", function ($federation_id) use ($app, $smarty) {
+	$db = getDbHandler();
+
+	$sql = "SELECT id, name FROM chapter WHERE federation_id = :federation_id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':federation_id' => $federation_id));
+
+	$json['chapters'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+	$app->contentType('application/json');
+	echo json_encode($json);
+
+});
+
+$app->get("/primarycu/:chapter_id", function ($chapter_id) use ($app, $smarty) {
+	$db = getDbHandler();
+
+	$sql = "SELECT id, name FROM primary_union WHERE chapter_id = :chapter_id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':chapter_id' => $chapter_id));
+
+	$json['unions'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+	$app->contentType('application/json');
+	echo json_encode($json);
+
+});
+
+$app->get("/primarycubyfed/:chapter_id", function ($federation_id) use ($app, $smarty) {
+	$db = getDbHandler();
+
+	$sql = "SELECT id, name FROM primary_union WHERE federation_id = :federation_id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':federation_id' => $federation_id));
+
+	$json['unions'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+	$app->contentType('application/json');
+	echo json_encode($json);
+
+});
+
 $app->post("/isgroup", function () use ($app, $smarty) {
 	$db = getDbHandler();
 
