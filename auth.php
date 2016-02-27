@@ -66,6 +66,8 @@ $app->group("/report", function () use ($app, $smarty) {
 				$chapters[$fd['id']] = $fd['name'];
 			}
 			$smarty->assign('chapters', $chapters);
+
+			$smarty->assign('cus', array());
 		}
 		
 		$country = "";
