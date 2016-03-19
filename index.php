@@ -5,7 +5,6 @@ session_start();
 require_once('config.php');
 require_once 'vendor/autoload.php';
 require_once('db.php');
-require_once('smarty3/Smarty.class.php');
 
 date_default_timezone_set('Asia/Bangkok');
 

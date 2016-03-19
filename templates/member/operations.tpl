@@ -74,12 +74,12 @@
 	             </table>
 	           </div>
 	           
-	          
+
        
           <div class='panel-heading'>No. of Employees by Department</div>
           <div class='panel-body'>
            <div class="controls controls-row">
-           	<table class='table table-striped table-bordered table-hover'>
+           	<table class='table table-striped table-bordered table-hover' id="operationTop">
            		<thead>
            			<tr>
            				<th style='width: 325px'>Department</th>
@@ -127,18 +127,24 @@
              		<td><input type="text" class='span2 digits female' value='{$operations.bod_female}' placeholder='Female' name="bod_female" /></td> 
              		<td><input type="text" class='span3 digits total' value='{$operations.bod_total}' placeholder='Total' name="bod_total" /> </td>
              	</tr>
-             	<tr>
-             		<td class='info'>Other: <input type='text' name='other_name' value='{$operations.other_name}' /> </td> 
-             		<td><input type="text" class='span1 digits male' value='{$operations.other_male}' placeholder='Male' name="other_male" /></td> 
-             		<td><input type="text" class='span2 digits female' value='{$operations.other_female}' placeholder='Female' name="other_female" /></td> 
-             		<td><input type="text" class='span3 digits total' value='{$operations.other_total}' placeholder='Female' name="other_total" /> </td>
-             	</tr>
+
+				{foreach from=$otherops item=otp}
+					<tr class="template_other">
+						<td class='info'>Other: <input type='text' name='other_name[]' value='{$otp.other_name}' />
+							<button type="button" class="btnAddAnotherRow">add other</button>
+						</td>
+						<td><input type="text" class='span1 digits male' value='{$otp.other_male}' placeholder='Male' name="other_male[]" /></td>
+						<td><input type="text" class='span2 digits female' value='{$otp.other_female}' placeholder='Female' name="other_female[]" /></td>
+						<td><input type="text" class='span3 digits total' value='{$otp.other_total}' placeholder='Female' name="other_total[]" /> </td>
+					</tr>
+				{/foreach}
              	</tbody>
              	</table>
            </div>
        	</div>
         
         <script type='text/javascript'>
+			var otherCount = 1;
         	$(function () {
         		$(".male, .female").change(function (e) {
         			var name = $(this).attr('name');
@@ -153,7 +159,23 @@
         				}
         			}
         		});
+				$(document).on("click", ".btnAddAnotherRow", addOtherRow);
         	});
+
+			function addOtherRow(e) {
+
+				if (otherCount == 10) {
+					$(".btnAddAnotherRow").disabled(true);
+					return false;
+				}
+
+				otherCount++;
+				var template = $(".template_other:first").html();
+				$(template).find("button").remove();
+				$(".template_other:last").after("<tr class='template_other'>" + template + "</tr>");
+
+			}
+
         </script>
         
        

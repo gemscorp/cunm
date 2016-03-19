@@ -445,6 +445,12 @@ $app->get("/operations", function () use ($app, $smarty) {
 
 	$smarty->assign('oparea', $oparea);
 
+	$sql = "SELECT * FROM pu_operations_other WHERE primary_union_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+
+	$smarty->assign('otherops', $sth->fetchAll());
+
 	$smarty->display('member/operations.tpl');
 });
 
@@ -458,6 +464,20 @@ $app->post("/operations", function () use ($app, $smarty) {
 	$sql = "DELETE FROM pu_operations_area WHERE primary_union_id = :id ";
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+
+	$sql = "DELETE FROM pu_operations_other WHERE primary_union_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+
+	//create table pu_operations_other (id int primary key auto_increment, primary_union_id int, other_name varchar(100), other_male int, other_female int, other_total int);
+	for ($i = 0; $i < count($_POST['other_name']); $i++) {
+		$sql = "INSERT INTO pu_operations_other (primary_union_id, other_name, other_male, other_female, other_total) "
+			 . "VALUES (:id, :name, :male, :female, :total) ";
+
+		$sth = $db->prepare($sql);
+		$sth->execute([':id' => $_SESSION['user_primary_union_id'], ':name' => $_POST['other_name'][$i],
+			':male' => $_POST['other_male'][$i], ':female' => $_POST['other_female'][$i], ':total' => $_POST['other_total'][$i]]);
+	}
 
 	$sql = "INSERT INTO pu_operations (primary_union_id, males, females, gtotal, manager_male, manager_female, manager_total, 
 			ops_male, ops_female, ops_total, gm_male, gm_female, gm_total, 
@@ -515,9 +535,9 @@ $app->post("/operations", function () use ($app, $smarty) {
 			':audit_male' => $_POST['audit_male'],
 			':audit_female' => $_POST['audit_female'],
 			':audit_total' => $_POST['audit_total'],
-			':other_male' => $_POST['other_male'],
-			':other_female' => $_POST['other_female'],
-			':other_total' => $_POST['other_total'],
+			':other_male' => $_POST['other_male'][0],
+			':other_female' => $_POST['other_female'][0],
+			':other_total' => $_POST['other_total'][0],
 			':bod_male' => $_POST['bod_male'],
 			':bod_female' => $_POST['bod_female'],
 			':bod_total' => $_POST['bod_total'],
@@ -536,7 +556,7 @@ $app->post("/operations", function () use ($app, $smarty) {
 			':othermale' => $_POST['othermale'],
 			':otherfemale' => $_POST['otherfemale'],
 			':othertotal' => $_POST['othertotal'],
-			':other_name' => $_POST['other_name'],
+			':other_name' => $_POST['other_name'][0],
             ':com_other_name' => $_POST['com_other_name'],
 			':branches' => $_POST['branches']
 	));
