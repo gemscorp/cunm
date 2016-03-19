@@ -762,12 +762,18 @@ function RunIndividualReport($app, $smarty)
 		if ($_SESSION['user_level'] == 2) {
 			$cu_ids = array($_SESSION['user_primary_union_id']);
 		} else {
-			$cu_ids = getCuByFedId($_POST['federation_id'], $_POST['chapter_id'], $_POST['cu_id']);
+			$cu_id = null;
+			if (!isset($_POST['cu_id'])) $cu_id = 0;
+			else $cu_id = $_POST['cu_id'];
+			$cu_ids = getCuByFedId($_POST['federation_id'], $_POST['chapter_id'], $cu_id);
 		}
 	} else if ($_POST['country_id'] == 0) {
 		$cu_ids = getAllCuIds();
 	} else {
-		$cu_ids = getCuByCountry($_POST['country_id'], $_POST['federation_id'], $_POST['chapter_id'], $_POST['cu_id']);
+		$cu_id = null;
+		if (!isset($_POST['cu_id'])) $cu_id = 0;
+		else $cu_id = $_POST['cu_id'];
+		$cu_ids = getCuByCountry($_POST['country_id'], $_POST['federation_id'], $_POST['chapter_id'], $cu_id);
 	}
 	
 	if (count($cu_ids) == 0) {
