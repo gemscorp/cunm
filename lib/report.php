@@ -758,7 +758,7 @@ function RunComparisonReport($app, $smarty)
 	}
 }
 
-function RunIndividualReport($app, $smarty)
+function RunIndividualReport($app, $smarty, $template = null)
 {
 	$db = getDbHandler();
 	
@@ -786,8 +786,7 @@ function RunIndividualReport($app, $smarty)
 		$smarty->display('member/nodata.tpl');
 		return;
 	}
-	
-	
+
 	$sql = "SELECT DISTINCT area_id FROM pu_operations_area WHERE primary_union_id IN (" . implode(",", $cu_ids) . ") ";
 	$sth = $db->prepare($sql);
 	$sth->execute();
@@ -963,12 +962,16 @@ function RunIndividualReport($app, $smarty)
 	}
 	
 	$smarty->assign('serval', $serval);
-	
-	if(isset($_POST['debug'])) {
-		$smarty->display('member/report_debug.tpl');
+
+	if ($template === null) {
+		if (isset($_POST['debug'])) {
+			$smarty->display('member/report_debug.tpl');
+		} else {
+			$smarty->display('member/report.tpl');
+		}
 	} else {
-		$smarty->display('member/report.tpl');
-	}	
+		return $smarty->fetch('member/' . $template);
+	}
 }
 
 function GetCurrencyAndRate()

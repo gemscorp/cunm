@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once 'vendor/autoload.php';
+require_once 'vendor/spipu/html2pdf/html2pdf.class.php';
 
 $app->get("/mandashboard", function () use ($app, $smarty) {
 	$smarty->display('mandashboard.tpl');
@@ -104,6 +106,8 @@ $app->group("/report", function () use ($app, $smarty) {
 			$smarty->assign('local_currency', $cur);
 			$smarty->assign('exchange_rate', $rate);
 		}
+
+		$_SESSION['postDataSaved'] = serialize($_POST);
 		
 		if ($_POST['report_type'] == 2) {
 			$smarty->assign('report_type', 'Comparison');
@@ -112,6 +116,36 @@ $app->group("/report", function () use ($app, $smarty) {
 		} else {
 			$smarty->assign('report_type', 'Individual');
 			RunIndividualReport($app, $smarty);
+		}
+	});
+
+	$app->post("/pdf", function () use ($app, $smarty) {
+		require_once 'lib/report.php';
+
+		$_POST = unserialize($_SESSION['postDataSaved']); // = serialize($_POST);
+
+		if ($_SESSION['user_level'] != 0) {
+
+			list($cur, $rate) =  GetCurrencyAndRate();
+
+			$smarty->assign('local_currency', $cur);
+			$smarty->assign('exchange_rate', $rate);
+		}
+
+		if ($_POST['report_type'] == 2) {
+			$smarty->assign('report_type', 'Comparison');
+			RunComparisonReport($app, $smarty);
+			return;
+		} else {
+			$smarty->assign('report_type', 'Individual');
+			$html = RunIndividualReport($app, $smarty, 'report_pdf.tpl');
+			$app->contentType("Content-type: application/pdf");
+			header('Content-Disposition: inline; filename=example.pdf');
+			header('Content-Transfer-Encoding: binary');
+			$html2pdf = new Html2Pdf('L', 'A4', 'en');
+			$html2pdf->setDefaultFont('Arial');
+			$html2pdf->writeHTML($html);
+			$html2pdf->Output('exemple.pdf');
 		}
 	});
 });

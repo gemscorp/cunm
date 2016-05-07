@@ -1,21 +1,5 @@
-{include file='header.tpl'}
-<h3>{$report_type} Report, Period - {$date_range}, {if $smarty.session.user_level neq 0} Exchange Rate 1 USD = {$exchange_rate} {$local_currency} {/if} </h3>
-
-{include file='common/alert.tpl'}
-<!-- Nav tabs -->
-<ul class="nav nav-tabs">
-  <li class='active'><a href="#area_market" data-toggle="tab">Area, Market, Gender &amp; Age</a></li>
-  <li><a href="#service" data-toggle="tab">Have Less Member Service Distribution</a></li>
-  <li><a href="#usage_services" data-toggle="tab">Usage of Service</a></li>
-  <li><a href="#balancesheet" data-toggle="tab">Balance Sheet</a></li>
-  <li><a href="#incomestatment" data-toggle="tab">Income Statement</a></li>
-  <li><a href="#pearls" data-toggle="tab">PEARLS</a></li>    
-</ul>
-<form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail'>
-<div class="tab-content">
-
-	<div class="tab-pane" id="usage_services">
-  		<table class="table">
+<page>
+<table class="table">
   			<thead>
   				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
   				<tr>
@@ -87,9 +71,8 @@
   			{/foreach}
   			</tbody>
   		</table>
-  </div>
-
-  <div class="tab-pane active" id="area_market">
+</page>
+<page>
   		<table class="table">
   			<thead>
   				<tr>
@@ -140,8 +123,8 @@
   				</tr>
   			</tbody>
   		</table>
-  </div>
-  <div class="tab-pane" id="service">
+</page>
+<page>
   		<table class="table">
   			<thead>
   				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
@@ -213,8 +196,8 @@
   				
   			</tbody>
   		</table>
-  </div>
-  <div class="tab-pane" id="balancesheet">
+</page>
+<page>
   		<table class="table">
   			{foreach from=$bslines item=bsline}
   				{if $group neq $bsline.group_name}
@@ -289,8 +272,9 @@
   						</tr>
   			{/foreach}
   		</table>
-  </div>
-  <div class="tab-pane" id="incomestatment">
+</page>
+<page>
+
   		<table class="table">
   			{foreach from=$islines item=isline}
   				{if $group neq $isline.group_name}
@@ -367,8 +351,8 @@
   					</tr>
   			{/foreach}
   		</table>
-  </div>
-  <div class="tab-pane" id="pearls">
+</page>
+<page>
   		<table class="table">
   			<thead>
   				<tr>
@@ -444,12 +428,4 @@
   				
   			</tbody>
   		</table>
-  </div>
-</div>
-</form>
-
-<form method="post" action="/report/pdf">
-	<input type="submit" />
-</form>
-
-{include file='footer.tpl'}
+</page>

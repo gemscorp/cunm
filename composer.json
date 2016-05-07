@@ -1,6 +1,7 @@
 {
     "require": {
         "slim/slim": "2.*",
-	"smarty/smarty": "~3.1"
+	"smarty/smarty": "~3.1",
+        "spipu/html2pdf": "^4.6"
     }
 }
