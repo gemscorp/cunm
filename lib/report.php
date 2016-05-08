@@ -356,7 +356,7 @@ function getIsAggr($dids, $period = null, $is_sheet = null)
 	return $is_sheet;
 }
 
-function RunComparisonReport($app, $smarty)
+function RunComparisonReport($app, $smarty, $template = null)
 {
 	$db = getDbHandler();
 	
@@ -750,11 +750,15 @@ function RunComparisonReport($app, $smarty)
 	}
 	
 	$smarty->assign('serval', $serval);
-	
-	if(isset($_POST['debug'])) {
-		$smarty->display('member/report_debug.tpl');
+
+	if ($template === null) {
+		if (isset($_POST['debug'])) {
+			$smarty->display('member/report_debug.tpl');
+		} else {
+			$smarty->display('member/report_compare.tpl');
+		}
 	} else {
-		$smarty->display('member/report_compare.tpl');
+		return $smarty->fetch('member/' . $template);
 	}
 }
 

@@ -448,8 +448,25 @@
 </div>
 </form>
 
-<form method="post" action="/report/pdf">
-	<input type="submit" />
-</form>
+<div class="row">
+	<div class="col-md-4">
+		<form method="post" action="/report/pdf">
+			<input type='hidden' name="type" value="pdf">
+			<input type="submit" value="PDF" />
+		</form>
+	</div>
+	<div class="col-md-4">
+		<form method="post" action="/report/pdf">
+			<input type='hidden' name="type" value="excel">
+			<input type="submit" value="Excel" />
+		</form>
+	</div>
+	<div class="col-md-4">
+		<form method="post" action="/report/pdf">
+			<input type='hidden' name="type" value="print">
+			<input type="submit" value="Print" />
+		</form>
+	</div>
+</div>
 
 {include file='footer.tpl'}

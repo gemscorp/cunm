@@ -1,20 +1,5 @@
-{include file='header.tpl'}
 <h3>{$report_type} Report, Period - {$date_range1} vs {$date_range2}  {if $smarty.session.user_level neq 0} Exchange Rate 1 USD = {$exchange_rate} {$local_currency} {/if}</h3>
 
-{include file='common/alert.tpl'}
-<!-- Nav tabs -->
-<ul class="nav nav-tabs">
-  <li class='active'><a href="#area_market" data-toggle="tab">Area, Market, Gender &amp; Age</a></li>
-  <li><a href="#service" data-toggle="tab">Have Less Member Service Distribution</a></li>
-  <li><a href="#usage_services" data-toggle="tab">Usage of Service</a></li>
-  <li><a href="#balancesheet" data-toggle="tab">Balance Sheet</a></li>
-  <li><a href="#incomestatment" data-toggle="tab">Income Statement</a></li>
-  <li><a href="#pearls" data-toggle="tab">PEARLS</a></li>    
-</ul>
-<form role="form" method='post' action='http://{$smarty.server.HTTP_HOST}{$smarty.const.APP_PATH}/member/detail'>
-<div class="tab-content">
-
-	<div class="tab-pane" id="usage_services">
   		<table class="table">
   			<thead>
   				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
@@ -143,9 +128,7 @@
   			{/foreach}
   			</tbody>
   		</table>
-  </div>
 
-  <div class="tab-pane active" id="area_market">
   		<table class="table">
   			<thead>
   				<tr>
@@ -228,8 +211,7 @@
 				{/foreach}
   			</tbody>
   		</table>
-  </div>
-  <div class="tab-pane" id="service">
+
   		<table class="table">
   			<thead>
   				{if $smarty.session.user_level neq 0 && $smarty.session.user_country_id neq 0}
@@ -326,8 +308,7 @@
   				{/foreach}  				
   			</tbody>
   		</table>
-  </div>
-  <div class="tab-pane" id="balancesheet">
+
   		<table class="table">
   					<tr>
   						<td>Line Item</td>
@@ -457,8 +438,7 @@
   						</tr>
   			{/foreach}
   		</table>
-  </div>
-  <div class="tab-pane" id="incomestatment">
+
   		<table class="table">
   					<tr>
   						<td>Line Item</td>
@@ -589,8 +569,7 @@
   					</tr>
   			{/foreach}
   		</table>
-  </div>
-  <div class="tab-pane" id="pearls">
+
   		<table class="table">
   			<thead>
   				<tr>
@@ -686,30 +665,5 @@
   				
   			</tbody>
   		</table>
-  </div>
-</div>
-</form>
-
-<div class="row">
-	<div class="col-md-4">
-		<form method="post" action="/report/pdf">
-			<input type='hidden' name="type" value="pdf">
-			<input type="submit" value="PDF" />
-		</form>
-	</div>
-	<div class="col-md-4">
-		<form method="post" action="/report/pdf">
-			<input type='hidden' name="type" value="excel">
-			<input type="submit" value="Excel" />
-		</form>
-	</div>
-	<div class="col-md-4">
-		<form method="post" action="/report/pdf">
-			<input type='hidden' name="type" value="print">
-			<input type="submit" value="Print" />
-		</form>
-	</div>
-</div>
 
 
-{include file='footer.tpl'}

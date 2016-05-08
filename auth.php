@@ -122,6 +122,7 @@ $app->group("/report", function () use ($app, $smarty) {
 	$app->post("/pdf", function () use ($app, $smarty) {
 		require_once 'lib/report.php';
 
+		$type = $_POST['type'];
 		$_POST = unserialize($_SESSION['postDataSaved']); // = serialize($_POST);
 
 		if ($_SESSION['user_level'] != 0) {
@@ -134,18 +135,39 @@ $app->group("/report", function () use ($app, $smarty) {
 
 		if ($_POST['report_type'] == 2) {
 			$smarty->assign('report_type', 'Comparison');
-			RunComparisonReport($app, $smarty);
-			return;
+			$html = RunComparisonReport($app, $smarty, 'report_compare_pdf.tpl');
+
 		} else {
 			$smarty->assign('report_type', 'Individual');
 			$html = RunIndividualReport($app, $smarty, 'report_pdf.tpl');
-			$app->contentType("Content-type: application/pdf");
-			header('Content-Disposition: inline; filename=example.pdf');
-			header('Content-Transfer-Encoding: binary');
-			$html2pdf = new Html2Pdf('L', 'A4', 'en');
-			$html2pdf->setDefaultFont('Arial');
-			$html2pdf->writeHTML($html);
-			$html2pdf->Output('exemple.pdf');
+		}
+
+		switch ($type) {
+			case 'pdf':
+				try {
+					$app->contentType("Content-type: application/pdf");
+					header('Content-Disposition: attachment; filename=example.pdf');
+					header('Content-Transfer-Encoding: binary');
+					$html2pdf = new Html2Pdf('L', 'A4', 'en');
+					$html2pdf->setDefaultFont('Arial');
+					$html2pdf->writeHTML($html);
+					$html2pdf->Output('exemple.pdf');
+				} catch (Exception $e) {
+					echo $e->getMessage();
+				}
+				break;
+			case 'print':
+				echo "<html><head></head><body>";
+				echo $html;
+				echo "</body></html>";
+				break;
+			case 'excel':
+				$app->contentType("Content-type: application/vnd.ms-exce");
+				header("Content-Disposition: attachment; filename=example.xls");
+				echo "<html><head></head><body>";
+				echo $html;
+				echo "</body></html>";
+				break;
 		}
 	});
 });
