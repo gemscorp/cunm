@@ -233,13 +233,17 @@
              			<td><input type="text" class='span2 digits female' value='{$operations.auditfemale}' placeholder='Female' name="auditfemale" /></td>
              			<td><input type="text" class='span3 digits total' value='{$operations.audittotal}' placeholder='Total' name="audittotal" /></td>
            			</tr>
-           
-           			<tr>
-             			<td class='info'>Other <input type='text' name='com_other_name' value='{$operations.com_other_name}' /></td>
-             			<td><input type="text" class='span1 digits male' value='{$operations.othermale}' placeholder='Male' name="othermale" /></td>
-             			<td><input type="text" class='span2 digits female' value='{$operations.otherfemale}' placeholder='Female' name="otherfemale" /></td>
-             			<td><input type="text" class='span3 digits total' value='{$operations.othertotal}' placeholder='Female' name="othertotal" /></td>
-             		</tr>
+
+					{foreach from=$otheropscom item=otp}
+						<tr class="template_other">
+							<td class='info'>Other: <input type='text' name='com_other_name[]' value='{$otp.other_name}' />
+								<button type="button" class="btnAddAnotherRow">add other</button>
+							</td>
+							<td><input type="text" class='span1 digits male' value='{$otp.other_male}' placeholder='Male' name="com_other_male[]" /></td>
+							<td><input type="text" class='span2 digits female' value='{$otp.other_female}' placeholder='Female' name="com_other_female[]" /></td>
+							<td><input type="text" class='span3 digits total' value='{$otp.other_total}' placeholder='Female' name="com_other_total[]" /> </td>
+						</tr>
+					{/foreach}
            		</tbody>
              </table>
            

@@ -451,6 +451,14 @@ $app->get("/operations", function () use ($app, $smarty) {
 
 	$smarty->assign('otherops', $sth->fetchAll());
 
+	$sql = "SELECT * FROM pu_operations_com_other WHERE primary_union_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+
+	$smarty->assign('otheropscom', $sth->fetchAll());
+
+
+
 	$smarty->display('member/operations.tpl');
 });
 
@@ -469,6 +477,10 @@ $app->post("/operations", function () use ($app, $smarty) {
 	$sth = $db->prepare($sql);
 	$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
 
+	$sql = "DELETE FROM pu_operations_com_other WHERE primary_union_id = :id ";
+	$sth = $db->prepare($sql);
+	$sth->execute(array(':id' => $_SESSION['user_primary_union_id']));
+
 	//create table pu_operations_other (id int primary key auto_increment, primary_union_id int, other_name varchar(100), other_male int, other_female int, other_total int);
 	for ($i = 0; $i < count($_POST['other_name']); $i++) {
 		$sql = "INSERT INTO pu_operations_other (primary_union_id, other_name, other_male, other_female, other_total) "
@@ -477,6 +489,15 @@ $app->post("/operations", function () use ($app, $smarty) {
 		$sth = $db->prepare($sql);
 		$sth->execute([':id' => $_SESSION['user_primary_union_id'], ':name' => $_POST['other_name'][$i],
 			':male' => $_POST['other_male'][$i], ':female' => $_POST['other_female'][$i], ':total' => $_POST['other_total'][$i]]);
+	}
+
+	for ($i = 0; $i < count($_POST['com_other_name']); $i++) {
+		$sql = "INSERT INTO pu_operations_com_other (primary_union_id, other_name, other_male, other_female, other_total) "
+			. "VALUES (:id, :name, :male, :female, :total) ";
+
+		$sth = $db->prepare($sql);
+		$sth->execute([':id' => $_SESSION['user_primary_union_id'], ':name' => $_POST['com_other_name'][$i],
+			':male' => $_POST['com_other_male'][$i], ':female' => $_POST['com_other_female'][$i], ':total' => $_POST['com_other_total'][$i]]);
 	}
 
 	$sql = "INSERT INTO pu_operations (primary_union_id, males, females, gtotal, manager_male, manager_female, manager_total, 
